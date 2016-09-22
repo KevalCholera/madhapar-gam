@@ -1,0 +1,13 @@
+<resources>
+
+    <!--application strings-->
+    <string name="app_name">MadhaparGam</string>
+    <string name="oneSignalAppId">05a23f01-4851-4f08-b986-82a82cc901cc</string>
+    <string name="googleProjectNumber">23707267697</string>
+
+    <!--main activity strings-->
+    <string name="passwordError">Password is not valid</string>
+    <string name="usernameError">Username is not valid</string>
+    <string name="loginFail">Login successfull</string>
+    <string name="loginSucess">Login Fail</string>
+</resources>

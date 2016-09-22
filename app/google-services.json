@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "23707267697",
+    "project_id": "madhapar-gam"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23707267697:android:f15583f3da911cd6",
+        "android_client_info": {
+          "package_name": "com.madhapar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtUTBOu86pKrUKIG_fUpZNODaKGtbs2Cc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
