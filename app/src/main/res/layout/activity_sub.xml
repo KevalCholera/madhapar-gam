@@ -4,31 +4,72 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="217dp"
-        android:text="SubActivity" />
-
-    <Button
-        android:id="@+id/btnSubMainActivity"
-        android:layout_width="wrap_content"
+        android:id="@+id/lin1"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ic_cancel"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/iconclose" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/imgloginscreenlogo"
+            android:layout_gravity="center"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/login_id"
+            android:drawableLeft="@drawable/iconmobile"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/login_password"
+            android:drawableLeft="@drawable/iconkey"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_login"
+            android:background="#27BB9B"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Log-in"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:text="Main Activity" />
-
-
-    <FrameLayout
-        android:id="@+id/fragmentBase"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimaryDark"></FrameLayout>
-
+        android:layout_below="@+id/lin1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/forget_passowrd"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Forget Password?"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_user_signup"
+            android:textAlignment="textEnd"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="New here?Sign up" />
+    </LinearLayout>
 
 </RelativeLayout>

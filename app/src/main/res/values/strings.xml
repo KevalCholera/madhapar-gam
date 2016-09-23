@@ -10,4 +10,12 @@
     <string name="usernameError">Username is not valid</string>
     <string name="loginFail">Login successfull</string>
     <string name="loginSucess">Login Fail</string>
+
+    <string name="mobileNumberLogin">Mobile Number</string>
+    <string name="passwordLogin">Password</string>
+    <string name="btnLogin">Log-in</string>
+    <string name="forgetPassword">Forget Password</string>
+    <string name="newUserSignUp">New here? Sign Up</string>
+
+
 </resources>

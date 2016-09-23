@@ -24,21 +24,7 @@ public class SubActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_sub);
-        btnSubMainActivity = (Button) findViewById(R.id.btnSubMainActivity);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentBase, new MainFragment());
-        fragmentTransaction.commit();
 
-
-        btnSubMainActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenterClass = new PresenterClass();
-                presenterClass.changeActivity(SubActivity.this, MainActivity.class, true);
-
-            }
-        });
     }
 
 }

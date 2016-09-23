@@ -14,6 +14,8 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.Presenter.PresenterClass;
 
+import butterknife.internal.Utils;
+
 
 public class MainActivity extends BaseActivity implements ViewInt, View.OnClickListener {
     private Button btnSubActivity, btnLogin;
@@ -31,7 +33,7 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         tvMainButtonClickText = (TextView) findViewById(R.id.tvMainClickText);
         etMainPassword = (EditText) findViewById(R.id.etMainPasswordText);
         etMainUsernaeme = (EditText) findViewById(R.id.etMainNameText);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = (Button) findViewById(R.id.btnLoginMain);
         progress = (ProgressBar) findViewById(R.id.progressMainLogin);
         presenter = new PresenterClass();
         mViewInt = this;
@@ -46,7 +48,7 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
             tvMainButtonClickText.setText(getString(R.string.passwordError));
             UtilClass.hideProgress(progress);
 
-        } else if (checkCode == 1) {
+        } else if (checkCode == UtilClass.PasswordError) {
             tvMainButtonClickText.setText(getString(R.string.usernameError));
             UtilClass.hideProgress(progress);
         }
@@ -70,7 +72,7 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
             UtilClass.showProgress(progress);
             presenter.checkLogin(etMainUsernaeme.getText().toString(), etMainPassword.getText().toString(), mViewInt, MainActivity.this);
         } else if (view == btnSubActivity) {
-            presenter.changeActivity(MainActivity.this, SubActivity.class, true);
+            presenter.changeActivity(MainActivity.this, LoginActivity.class, true);
         }
     }
 
