@@ -62,9 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/activity_top_login_margin"
-            android:background="@drawable/loginbtn"
+
             android:text="@string/btnLogin"
             android:textColor="@color/colorWhite" />
+        <!--android:background="@drawable/loginbtn"-->
     </LinearLayout>
 
     <LinearLayout

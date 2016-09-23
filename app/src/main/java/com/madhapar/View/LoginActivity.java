@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     }
     @OnClick(R.id.tvUserSignUp)
     public void signup(){
-        UtilClass.changeActivity(LoginActivity.this,SignUpActivity.class,true);
+//        UtilClass.changeActivity(LoginActivity.this,SignUpActivity.class,true);
     }
     @OnClick(R.id.ivClose)
     public void close(){
@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     }
     @OnClick(R.id.tvForgetPassword)
     public void forgetpassword(){
-        UtilClass.changeActivity(LoginActivity.this,ForgetPassword.class,true);
+//        UtilClass.changeActivity(LoginActivity.this,ForgetPassword.class,true);
     }
     @Override
     public void loginValidateResult(int check) {

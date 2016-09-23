@@ -1,7 +1,5 @@
 package com.madhapar.Model;
 
-import android.app.Activity;
-
 /**
  * Created by smartsense on 22/09/16.
  */
