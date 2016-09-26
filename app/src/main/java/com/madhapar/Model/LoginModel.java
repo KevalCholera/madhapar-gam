@@ -18,11 +18,16 @@ public class LoginModel implements LoginModelInt {
             @Override
             public void run() {
                 boolean error = false;
-                if (TextUtils.isEmpty(contactNumber)) {
+                if(TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password))
+                {
+                    listener.onRequiredFieldError();
+                    error = true;
+                }
+                else if (TextUtils.isEmpty(contactNumber)) {
                     listener.oncontactNumberError();
                     error = true;
                 }
-                else if(!(contactNumber.toString().length() ==10)){
+                else if(!(contactNumber.toString().length() >7 && contactNumber.toString().length() < 14)){
                     listener.onContactLenghtError();
                     error = true;
                 }
@@ -30,7 +35,7 @@ public class LoginModel implements LoginModelInt {
                     listener.onPasswordError();
                     error = true;
                 }
-                else if((!(password.toString().length() > 5))){
+                else if((!(password.toString().length() > 6))){
                     listener.onPasswordLengthError();
                     error = true;
                 }

@@ -47,8 +47,9 @@ public class LoginActivity extends BaseActivity implements LoginInt {
         presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString());
     }
     @OnClick(R.id.tvUserSignUp)
-    public void signup(){
-//        UtilClass.changeActivity(LoginActivity.this,SignUpActivity.class,true);
+    public void signup()
+    {
+        UtilClass.changeActivity(LoginActivity.this,SignUpActivity.class,false);
     }
     @OnClick(R.id.ivClose)
     public void close(){
@@ -56,7 +57,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     }
     @OnClick(R.id.tvForgetPassword)
     public void forgetpassword(){
-//        UtilClass.changeActivity(LoginActivity.this,ForgetPassword.class,true);
+        UtilClass.changeActivity(LoginActivity.this,ForgetPassword.class,true);
     }
     @Override
     public void loginValidateResult(int check) {
@@ -64,16 +65,19 @@ public class LoginActivity extends BaseActivity implements LoginInt {
             UtilClass.displyMessage("Enter Contact Number",LoginActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.PasswordLengthError){
-            UtilClass.displyMessage("Enter Password Greater than 7",LoginActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage("Enter Password Greater than 6",LoginActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.PasswordError){
             UtilClass.displyMessage("Enter valid Password",LoginActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.UserIdLengthError){
-            UtilClass.displyMessage("Contact no Length is not valid less than 10",LoginActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage("Contact no Length is required 7 to 10 digit",LoginActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.Success){
             UtilClass.displyMessage("Login Success",LoginActivity.this,Toast.LENGTH_SHORT);
+        }
+        else if(check == UtilClass.RequiredFieldError){
+            UtilClass.displyMessage("Enter Required Field",LoginActivity.this,Toast.LENGTH_SHORT);
         }
 
     }

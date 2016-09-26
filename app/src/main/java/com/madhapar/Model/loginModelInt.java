@@ -17,6 +17,8 @@ public interface LoginModelInt {
         void onPasswordLengthError();
 
         void onSuccess();
+
+        void onRequiredFieldError();
     }
 
     public void login(String contactNumber, String password, OnLoginFinishedListener listener);

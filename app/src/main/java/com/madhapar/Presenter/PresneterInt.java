@@ -2,6 +2,7 @@ package com.madhapar.Presenter;
 
 import android.app.Activity;
 
+import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.ViewInt;
 
 
@@ -16,4 +17,7 @@ public interface PresneterInt {
 
     public void validateCredentials(String contactNumber, String password);
 
+    public void signUpValidationCredentials(String firstName,String lastName,String contactNumber,String password,String familyMember);
+
+    public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1);
 }

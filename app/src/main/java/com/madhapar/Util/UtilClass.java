@@ -18,6 +18,10 @@ public class UtilClass {
     public static final int UserIdError=3;
     public static final int UserIdLengthError=4;
     public static final int Success=5;
+    public static final int RequiredFieldError=6;
+    public static final int FirstNameError = 7;
+    public static final int LastNameError = 8;
+    public static final int FamilyMemberError = 9;
 
     public static void displyMessage(String msg, Context context, int toastLenght) {
         Toast.makeText(context, msg, toastLenght).show();
@@ -39,6 +43,5 @@ public class UtilClass {
     public static void hideProgress(ProgressBar progress) {
         progress.setVisibility(View.GONE);
     }
-
 
 }
