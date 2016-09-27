@@ -35,49 +35,49 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     @BindView(R.id.btnLogin)
     Button btnLogin;
     private PresneterInt presenter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
     }
+
     @OnClick(R.id.btnLogin)
-    public void submit(){
+    public void submit() {
         presenter = new PresenterClass(this);
         presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString());
     }
+
     @OnClick(R.id.tvUserSignUp)
-    public void signup()
-    {
-        UtilClass.changeActivity(LoginActivity.this,SignUpActivity.class,false);
+    public void signup() {
+        UtilClass.changeActivity(LoginActivity.this, SignUpActivity.class, false);
     }
+
     @OnClick(R.id.ivClose)
-    public void close(){
-        UtilClass.changeActivity(LoginActivity.this,MainActivity.class,true);
+    public void close() {
+        UtilClass.changeActivity(LoginActivity.this, MainActivity.class, true);
     }
+
     @OnClick(R.id.tvForgetPassword)
-    public void forgetpassword(){
-        UtilClass.changeActivity(LoginActivity.this,ForgetPassword.class,true);
+    public void forgetpassword() {
+        UtilClass.changeActivity(LoginActivity.this, ForgetPassword.class, true);
     }
+
     @Override
     public void loginValidateResult(int check) {
-        if(check == UtilClass.UserIdError){
-            UtilClass.displyMessage("Enter Contact Number",LoginActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.PasswordLengthError){
-            UtilClass.displyMessage("Enter Password Greater than 6",LoginActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.PasswordError){
-            UtilClass.displyMessage("Enter valid Password",LoginActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.UserIdLengthError){
-            UtilClass.displyMessage("Contact no Length is required 7 to 10 digit",LoginActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.Success){
-            UtilClass.displyMessage("Login Success",LoginActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.RequiredFieldError){
-            UtilClass.displyMessage("Enter Required Field",LoginActivity.this,Toast.LENGTH_SHORT);
+        if (check == UtilClass.UserIdError) {
+            UtilClass.displyMessage("Enter Contact Number", LoginActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.PasswordLengthError) {
+            UtilClass.displyMessage("Enter Password Greater than 6", LoginActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.PasswordError) {
+            UtilClass.displyMessage("Enter valid Password", LoginActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.UserIdLengthError) {
+            UtilClass.displyMessage("Contact no Length is required 7 to 10 digit", LoginActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.Success) {
+            UtilClass.displyMessage("Login Success", LoginActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.RequiredFieldError) {
+            UtilClass.displyMessage("Enter Required Field", LoginActivity.this, Toast.LENGTH_SHORT);
         }
 
     }

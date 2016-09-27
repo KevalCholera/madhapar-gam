@@ -1,64 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnMainSubActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
-        android:text="SubActivity"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="288dp" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
-    <TextView
-        android:id="@+id/tvMainClickText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Main Activity!" />
+        <FrameLayout
+            android:id="@+id/flMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/etMainNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="username"
-        android:inputType="textPersonName" />
+    <LinearLayout
+        android:id="@+id/llDrawerMain"
+        android:layout_width="75dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <EditText
-        android:id="@+id/etMainPasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etMainNameText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword" />
+        <ListView
+            android:id="@+id/lvDrawerMain"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_weight="0.8"
+            android:choiceMode="singleChoice"
+            android:divider="@null"
+            android:dividerHeight="1dp" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnLoginMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etMainPasswordText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Login" />
+</android.support.v4.widget.DrawerLayout>
 
-    <ProgressBar
-        android:id="@+id/progressMainLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
-</RelativeLayout>

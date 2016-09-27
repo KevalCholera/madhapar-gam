@@ -2,6 +2,9 @@ package com.madhapar.Presenter;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,11 +24,13 @@ import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
 import com.madhapar.View.ViewInt;
 
+import java.util.List;
+
 /**
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,LoginModel.OnLoginFinishedListener,SignUpModel.OnLoginFinishedListener,ForgetPasswordModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
@@ -57,13 +62,12 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
         modelClass.validateUser(username, password, textValidator, activity);
     }
 
-    public PresenterClass(LoginActivity loginModel){
+    public PresenterClass(LoginActivity loginModel) {
 
         this.loginInt = loginModel;
     }
 
-    public PresenterClass(SignUpActivity signUpModel)
-    {
+    public PresenterClass(SignUpActivity signUpModel) {
         this.signupInt = signUpModel;
     }
 
@@ -77,25 +81,50 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
 
     @Override
     public void validateCredentials(String contactNumber, String password) {
-        if(loginInt != null){
+        if (loginInt != null) {
         }
         loginModelInt = new LoginModel();
-        loginModelInt.login(contactNumber,password,this);
+        loginModelInt.login(contactNumber, password, this);
     }
 
     @Override
     public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember) {
 
         signUpModel = new SignUpModel();
-        signUpModel.signup(firstName,lastName,contactNumber,password,familyMember,this);
+        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this);
     }
 
     @Override
-    public void forgetPasswordCredentials(String contactNumber,ForgetPasswordViewInt forgetPasswordViewInt1) {
+    public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1) {
         forgetPasswordViewInt = forgetPasswordViewInt1;
         forgetPassModel = new ForgetPasswordModel();
-        forgetPassModel.login(contactNumber,this);
+        forgetPassModel.login(contactNumber, this);
     }
+
+    @Override
+    public void changeFragment(int containerId, int position, AppCompatActivity activity) {
+        if (modelClass == null) {
+            modelClass = new MainModelClass();
+        }
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.
+                replace(containerId, modelClass.getFragment(position));
+
+        fragmentTransaction.commit();
+
+    }
+
+    @Override
+    public List<Integer> initMainDrawer() {
+        if (modelClass == null) {
+            modelClass = new MainModelClass();
+        }
+
+        return modelClass.getMainDrawerData();
+
+    }
+
 
     @Override
     public void passwordError() {
@@ -135,8 +164,9 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     @Override
     public void onPasswordLengthError() {
         loginInt.loginValidateResult(UtilClass.PasswordLengthError);
-        Log.e("Password","Match");
+        Log.e("Password", "Match");
     }
+
     @Override
     public void onSuccess() {
         loginInt.loginValidateResult(UtilClass.Success);
@@ -165,8 +195,9 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     @Override
     public void onSignupPasswordLengthError() {
         signupInt.signUpValidateResult(UtilClass.PasswordLengthError);
-        Log.e("password","length");
+        Log.e("password", "length");
     }
+
     @Override
     public void onsignUpPasswordError() {
         signupInt.signUpValidateResult(UtilClass.PasswordError);

@@ -25,7 +25,7 @@ public class UtilClass {
 
     public static void displyMessage(String msg, Context context, int toastLenght) {
         Toast.makeText(context, msg, toastLenght).show();
-        Log.e(context.getPackageName(), "Log:  " + msg);
+        Log.e(context.getPackageName(), "Log:  " + msg + "");
     }
 
     public static void showProgress(ProgressBar progress) {
