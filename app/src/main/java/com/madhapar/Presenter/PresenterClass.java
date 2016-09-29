@@ -1,21 +1,23 @@
 package com.madhapar.Presenter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.madhapar.Model.ChangePasswordModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.MainModelInt;
 import com.madhapar.Model.SignUpModel;
-import com.madhapar.Model.SignUpModelInt;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.AlertDialogClass;
+import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.ForgetPassword;
 import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.LoginActivity;
@@ -30,7 +32,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener,ChangePasswordModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
@@ -42,13 +44,14 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
+    private ChangePasswordViewInt changePasswordViewInt;
+    private ChangePasswordModel changePasswordModel;
+    private AlertDialogClass alertDialogClass;
     Handler handler;
     LoginModel loginModel;
 
     public PresenterClass() {
-
     }
-
     public PresenterClass(ForgetPassword forgetPassword) {
         this.forgetPasswordViewInt = (ForgetPasswordViewInt) forgetPasswordViewInt;
     }
@@ -112,8 +115,20 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
                 replace(containerId, modelClass.getFragment(position));
 
         fragmentTransaction.commit();
-
     }
+
+    @Override
+    public void alert(Context context) {
+        new AlertDialogClass(context);
+    }
+
+    @Override
+    public void changePasswordCredential(String newPassword, String confirmNewPassword, ChangePasswordViewInt changePasswordViewInt1) {
+        changePasswordViewInt = changePasswordViewInt1;
+        changePasswordModel = new ChangePasswordModel();
+        changePasswordModel.chnagePassword(newPassword,confirmNewPassword,this);
+    }
+
 
     @Override
     public List<Integer> initMainDrawer() {
@@ -124,8 +139,6 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
         return modelClass.getMainDrawerData();
 
     }
-
-
     @Override
     public void passwordError() {
         viewInt.validationResult(0);
@@ -219,8 +232,38 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     }
 
     @Override
+    public void onChangePasswordSuccess() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.Success);
+    }
+
+    @Override
     public void onRequiredFieldError() {
         loginInt.loginValidateResult(UtilClass.RequiredFieldError);
+    }
+
+    @Override
+    public void onNewPasswordError() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.PasswordError);
+    }
+
+    @Override
+    public void onConfirmPasswordError() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.ConfirmPassword);
+    }
+
+    @Override
+    public void onNewPasswordLengthError() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.PasswordLengthError);
+    }
+
+    @Override
+    public void onPasswordMatchError() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.MatchPassword);
+    }
+
+    @Override
+    public void onChangePasswordRequiredFieldError() {
+        changePasswordViewInt.changePasswordValidateResult(UtilClass.RequiredFieldError);
     }
 
     @Override

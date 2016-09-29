@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -69,8 +70,10 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         lvDrawerMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                presenter.changeFragment(R.id.flMain, position, MainActivity.this);
-                dlMain.closeDrawers();
+//                presenter.changeFragment(R.id.flMain, position, MainActivity.this);
+//                dlMain.closeDrawers();
+                startActivity(new Intent(MainActivity.this,ChangePasswordActivity.class));
+                finish();
             }
         });
 

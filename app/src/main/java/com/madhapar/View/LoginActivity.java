@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
 
     @OnClick(R.id.ivClose)
     public void close() {
-        UtilClass.changeActivity(LoginActivity.this, MainActivity.class, true);
+        UtilClass.changeActivity(LoginActivity.this, FeedbackActivity.class, true);
     }
 
     @OnClick(R.id.tvForgetPassword)

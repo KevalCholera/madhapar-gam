@@ -1,10 +1,10 @@
 package com.madhapar.View;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
@@ -16,13 +16,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ForgetPassword extends AppCompatActivity implements ForgetPasswordViewInt {
+public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewInt,AlertDialofClassInt {
     @BindView(R.id.etForgetMobileNumber)
     EditText etForgetMobileNumber;
     @BindView(R.id.btnRecover)
     Button btnRecover;
     @BindView(R.id.btnCancel)
     Button btnCancel;
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder alBuilder;
     private PresneterInt presenter;
     private ForgetPasswordViewInt forgetPasswordViewInt=this;
     @Override
@@ -31,6 +33,7 @@ public class ForgetPassword extends AppCompatActivity implements ForgetPasswordV
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
     }
+
     @OnClick(R.id.btnRecover)
     public void recover(){
         presenter = new PresenterClass(this);
@@ -54,6 +57,8 @@ public class ForgetPassword extends AppCompatActivity implements ForgetPasswordV
         }
         if(check == UtilClass.Success){
             UtilClass.displyMessage("Password Update",ForgetPassword.this,Toast.LENGTH_SHORT);
+            presenter.alert(ForgetPassword.this);
+            Log.e("Alert","Open");
         }
     }
 }

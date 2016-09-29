@@ -28,5 +28,17 @@
     <string name="back">Back</string>
     <string name="recover">Recover</string>
     <string name="cancel">cancel</string>
+    <string name="save">Save</string>
+    <string name="resendOTP">Resend OTP</string>
+    <string name="enterOTP">Enter OTP</string>
+
+    <string name="newPassword">New Password</string>
+    <string name="confirmNewPassword">Confirm New Password</string>
+    
+    <string name="feedbackName">Name</string>
+    <string name="feedbackMobile">Mobile</string>
+    <string name="feedbackSubject">Subject</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedbackSent">Send</string>
 
 </resources>

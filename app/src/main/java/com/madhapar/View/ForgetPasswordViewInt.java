@@ -5,5 +5,4 @@ package com.madhapar.View;
  */
 public interface ForgetPasswordViewInt {
     public void forgetPasswordValidateResult(int check);
-
 }

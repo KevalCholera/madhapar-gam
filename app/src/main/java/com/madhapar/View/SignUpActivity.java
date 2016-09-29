@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignUpActivity extends AppCompatActivity implements SignUpViewInt {
+public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     @BindView(R.id.etFirstName)
     EditText etFirstName;
     @BindView(R.id.etLasttName)

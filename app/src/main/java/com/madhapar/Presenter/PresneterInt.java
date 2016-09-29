@@ -1,8 +1,11 @@
 package com.madhapar.Presenter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.madhapar.View.AlertDialogClass;
+import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.ViewInt;
 
@@ -27,4 +30,7 @@ public interface PresneterInt {
     public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1);
 
     public void changeFragment(int containerId, int position, AppCompatActivity activity);
+    public void alert(Context context);
+
+    public void changePasswordCredential(String newPassword, String confirmNewPassword, ChangePasswordViewInt changePasswordViewInt1);
 }
