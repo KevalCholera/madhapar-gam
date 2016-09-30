@@ -13,10 +13,6 @@ public class LoginModel implements LoginModelInt {
 
     @Override
     public void login(final String contactNumber, final String password, final LoginModelInt.OnLoginFinishedListener listener) {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 boolean error = false;
                 if(TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password))
                 {
@@ -43,7 +39,5 @@ public class LoginModel implements LoginModelInt {
                     listener.onSuccess();
                 }
             }
-        }, 2000);
-    }
 }
 

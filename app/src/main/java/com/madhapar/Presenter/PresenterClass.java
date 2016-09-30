@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
+import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
@@ -18,6 +19,7 @@ import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.AlertDialogClass;
 import com.madhapar.View.ChangePasswordViewInt;
+import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPassword;
 import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.LoginActivity;
@@ -32,7 +34,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener,ChangePasswordModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener,ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
@@ -45,6 +47,8 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
     private ChangePasswordViewInt changePasswordViewInt;
+    private FeedbackActivityInt feedbackActivityint;
+    private FeedbackModel feedbackModel;
     private ChangePasswordModel changePasswordModel;
     private AlertDialogClass alertDialogClass;
     Handler handler;
@@ -139,6 +143,15 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
         return modelClass.getMainDrawerData();
 
     }
+
+    @Override
+    public void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt) {
+        feedbackActivityint = feedbackActivityInt;
+        feedbackModel = new FeedbackModel();
+        feedbackModel.feedback(name,mobileNumber,subject,feedback,this);
+
+    }
+
     @Override
     public void passwordError() {
         viewInt.validationResult(0);
@@ -279,5 +292,25 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     @Override
     public void onForgetSuccess() {
         forgetPasswordViewInt.forgetPasswordValidateResult(UtilClass.Success);
+    }
+
+    @Override
+    public void onFeddbackSubjectError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackSubject);
+    }
+
+    @Override
+    public void onFeddbackDescriptionError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.Feeedback);
+    }
+
+    @Override
+    public void onFeddbackRequiredFieldError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.RequiredFieldError);
+    }
+
+    @Override
+    public void onFeedbackSuccess() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.Success);
     }
 }

@@ -24,6 +24,8 @@ public class UtilClass {
     public static final int FamilyMemberError = 9;
     public static final int MatchPassword = 10;
     public static final int ConfirmPassword = 11;
+    public static final int FeedbackSubject = 12;
+    public static final int Feeedback = 13;
 
     public static void displyMessage(String msg, Context context, int toastLenght) {
         Toast.makeText(context, msg, toastLenght).show();

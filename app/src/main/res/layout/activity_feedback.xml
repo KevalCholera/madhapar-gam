@@ -5,6 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.madhapar.View.FeedbackActivity">
+    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarFeedback"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tvToolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text ="@string/feedback"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/colorWhite"/>
+
+    </android.support.v7.widget.Toolbar>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"
@@ -49,6 +64,7 @@
         android:paddingLeft="@dimen/margin_small"
         android:layout_marginLeft="@dimen/text_siz_large"
         android:layout_marginRight="@dimen/text_siz_large"
+        android:inputType="textMultiLine"
         android:paddingTop="@dimen/margin_small"
         android:background="@drawable/feedback"
         android:hint="@string/feedback"
@@ -58,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"
         android:layout_marginTop="@dimen/top_margin_large"
+        android:id="@+id/btnFeedbackSend"
         android:layout_marginLeft="@dimen/text_siz_large"
         android:layout_marginRight="@dimen/text_siz_large"
         android:background="@color/colorPrimary"

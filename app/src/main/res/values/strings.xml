@@ -31,10 +31,17 @@
     <string name="save">Save</string>
     <string name="resendOTP">Resend OTP</string>
     <string name="enterOTP">Enter OTP</string>
+    <string name="changePasswordLabel">Change Password</string>
+    <string name="eventName">Event Name</string>
+    <string name="share">Share</string>
+    <string name="going">Going</string>
+    <string name="interest">Interest</string>
+    <string name="cantgo">Cant Go</string>
+    <string name="eventcalender">Event Calender</string>
 
     <string name="newPassword">New Password</string>
     <string name="confirmNewPassword">Confirm New Password</string>
-    
+
     <string name="feedbackName">Name</string>
     <string name="feedbackMobile">Mobile</string>
     <string name="feedbackSubject">Subject</string>

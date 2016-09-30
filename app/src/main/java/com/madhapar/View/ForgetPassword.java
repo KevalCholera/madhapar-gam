@@ -2,7 +2,10 @@ package com.madhapar.View;
 
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,6 +26,8 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
     Button btnRecover;
     @BindView(R.id.btnCancel)
     Button btnCancel;
+    @BindView(R.id.toolbarForgotPassword)
+    Toolbar toolbar;
     private AlertDialog alertDialog;
     private AlertDialog.Builder alBuilder;
     private PresneterInt presenter;
@@ -32,6 +37,22 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
+        super.setSupportActionBar(toolbar);
+        super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home)
+        {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.btnRecover)
@@ -43,9 +64,9 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
     public void cancel(){
         UtilClass.changeActivity(ForgetPassword.this,LoginActivity.class,true);
     }
-    @OnClick(R.id.tvForgetPasswordBack)
+   // @OnClick(R.id.tvForgetPasswordBack)
     public void back(){
-        UtilClass.changeActivity(ForgetPassword.this,LoginActivity.class,true);
+
     }
     @Override
     public void forgetPasswordValidateResult(int check) {
@@ -61,4 +82,8 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
             Log.e("Alert","Open");
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        UtilClass.changeActivity(ForgetPassword.this,LoginActivity.class,true);    }
 }

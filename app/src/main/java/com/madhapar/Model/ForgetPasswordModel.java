@@ -25,9 +25,6 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
 
     @Override
     public void login(final String contactNumber, final OnLoginFinishedListener listener) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 boolean error = false;
                 if (TextUtils.isEmpty(contactNumber)) {
                     listener.onForgetContactNumberError();
@@ -40,8 +37,6 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
                 if (!error) {
                     listener.onForgetSuccess();
                 }
-            }
-        }, 2000);
     }
 
 }

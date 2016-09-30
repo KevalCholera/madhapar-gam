@@ -11,9 +11,6 @@ public class SignUpModel implements SignUpModelInt {
 
     @Override
     public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnLoginFinishedListener listener) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 boolean error = false;
                 Log.e("Password",password);
                 if(TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(familyMember) && TextUtils.isEmpty(lastName))
@@ -53,7 +50,4 @@ public class SignUpModel implements SignUpModelInt {
                     listener.onSignUpSuccess();
                 }
             }
-        }, 2000);
-
-    }
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.madhapar.View.AlertDialogClass;
 import com.madhapar.View.ChangePasswordViewInt;
+import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.ViewInt;
 
@@ -24,6 +25,9 @@ public interface PresneterInt {
     public void validateCredentials(String contactNumber, String password);
 
     public List<Integer> initMainDrawer();
+
+    public void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
+
 
     public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember);
 
