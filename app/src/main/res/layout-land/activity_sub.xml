@@ -20,14 +20,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/imgloginscreenlogo"
+            android:src="@drawable/img_login_screen_logo"
             android:layout_gravity="center"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:id="@+id/login_id"
-            android:drawableLeft="@drawable/iconmobile"
+            android:drawableLeft="@drawable/icon_mobile"
             android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"/>
         <EditText
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:id="@+id/login_password"
-            android:drawableLeft="@drawable/iconkey"
+            android:drawableLeft="@drawable/icon_key"
             android:layout_marginRight="50dp"
             android:layout_marginLeft="50dp"/>
         <Button

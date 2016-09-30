@@ -10,21 +10,11 @@ import java.util.List;
  */
 
 public interface MainModelInt {
-    interface Textvalidator {
-        public void passwordError();
 
-        public void usernameError();
 
-        public void success();
+    void changeActivity(Activity curruntActivity, Class nextActivity, Boolean finish);
 
-        public void fail();
-    }
+    List<Integer> getMainDrawerData();
 
-    public void validateUser(String username, String password, Textvalidator textvalidator, Activity activity);
-
-    public void changeActivity(Activity curruntActivity, Class nextActivity, Boolean finish);
-
-    public List<Integer> getMainDrawerData();
-
-    public Fragment getFragment(int fragmentNo);
+    Fragment getFragment(int fragmentNo);
 }

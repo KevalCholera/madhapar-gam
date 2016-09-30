@@ -5,9 +5,9 @@ package com.madhapar.Model;
  */
 public interface SignUpModelInt {
 
-    public void signup(String firstName,String lastName,String contactNumber, String password,String familyMember , SignUpModelInt.OnLoginFinishedListener listener);
+     void signup(String firstName,String lastName,String contactNumber, String password,String familyMember , SignUpModelInt.OnLoginFinishedListener listener);
 
-    public interface OnLoginFinishedListener {
+     interface OnLoginFinishedListener {
 
         void onSignUpSuccess();
 

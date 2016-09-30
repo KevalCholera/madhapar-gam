@@ -37,6 +37,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+
     }
 
     @OnClick(R.id.btnSignUp)

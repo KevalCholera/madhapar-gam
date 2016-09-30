@@ -20,11 +20,12 @@
     <string name="newUserSignUp">New here? Sign Up</string>
 
     <string name="firstName">First Name</string>
-    <string name="lastName">LastName</string>
+    <string name="lastName">Last Name</string>
     <string name="familyMember">Family Member</string>
     <string name="textContact">Enter Your Mobile Number</string>
 
     <string name="signUp">Sign Up</string>
+    <string name="signupButtonText">Sign-Up</string>
     <string name="back">Back</string>
     <string name="recover">Recover</string>
     <string name="cancel">cancel</string>

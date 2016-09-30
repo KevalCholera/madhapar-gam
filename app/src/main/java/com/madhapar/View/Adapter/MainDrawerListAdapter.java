@@ -1,17 +1,23 @@
 package com.madhapar.View.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.View.EventCalender;
+
+import org.json.JSONArray;
 
 import java.util.List;
-import java.util.zip.Inflater;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by smartsense on 24/09/16.
@@ -62,5 +68,6 @@ public class MainDrawerListAdapter extends BaseAdapter {
     public class ViewHolder {
         public ImageView ivDrawerElement;
     }
+
 
 }

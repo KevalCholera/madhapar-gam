@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,6 +77,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
             UtilClass.displyMessage("Contact no Length is required 7 to 10 digit", LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.Success) {
             UtilClass.displyMessage("Login Success", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.changeActivity(LoginActivity.this, MainActivity.class, true);
         } else if (check == UtilClass.RequiredFieldError) {
             UtilClass.displyMessage("Enter Required Field", LoginActivity.this, Toast.LENGTH_SHORT);
         }

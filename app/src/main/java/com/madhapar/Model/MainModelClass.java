@@ -25,30 +25,6 @@ import java.util.List;
  */
 
 public class MainModelClass implements MainModelInt {
-    @Override
-    public void validateUser(final String username, final String password, final Textvalidator textvalidator, final Activity activity) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (TextUtils.isEmpty(username)) {
-                    if (TextUtils.isEmpty(password)) {
-                        textvalidator.fail();
-                        UtilClass.displyMessage("Fail", activity, Toast.LENGTH_SHORT);
-                    } else {
-                        textvalidator.usernameError();
-                        UtilClass.displyMessage("Username Error", activity, Toast.LENGTH_SHORT);
-                    }
-                } else if (TextUtils.isEmpty(password)) {
-                    textvalidator.passwordError();
-                    UtilClass.displyMessage("Password Error", activity, Toast.LENGTH_SHORT);
-                } else {
-                    textvalidator.success();
-                    UtilClass.displyMessage("Successfull", activity, Toast.LENGTH_SHORT);
-                }
-            }
-        }, 2000);
-
-    }
 
     @Override
     public void changeActivity(Activity curruntActivity, Class nextActivity, Boolean finish) {
@@ -68,8 +44,6 @@ public class MainModelClass implements MainModelInt {
         drawerIconList.add(3, R.drawable.ic_network);
         drawerIconList.add(4, R.drawable.ic_more);
         return drawerIconList;
-
-
     }
 
     @Override

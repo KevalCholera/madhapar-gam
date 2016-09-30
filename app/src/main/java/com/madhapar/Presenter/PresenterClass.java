@@ -34,11 +34,10 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener,ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
-    private MainModelInt.Textvalidator textValidator;
     private LoginInt loginInt;
     private LoginModelInt loginModelInt;
     //private SignUpModelInt signUpModelInt;
@@ -50,24 +49,15 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     private FeedbackActivityInt feedbackActivityint;
     private FeedbackModel feedbackModel;
     private ChangePasswordModel changePasswordModel;
-    private AlertDialogClass alertDialogClass;
-    Handler handler;
     LoginModel loginModel;
 
     public PresenterClass() {
     }
+
     public PresenterClass(ForgetPassword forgetPassword) {
         this.forgetPasswordViewInt = (ForgetPasswordViewInt) forgetPasswordViewInt;
     }
 
-
-    @Override
-    public void checkLogin(String username, String password, ViewInt mViewInt, Activity activity) {
-        this.viewInt = mViewInt;
-        modelClass = new MainModelClass();
-        textValidator = this;
-        modelClass.validateUser(username, password, textValidator, activity);
-    }
 
     public PresenterClass(LoginActivity loginModel) {
 
@@ -118,7 +108,7 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
         fragmentTransaction.
                 replace(containerId, modelClass.getFragment(position));
 
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
@@ -130,7 +120,7 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     public void changePasswordCredential(String newPassword, String confirmNewPassword, ChangePasswordViewInt changePasswordViewInt1) {
         changePasswordViewInt = changePasswordViewInt1;
         changePasswordModel = new ChangePasswordModel();
-        changePasswordModel.chnagePassword(newPassword,confirmNewPassword,this);
+        changePasswordModel.chnagePassword(newPassword, confirmNewPassword, this);
     }
 
 
@@ -148,29 +138,10 @@ public class PresenterClass implements PresneterInt, MainModelInt.Textvalidator,
     public void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt) {
         feedbackActivityint = feedbackActivityInt;
         feedbackModel = new FeedbackModel();
-        feedbackModel.feedback(name,mobileNumber,subject,feedback,this);
+        feedbackModel.feedback(name, mobileNumber, subject, feedback, this);
 
     }
 
-    @Override
-    public void passwordError() {
-        viewInt.validationResult(0);
-    }
-
-    @Override
-    public void usernameError() {
-        viewInt.validationResult(1);
-    }
-
-    @Override
-    public void success() {
-        viewInt.validationResult(2);
-    }
-
-    @Override
-    public void fail() {
-        viewInt.validationResult(3);
-    }
 
     @Override
     public void oncontactNumberError() {
