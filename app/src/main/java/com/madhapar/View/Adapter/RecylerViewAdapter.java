@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -32,7 +33,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View eventView = LayoutInflater.from(context).inflate(R.layout.alert_card_event, parent, false);
+        View eventView = LayoutInflater.from(context).inflate(R.layout.event_card, parent, false);
         ButterKnife.bind(this,eventView);
         if(eventView != null){Log.e("Log Here","eventview not null");}
         return new MyViewHolder(eventView);
@@ -59,17 +60,21 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView tvEventName, tvTime, tvAddress, tvGoing, tvInterest, tvNotInterest;
-
+                @BindView(R.id.tvEventName)
+                TextView tvEventName;
+                @BindView(R.id.tvTime)
+                TextView tvTime;
+                @BindView(R.id.tvAddress)
+                TextView tvAddress;
+                @BindView(R.id.tvGoingCount)
+                TextView tvGoing;
+                @BindView(R.id.tvInterestCount)
+                TextView tvInterest;
+                @BindView(R.id.tvNotInterestCount)
+                TextView tvNotInterest;
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvEventName = (TextView) itemView.findViewById(R.id.tvEventName);
-            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-            tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
-            tvGoing = (TextView) itemView.findViewById(R.id.tvGoingCount);
-            tvInterest = (TextView) itemView.findViewById(R.id.tvInterestCount);
-            tvNotInterest = (TextView) itemView.findViewById(R.id.tvNotInterestCount);
-
+            ButterKnife.bind(this,itemView);
         }
     }
 
