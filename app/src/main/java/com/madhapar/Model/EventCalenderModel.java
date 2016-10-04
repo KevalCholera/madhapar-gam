@@ -13,8 +13,6 @@ public class EventCalenderModel implements EventCalenderModelInt{
 
     @Override
     public JSONArray getEventList() {
-        Log.e("presenter","eventList");
-
         JSONArray eventList = new JSONArray();
         try {
             JSONObject obj1 = new JSONObject();
@@ -38,5 +36,4 @@ public class EventCalenderModel implements EventCalenderModelInt{
         }
         return eventList;
     }
-
 }
