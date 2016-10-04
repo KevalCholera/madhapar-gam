@@ -2,19 +2,19 @@ package com.madhapar.Presenter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
+import com.madhapar.Model.EventCalenderModel;
+import com.madhapar.Model.EventCalenderModelInt;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
-import com.madhapar.Model.MainModelInt;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.AlertDialogClass;
@@ -27,6 +27,8 @@ import com.madhapar.View.LoginInt;
 import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
 import com.madhapar.View.ViewInt;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     private LoginModelInt loginModelInt;
     //private SignUpModelInt signUpModelInt;
     private SignUpModel signUpModel;
+    private EventCalenderModel eventCalenderModel;
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
@@ -51,21 +54,12 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     private ChangePasswordModel changePasswordModel;
     LoginModel loginModel;
 
-    public PresenterClass() {
-    }
-
-    public PresenterClass(ForgetPassword forgetPassword) {
-        this.forgetPasswordViewInt = (ForgetPasswordViewInt) forgetPasswordViewInt;
-    }
-
-
-    public PresenterClass(LoginActivity loginModel) {
-
-        this.loginInt = loginModel;
-    }
-
     public PresenterClass(SignUpActivity signUpModel) {
         this.signupInt = signUpModel;
+    }
+
+    public PresenterClass() {
+
     }
 
     @Override
@@ -77,9 +71,10 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     }
 
     @Override
-    public void validateCredentials(String contactNumber, String password) {
+    public void validateCredentials(String contactNumber, String password,LoginActivity loginModel) {
         if (loginInt != null) {
         }
+        this.loginInt = loginModel;
         loginModelInt = new LoginModel();
         loginModelInt.login(contactNumber, password, this);
     }
@@ -129,9 +124,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
         if (modelClass == null) {
             modelClass = new MainModelClass();
         }
-
         return modelClass.getMainDrawerData();
-
     }
 
     @Override
@@ -139,10 +132,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
         feedbackActivityint = feedbackActivityInt;
         feedbackModel = new FeedbackModel();
         feedbackModel.feedback(name, mobileNumber, subject, feedback, this);
-
     }
-
-
     @Override
     public void oncontactNumberError() {
         loginInt.loginValidateResult(UtilClass.UserIdError);
@@ -283,5 +273,12 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     @Override
     public void onFeedbackSuccess() {
         feedbackActivityint.feedbackValidateResult(UtilClass.Success);
+    }
+
+    @Override
+    public JSONArray getEventList() {
+        eventCalenderModel = new EventCalenderModel();
+        return eventCalenderModel.getEventList();
+
     }
 }

@@ -13,6 +13,7 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.Fragment.EventFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +61,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     }
     @OnClick(R.id.btnChnagePasswordCancel)
     public void cancelChangePassword(){
-        UtilClass.changeActivity(ChangePasswordActivity.this,EventCalenderActivity.class,true);
+        UtilClass.changeActivity(ChangePasswordActivity.this,EventFragment.class,true);
     }
     @Override
     public void changePasswordValidateResult(int check) {

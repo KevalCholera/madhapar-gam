@@ -46,8 +46,8 @@ public class LoginActivity extends BaseActivity implements LoginInt {
 
     @OnClick(R.id.btnLogin)
     public void submit() {
-        presenter = new PresenterClass(this);
-        presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString());
+        presenter = new PresenterClass();
+        presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString(),this);
     }
 
     @OnClick(R.id.tvUserSignUp)

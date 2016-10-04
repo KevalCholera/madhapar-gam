@@ -57,12 +57,12 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
 
     @OnClick(R.id.btnRecover)
     public void recover(){
-        presenter = new PresenterClass(this);
+        presenter = new PresenterClass();
         presenter.forgetPasswordCredentials(etForgetMobileNumber.getText().toString(),forgetPasswordViewInt);
     }
     @OnClick(R.id.btnCancel)
     public void cancel(){
-        UtilClass.changeActivity(ForgetPassword.this,LoginActivity.class,true);
+        UtilClass.changeActivity(ForgetPassword.this,FeedbackActivity.class,true);
     }
    // @OnClick(R.id.tvForgetPasswordBack)
     public void back(){

@@ -47,7 +47,8 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     }
     @OnClick(R.id.imgBack)
     public void back(){
-        finish();
+    //    finish();
+        UtilClass.changeActivity(SignUpActivity.this,ForgetPassword.class,true);
     }
 
     @Override

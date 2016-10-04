@@ -70,10 +70,10 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         lvDrawerMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                presenter.changeFragment(R.id.flMain, position, MainActivity.this);
-//                dlMain.closeDrawers();
-                startActivity(new Intent(MainActivity.this, EventCalenderActivity.class));
-                finish();
+                presenter.changeFragment(R.id.flMain, position, MainActivity.this);
+               dlMain.closeDrawers();
+                //startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //finish();
             }
         });
 

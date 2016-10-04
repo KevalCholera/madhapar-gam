@@ -13,6 +13,7 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.Fragment.EventFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +55,7 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     }
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(FeedbackActivity.this,MainActivity.class,true);    }
+        UtilClass.changeActivity(FeedbackActivity.this,LoginActivity.class,true);    }
 
     @OnClick(R.id.btnFeedbackSend)
     public void feedback(){
