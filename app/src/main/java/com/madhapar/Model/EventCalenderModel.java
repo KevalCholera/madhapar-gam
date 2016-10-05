@@ -29,7 +29,7 @@ public class EventCalenderModel implements EventCalenderModelInt{
             obj2.put("going ","12");
             obj2.put("interested ","12");
             obj2.put("cantGo ","12");
-           eventList.put(obj1);
+            eventList.put(obj1);
             eventList.put(obj2);
         } catch (JSONException e) {
             e.printStackTrace();

@@ -2,9 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_top_login_margin"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_top_login_margin"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"
@@ -16,8 +20,10 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:gravity="center"
+        android:textAlignment="center"
+        android:selectAllOnFocus="true"
         android:background="@android:color/transparent"
-        android:textSize="@dimen/activity_top_login_margin"
+        android:textSize="@dimen/activity_vertical_margin"
         android:layout_height="@dimen/text_siz_large"
         android:textColor="@color/colorPrimary"
         android:hint="@string/search" />
@@ -26,13 +32,30 @@
             android:layout_height="wrap_content"
             android:id="@+id/ic_search"
             android:src="@drawable/ic_search"
+            android:paddingBottom="@dimen/cardview_default_radius"
             android:visibility="gone"/>
+
+
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewMyNetwork"
-        android:layout_marginTop="@dimen/margin_medium"
+        </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cardview_default_elevation"
+        android:layout_marginBottom="@dimen/cardview_default_elevation"
+        android:orientation="horizontal">
+        <View android:id="@+id/primerdivisor"
+            android:layout_height="@dimen/cardview_default_elevation"
+            android:layout_width="fill_parent"
+            android:background="@color/colorGrey" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewMyNetwork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_top_login_margin"
+        android:paddingRight="@dimen/activity_top_login_margin"
         android:scrollbars="vertical" />
 
 </LinearLayout>

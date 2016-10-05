@@ -8,6 +8,4 @@ import org.json.JSONException;
  */
 public interface EventCalenderModelInt {
      JSONArray getEventList();
-
-
 }

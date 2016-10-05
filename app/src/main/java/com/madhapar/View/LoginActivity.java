@@ -68,18 +68,18 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     @Override
     public void loginValidateResult(int check) {
         if (check == UtilClass.UserIdError) {
-            UtilClass.displyMessage("Enter Contact Number", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contact), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.PasswordLengthError) {
-            UtilClass.displyMessage("Enter Password Greater than 6", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.passwordlength), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.PasswordError) {
-            UtilClass.displyMessage("Enter valid Password", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterpassword), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.UserIdLengthError) {
-            UtilClass.displyMessage("Contact no Length is required 7 to 10 digit", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contactlength), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.Success) {
-            UtilClass.displyMessage("Login Success", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.loginSuccess), LoginActivity.this, Toast.LENGTH_SHORT);
             UtilClass.changeActivity(LoginActivity.this, MainActivity.class, true);
         } else if (check == UtilClass.RequiredFieldError) {
-            UtilClass.displyMessage("Enter Required Field", LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterrequiredfiels), LoginActivity.this, Toast.LENGTH_SHORT);
         }
 
     }

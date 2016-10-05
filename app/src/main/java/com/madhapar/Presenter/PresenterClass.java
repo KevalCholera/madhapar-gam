@@ -15,6 +15,7 @@ import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
+import com.madhapar.Model.MyNetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.AlertDialogClass;
@@ -45,6 +46,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     //private SignUpModelInt signUpModelInt;
     private SignUpModel signUpModel;
     private EventCalenderModel eventCalenderModel;
+    private MyNetworkModel myNetworkModel;
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
@@ -280,5 +282,11 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
         eventCalenderModel = new EventCalenderModel();
         return eventCalenderModel.getEventList();
 
+    }
+
+    @Override
+    public JSONArray getProfile() {
+        myNetworkModel = new MyNetworkModel();
+        return myNetworkModel.getProfile();
     }
 }

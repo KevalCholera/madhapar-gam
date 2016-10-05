@@ -71,15 +71,14 @@ public class ForgetPassword extends BaseActivity  implements ForgetPasswordViewI
     @Override
     public void forgetPasswordValidateResult(int check) {
         if(check == UtilClass.UserIdLengthError){
-            UtilClass.displyMessage("Enter Valid Contact Number",ForgetPassword.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contactlength),ForgetPassword.this, Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.UserIdError){
-            UtilClass.displyMessage("Contact Number must be Greater Than 7 letters",ForgetPassword.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contact),ForgetPassword.this,Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.Success){
-            UtilClass.displyMessage("Password Update",ForgetPassword.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.passwordUpdate),ForgetPassword.this,Toast.LENGTH_SHORT);
             presenter.alert(ForgetPassword.this);
-            Log.e("Alert","Open");
         }
     }
 

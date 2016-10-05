@@ -66,22 +66,22 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     @Override
     public void changePasswordValidateResult(int check) {
         if(check == UtilClass.RequiredFieldError){
-            UtilClass.displyMessage("Enter Required Field",ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterrequiredfiels),ChangePasswordActivity.this, Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.PasswordError){
-            UtilClass.displyMessage("Enter New Password",ChangePasswordActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enternewpassword),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.PasswordLengthError){
-            UtilClass.displyMessage("Password must be greater than 6 letters",ChangePasswordActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.passwordlength),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.MatchPassword){
-            UtilClass.displyMessage("Password cant match Enter Valid Confirm Password",ChangePasswordActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.passwordmatch),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
         }
         else if(check == UtilClass.ConfirmPassword){
-            UtilClass.displyMessage("Enter Confirm Password",ChangePasswordActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterConfirmPassword),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.Success){
-            UtilClass.displyMessage("Password Update",ChangePasswordActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.passwordupdate),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
         }
     }
 }

@@ -3,8 +3,6 @@ package com.madhapar.Presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-
-import com.madhapar.Model.EventCalenderModel;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
@@ -31,6 +29,8 @@ public interface PresneterInt {
     void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 
     JSONArray getEventList();
+
+    JSONArray getProfile();
 
     void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember);
 

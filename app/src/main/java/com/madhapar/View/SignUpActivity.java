@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     @BindView(R.id.etMobileNumber)
     EditText etMobileNumber;
     @BindView(R.id.btnSignUp)
+    Context c = SignUpActivity.this;
     Button btnSignUp;
     @BindView(R.id.imgBack)
     ImageView imgBack;
@@ -56,32 +58,32 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
         switch (check){
             case UtilClass.RequiredFieldError:
             {
-                UtilClass.displyMessage("Enter Required Field",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.enterrequiredfiels),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.FamilyMemberError:
             {
-                UtilClass.displyMessage("Enter Family Member",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.enterfamilymember),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.FirstNameError:
             {
-                UtilClass.displyMessage("Enter First Name",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.enterfirstnm),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.LastNameError:
             {
-                UtilClass.displyMessage("Enter Valid Last Name",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.enterlastnm),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.PasswordError:
             {
-                UtilClass.displyMessage("Enter Password",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.enterpassword),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.PasswordLengthError:
             {
-                UtilClass.displyMessage("Password must be greater than 6 letters",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.passwordlength),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.Success:
@@ -91,12 +93,12 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
             }
             case UtilClass.UserIdError:
             {
-                UtilClass.displyMessage("Enter Contact Number",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.contact),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.UserIdLengthError:
             {
-                UtilClass.displyMessage("Contact Number must be 7 to 14 digit",SignUpActivity.this,Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.contactlength),SignUpActivity.this,Toast.LENGTH_SHORT);
                 break;
             }
             default:

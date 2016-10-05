@@ -13,7 +13,10 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.FeedbackActivity;
+import com.madhapar.View.GoingActivity;
+import com.madhapar.View.InterestedActivity;
 import com.madhapar.View.LoginActivity;
+import com.madhapar.View.NotGoingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,11 +31,11 @@ public class MoreFragment extends BaseFragment {
     private PresenterClass presenter;
     @OnClick(R.id.tvIntroHistory)
     public void introHistory(){
-        UtilClass.displyMessage("Intro and History and ",getContext(), Toast.LENGTH_SHORT);
+        presenter.changeActivity(getActivity(), InterestedActivity.class,true);
     }
     @OnClick(R.id.tvEventPhotos)
     public void eventPhotos(){
-        UtilClass.displyMessage(" Event Photos",getContext(), Toast.LENGTH_SHORT);
+        presenter.changeActivity(getActivity(), GoingActivity.class,true);
     }
     @OnClick(R.id.tvFeedback)
     public void tvFeedback(){
@@ -40,7 +43,7 @@ public class MoreFragment extends BaseFragment {
     }
     @OnClick(R.id.tvAboutUs)
     public void tvAboutUs(){
-        UtilClass.displyMessage("About Us",getContext(),Toast.LENGTH_SHORT);
+        presenter.changeActivity(getActivity(), NotGoingActivity.class,true);
     }
     @OnClick(R.id.tvFundRaising)
     public void tvFundRaising(){

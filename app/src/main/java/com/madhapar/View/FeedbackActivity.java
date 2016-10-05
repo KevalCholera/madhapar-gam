@@ -66,16 +66,16 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     @Override
     public void feedbackValidateResult(int check) {
         if(check == UtilClass.RequiredFieldError){
-            UtilClass.displyMessage("Enter Required Field",FeedbackActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterrequiredfiels),FeedbackActivity.this, Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.FeedbackSubject){
-            UtilClass.displyMessage("Enter valid Feedback Subject",FeedbackActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.subjectrequired),FeedbackActivity.this,Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.Feeedback){
-            UtilClass.displyMessage("Enter Feedback",FeedbackActivity.this,Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.enterFeedback),FeedbackActivity.this,Toast.LENGTH_SHORT);
         }
         if(check == UtilClass.Success) {
-            UtilClass.displyMessage("Thank You !", FeedbackActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.thanku), FeedbackActivity.this, Toast.LENGTH_SHORT);
         }
 
     }

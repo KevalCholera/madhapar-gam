@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.madhapar.View.FeedbackActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
     <android.support.v7.widget.Toolbar android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbarFeedback"
@@ -77,7 +87,10 @@
         android:id="@+id/btnFeedbackSend"
         android:layout_marginLeft="@dimen/text_siz_large"
         android:layout_marginRight="@dimen/text_siz_large"
+        android:layout_marginBottom="@dimen/activity_login_margin"
         android:background="@color/colorPrimary"
         android:text="@string/feedbackSent"
         android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

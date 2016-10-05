@@ -38,6 +38,7 @@
     <string name="going">Going</string>
     <string name="interest">Interest</string>
     <string name="cantgo">Can\'\ t Go</string>
+    <string name="noygoing">Not Going</string>
     <string name="eventcalender">Event Calender</string>
 
     <string name="newPassword">New Password</string>
@@ -48,7 +49,7 @@
     <string name="feedbackSubject">Subject</string>
     <string name="feedback">Feedback</string>
     <string name="feedbackSent">Send</string>
-    
+
     <string name="more1">Intro &amp; History</string>
     <string name="more2">Event Photos</string>
     <string name="more3">Feedback</string>
@@ -57,5 +58,24 @@
     <string name="more6">Sign Out</string>
 
     <string name="search">Search</string>
+
+    <string name="enterrequiredfiels">Enter Required Field</string>
+    <string name="enterfamilymember">Enter Family Member</string>
+    <string name="enterfirstnm">Enter Valid First Name</string>
+    <string name="enterlastnm">Enter Vlaid Last Name</string>
+    <string name="enterpassword">Enter Password</string>
+    <string name="passwordlength">Password must be greater than 6 letters</string>
+    <string name="contact">Enter Contact Number</string>
+    <string name="contactlength">Contact Number must be 7 to 14 digit</string>
+    <string name="loginSuccess">Login Success</string>
+    <string name="passwordUpdate">password Update</string>
+    <string name="subjectrequired">Enter valid Feedback Subject</string>
+    <string name="enterFeedback">Enter Feedback</string>
+    <string name="thanku">Thank you </string>
+    <string name="enternewpassword">Enter New Password</string>
+    <string name="enterConfirmPassword">Enter Confirm Password</string>
+    <string name="passwordupdate">Password Update</string>
+    <string name="passwordmatch">Password cant match Enter Valid Confirm Password</string>
+    <string name="resenedcode">Resend Code Successfully</string>
 
 </resources>

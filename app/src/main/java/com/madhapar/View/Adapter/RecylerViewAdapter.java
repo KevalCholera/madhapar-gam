@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.UtilClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by smartsense on 30/09/16.
@@ -72,6 +74,9 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
                 TextView tvInterest;
                 @BindView(R.id.tvNotInterestCount)
                 TextView tvNotInterest;
+        @OnClick(R.id.tvGoing)
+        public void goinActivity(){
+        }
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

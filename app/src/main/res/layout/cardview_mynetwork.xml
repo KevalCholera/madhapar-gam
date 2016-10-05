@@ -2,9 +2,9 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/activity_top_login_margin"
     android:layout_height="wrap_content"
-    android:background="@drawable/eventcard"
+    android:layout_marginTop="@dimen/margin_medium"
+    android:background="@drawable/networkcard"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -16,11 +16,9 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
             android:src="@drawable/honey"
-            android:id="@+id/circleView"
-            />
+            android:id="@+id/circleView" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvName"
-                android:text="dsbcjdbcjdbc"
+                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/activity_vertical_margin"
                 />
@@ -39,14 +37,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvQualification"
-                android:text="svcxhjdvchds"
                 android:layout_marginTop="@dimen/margin_small"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvCity"
-                android:layout_marginTop="@dimen/margin_small"
-                android:text="njbxsjbxhs"/>
+                android:layout_marginTop="@dimen/margin_small" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
