@@ -12,8 +12,12 @@ import android.widget.Toast;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
+import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Fragment.EventFragment;
+import com.mpt.storage.SharedPreferenceUtil;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +33,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     @BindView(R.id.toolbarChangePassword)
     Toolbar toolbarChangePassword;
     private PresneterInt presenter;
-    private ChangePasswordViewInt changePasswordViewInt=this;
+    private String otpToken;
+    private ChangePasswordViewInt changePasswordViewInt = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +43,11 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         ButterKnife.bind(this);
         super.setSupportActionBar(toolbarChangePassword);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getIntent() != null) {
+            otpToken = getIntent().getStringExtra("otpToken");
+        }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -45,43 +55,67 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(ChangePasswordActivity.this,MainActivity.class,true);    }
+        UtilClass.hideProgress();
+        UtilClass.changeActivity(ChangePasswordActivity.this, MainActivity.class, true);
+    }
+
     @OnClick(R.id.btnSave)
-    public void save(){
-        presenter = new PresenterClass();
-        presenter.changePasswordCredential(etChangeNewPassword.getText().toString(),etChangeConfirmNewPassword.getText().toString(),changePasswordViewInt);
+    public void save() {
+        if (UtilClass.isInternetAvailabel(this)) {
+            UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
+            presenter = new PresenterClass();
+            presenter.changePasswordCredential(etChangeNewPassword.getText().toString().trim(), etChangeConfirmNewPassword.getText().toString().trim(), otpToken, SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""), changePasswordViewInt);
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
+        }
     }
+
     @OnClick(R.id.btnChnagePasswordCancel)
-    public void cancelChangePassword(){
-        UtilClass.changeActivity(ChangePasswordActivity.this,EventFragment.class,true);
+    public void cancelChangePassword() {
+        UtilClass.hideProgress();
+        finish();
     }
+
     @Override
     public void changePasswordValidateResult(int check) {
-        if(check == UtilClass.RequiredFieldError){
-            UtilClass.displyMessage(getString(R.string.enterrequiredfiels),ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+        UtilClass.hideProgress();
+        if (check == UtilClass.RequiredFieldError) {
+            UtilClass.displyMessage(getString(R.string.enterrequiredfiels), ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.PasswordError) {
+            UtilClass.displyMessage(getString(R.string.enternewpassword), ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.PasswordLengthError) {
+            UtilClass.displyMessage(getString(R.string.passwordlength), ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.MatchPassword) {
+            UtilClass.displyMessage(getString(R.string.passwordmatch), ChangePasswordActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.ConfirmPassword) {
+            UtilClass.displyMessage(getString(R.string.enterConfirmPassword), ChangePasswordActivity.this, Toast.LENGTH_SHORT);
         }
-        else if(check == UtilClass.PasswordError){
-            UtilClass.displyMessage(getString(R.string.enternewpassword),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.PasswordLengthError){
-            UtilClass.displyMessage(getString(R.string.passwordlength),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.MatchPassword){
-            UtilClass.displyMessage(getString(R.string.passwordmatch),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
-        }
-        else if(check == UtilClass.ConfirmPassword){
-            UtilClass.displyMessage(getString(R.string.enterConfirmPassword),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
-        }
-        if(check == UtilClass.Success){
-            UtilClass.displyMessage(getString(R.string.passwordupdate),ChangePasswordActivity.this,Toast.LENGTH_SHORT);
-        }
+    }
+
+    @Override
+    public void changePasswordSuccessfull(JSONObject response) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(response.optString("message"), this, 0);
+        UtilClass.changeActivity(this, LoginActivity.class, true);
+    }
+
+    @Override
+    public void changePasswordFail(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, this, 0);
+    }
+
+    @Override
+    public void changePasswordRequestError() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
     }
 }

@@ -1,5 +1,6 @@
 package com.madhapar.Model;
 
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -12,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.UserVerifyActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -27,32 +29,23 @@ import java.util.Map;
 public class LoginModel implements LoginModelInt {
 
     @Override
-    public void login(final String loginId, final String password, final LoginModelInt.OnLoginFinishedListener listener) {
-        boolean error = false;
+    public void login(final String loginId, final String password, final LoginModelInt.onLoginFinishListener listener, AppCompatActivity activity) {
         if (TextUtils.isEmpty(loginId) && TextUtils.isEmpty(password)) {
             listener.onLoginRequiredFieldError();
-            error = true;
         } else if (TextUtils.isEmpty(loginId)) {
             listener.onLogincontactNumberError();
-            error = true;
         } else if (!(loginId.length() > 7 && loginId.length() < 14)) {
             listener.onLoginContactLenghtError();
-            error = true;
         } else if (TextUtils.isEmpty(password)) {
             listener.onLoginPasswordError();
-            error = true;
         } else if (((password.length() < 6))) {
             listener.onLoginPasswordLengthError();
-            error = true;
-        }
-        if (!error) {
-            doLogin(listener, loginId, password);
+        } else {
+            doLogin(listener, loginId, password, activity);
         }
     }
 
-    private void doLogin(final LoginModelInt.OnLoginFinishedListener listener, final String login, final String password) {
-
-
+    private void doLogin(final LoginModelInt.onLoginFinishListener listener, final String login, final String password, final AppCompatActivity activity) {
         String tag = "login";
         StringRequest loginRequest = new StringRequest(Request.Method.POST, UtilClass.getLoginUrl(), new Response.Listener<String>() {
             @Override
@@ -66,7 +59,6 @@ public class LoginModel implements LoginModelInt {
                                 JSONObject userObject = logiObject.optJSONObject("user");
                                 if (userObject != null) {
                                     try {
-                                        Log.e("json", "response" + userObject);
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserId, userObject.optString("userId"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserMobileNo, userObject.optString("userMobileNo"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFirstName, userObject.optString("userFirstName"));
@@ -80,17 +72,21 @@ public class LoginModel implements LoginModelInt {
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserBloodGroup, userObject.optString("userBloodGroup"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFamilyMemberCount, userObject.optString("userFamilyMemberCount"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationId, userObject.optString("userRegistrationId"));
-                                        SharedPreferenceUtil.putValue(Constants.UserData.isVerified, userObject.optString("isVerified"));
+                                        SharedPreferenceUtil.putValue(Constants.UserData.isVerified, userObject.optBoolean("isVerified"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, userObject.optString("userFBProfileName"));
                                         SharedPreferenceUtil.save();
+//                                        if (!userObject.optBoolean("isVerified")) {
+//                                            UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
+//                                        } else {
                                         listener.onLoginSuccess();
+                                        //   }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 }
                                 SharedPreferenceUtil.save();
                             } else {
-                                listener.onLoginFailError(new JSONObject(response));
+                                listener.onLoginFailError(logiObject.optString("message"));
                             }
                         }
                     } catch (JSONException e) {
@@ -101,7 +97,7 @@ public class LoginModel implements LoginModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onLoginRequestError();
+                listener.onRequestError();
             }
         }) {
             @Override

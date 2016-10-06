@@ -6,4 +6,7 @@ package com.madhapar.View;
 
 public interface LoginInt {
     public void loginValidateResult(int check);
+
+    void onFailLogin(String message);
+    void onRequestFail();
 }

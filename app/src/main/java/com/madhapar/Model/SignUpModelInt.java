@@ -13,7 +13,9 @@ public interface SignUpModelInt {
 
         void onSignUpSuccess();
 
-        void onSignUpFailError(JSONObject error);
+        void onSignUpRequestError();
+
+        void onSignUpFailError(String signUpError);
 
         void onSignUpFirstNameError();
 

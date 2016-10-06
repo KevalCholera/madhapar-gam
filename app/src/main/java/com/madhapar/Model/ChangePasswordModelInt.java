@@ -1,12 +1,16 @@
 package com.madhapar.Model;
 
+import org.json.JSONObject;
+
 /**
  * Created by Ronak on 9/27/2016.
  */
 public interface ChangePasswordModelInt {
-    interface OnLoginFinishedListener{
+    interface onChangePasswordRequestFinishListener {
 
-        void onChangePasswordSuccess();
+        void onChangePasswordSuccess(JSONObject changeObj);
+
+        void onFailToChangePassword(String message);
 
         void onNewPasswordError();
 
@@ -17,7 +21,10 @@ public interface ChangePasswordModelInt {
         void onPasswordMatchError();
 
         void onChangePasswordRequiredFieldError();
+
+        void onChangePasswordRequestError();
     }
-    public void chnagePassword(String newPassword,String confirmNewPassword, OnLoginFinishedListener listener);
+
+    public void changePassword(String newPassword, String confirmNewPassword, String otpToken, String contactNumber, onChangePasswordRequestFinishListener listener);
 
 }

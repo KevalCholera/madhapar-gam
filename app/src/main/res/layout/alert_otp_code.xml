@@ -7,59 +7,64 @@
     android:background="@drawable/alertdialogdesign"
     android:orientation="vertical"
     tools:context="com.madhapar.View.ForgetPassword">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_rightleft_login"
-        android:gravity="center"
         android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/enterOTP"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/activity_top_login_margin"
-        android:text="@string/enterOTP"/>
+        android:textSize="@dimen/activity_top_login_margin" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_rightleft_login"
         android:layout_marginLeft="@dimen/activity_rightleft_login"
+        android:layout_marginRight="@dimen/activity_rightleft_login"
         android:layout_marginTop="@dimen/activity_rightleft_login"
         android:gravity="center"
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/etCode1"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:maxLength="1"
             android:layout_height="wrap_content"
-            android:id="@+id/etCode1"/>
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="text"
+            android:maxLength="1" />
+
         <EditText
+            android:id="@+id/etCode2"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_medium"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:inputType="number"
-            android:maxLength="1"
-            android:layout_height="wrap_content"
-            android:id="@+id/etCode2"/>
+            android:inputType="text"
+            android:maxLength="1" />
+
         <EditText
+            android:id="@+id/etCode3"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:gravity="center"
             android:layout_height="wrap_content"
-            android:id="@+id/etCode3"/>
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="text"
+            android:maxLength="1" />
+
         <EditText
+            android:id="@+id/etCode4"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:gravity="center"
             android:layout_height="wrap_content"
-            android:id="@+id/etCode4"/>
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="text"
+            android:maxLength="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,24 +73,26 @@
         android:layout_marginBottom="@dimen/activity_login_margin"
         android:layout_marginTop="@dimen/activity_rightleft_login"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:id="@+id/tvResendCode"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/margin_medium"
-            android:gravity="left"
-            android:textSize="@dimen/activity_top_login_margin"
-            android:text="@string/resendOTP"/>
-        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvCancel"
+            android:layout_marginLeft="@dimen/margin_medium"
             android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/resendOTP"
+            android:textSize="@dimen/activity_top_login_margin" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_medium"
+            android:layout_weight="1"
             android:gravity="right"
-            android:textSize="@dimen/activity_top_login_margin"
-            android:text="@string/cancel"/>
+            android:text="@string/cancel"
+            android:textSize="@dimen/activity_top_login_margin" />
 
     </LinearLayout>
 </LinearLayout>

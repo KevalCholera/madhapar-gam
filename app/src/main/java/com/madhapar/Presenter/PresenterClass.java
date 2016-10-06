@@ -11,12 +11,14 @@ import com.madhapar.Model.ChangePasswordModel;
 import com.madhapar.Model.EventCalenderModel;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
+import com.madhapar.Model.ForgetPasswordModelInt;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.MyNetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.AlertDialofClassInt;
 import com.madhapar.View.AlertDialogClass;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
@@ -36,7 +38,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinishedListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnLoginFinishedListener, ForgetPasswordModelInt.onVerifyOtpListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
@@ -53,6 +55,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     private FeedbackActivityInt feedbackActivityint;
     private FeedbackModel feedbackModel;
     private ChangePasswordModel changePasswordModel;
+    private AlertDialofClassInt alertIntl;
     LoginModel loginModel;
 
     public PresenterClass(SignUpActivity signUpModel) {
@@ -72,12 +75,10 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     }
 
     @Override
-    public void validateCredentials(String contactNumber, String password, LoginActivity loginModel) {
-        if (loginInt != null) {
-        }
-        this.loginInt = loginModel;
-        loginModelInt = new LoginModel();
-        loginModelInt.login(contactNumber, password, this);
+    public void validateCredentials(String contactNumber, String password, LoginInt loginInt,AppCompatActivity activity) {
+        this.loginInt = loginInt;
+        LoginModel loginModel = new LoginModel();
+        loginModel.login(contactNumber, password, this,activity);
     }
 
     @Override
@@ -90,8 +91,18 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     @Override
     public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1) {
         forgetPasswordViewInt = forgetPasswordViewInt1;
-        forgetPassModel = new ForgetPasswordModel();
-        forgetPassModel.login(contactNumber, this);
+        if (forgetPassModel == null)
+            forgetPassModel = new ForgetPasswordModel();
+        forgetPassModel.sendOtp(contactNumber, this);
+    }
+
+    @Override
+    public void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alertDialogInt) {
+        this.alertIntl = alertDialogInt;
+        if (forgetPassModel == null)
+            forgetPassModel = new ForgetPasswordModel();
+        forgetPassModel.verifyOtp(contactNumber, this, otpValue);
+
     }
 
     @Override
@@ -108,15 +119,15 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     }
 
     @Override
-    public void alert(Context context) {
-        new AlertDialogClass(context);
+    public void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber) {
+        new AlertDialogClass(context, otpResponse, contactNumber);
     }
 
     @Override
-    public void changePasswordCredential(String newPassword, String confirmNewPassword, ChangePasswordViewInt changePasswordViewInt1) {
+    public void changePasswordCredential(String newPassword, String confirmNewPassword, String otpToken, String contactNumber, ChangePasswordViewInt changePasswordViewInt1) {
         changePasswordViewInt = changePasswordViewInt1;
         changePasswordModel = new ChangePasswordModel();
-        changePasswordModel.chnagePassword(newPassword, confirmNewPassword, this);
+        changePasswordModel.changePassword(newPassword, confirmNewPassword, otpToken, contactNumber, this);
     }
 
 
@@ -135,6 +146,8 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
         feedbackModel.feedback(name, mobileNumber, subject, feedback, this);
     }
 
+
+    //_________Login________//
     @Override
     public void onLogincontactNumberError() {
         loginInt.loginValidateResult(UtilClass.UserIdError);
@@ -153,7 +166,6 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     @Override
     public void onLoginPasswordLengthError() {
         loginInt.loginValidateResult(UtilClass.PasswordLengthError);
-        Log.e("Password", "Match");
     }
 
     @Override
@@ -162,21 +174,30 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     }
 
     @Override
-    public void onLoginFailError(JSONObject object) {
+    public void onLoginFailError(String failMessage) {
+        loginInt.onFailLogin(failMessage);
     }
 
     @Override
-    public void onLoginRequestError() {
-
+    public void onRequestError() {
+        loginInt.onRequestFail();
     }
 
+
+    //________Signup_______//
     @Override
     public void onSignUpSuccess() {
         signupInt.signUpValidateResult(UtilClass.Success);
     }
 
     @Override
-    public void onSignUpFailError(JSONObject error) {
+    public void onSignUpRequestError() {
+        signupInt.signUpRequestError();
+    }
+
+    @Override
+    public void onSignUpFailError(String errorMessage) {
+        signupInt.signUpResponseError(errorMessage);
 
     }
 
@@ -221,9 +242,17 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
         signupInt.signUpValidateResult(UtilClass.RequiredFieldError);
     }
 
+
+    //________Change Password_________//
+
     @Override
-    public void onChangePasswordSuccess() {
-        changePasswordViewInt.changePasswordValidateResult(UtilClass.Success);
+    public void onChangePasswordSuccess(JSONObject changePasswordObj) {
+        changePasswordViewInt.changePasswordSuccessfull(changePasswordObj);
+    }
+
+    @Override
+    public void onFailToChangePassword(String message) {
+        changePasswordViewInt.changePasswordFail(message);
     }
 
     @Override
@@ -257,6 +286,13 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     }
 
     @Override
+    public void onChangePasswordRequestError() {
+        changePasswordViewInt.changePasswordRequestError();
+    }
+
+
+    //_________Forgot Password________//
+    @Override
     public void onForgetContactLenghtError() {
         forgetPasswordViewInt.forgetPasswordValidateResult(UtilClass.UserIdLengthError);
     }
@@ -267,10 +303,22 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     }
 
     @Override
-    public void onForgetSuccess() {
-        forgetPasswordViewInt.forgetPasswordValidateResult(UtilClass.Success);
+    public void onForgetSuccess(JSONObject optResponse) {
+        forgetPasswordViewInt.forgotPasswordSuccess(optResponse);
     }
 
+    @Override
+    public void onForgotFail(String message) {
+        forgetPasswordViewInt.forgotPasswrodFail(message);
+    }
+
+    @Override
+    public void onOtpRequestError() {
+        forgetPasswordViewInt.forgotPasswordRequestError();
+    }
+
+
+    //____________Feedback ___________//
     @Override
     public void onFeddbackSubjectError() {
         feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackSubject);
@@ -296,5 +344,21 @@ public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinish
     public JSONArray getProfile() {
         myNetworkModel = new MyNetworkModel();
         return myNetworkModel.getProfile();
+    }
+
+
+    @Override
+    public void onOtpVerify(JSONObject verifyResponse) {
+        alertIntl.otpVerificationSuccessfull(verifyResponse);
+    }
+
+    @Override
+    public void onOtpVerificationFail(String message) {
+        alertIntl.otpVerificationFail(message);
+    }
+
+    @Override
+    public void onVerifyOtpRequestError() {
+        alertIntl.otpVerifyRequestError();
     }
 }

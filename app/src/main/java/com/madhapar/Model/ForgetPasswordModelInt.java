@@ -3,20 +3,37 @@ package com.madhapar.Model;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
 /**
  * Created by Ronak on 9/26/2016.
  */
 public interface ForgetPasswordModelInt {
 
 
-    interface OnLoginFinishedListener {
+    interface onSendOtpListener {
 
         void onForgetContactLenghtError();
 
         void onForgetContactNumberError();
 
-        void onForgetSuccess();
+        void onForgetSuccess(JSONObject optResponse);
+
+        void onForgotFail(String message);
+
+        void onOtpRequestError();
     }
-    public void login(String contactNumber, OnLoginFinishedListener listener);
+
+    interface onVerifyOtpListener {
+        void onOtpVerify(JSONObject verifyResponse);
+
+        void onOtpVerificationFail(String message);
+
+        void onVerifyOtpRequestError();
+    }
+
+    void sendOtp(String contactNumber, onSendOtpListener listener);
+
+    void verifyOtp(String contactNumber, onVerifyOtpListener listener, String otp);
 }
 

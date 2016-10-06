@@ -8,5 +8,7 @@ import org.json.JSONObject;
 public interface SignUpViewInt {
     public void signUpValidateResult(int check);
 
-     void signUpResponseError(JSONObject error);
+    void signUpResponseError(String error);
+
+    void signUpRequestError();
 }

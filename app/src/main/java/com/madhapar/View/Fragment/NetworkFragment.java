@@ -31,24 +31,26 @@ public class NetworkFragment extends BaseFragment {
     EditText etSearch;
     @BindView(R.id.recyclerViewMyNetwork)
     RecyclerView recyclerViewMyNetwork;
+
     @OnTextChanged(R.id.etSearch)
-    public void search(){
-        if(etSearch.getText().length()>=1) {
+    public void search() {
+        if (etSearch.getText().length() >= 1) {
             ic_search.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             ic_search.setVisibility(View.VISIBLE);
         }
     }
+
     PresenterClass presenterClass;
     private MyNetworkAdapter recylerViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_network, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         presenterClass = new PresenterClass();
         recylerViewAdapter = new MyNetworkAdapter(getActivity(), presenterClass.getProfile());
         mLayoutManager = new LinearLayoutManager(mContext);

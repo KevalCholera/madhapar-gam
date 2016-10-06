@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         presenter = new PresenterClass();
         mainViewInt = this;
         ButterKnife.bind(this);
-
         //----drawer layout---//
         //  dlMain = (DrawerLayout) findViewById(R.id.dlMain);
         // lvDrawerMain = (ListView) findViewById(R.id.lvDrawerMain);
@@ -71,7 +70,7 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 presenter.changeFragment(R.id.flMain, position, MainActivity.this);
-               dlMain.closeDrawers();
+                dlMain.closeDrawers();
                 //startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 //finish();
             }

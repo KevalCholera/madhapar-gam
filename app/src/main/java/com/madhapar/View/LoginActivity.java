@@ -1,7 +1,7 @@
 package com.madhapar.View;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,41 +47,61 @@ public class LoginActivity extends BaseActivity implements LoginInt {
 
     @OnClick(R.id.btnLogin)
     public void submit() {
-        presenter = new PresenterClass();
-        presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString(),this);
+        if (UtilClass.isInternetAvailabel(LoginActivity.this)) {
+            UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
+            presenter = new PresenterClass();
+            presenter.validateCredentials(etLoginId.getText().toString(), etLoginPassword.getText().toString(), this, this);
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
+        }
+
     }
 
     @OnClick(R.id.tvUserSignUp)
     public void signup() {
+        UtilClass.hideProgress();
         UtilClass.changeActivity(LoginActivity.this, SignUpActivity.class, false);
     }
 
     @OnClick(R.id.ivClose)
     public void close() {
+        UtilClass.hideProgress();
         UtilClass.changeActivity(LoginActivity.this, FeedbackActivity.class, true);
     }
 
     @OnClick(R.id.tvForgetPassword)
     public void forgetpassword() {
-        UtilClass.changeActivity(LoginActivity.this, ForgetPassword.class, true);
+        UtilClass.hideProgress();
+        UtilClass.changeActivity(LoginActivity.this, ForgetPassword.class, false);
     }
 
     @Override
     public void loginValidateResult(int check) {
+        UtilClass.hideProgress();
         if (check == UtilClass.UserIdError) {
-            UtilClass.displyMessage(getString(R.string.contact), LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contactError), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.PasswordLengthError) {
             UtilClass.displyMessage(getString(R.string.passwordlength), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.PasswordError) {
             UtilClass.displyMessage(getString(R.string.enterpassword), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.UserIdLengthError) {
-            UtilClass.displyMessage(getString(R.string.contactlength), LoginActivity.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.ErrorContactLength), LoginActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.Success) {
-            UtilClass.displyMessage(getString(R.string.loginSuccess), LoginActivity.this, Toast.LENGTH_SHORT);
             UtilClass.changeActivity(LoginActivity.this, MainActivity.class, true);
         } else if (check == UtilClass.RequiredFieldError) {
             UtilClass.displyMessage(getString(R.string.enterrequiredfiels), LoginActivity.this, Toast.LENGTH_SHORT);
         }
+    }
 
+    @Override
+    public void onFailLogin(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, LoginActivity.this, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onRequestFail() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), LoginActivity.this, Toast.LENGTH_SHORT);
     }
 }

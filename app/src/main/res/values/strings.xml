@@ -65,8 +65,8 @@
     <string name="enterlastnm">Enter Vlaid Last Name</string>
     <string name="enterpassword">Enter Password</string>
     <string name="passwordlength">Password must be greater than 6 letters</string>
-    <string name="contact">Enter Contact Number</string>
-    <string name="contactlength">Contact Number must be 7 to 14 digit</string>
+    <string name="contactError">Enter Contact Number</string>
+    <string name="ErrorContactLength">Contact Number must be 7 to 14 digit</string>
     <string name="loginSuccess">Login Success</string>
     <string name="passwordUpdate">password Update</string>
     <string name="subjectrequired">Enter valid Feedback Subject</string>
@@ -78,4 +78,14 @@
     <string name="passwordmatch">Password cant match Enter Valid Confirm Password</string>
     <string name="resenedcode">Resend Code Successfully</string>
 
+
+    <!--Process message-->
+    <string name="msgPleaseWait">Please Wait..</string>
+    <string name="msgCheckInternet">Please check your internet connection</string>
+    <string name="msgSomethigWentWrong">Something went wrong please try again later.</string>
+    <string name="msgOtpNotMatch">Otp does not match</string>
+
+
+    <!--manifest-->
+    <string name="lableUserVerify">Verify Otp</string>
 </resources>

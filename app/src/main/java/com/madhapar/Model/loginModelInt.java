@@ -1,14 +1,15 @@
 package com.madhapar.Model;
 
-import org.json.JSONObject;
+import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by smartsense on 22/09/16.
+ * Created by smartsense on 06/10/16.
  */
 
 public interface LoginModelInt {
 
-    interface OnLoginFinishedListener {
+    public interface onLoginFinishListener {
+        void onLoginRequiredFieldError();
 
         void onLogincontactNumberError();
 
@@ -20,12 +21,11 @@ public interface LoginModelInt {
 
         void onLoginSuccess();
 
-        void onLoginRequiredFieldError();
-        void onLoginFailError(JSONObject errorObject);
-      void  onLoginRequestError();
+        void onLoginFailError(String failMessage);
+
+        void onRequestError();
+
     }
 
-    public void login(String contactNumber, String password, OnLoginFinishedListener listener);
-
-
+    void login(String contactNumber, String password, LoginModelInt.onLoginFinishListener listener, AppCompatActivity activity);
 }

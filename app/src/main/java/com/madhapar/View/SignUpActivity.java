@@ -1,7 +1,5 @@
 package com.madhapar.View;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +30,6 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     EditText etMobileNumber;
     @BindView(R.id.btnSignUp)
     Button btnSignUp;
-    Context c = SignUpActivity.this;
     @BindView(R.id.imgBack)
     ImageView imgBack;
     private PresneterInt presenter;
@@ -42,23 +39,29 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-
     }
 
     @OnClick(R.id.btnSignUp)
     public void signup() {
-        presenter = new PresenterClass(this);
-        presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etFamilyMember.getText().toString());
+        if (UtilClass.isInternetAvailabel(SignUpActivity.this)) {
+            UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
+            presenter = new PresenterClass(this);
+            presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etFamilyMember.getText().toString());
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
+        }
     }
 
     @OnClick(R.id.imgBack)
     public void back() {
-        //    finish();
-        UtilClass.changeActivity(SignUpActivity.this, ForgetPassword.class, true);
+        UtilClass.hideProgress();
+        finish();
+
     }
 
     @Override
     public void signUpValidateResult(int check) {
+        UtilClass.hideProgress();
         switch (check) {
             case UtilClass.RequiredFieldError: {
                 UtilClass.displyMessage(getString(R.string.enterrequiredfiels), SignUpActivity.this, Toast.LENGTH_SHORT);
@@ -89,11 +92,11 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
                 break;
             }
             case UtilClass.UserIdError: {
-                UtilClass.displyMessage(getString(R.string.contact), SignUpActivity.this, Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.contactError), SignUpActivity.this, Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.UserIdLengthError: {
-                UtilClass.displyMessage(getString(R.string.contactlength), SignUpActivity.this, Toast.LENGTH_SHORT);
+                UtilClass.displyMessage(getString(R.string.ErrorContactLength), SignUpActivity.this, Toast.LENGTH_SHORT);
                 break;
             }
             default: {
@@ -101,15 +104,18 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
                 break;
             }
         }
+    }
 
+    @Override
+    public void signUpResponseError(String error) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(error, SignUpActivity.this, 0);
 
     }
 
     @Override
-    public void signUpResponseError(JSONObject error) {
-        if (error != null) {
-            if (error.has("message"))
-                UtilClass.displyMessage(error.optString("message"), SignUpActivity.this, 0);
-        }
+    public void signUpRequestError() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), SignUpActivity.this, 0);
     }
 }

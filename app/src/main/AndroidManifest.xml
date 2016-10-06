@@ -71,6 +71,14 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name="com.madhapar.View.UserVerifyActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableUserVerify"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
     </application>
 
 </manifest>

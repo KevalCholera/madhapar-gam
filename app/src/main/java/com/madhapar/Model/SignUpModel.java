@@ -27,34 +27,24 @@ public class SignUpModel implements SignUpModelInt {
 
     @Override
     public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnSignUpFinishedListener listener) {
-        boolean error = false;
         Log.e("Password", password);
         if (TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(familyMember) && TextUtils.isEmpty(lastName)) {
             listener.onSignUpRequiredFieldError();
-            error = true;
         } else if (TextUtils.isEmpty(firstName)) {
             listener.onSignUpFirstNameError();
-            error = true;
         } else if (TextUtils.isEmpty(lastName)) {
             listener.onSignUplastNameError();
-            error = true;
         } else if (TextUtils.isEmpty(contactNumber)) {
             listener.onSignupContactNumberError();
-            error = true;
         } else if (!(contactNumber.toString().length() > 7 && contactNumber.toString().length() < 14)) {
             listener.onSignUpContactLenghtError();
-            error = true;
         } else if (TextUtils.isEmpty(password)) {
             listener.onsignUpPasswordError();
-            error = true;
         } else if ((!(password.toString().length() > 6))) {
             listener.onSignupPasswordLengthError();
-            error = true;
         } else if (TextUtils.isEmpty(familyMember)) {
             listener.onSignUpFamilyMemberError();
-            error = true;
-        }
-        if (!error) {
+        } else {
             doSignup(firstName, lastName, contactNumber, password, familyMember, listener);
         }
     }
@@ -88,7 +78,7 @@ public class SignUpModel implements SignUpModelInt {
                                     listener.onSignUpSuccess();
                                 }
                             } else {
-                                listener.onSignUpFailError(new JSONObject(response));
+                                listener.onSignUpFailError(signUpObject.optString("message"));
                             }
                         }
                     } catch (JSONException e) {
@@ -100,7 +90,7 @@ public class SignUpModel implements SignUpModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("signup", "response error" + error);
+                listener.onSignUpRequestError();
             }
         }) {
             @Override
