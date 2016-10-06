@@ -13,13 +13,13 @@ public class GoinListModel implements GoingListModelInt {
         JSONArray goinList = new JSONArray();
         try {
             JSONObject obj1 = new JSONObject();
-            obj1.put("GoingPersonName","Tony Clark");
+            obj1.put("GoingPersonName","Tony Clark3");
             JSONObject obj2 = new JSONObject();
-            obj2.put("GoingPersonName","Allan Bred");
+            obj2.put("GoingPersonName","Allan Bred3");
             JSONObject obj3 = new JSONObject();
-            obj3.put("GoingPersonName","Ben Peter");
+            obj3.put("GoingPersonName","Ben Peter3");
             JSONObject obj4 = new JSONObject();
-            obj4.put("GoingPersonName","Suart Mini");
+            obj4.put("GoingPersonName","Suart Mini3");
             goinList.put(obj1);
             goinList.put(obj2);
             goinList.put(obj3);

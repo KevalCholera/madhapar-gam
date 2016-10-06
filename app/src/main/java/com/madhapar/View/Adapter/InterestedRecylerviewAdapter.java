@@ -32,16 +32,15 @@ public class InterestedRecylerviewAdapter extends RecyclerView.Adapter<Intereste
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View viewGoing = LayoutInflater.from(context).inflate(R.layout.cardview_interested,parent,false);
+        View viewGoing = LayoutInflater.from(context).inflate(R.layout.card_going,parent,false);
         ButterKnife.bind(this,viewGoing);
         return new MyViewHolder(viewGoing);
     }
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         try {
             JSONObject obj1 = interestedListArry.getJSONObject(position);
-            holder.tvInterestedPersonName.setText(obj1.optString("InterestedPersonName"));
+            holder.tvGoingPersonName.setText(obj1.optString("InterestedPersonName"));
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -53,9 +52,8 @@ public class InterestedRecylerviewAdapter extends RecyclerView.Adapter<Intereste
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvInterestedPersonName)
-        TextView tvInterestedPersonName;
-
+        @BindView(R.id.tvGoingPersonName)
+        TextView tvGoingPersonName;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

@@ -7,20 +7,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
+import com.madhapar.Presenter.PresenterClassSecond;
+import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.FeedbackActivity;
 import com.madhapar.View.GoingActivity;
-import com.madhapar.View.InterestedActivity;
 import com.madhapar.View.LoginActivity;
-import com.madhapar.View.NotGoingActivity;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -31,16 +28,19 @@ import butterknife.OnClick;
 public class MoreFragment extends BaseFragment {
     Context context;
     private PresenterClass presenter;
+    private PresenterClassSecond presenterClassSecond;
     Intent intent;
-    TextView personName;
-    TextView goingPersonName;
     @OnClick(R.id.tvIntroHistory)
     public void introHistory(){
-        presenter.changeActivity(getActivity(), InterestedActivity.class,true);
+        presenter.changeActivity(getActivity(), GoingActivity.class,true);
+        intent = new Intent();
+        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.InterestedPersonName);
     }
     @OnClick(R.id.tvEventPhotos)
     public void eventPhotos(){
         presenter.changeActivity(getActivity(), GoingActivity.class,true);
+        intent = new Intent();
+        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.GoingPersonName);
     }
     @OnClick(R.id.tvFeedback)
     public void tvFeedback(){
@@ -48,7 +48,9 @@ public class MoreFragment extends BaseFragment {
     }
     @OnClick(R.id.tvAboutUs)
     public void tvAboutUs(){
-        presenter.changeActivity(getActivity(), NotGoingActivity.class,true);
+        presenter.changeActivity(getActivity(), GoingActivity.class,true);
+        intent = new Intent();
+        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.NotGoingPersonName);
     }
     @OnClick(R.id.tvFundRaising)
     public void tvFundRaising(){

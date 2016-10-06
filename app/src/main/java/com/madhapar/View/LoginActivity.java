@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
     }
 

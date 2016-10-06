@@ -2,13 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            android:thickness="1dp"
+            android:thickness="0dp"
             android:shape="rectangle">
             <corners android:radius="20dp" />
+            <padding
+                android:left="@dimen/cardview_default_elevation"
+                android:right="@dimen/cardview_default_elevation"
+                />
             <stroke
-                android:width="0.05dp"
-                android:color="@color/cardview_dark_background" />
-
+                android:width="1dp"
+                android:color="@color/cardview_light_background" />
             <gradient
                 android:startColor="@color/colorWhite"
                 android:endColor="@color/colorWhite"
@@ -17,3 +20,4 @@
         </shape>
     </item>
 </selector>
+

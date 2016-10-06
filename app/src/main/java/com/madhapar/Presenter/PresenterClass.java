@@ -36,7 +36,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, LoginModelInt.OnLoginFinishedListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;

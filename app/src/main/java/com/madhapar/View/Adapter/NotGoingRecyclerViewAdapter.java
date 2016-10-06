@@ -30,7 +30,7 @@ public class NotGoingRecyclerViewAdapter extends RecyclerView.Adapter<NotGoingRe
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View viewGoing = LayoutInflater.from(context).inflate(R.layout.cardview_notgoing,parent,false);
+        View viewGoing = LayoutInflater.from(context).inflate(R.layout.card_going,parent,false);
         ButterKnife.bind(this,viewGoing);
         return new MyViewHolder(viewGoing);
     }
@@ -39,7 +39,7 @@ public class NotGoingRecyclerViewAdapter extends RecyclerView.Adapter<NotGoingRe
     public void onBindViewHolder(MyViewHolder holder, int position) {
         try {
             JSONObject obj1 = notGoingListArry.getJSONObject(position);
-            holder.tvpersonNotGoingName.setText(obj1.optString("NotGoingPersonName"));
+            holder.tvGoingPersonName.setText(obj1.optString("NotGoingPersonName"));
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -52,8 +52,8 @@ public class NotGoingRecyclerViewAdapter extends RecyclerView.Adapter<NotGoingRe
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvPersonNotGoingName)
-        TextView tvpersonNotGoingName;
+        @BindView(R.id.tvGoingPersonName)
+        TextView tvGoingPersonName;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

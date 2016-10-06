@@ -32,6 +32,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     EditText etMobileNumber;
     @BindView(R.id.btnSignUp)
     Button btnSignUp;
+    Context c = SignUpActivity.this;
     @BindView(R.id.imgBack)
     ImageView imgBack;
     private PresneterInt presenter;

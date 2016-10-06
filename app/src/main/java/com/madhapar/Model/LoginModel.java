@@ -27,7 +27,7 @@ import java.util.Map;
 public class LoginModel implements LoginModelInt {
 
     @Override
-    public void login(final String loginId, final String password, final LoginModelInt.onLoginFinishListener listener) {
+    public void login(final String loginId, final String password, final LoginModelInt.OnLoginFinishedListener listener) {
         boolean error = false;
         if (TextUtils.isEmpty(loginId) && TextUtils.isEmpty(password)) {
             listener.onLoginRequiredFieldError();
@@ -50,7 +50,7 @@ public class LoginModel implements LoginModelInt {
         }
     }
 
-    private void doLogin(final LoginModelInt.onLoginFinishListener listener, final String login, final String password) {
+    private void doLogin(final LoginModelInt.OnLoginFinishedListener listener, final String login, final String password) {
 
 
         String tag = "login";

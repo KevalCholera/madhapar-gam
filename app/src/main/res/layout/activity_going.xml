@@ -10,10 +10,9 @@
         android:id="@+id/toolbarGoing"
         android:background="@color/colorPrimary">
         <TextView
-            android:id="@+id/tvToolbarTitle"
+            android:id="@+id/tvToolbarTitleGoing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text ="@string/going"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_small"
             android:textColor="@color/colorWhite"/>

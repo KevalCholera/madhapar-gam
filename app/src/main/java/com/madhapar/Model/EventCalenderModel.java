@@ -29,8 +29,6 @@ public class EventCalenderModel implements EventCalenderModelInt {
 
     @Override
     public void getEventList(final EventListCallback eventListCallback) {
-
-
         String tag = "getEventList";
         StringRequest eventListRequest = new StringRequest(Request.Method.GET, UtilClass.getEventListUrl(), new Response.Listener<String>() {
             @Override

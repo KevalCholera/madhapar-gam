@@ -7,21 +7,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:padding="@dimen/activity_top_login_margin"
-    android:orientation="vertical">
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:gravity="left"
         android:background="@drawable/search">
     <EditText
         android:id="@+id/etSearch"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:gravity="center"
         android:textAlignment="center"
-        android:selectAllOnFocus="true"
         android:background="@android:color/transparent"
         android:textSize="@dimen/activity_vertical_margin"
         android:layout_height="@dimen/text_siz_large"

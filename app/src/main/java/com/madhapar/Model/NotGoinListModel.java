@@ -13,13 +13,13 @@ public class NotGoinListModel implements NotGoingModelInt {
         JSONArray notgoingList = new JSONArray();
         try {
             JSONObject obj1 = new JSONObject();
-            obj1.put("NotGoingPersonName","Tony Clark");
+            obj1.put("NotGoingPersonName","Tony Clark2");
             JSONObject obj2 = new JSONObject();
-            obj2.put("NotGoingPersonName","Allan Bred");
+            obj2.put("NotGoingPersonName","Allan Bred2");
             JSONObject obj3 = new JSONObject();
-            obj3.put("NotGoingPersonName","Ben Peter");
+            obj3.put("NotGoingPersonName","Ben Peter2");
             JSONObject obj4 = new JSONObject();
-            obj4.put("NotGoingPersonName","Suart Mini");
+            obj4.put("NotGoingPersonName","Suart Mini2");
             notgoingList.put(obj1);
             notgoingList.put(obj2);
             notgoingList.put(obj3);

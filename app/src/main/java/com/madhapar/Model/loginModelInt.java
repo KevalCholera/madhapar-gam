@@ -1,5 +1,7 @@
 package com.madhapar.Model;
 
+import org.json.JSONObject;
+
 /**
  * Created by smartsense on 22/09/16.
  */
@@ -8,17 +10,19 @@ public interface LoginModelInt {
 
     interface OnLoginFinishedListener {
 
-        void oncontactNumberError();
+        void onLogincontactNumberError();
 
-        void onPasswordError();
+        void onLoginPasswordError();
 
-        void onContactLenghtError();
+        void onLoginContactLenghtError();
 
-        void onPasswordLengthError();
+        void onLoginPasswordLengthError();
 
-        void onSuccess();
+        void onLoginSuccess();
 
-        void onRequiredFieldError();
+        void onLoginRequiredFieldError();
+        void onLoginFailError(JSONObject errorObject);
+      void  onLoginRequestError();
     }
 
     public void login(String contactNumber, String password, OnLoginFinishedListener listener);

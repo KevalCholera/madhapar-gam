@@ -13,13 +13,13 @@ public class InterestedListModel implements InterestedListModelInt {
         JSONArray interestList = new JSONArray();
         try {
             JSONObject obj1 = new JSONObject();
-            obj1.put("InterestedPersonName","Tony Clark");
+            obj1.put("InterestedPersonName","Tony Clark1");
             JSONObject obj2 = new JSONObject();
-            obj2.put("InterestedPersonName","Allan Bred");
+            obj2.put("InterestedPersonName","Allan Bred1");
             JSONObject obj3 = new JSONObject();
-            obj3.put("InterestedPersonName","Ben Peter");
+            obj3.put("InterestedPersonName","Ben Peter1");
             JSONObject obj4 = new JSONObject();
-            obj4.put("InterestedPersonName","Suart Mini");
+            obj4.put("InterestedPersonName","Suart Mini1");
             interestList.put(obj1);
             interestList.put(obj2);
             interestList.put(obj3);
