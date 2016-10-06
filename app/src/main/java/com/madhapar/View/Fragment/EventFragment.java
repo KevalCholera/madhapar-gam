@@ -11,8 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Model.EventCalenderModelInt;
 import com.madhapar.Presenter.PresenterClass;
+import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.RecylerViewAdapter;
+import com.madhapar.View.EventListInt;
+
+import org.json.JSONArray;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,10 +27,10 @@ import butterknife.ButterKnife;
  * Created by smartsense on 24/09/16.
  */
 
-public class EventFragment extends BaseFragment {
+public class EventFragment extends BaseFragment implements EventListInt {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    private PresenterClass presenterClass;
+    private RequestPresenter presenterClass;
     private RecylerViewAdapter recylerViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
@@ -33,25 +39,28 @@ public class EventFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
-        ButterKnife.bind(this,view);
-        presenterClass = new PresenterClass();
-        recylerViewAdapter = new RecylerViewAdapter(getActivity(), presenterClass.getEventList());
-        mLayoutManager = new LinearLayoutManager(mContext);
-        recyclerView.setLayoutManager(mLayoutManager);
+        ButterKnife.bind(this, view);
+        presenterClass = new RequestPresenter();
+        presenterClass.getEventList(this);
         mContext = this.getActivity();
-        recyclerView.setAdapter(recylerViewAdapter);
-        if (recyclerView != null) {
-            Log.e("recyclerview", "Get");
-        }
-        else {
-            Log.e("TextView", "null");
-        }
-        if (recyclerView != null) {
-            Log.e("view", "Get");
-        }
-        else {
-            Log.e("TextView", "null");
-        }
+        mLayoutManager = new LinearLayoutManager(mContext);
+
         return view;
+    }
+
+    @Override
+    public void onSuccessEventList(JSONArray eventArray) {
+        Log.e("fragment", "json" + eventArray);
+        recylerViewAdapter = new RecylerViewAdapter(getActivity(), eventArray);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(recylerViewAdapter);
+
+    }
+
+    @Override
+    public void onFailEventList(String errorMessage) {
+        Log.e("fragment", "json" + errorMessage);
+        UtilClass.displyMessage(errorMessage, getActivity(), 0);
+
     }
 }

@@ -1,20 +1,48 @@
 package com.madhapar.Application;
 
 import android.app.Application;
+import android.text.TextUtils;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.Volley;
 import com.mpt.storage.SharedPreferenceUtil;
 import com.onesignal.OneSignal;
+
+import org.json.JSONObject;
 
 /**
  * Created by smartsense on 22/09/16.
  */
 
 public class MadhaparGamApp extends Application {
+    private RequestQueue reuestQueque;
+    private static MadhaparGamApp appInstnace;
+    private static final String TAG = "MADHAPARGAM_APP";
 
     @Override
     public void onCreate() {
         super.onCreate();
         OneSignal.startInit(this).init();
         SharedPreferenceUtil.init(this);
+        appInstnace = this;
     }
+
+    public RequestQueue getRequestQueue() {
+        if (reuestQueque == null) {
+            reuestQueque = Volley.newRequestQueue(getApplicationContext());
+        }
+        return reuestQueque;
+    }
+
+    public static synchronized MadhaparGamApp getAppInstance() {
+        return appInstnace;
+    }
+
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        getRequestQueue().add(req);
+    }
+
 }

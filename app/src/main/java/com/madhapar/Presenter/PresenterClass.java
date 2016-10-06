@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
 import com.madhapar.Model.EventCalenderModel;
-import com.madhapar.Model.EventCalenderModelInt;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.LoginModel;
@@ -21,7 +20,6 @@ import com.madhapar.Util.UtilClass;
 import com.madhapar.View.AlertDialogClass;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
-import com.madhapar.View.ForgetPassword;
 import com.madhapar.View.ForgetPasswordViewInt;
 import com.madhapar.View.LoginActivity;
 import com.madhapar.View.LoginInt;
@@ -30,6 +28,7 @@ import com.madhapar.View.SignUpViewInt;
 import com.madhapar.View.ViewInt;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedListener, SignUpModel.OnLoginFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
+public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.OnLoginFinishedListener, ChangePasswordModel.OnLoginFinishedListener, FeedbackModel.OnLoginFinishedListener {
 
     private ViewInt viewInt;
     private MainModelClass modelClass;
@@ -73,7 +72,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     }
 
     @Override
-    public void validateCredentials(String contactNumber, String password,LoginActivity loginModel) {
+    public void validateCredentials(String contactNumber, String password, LoginActivity loginModel) {
         if (loginInt != null) {
         }
         this.loginInt = loginModel;
@@ -135,30 +134,40 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
         feedbackModel = new FeedbackModel();
         feedbackModel.feedback(name, mobileNumber, subject, feedback, this);
     }
+
     @Override
-    public void oncontactNumberError() {
+    public void onLogincontactNumberError() {
         loginInt.loginValidateResult(UtilClass.UserIdError);
     }
 
     @Override
-    public void onPasswordError() {
+    public void onLoginPasswordError() {
         loginInt.loginValidateResult(UtilClass.PasswordError);
     }
 
     @Override
-    public void onContactLenghtError() {
+    public void onLoginContactLenghtError() {
         loginInt.loginValidateResult(UtilClass.UserIdLengthError);
     }
 
     @Override
-    public void onPasswordLengthError() {
+    public void onLoginPasswordLengthError() {
         loginInt.loginValidateResult(UtilClass.PasswordLengthError);
         Log.e("Password", "Match");
     }
 
     @Override
-    public void onSuccess() {
+    public void onLoginSuccess() {
         loginInt.loginValidateResult(UtilClass.Success);
+    }
+
+    @Override
+    public void onLoginFailError(JSONObject object) {
+    }
+
+    @Override
+    public void onLoginRequestError() {
+
     }
 
     @Override
@@ -167,17 +176,22 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     }
 
     @Override
-    public void onFirstNameError() {
+    public void onSignUpFailError(JSONObject error) {
+
+    }
+
+    @Override
+    public void onSignUpFirstNameError() {
         signupInt.signUpValidateResult(UtilClass.FirstNameError);
     }
 
     @Override
-    public void onlastNameError() {
+    public void onSignUplastNameError() {
         signupInt.signUpValidateResult(UtilClass.LastNameError);
     }
 
     @Override
-    public void onFamilyMemberError() {
+    public void onSignUpFamilyMemberError() {
         signupInt.signUpValidateResult(UtilClass.FamilyMemberError);
     }
 
@@ -213,7 +227,7 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
     }
 
     @Override
-    public void onRequiredFieldError() {
+    public void onLoginRequiredFieldError() {
         loginInt.loginValidateResult(UtilClass.RequiredFieldError);
     }
 
@@ -277,12 +291,6 @@ public class PresenterClass implements PresneterInt, LoginModel.OnLoginFinishedL
         feedbackActivityint.feedbackValidateResult(UtilClass.Success);
     }
 
-    @Override
-    public JSONArray getEventList() {
-        eventCalenderModel = new EventCalenderModel();
-        return eventCalenderModel.getEventList();
-
-    }
 
     @Override
     public JSONArray getProfile() {

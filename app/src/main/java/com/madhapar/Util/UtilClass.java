@@ -3,6 +3,7 @@ package com.madhapar.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,12 +14,14 @@ import android.widget.Toast;
  */
 
 public class UtilClass {
-    public static final int PasswordError=1;
-    public static final int PasswordLengthError=2;
-    public static final int UserIdError=3;
-    public static final int UserIdLengthError=4;
-    public static final int Success=5;
-    public static final int RequiredFieldError=6;
+    public static final int PasswordError = 1;
+    public static final int PasswordLengthError = 2;
+    public static final int UserIdError = 3;
+    public static final int UserIdLengthError = 4;
+    public static final int Success = 5;
+    public static final int SignUpRequestError = 100;
+    public static final int LoginRequestError = 101;
+    public static final int RequiredFieldError = 6;
     public static final int FirstNameError = 7;
     public static final int LastNameError = 8;
     public static final int FamilyMemberError = 9;
@@ -26,6 +29,7 @@ public class UtilClass {
     public static final int ConfirmPassword = 11;
     public static final int FeedbackSubject = 12;
     public static final int Feeedback = 13;
+    public static final int RetryTimeOut = 20000;
 
     public static void displyMessage(String msg, Context context, int toastLenght) {
         Toast.makeText(context, msg, toastLenght).show();
@@ -36,6 +40,7 @@ public class UtilClass {
         progress.setVisibility(View.VISIBLE);
 
     }
+
     public static void changeActivity(Activity curruntActivity, Class nextActivity, Boolean finish) {
         curruntActivity.startActivity(new Intent(curruntActivity, nextActivity));
         if (finish) {
@@ -48,4 +53,18 @@ public class UtilClass {
         progress.setVisibility(View.GONE);
     }
 
+    public static String getSignupUrl() {
+        Uri signupUri = Uri.parse(Constants.RequestConstants.SignupUrl).buildUpon().build();
+        return signupUri.toString();
+    }
+
+    public static String getLoginUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.LoginUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+    public static String getEventListUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventListUrl).buildUpon().build();
+        return builder.toString();
+    }
 }

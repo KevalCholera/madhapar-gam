@@ -28,7 +28,6 @@ public interface PresneterInt {
 
     void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 
-    JSONArray getEventList();
 
     JSONArray getProfile();
 
