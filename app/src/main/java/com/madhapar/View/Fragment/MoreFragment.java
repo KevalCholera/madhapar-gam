@@ -1,12 +1,14 @@
 package com.madhapar.View.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
@@ -29,6 +31,9 @@ import butterknife.OnClick;
 public class MoreFragment extends BaseFragment {
     Context context;
     private PresenterClass presenter;
+    Intent intent;
+    TextView personName;
+    TextView goingPersonName;
     @OnClick(R.id.tvIntroHistory)
     public void introHistory(){
         presenter.changeActivity(getActivity(), InterestedActivity.class,true);

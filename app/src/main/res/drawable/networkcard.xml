@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            android:thickness="1dp"
+            android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <stroke
+                android:width="0.05dp"
+                android:color="@color/cardview_dark_background" />
+
+            <gradient
+                android:startColor="@color/colorWhite"
+                android:endColor="@color/colorWhite"
+                android:type="linear"
+                android:angle="270"/>
+        </shape>
+    </item>
+</selector>
