@@ -14,9 +14,11 @@ public class Constants {
 
     public static class RequestConstants {
         public static String BaseUrl = "http://139.59.29.185/";
+        public static String BaseUrlForImage = "http://139.59.29.185";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
+        public static String UserListUrl = BaseUrl + "users/";
         public static String OtpUrl = BaseUrl + "sendOTP/";
         public static String VerifyOtpUrl = BaseUrl + "verifyOTP/";
         public static String ChangePasswordUrl = BaseUrl + "resetPassword/";

@@ -107,6 +107,11 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getUserListUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.UserListUrl).buildUpon().build();
+        return builder.toString();
+    }
+
 
     public static String getOtpUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.OtpUrl).buildUpon().build();

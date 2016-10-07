@@ -57,7 +57,8 @@
     <string name="more5">Fund Raising</string>
     <string name="more6">Sign Out</string>
 
-    <string name="search">Search</string>
+    <string name="search">Search Ocassion</string>
+    <string name="emptyUserList">Curruntly there are no \n users in your network</string>
 
     <string name="enterrequiredfiels">Enter Required Field</string>
     <string name="enterfamilymember">Enter Family Member</string>

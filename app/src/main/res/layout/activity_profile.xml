@@ -48,7 +48,7 @@
     <ImageView
         android:layout_width="@dimen/activity_login_margin"
         android:layout_height="@dimen/activity_rightleft_login"
-        android:src="@drawable/icon_edit_white"
+        android:src="@drawable/ic_home"
         android:layout_marginTop="@dimen/activity_rightleft_login"
         android:layout_marginLeft="220dp"/>
 </RelativeLayout>
@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/feedback"
-            android:layout_marginTop="@dimen/profiledimen"
+            android:layout_marginTop="@dimen/imgsize"
             android:layout_marginRight="@dimen/margin_small"
             android:focusableInTouchMode="true"
             android:text="bhbhj"/>
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/feedback"
             android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="@dimen/profiledimen"
+            android:layout_marginTop="@dimen/imgsize"
             android:focusableInTouchMode="true"
             android:text="bhbhj"/>
         <EditText

@@ -1,13 +1,22 @@
 package com.madhapar.View.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.Constants;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,16 +24,20 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Ronak on 10/5/2016.
  */
-public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.MyViewHolder> {
-    JSONArray profileArry;
-    Context context;
+public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.MyViewHolder> implements Filterable {
+    public JSONArray profileArry;
+    private Context context;
+    private UserFilter filter;
+    private JSONArray tempArray;
 
     public NetworkListAdapter(Context context, JSONArray jsonArray) {
         this.profileArry = jsonArray;
+        this.tempArray = jsonArray;
         this.context = context;
     }
 
@@ -37,12 +50,24 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        Log.e("bind", "holder");
         try {
-            JSONObject obj1 = profileArry.getJSONObject(position);
-            holder.tvName.setText(obj1.optString("personName"));
-            holder.tvQualification.setText(obj1.optString("qualification"));
-            holder.tvCity.setText(obj1.optString("personCity"));
-        } catch (JSONException e) {
+            Log.e("mdp", "adapter" + "size" + profileArry.length());
+            JSONObject userObj = profileArry.optJSONObject(position);
+            String userFirstname = userObj.optString("userFirstName");
+            String userLastname = userObj.optString("userLastName");
+            String userProfessrion = userObj.optString("userProfession");
+            holder.tvUserName.setText(userFirstname + " " + userLastname);
+            holder.tvUserProfession.setText(userProfessrion.trim().equalsIgnoreCase("") ? "N/A" : userProfessrion);
+            JSONObject locationObj = userObj.optJSONObject("userLocation");
+            String userCity = "";
+            if (locationObj != null && locationObj.has("locationName")) {
+                userCity = locationObj.optString("locationName");
+            }
+            holder.tvUserCity.setText(userCity.trim().equalsIgnoreCase("") ? "N/A" : userCity);
+            Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + profileArry.optJSONObject(position).optString("userProfilePic")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(holder.ivUserPic);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -50,20 +75,65 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
 
     @Override
     public int getItemCount() {
-        return profileArry.length();
+
+        return this.profileArry.length();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (this.filter == null)
+            this.filter = new UserFilter(this);
+        return filter;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvName)
-        TextView tvName;
-        @BindView(R.id.tvQualification)
-        TextView tvQualification;
-        @BindView(R.id.tvCity)
-        TextView tvCity;
+        @BindView(R.id.tvUserName)
+        TextView tvUserName;
+        @BindView(R.id.tvUserProfession)
+        TextView tvUserProfession;
+        @BindView(R.id.tvUserCity)
+        TextView tvUserCity;
+        @BindView(R.id.civUserPic)
+        com.madhapar.Util.CircleImageView ivUserPic;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public class UserFilter extends Filter {
+        NetworkListAdapter adapter;
+
+        public UserFilter(NetworkListAdapter adapter) {
+            this.adapter = adapter;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            JSONArray filterdArray = new JSONArray();
+            FilterResults result = new FilterResults();
+            if (tempArray != null) {
+                for (int i = 0; i < tempArray.length(); i++) {
+                    if (tempArray.optJSONObject(i).optString("userFirstName").toLowerCase().contains(charSequence.toString().toLowerCase()) || tempArray.optJSONObject(i).optString("userLastName").toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                        filterdArray.put(tempArray.optJSONObject(i));
+                    }
+                }
+            }
+            result.values = filterdArray;
+            result.count = filterdArray.length();
+            return result;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            JSONArray filterdArray = (JSONArray) filterResults.values;
+            if (adapter != null && filterdArray != null) {
+                adapter.profileArry = filterdArray;
+                adapter.notifyDataSetChanged();
+            }
+
+        }
+    }
+
 }

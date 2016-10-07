@@ -1,7 +1,6 @@
 package com.madhapar.Presenter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import com.madhapar.Model.ForgetPasswordModelInt;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
-import com.madhapar.Model.MyNetworkModel;
+import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.AlertDialofClassInt;
@@ -23,7 +22,6 @@ import com.madhapar.View.AlertDialogClass;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
-import com.madhapar.View.LoginActivity;
 import com.madhapar.View.LoginInt;
 import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
@@ -47,7 +45,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     //private SignUpModelInt signUpModelInt;
     private SignUpModel signUpModel;
     private EventCalenderModel eventCalenderModel;
-    private MyNetworkModel myNetworkModel;
+    private NetworkModel networkModelClass;
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
@@ -82,10 +80,10 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember,AppCompatActivity activity) {
+    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember, AppCompatActivity activity) {
 
         signUpModel = new SignUpModel();
-        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this,activity);
+        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this, activity);
     }
 
 
@@ -321,13 +319,6 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     @Override
     public void onFeedbackSuccess() {
         feedbackActivityint.feedbackValidateResult(UtilClass.Success);
-    }
-
-
-    @Override
-    public JSONArray getProfile() {
-        myNetworkModel = new MyNetworkModel();
-        return myNetworkModel.getProfile();
     }
 
 

@@ -32,10 +32,7 @@ public interface PresneterInt {
 
     void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 
-
-    JSONArray getProfile();
-
-    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember,AppCompatActivity activity);
+    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember, AppCompatActivity activity);
 
     void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt, int type);
 
