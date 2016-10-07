@@ -110,6 +110,7 @@
                 android:gravity="center"
                 android:hint="@string/familyMember"
                 android:imeOptions="actionNext"
+                android:inputType="number"
                 android:singleLine="true" />
 
             <Button

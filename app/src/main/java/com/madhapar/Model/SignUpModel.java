@@ -1,5 +1,6 @@
 package com.madhapar.Model;
 
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -12,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.UserVerifyActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -26,7 +28,7 @@ import java.util.Map;
 public class SignUpModel implements SignUpModelInt {
 
     @Override
-    public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnSignUpFinishedListener listener) {
+    public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnSignUpFinishedListener listener, AppCompatActivity activity) {
         Log.e("Password", password);
         if (TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(familyMember) && TextUtils.isEmpty(lastName)) {
             listener.onSignUpRequiredFieldError();
@@ -45,11 +47,11 @@ public class SignUpModel implements SignUpModelInt {
         } else if (TextUtils.isEmpty(familyMember)) {
             listener.onSignUpFamilyMemberError();
         } else {
-            doSignup(firstName, lastName, contactNumber, password, familyMember, listener);
+            doSignup(firstName, lastName, contactNumber, password, familyMember, listener, activity);
         }
     }
 
-    private void doSignup(final String userFirstName, final String userLastName, final String userMobileNo, final String password, final String familyMemberCount, final SignUpModelInt.OnSignUpFinishedListener listener) {
+    private void doSignup(final String userFirstName, final String userLastName, final String userMobileNo, final String password, final String familyMemberCount, final SignUpModelInt.OnSignUpFinishedListener listener, final AppCompatActivity activity) {
         String tag = "signUp";
         StringRequest signUpRequest = new StringRequest(Request.Method.POST, UtilClass.getSignupUrl(), new Response.Listener<String>() {
             @Override
@@ -75,7 +77,11 @@ public class SignUpModel implements SignUpModelInt {
                                     SharedPreferenceUtil.putValue(Constants.UserData.isVerified, responseObj.optString("isVerified"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, responseObj.optString("userFBProfileName"));
                                     SharedPreferenceUtil.save();
-                                    listener.onSignUpSuccess();
+                                    if (!responseObj.optBoolean("isVerified")) {
+                                        UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
+                                    } else {
+                                        listener.onSignUpSuccess();
+                                    }
                                 }
                             } else {
                                 listener.onSignUpFailError(signUpObject.optString("message"));

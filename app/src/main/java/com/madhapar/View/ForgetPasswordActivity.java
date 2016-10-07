@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ForgetPassword extends BaseActivity implements ForgetPasswordViewInt {
+public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswordViewInt {
     @BindView(R.id.etForgetMobileNumber)
     EditText etForgetMobileNumber;
     @BindView(R.id.btnRecover)
@@ -55,10 +55,11 @@ public class ForgetPassword extends BaseActivity implements ForgetPasswordViewIn
 
     @OnClick(R.id.btnRecover)
     public void recover() {
+        UtilClass.closeKeyboard(ForgetPasswordActivity.this);
         if (UtilClass.isInternetAvailabel(this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
             presenter = new PresenterClass();
-            presenter.forgetPasswordCredentials(etForgetMobileNumber.getText().toString(), forgetPasswordViewInt);
+            presenter.forgetPasswordCredentials(etForgetMobileNumber.getText().toString(), forgetPasswordViewInt, 1);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
         }
@@ -66,6 +67,7 @@ public class ForgetPassword extends BaseActivity implements ForgetPasswordViewIn
 
     @OnClick(R.id.btnCancel)
     public void cancel() {
+        UtilClass.closeKeyboard(ForgetPasswordActivity.this);
         UtilClass.hideProgress();
         finish();
     }
@@ -75,28 +77,28 @@ public class ForgetPassword extends BaseActivity implements ForgetPasswordViewIn
     public void forgetPasswordValidateResult(int check) {
         UtilClass.hideProgress();
         if (check == UtilClass.UserIdLengthError) {
-            UtilClass.displyMessage(getString(R.string.ErrorContactLength), ForgetPassword.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.ErrorContactLength), ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
         } else if (check == UtilClass.UserIdError) {
-            UtilClass.displyMessage(getString(R.string.contactError), ForgetPassword.this, Toast.LENGTH_SHORT);
+            UtilClass.displyMessage(getString(R.string.contactError), ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
         }
     }
 
     @Override
     public void forgotPasswordSuccess(JSONObject optResponse) {
         UtilClass.hideProgress();
-        presenter.alert(ForgetPassword.this, optResponse, etForgetMobileNumber.getText().toString());
+        presenter.alert(ForgetPasswordActivity.this, optResponse, etForgetMobileNumber.getText().toString(), 1);
     }
 
     @Override
     public void forgotPasswrodFail(String message) {
         UtilClass.hideProgress();
-        UtilClass.displyMessage(message, ForgetPassword.this, Toast.LENGTH_SHORT);
+        UtilClass.displyMessage(message, ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void forgotPasswordRequestError() {
         UtilClass.hideProgress();
-        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), ForgetPassword.this, Toast.LENGTH_SHORT);
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
     }
 
     @Override

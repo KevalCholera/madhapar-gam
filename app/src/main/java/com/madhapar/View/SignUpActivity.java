@@ -43,10 +43,11 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
 
     @OnClick(R.id.btnSignUp)
     public void signup() {
+        UtilClass.closeKeyboard(SignUpActivity.this);
         if (UtilClass.isInternetAvailabel(SignUpActivity.this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
             presenter = new PresenterClass(this);
-            presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etFamilyMember.getText().toString());
+            presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etFamilyMember.getText().toString(), this);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
         }

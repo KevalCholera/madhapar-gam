@@ -69,6 +69,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
 
     @OnClick(R.id.btnSave)
     public void save() {
+        UtilClass.closeKeyboard(ChangePasswordActivity.this);
         if (UtilClass.isInternetAvailabel(this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
             presenter = new PresenterClass();
@@ -80,6 +81,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
 
     @OnClick(R.id.btnChnagePasswordCancel)
     public void cancelChangePassword() {
+        UtilClass.closeKeyboard(ChangePasswordActivity.this);
         UtilClass.hideProgress();
         finish();
     }

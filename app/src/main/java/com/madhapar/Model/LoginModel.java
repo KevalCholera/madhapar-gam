@@ -75,11 +75,11 @@ public class LoginModel implements LoginModelInt {
                                         SharedPreferenceUtil.putValue(Constants.UserData.isVerified, userObject.optBoolean("isVerified"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, userObject.optString("userFBProfileName"));
                                         SharedPreferenceUtil.save();
-//                                        if (!userObject.optBoolean("isVerified")) {
-//                                            UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
-//                                        } else {
-                                        listener.onLoginSuccess();
-                                        //   }
+                                        if (!userObject.optBoolean("isVerified")) {
+                                            UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
+                                        } else {
+                                            listener.onLoginSuccess();
+                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

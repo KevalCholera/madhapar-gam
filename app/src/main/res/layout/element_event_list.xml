@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/activity_top_login_margin"
     android:layout_marginRight="@dimen/activity_top_login_margin"
-    android:layout_marginTop="@dimen/activity_top_login_margin"
+    android:layout_marginTop="@dimen/margin_medium"
     android:background="@drawable/eventcard"
     android:orientation="vertical"
     app:cardCornerRadius="5dp">
@@ -18,6 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
             android:orientation="horizontal">
@@ -26,7 +27,6 @@
                 android:id="@+id/tvEventName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_medium"
                 android:layout_weight="1"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/activity_vertical_margin"
@@ -45,31 +45,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
                 android:textSize="@dimen/text_size_card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
                 android:textSize="@dimen/text_size_card" />
         </LinearLayout>
 
@@ -79,9 +76,9 @@
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/margin_medium"
             android:layout_marginTop="@dimen/activity_top_login_margin"
-            android:layout_weight="3"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -89,14 +86,16 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/padding_text"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/activity_vertical_margin"
                     android:layout_height="@dimen/activity_vertical_margin"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/cardview_default_radius"
-                    android:gravity="center"
-                    android:src="@drawable/icon_event_going" />
+                    android:background="@mipmap/ic_event_going"
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvGoing"
@@ -124,14 +123,16 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/padding_text"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/activity_vertical_margin"
                     android:layout_height="@dimen/activity_vertical_margin"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/cardview_default_radius"
                     android:gravity="center"
-                    android:src="@drawable/icon_event_interest" />
+                    android:src="@mipmap/ic_event_interest" />
 
                 <TextView
                     android:id="@+id/tvInterest"
@@ -160,20 +161,21 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/padding_text"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/activity_vertical_margin"
                     android:layout_height="@dimen/activity_vertical_margin"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/cardview_default_radius"
-                    android:gravity="center"
-                    android:src="@drawable/icon_event_not_going" />
+                    android:background="@mipmap/ic_event_cantgo"
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/tvNotInterest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="@dimen/margin_small"
                     android:text="@string/cantgo"
@@ -184,14 +186,14 @@
                     android:id="@+id/tvNotInterestCount"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/magin_large"
-                    android:layout_gravity="center"
                     android:background="@drawable/textviewcard"
                     android:gravity="center"
+
                     android:padding="@dimen/smallPadding"
-                    android:textAlignment="center"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/margin_medium" />
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

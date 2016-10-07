@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -100,6 +102,12 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getUserVerifyUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.UserVerifyUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+
     public static String getOtpUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.OtpUrl).buildUpon().build();
         return builder.toString();
@@ -142,5 +150,28 @@ public class UtilClass {
         return false;
     }
 
+
+    static public void closeKeyboard(Activity a) {
+        try {
+            if (isKeyboardVisible(a)) {
+                InputMethodManager imm = (InputMethodManager) a.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isKeyboardVisible(Activity activity) {
+        Rect r = new Rect();
+        View contentView = activity.findViewById(android.R.id.content);
+        contentView.getWindowVisibleDisplayFrame(r);
+        int screenHeight = contentView.getRootView().getHeight();
+
+        int keypadHeight = screenHeight - r.bottom;
+
+        return
+                (keypadHeight > screenHeight * 0.15);
+    }
 
 }

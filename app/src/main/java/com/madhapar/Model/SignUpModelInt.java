@@ -1,5 +1,7 @@
 package com.madhapar.Model;
 
+import android.support.v7.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 /**
@@ -7,7 +9,7 @@ import org.json.JSONObject;
  */
 public interface SignUpModelInt {
 
-    void signup(String firstName, String lastName, String contactNumber, String password, String familyMember, SignUpModelInt.OnSignUpFinishedListener listener);
+    void signup(String firstName, String lastName, String contactNumber, String password, String familyMember, SignUpModelInt.OnSignUpFinishedListener listener, AppCompatActivity activity);
 
     interface OnSignUpFinishedListener {
 

@@ -1,6 +1,5 @@
 package com.madhapar.View;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,13 +11,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
-import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.GoingrecyclerView;
 import com.madhapar.View.Adapter.InterestedRecylerviewAdapter;
-import com.madhapar.View.Adapter.MyNetworkAdapter;
 import com.madhapar.View.Adapter.NotGoingRecyclerViewAdapter;
 
 import butterknife.BindView;

@@ -75,35 +75,19 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void validateCredentials(String contactNumber, String password, LoginInt loginInt,AppCompatActivity activity) {
+    public void validateCredentials(String contactNumber, String password, LoginInt loginInt, AppCompatActivity activity) {
         this.loginInt = loginInt;
         LoginModel loginModel = new LoginModel();
-        loginModel.login(contactNumber, password, this,activity);
+        loginModel.login(contactNumber, password, this, activity);
     }
 
     @Override
-    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember) {
+    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember,AppCompatActivity activity) {
 
         signUpModel = new SignUpModel();
-        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this);
+        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this,activity);
     }
 
-    @Override
-    public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1) {
-        forgetPasswordViewInt = forgetPasswordViewInt1;
-        if (forgetPassModel == null)
-            forgetPassModel = new ForgetPasswordModel();
-        forgetPassModel.sendOtp(contactNumber, this);
-    }
-
-    @Override
-    public void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alertDialogInt) {
-        this.alertIntl = alertDialogInt;
-        if (forgetPassModel == null)
-            forgetPassModel = new ForgetPasswordModel();
-        forgetPassModel.verifyOtp(contactNumber, this, otpValue);
-
-    }
 
     @Override
     public void changeFragment(int containerId, int position, AppCompatActivity activity) {
@@ -119,8 +103,8 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber) {
-        new AlertDialogClass(context, otpResponse, contactNumber);
+    public void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber, int type) {
+        new AlertDialogClass(context, otpResponse, contactNumber, type);
     }
 
     @Override
@@ -344,6 +328,37 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     public JSONArray getProfile() {
         myNetworkModel = new MyNetworkModel();
         return myNetworkModel.getProfile();
+    }
+
+
+    //__________OTP VERIFICATION_____///
+
+
+    @Override
+    public void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt1, int type) {
+        forgetPasswordViewInt = forgetPasswordViewInt1;
+        if (forgetPassModel == null)
+            forgetPassModel = new ForgetPasswordModel();
+        forgetPassModel.sendOtp(contactNumber, this, type);
+    }
+
+    @Override
+    public void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alertDialogInt) {
+        this.alertIntl = alertDialogInt;
+        if (forgetPassModel == null)
+            forgetPassModel = new ForgetPasswordModel();
+        forgetPassModel.verifyOtp(contactNumber, this, otpValue);
+
+    }
+
+    @Override
+    public void verifyUserOtp(String contactNumber, String otp, AlertDialofClassInt alertDialofClassInt) {
+        this.alertIntl = alertDialofClassInt;
+        if (forgetPassModel == null) {
+            forgetPassModel = new ForgetPasswordModel();
+        }
+        forgetPassModel.verifyUserOtp(contactNumber, this, otp);
+
     }
 
 

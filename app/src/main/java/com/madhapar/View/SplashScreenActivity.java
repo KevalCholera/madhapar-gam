@@ -19,8 +19,8 @@ public class SplashScreenActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        if (SharedPreferenceUtil.contains(Constants.UserData.UserFirstName) && SharedPreferenceUtil.contains(Constants.UserData.UserId)) {
-            if (!SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, "").equalsIgnoreCase("") && !SharedPreferenceUtil.getString(Constants.UserData.UserId, "").equalsIgnoreCase("")) {
+        if (!SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, "").equalsIgnoreCase("") && !SharedPreferenceUtil.getString(Constants.UserData.UserId, "").equalsIgnoreCase("")) {
+            if (SharedPreferenceUtil.getBoolean(Constants.UserData.isVerified, false)) {
                 UtilClass.changeActivity(SplashScreenActivity.this, MainActivity.class, true);
             } else {
                 UtilClass.changeActivity(SplashScreenActivity.this, LoginActivity.class, true);

@@ -1,7 +1,6 @@
 package com.madhapar.View;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,12 +40,12 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_login);
-
         ButterKnife.bind(this);
     }
 
     @OnClick(R.id.btnLogin)
     public void submit() {
+        UtilClass.closeKeyboard(LoginActivity.this);
         if (UtilClass.isInternetAvailabel(LoginActivity.this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
             presenter = new PresenterClass();
@@ -59,6 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
 
     @OnClick(R.id.tvUserSignUp)
     public void signup() {
+        UtilClass.closeKeyboard(LoginActivity.this);
         UtilClass.hideProgress();
         UtilClass.changeActivity(LoginActivity.this, SignUpActivity.class, false);
     }
@@ -71,8 +71,9 @@ public class LoginActivity extends BaseActivity implements LoginInt {
 
     @OnClick(R.id.tvForgetPassword)
     public void forgetpassword() {
+        UtilClass.closeKeyboard(LoginActivity.this);
         UtilClass.hideProgress();
-        UtilClass.changeActivity(LoginActivity.this, ForgetPassword.class, false);
+        UtilClass.changeActivity(LoginActivity.this, ForgetPasswordActivity.class, false);
     }
 
     @Override

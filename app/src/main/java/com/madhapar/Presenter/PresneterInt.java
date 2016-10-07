@@ -26,7 +26,7 @@ public interface PresneterInt {
 
     void changeActivity(Activity curruntActivity, Class nextActivity, Boolean finish);
 
-    void validateCredentials(String contactNumber, String password, LoginInt loginInt,AppCompatActivity activity);
+    void validateCredentials(String contactNumber, String password, LoginInt loginInt, AppCompatActivity activity);
 
     List<Integer> initMainDrawer();
 
@@ -35,15 +35,17 @@ public interface PresneterInt {
 
     JSONArray getProfile();
 
-    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember);
+    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember,AppCompatActivity activity);
 
-    void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt);
+    void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt, int type);
 
     void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alerClasstInt);
 
+    void verifyUserOtp(String contactNumber, String otp, AlertDialofClassInt alertDialofClassInt);
+
     void changeFragment(int containerId, int position, AppCompatActivity activity);
 
-    void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber);
+    void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber, int type);
 
     void changePasswordCredential(String newPassword, String confirmNewPassword, String otpToken, String contactNumber, ChangePasswordViewInt changePasswordViewInt1);
 }

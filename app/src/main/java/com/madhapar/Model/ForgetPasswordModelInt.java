@@ -32,8 +32,11 @@ public interface ForgetPasswordModelInt {
         void onVerifyOtpRequestError();
     }
 
-    void sendOtp(String contactNumber, onSendOtpListener listener);
+
+    void sendOtp(String contactNumber, onSendOtpListener listener, int type);
 
     void verifyOtp(String contactNumber, onVerifyOtpListener listener, String otp);
+
+    void verifyUserOtp(String contactNumber, onVerifyOtpListener listener, String otp);
 }
 

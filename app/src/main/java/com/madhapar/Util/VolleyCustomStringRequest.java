@@ -20,85 +20,100 @@ import java.util.Map;
 
 public class VolleyCustomStringRequest extends StringRequest {
 
-	private int mStatusCode;
-	private ErrorListener mErrorListener;
-	Map<String, String> Params;
-	public VolleyCustomStringRequest(int method, String url,
-									 Listener<String> listener, ErrorListener errorListener, Map<String, String> params) {
-		super(method, url, listener, errorListener);
-		this.Params = params;
-		mErrorListener = errorListener;
-	}
+    private int mStatusCode;
+    private ErrorListener mErrorListener;
+    Map<String, String> Params;
 
-	@Override
-	protected Map<String, String> getParams() throws AuthFailureError {
-		// TODO Auto-generated method stub
-		return Params;
-	}
-	
-	@Override
-	public Request<?> setRetryPolicy(RetryPolicy retryPolicy) {
-		// TODO Auto-generated method stub
-		retryPolicy = new DefaultRetryPolicy(10000, 0,
-				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-		return super.setRetryPolicy(retryPolicy);
-	}
+    public VolleyCustomStringRequest(int method, String url,
+                                     Listener<String> listener, ErrorListener errorListener, Map<String, String> params) {
+        super(method, url, listener, errorListener);
 
-	public int getStatusCode() {
-		return mStatusCode;
-	}
+        this.Params = params;
+        mErrorListener = errorListener;
+    }
 
-	@Override
-	protected Response<String> parseNetworkResponse(NetworkResponse response) {
-		mStatusCode = response.statusCode;
-		Log.e("StatusCode", "" + mStatusCode);
-		return super.parseNetworkResponse(response);
-	}
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        // TODO Auto-generated method stub
+        return Params;
+    }
 
-	@Override
-	public void deliverError(VolleyError error) {
-		// TODO Auto-generated method stub
+    @Override
+    public Request<?> setRetryPolicy(RetryPolicy retryPolicy) {
+        // TODO Auto-generated method stub
+        retryPolicy = new DefaultRetryPolicy(10000, 0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        return super.setRetryPolicy(retryPolicy);
+    }
 
-		Log.e("Deliver Error", "True");
-		if(error==null || error.getMessage()==null || error.getMessage().trim().length()==0){
-			error = new VolleyError(VolleySetup.ErrorMessage);
-		}
 
-		mErrorListener.onErrorResponse(error);
-		super.parseNetworkError(error);
-	}
+    @Override
+    public byte[] getBody() throws AuthFailureError {
+        Log.e("get", "body called");
+        return super.getBody();
+    }
 
-	@Override
-	protected VolleyError parseNetworkError(VolleyError volleyError) {
-		if (volleyError.networkResponse != null
-				&& volleyError.networkResponse.data != null) {
-			Log.e("status Code", " code "
-					+ volleyError.networkResponse.statusCode);
+    @Override
+    public String getBodyContentType() {
+        Log.e("get", "body content typec alled");
+        return super.getBodyContentType();
+    }
 
-			try {
-				JSONObject jsonobject = new JSONObject(new String(
-						volleyError.networkResponse.data));
-				VolleyError error;
-				if(jsonobject.optString("message")!=null && jsonobject.optString("message").trim().length()>0){
-					error = new VolleyError(
-						jsonobject.optString("message"));
-				}else{
-					error = new VolleyError(VolleySetup.ErrorMessage);
-				}
-					
-				
-				volleyError = error;
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    public int getStatusCode() {
+        return mStatusCode;
+    }
 
-		} else {
-			
-			VolleyError error = new VolleyError(VolleySetup.ErrorMessage);
-			volleyError = error;
-		}
+    @Override
+    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+        mStatusCode = response.statusCode;
+        Log.e("StatusCode", "" + mStatusCode);
+        return super.parseNetworkResponse(response);
+    }
 
-		return volleyError;
-	}
+    @Override
+    public void deliverError(VolleyError error) {
+        // TODO Auto-generated method stub
+
+        Log.e("Deliver Error", "True");
+        if (error == null || error.getMessage() == null || error.getMessage().trim().length() == 0) {
+            error = new VolleyError(VolleySetup.ErrorMessage);
+        }
+
+        mErrorListener.onErrorResponse(error);
+        super.parseNetworkError(error);
+    }
+
+    @Override
+    protected VolleyError parseNetworkError(VolleyError volleyError) {
+        if (volleyError.networkResponse != null
+                && volleyError.networkResponse.data != null) {
+            Log.e("status Code", " code "
+                    + volleyError.networkResponse.statusCode);
+
+            try {
+                JSONObject jsonobject = new JSONObject(new String(
+                        volleyError.networkResponse.data));
+                VolleyError error;
+                if (jsonobject.optString("message") != null && jsonobject.optString("message").trim().length() > 0) {
+                    error = new VolleyError(
+                            jsonobject.optString("message"));
+                } else {
+                    error = new VolleyError(VolleySetup.ErrorMessage);
+                }
+
+
+                volleyError = error;
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        } else {
+
+            VolleyError error = new VolleyError(VolleySetup.ErrorMessage);
+            volleyError = error;
+        }
+
+        return volleyError;
+    }
 }

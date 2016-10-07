@@ -24,9 +24,8 @@ public class UserVerifyActivity extends BaseActivity implements ForgetPasswordVi
         presenterClass = new PresenterClass();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_verify);
-
         if (UtilClass.isInternetAvailabel(this)) {
-            presenterClass.forgetPasswordCredentials(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""), this);
+            presenterClass.forgetPasswordCredentials(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""), this, 2);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
         }
@@ -43,7 +42,7 @@ public class UserVerifyActivity extends BaseActivity implements ForgetPasswordVi
             if (presenterClass == null) {
                 presenterClass = new PresenterClass();
             }
-            presenterClass.alert(this, otpResponse, SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
+            presenterClass.alert(this, otpResponse, SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""), 2);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
         }

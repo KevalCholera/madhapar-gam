@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/alertdialogdesign"
     android:orientation="vertical"
-    tools:context="com.madhapar.View.ForgetPassword">
+    tools:context="com.madhapar.View.ForgetPasswordActivity">
 
     <TextView
         android:layout_width="match_parent"

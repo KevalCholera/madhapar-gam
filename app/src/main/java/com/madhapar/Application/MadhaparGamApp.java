@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 import com.mpt.storage.SharedPreferenceUtil;
@@ -28,7 +29,6 @@ public class MadhaparGamApp extends Application {
         SharedPreferenceUtil.init(this);
         appInstnace = this;
     }
-
     public RequestQueue getRequestQueue() {
         if (reuestQueque == null) {
             reuestQueque = Volley.newRequestQueue(getApplicationContext());
@@ -45,4 +45,9 @@ public class MadhaparGamApp extends Application {
         getRequestQueue().add(req);
     }
 
+    public <T> void addToRequestQueueCustom(Request<T> req, String tag, HttpStack stack) {
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        RequestQueue requestQueue1 = Volley.newRequestQueue(getApplicationContext(), stack);
+        requestQueue1.add(req);
+    }
 }

@@ -13,8 +13,7 @@ import android.widget.ImageView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
-import com.madhapar.View.Adapter.MyNetworkAdapter;
-import com.madhapar.View.Adapter.RecylerViewAdapter;
+import com.madhapar.View.Adapter.NetworkListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,23 +25,23 @@ import butterknife.OnTextChanged;
 
 public class NetworkFragment extends BaseFragment {
     @BindView(R.id.ic_search)
-    ImageView ic_search;
+    ImageView iVsearch;
     @BindView(R.id.etSearch)
     EditText etSearch;
     @BindView(R.id.recyclerViewMyNetwork)
-    RecyclerView recyclerViewMyNetwork;
+    RecyclerView rvNetworkList;
 
     @OnTextChanged(R.id.etSearch)
     public void search() {
         if (etSearch.getText().length() >= 1) {
-            ic_search.setVisibility(View.GONE);
+            iVsearch.setVisibility(View.GONE);
         } else {
-            ic_search.setVisibility(View.VISIBLE);
+            iVsearch.setVisibility(View.VISIBLE);
         }
     }
 
     PresenterClass presenterClass;
-    private MyNetworkAdapter recylerViewAdapter;
+    private NetworkListAdapter networkListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
 
@@ -52,17 +51,17 @@ public class NetworkFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_network, container, false);
         ButterKnife.bind(this, view);
         presenterClass = new PresenterClass();
-        recylerViewAdapter = new MyNetworkAdapter(getActivity(), presenterClass.getProfile());
+        networkListAdapter = new NetworkListAdapter(getActivity(), presenterClass.getProfile());
         mLayoutManager = new LinearLayoutManager(mContext);
-        recyclerViewMyNetwork.setLayoutManager(mLayoutManager);
+        rvNetworkList.setLayoutManager(mLayoutManager);
         mContext = this.getActivity();
-        recyclerViewMyNetwork.setAdapter(recylerViewAdapter);
+        rvNetworkList.setAdapter(networkListAdapter);
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        ic_search.setVisibility(View.VISIBLE);
+        iVsearch.setVisibility(View.VISIBLE);
     }
 }

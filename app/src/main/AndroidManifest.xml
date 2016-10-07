@@ -31,7 +31,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.madhapar.View.ForgetPassword"
+            android:name="com.madhapar.View.ForgetPasswordActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/forgetPassword"
             android:screenOrientation="portrait"

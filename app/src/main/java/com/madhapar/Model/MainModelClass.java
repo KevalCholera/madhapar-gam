@@ -56,12 +56,10 @@ public class MainModelClass implements MainModelInt {
         } else if (fragmentNo == 2) {
             fragment = new UserFragment();
         } else if (fragmentNo == 3) {
-            fragment = new MoreFragment();
-        } else if (fragmentNo == 4) {
             fragment = new NetworkFragment();
+        } else if (fragmentNo == 4) {
+            fragment = new MoreFragment();
         }
         return fragment;
     }
-
-
 }

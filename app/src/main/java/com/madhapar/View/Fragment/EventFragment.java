@@ -44,14 +44,24 @@ public class EventFragment extends BaseFragment implements EventListInt {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         ButterKnife.bind(this, view);
         presenterClass = new RequestPresenter();
-        presenterClass.getEventList(EventFragment.this);
+        if (UtilClass.isInternetAvailabel(getActivity())) {
+            UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+            presenterClass.getEventList(EventFragment.this);
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
+        }
         mContext = this.getActivity();
         mLayoutManager = new LinearLayoutManager(mContext);
         rlEventList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                rlEventList.setRefreshing(true);
-                presenterClass.getEventList(EventFragment.this);
+                if (UtilClass.isInternetAvailabel(getActivity())) {
+                    rlEventList.setRefreshing(true);
+                    presenterClass.getEventList(EventFragment.this);
+                } else {
+                    rlEventList.setRefreshing(false);
+                    UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
+                }
             }
         });
         return view;
@@ -59,10 +69,10 @@ public class EventFragment extends BaseFragment implements EventListInt {
 
     @Override
     public void onSuccessEventList(JSONArray eventArray) {
+        UtilClass.hideProgress();
         if (rlEventList.isRefreshing()) {
             rlEventList.setRefreshing(false);
         }
-        Log.e("fragment", "json" + eventArray);
         recylerViewAdapter = new RecylerViewAdapter(getActivity(), eventArray);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(recylerViewAdapter);
@@ -71,10 +81,10 @@ public class EventFragment extends BaseFragment implements EventListInt {
 
     @Override
     public void onFailEventList(String errorMessage) {
+        UtilClass.hideProgress();
         if (rlEventList.isRefreshing()) {
             rlEventList.setRefreshing(false);
         }
-        Log.e("fragment", "json" + errorMessage);
         UtilClass.displyMessage(errorMessage, getActivity(), 0);
 
     }

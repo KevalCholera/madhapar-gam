@@ -33,7 +33,7 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
     private String contactNumber;
     private JSONObject otpObj;
     private PresenterClass presenter;
-
+    private int type;
     @BindView(R.id.etCode1)
     EditText code1;
     @BindView(R.id.etCode2)
@@ -70,11 +70,18 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
     @OnTextChanged(R.id.etCode4)
     public void code4() {
         if (code4.getText().toString().trim().length() == 1) {
+
             String insertedOtp = code1.getText().toString().trim() + code2.getText().toString().trim() + code3.getText().toString().trim() + code4.getText().toString().trim();
+            Log.e("otp", "inserted" + insertedOtp);
+            Log.e("otp", this.otpObj.optString("otpValue"));
             if (insertedOtp.equals(this.otpObj.optString("otpValue"))) {
                 if (UtilClass.isInternetAvailabel(activity)) {
-                    UtilClass.displyMessage(activity.getString(R.string.msgPleaseWait), activity, 0);
-                    new PresenterClass().verifyForgotPasswordOtp(this.contactNumber, insertedOtp, this);
+                    UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
+                    if (this.type == 1)
+                        new PresenterClass().verifyForgotPasswordOtp(this.contactNumber, insertedOtp, this);
+                    else {
+                        new PresenterClass().verifyUserOtp(this.contactNumber, insertedOtp, this);
+                    }
                 } else {
                     UtilClass.displyMessage(activity.getString(R.string.msgSomethigWentWrong), this.activity, 0);
                 }
@@ -90,7 +97,7 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
         presenter = new PresenterClass();
         if (UtilClass.isInternetAvailabel(activity)) {
             UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
-            new PresenterClass().forgetPasswordCredentials(this.contactNumber, this);
+            new PresenterClass().forgetPasswordCredentials(this.contactNumber, this, this.type);
         } else {
             UtilClass.displyMessage(activity.getString(R.string.msgSomethigWentWrong), this.activity, 0);
         }
@@ -100,9 +107,10 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
     public void onCancel() {
         UtilClass.hideProgress();
         alert.dismiss();
+        activity.finish();
     }
 
-    public AlertDialogClass(@NonNull final AppCompatActivity context, JSONObject otpObj1, String contactNumber) {
+    public AlertDialogClass(@NonNull final AppCompatActivity context, JSONObject otpObj1, String contactNumber, int type) {
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.alert_otp_code, null, false);
@@ -113,6 +121,7 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
         SharedPreferenceUtil.save();
         this.otpObj = otpObj1;
         ButterKnife.bind(this, view);
+        this.type = type;
         alert = create();
         alert.show();
         alert.setCancelable(false);
@@ -150,11 +159,18 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
 
     @Override
     public void otpVerificationSuccessfull(JSONObject verifyObj) {
-        alert.dismiss();
+        if (verifyObj.has("otpToken") && this.type == 1) {
+            UtilClass.displyMessage(verifyObj.optString("message"), activity, 0);
+            Intent intent = new Intent(activity, ChangePasswordActivity.class);
+            intent.putExtra("otpToken", verifyObj.optString("otpToken"));
+            activity.startActivity(intent);
+        } else {
+            UtilClass.displyMessage(verifyObj.optString("message"), activity, 0);
+            Intent intent = new Intent(activity, LoginActivity.class);
+            activity.startActivity(intent);
+        }
         UtilClass.hideProgress();
-        Intent intent = new Intent(activity, ChangePasswordActivity.class);
-        intent.putExtra("otpToken", verifyObj.optString("otpToken"));
-        activity.startActivity(intent);
+        alert.dismiss();
         activity.finish();
     }
 

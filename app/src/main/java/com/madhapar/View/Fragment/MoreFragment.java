@@ -17,6 +17,7 @@ import com.madhapar.Util.UtilClass;
 import com.madhapar.View.FeedbackActivity;
 import com.madhapar.View.GoingActivity;
 import com.madhapar.View.LoginActivity;
+import com.mpt.storage.SharedPreferenceUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,41 +31,50 @@ public class MoreFragment extends BaseFragment {
     private PresenterClass presenter;
     private PresenterClassSecond presenterClassSecond;
     Intent intent;
+
     @OnClick(R.id.tvIntroHistory)
-    public void introHistory(){
-        presenter.changeActivity(getActivity(), GoingActivity.class,true);
+    public void introHistory() {
+        presenter.changeActivity(getActivity(), GoingActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.InterestedPersonName);
+        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.InterestedPersonName);
     }
+
     @OnClick(R.id.tvEventPhotos)
-    public void eventPhotos(){
-        presenter.changeActivity(getActivity(), GoingActivity.class,true);
+    public void eventPhotos() {
+        presenter.changeActivity(getActivity(), GoingActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.GoingPersonName);
+        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.GoingPersonName);
     }
+
     @OnClick(R.id.tvFeedback)
-    public void tvFeedback(){
-        presenter.changeActivity(getActivity(), FeedbackActivity.class,true);
+    public void tvFeedback() {
+        presenter.changeActivity(getActivity(), FeedbackActivity.class, true);
     }
+
     @OnClick(R.id.tvAboutUs)
-    public void tvAboutUs(){
-        presenter.changeActivity(getActivity(), GoingActivity.class,true);
+    public void tvAboutUs() {
+        presenter.changeActivity(getActivity(), GoingActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check,Constants.DifferentData.NotGoingPersonName);
+        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.NotGoingPersonName);
     }
+
     @OnClick(R.id.tvFundRaising)
-    public void tvFundRaising(){
-        UtilClass.displyMessage("Fund Raising",getContext(),Toast.LENGTH_SHORT);
+    public void tvFundRaising() {
+        UtilClass.displyMessage("Fund Raising", getContext(), Toast.LENGTH_SHORT);
     }
+
     @OnClick(R.id.tvSignOut)
-    public void tvSignOut(){
-        presenter.changeActivity(getActivity(), LoginActivity.class,true);
+    public void tvSignOut() {
+        SharedPreferenceUtil.clear();
+        SharedPreferenceUtil.save();
+        presenter.changeActivity(getActivity(), LoginActivity.class, true);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_more, container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_more, container, false);
+        ButterKnife.bind(this, view);
         presenter = new PresenterClass();
         return view;
     }

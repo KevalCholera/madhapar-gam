@@ -5,16 +5,18 @@ package com.madhapar.Util;
  */
 
 public class Constants {
-    public static class DifferentData{
+    public static class DifferentData {
         public static final int GoingPersonName = 1;
         public static final int InterestedPersonName = 2;
         public static final int NotGoingPersonName = 3;
         public static String Check = "check";
     }
+
     public static class RequestConstants {
         public static String BaseUrl = "http://139.59.29.185/";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
+        public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
         public static String OtpUrl = BaseUrl + "sendOTP/";
         public static String VerifyOtpUrl = BaseUrl + "verifyOTP/";
         public static String ChangePasswordUrl = BaseUrl + "resetPassword/";
