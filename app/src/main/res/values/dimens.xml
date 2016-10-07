@@ -23,4 +23,5 @@
     <dimen name="signButtonMargin">25dp</dimen>
     <dimen name="smallPadding">2dp</dimen>
     <dimen name="padding_text">3dp</dimen>
+    <dimen name="imgsize">250dp</dimen>
 </resources>

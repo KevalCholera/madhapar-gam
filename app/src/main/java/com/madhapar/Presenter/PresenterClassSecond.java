@@ -2,6 +2,7 @@ package com.madhapar.Presenter;
 
 import com.madhapar.Model.GoinListModel;
 import com.madhapar.Model.InterestedListModel;
+import com.madhapar.Model.NewsFeedModel;
 import com.madhapar.Model.NotGoinListModel;
 
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ public class PresenterClassSecond implements PresenterClassSecondInt {
     private GoinListModel goinListModel;
     private InterestedListModel interestedListModel;
     private NotGoinListModel notGoinListModel;
+    private NewsFeedModel newsFeedModel;
     @Override
     public JSONArray getGoingList() {
         goinListModel = new GoinListModel();
@@ -29,5 +31,11 @@ public class PresenterClassSecond implements PresenterClassSecondInt {
     public JSONArray getNotGoingPersonName() {
         notGoinListModel = new NotGoinListModel();
         return notGoinListModel.getNotGoingList();
+    }
+
+    @Override
+    public JSONArray getNewsData() {
+        newsFeedModel = new NewsFeedModel();
+        return newsFeedModel.getNewsData();
     }
 }

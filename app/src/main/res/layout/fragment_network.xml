@@ -16,6 +16,13 @@
         android:layout_gravity="center_vertical"
         android:gravity="left"
         android:background="@drawable/search">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ic_search"
+            android:src="@drawable/ic_search"
+            android:paddingBottom="@dimen/cardview_default_radius"
+            android:visibility="gone"/>
     <EditText
         android:id="@+id/etSearch"
         android:layout_gravity="center"
@@ -26,14 +33,6 @@
         android:layout_height="@dimen/text_siz_large"
         android:textColor="@color/colorPrimary"
         android:hint="@string/search" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ic_search"
-            android:src="@drawable/ic_search"
-            android:paddingBottom="@dimen/cardview_default_radius"
-            android:visibility="gone"/>
-
 
     </LinearLayout>
         </LinearLayout>

@@ -9,4 +9,6 @@ public interface PresenterClassSecondInt {
     JSONArray getGoingList();
     JSONArray getInterestList();
     JSONArray getNotGoingPersonName();
+    JSONArray getNewsData();
+
 }
