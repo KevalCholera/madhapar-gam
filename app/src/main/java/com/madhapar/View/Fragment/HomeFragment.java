@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClassSecond;
-import com.madhapar.View.Adapter.MyNetworkAdapter;
 import com.madhapar.View.Adapter.NewsDataRecyclerView;
 
 import butterknife.BindView;

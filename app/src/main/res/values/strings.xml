@@ -77,8 +77,16 @@
     <string name="passwordupdate">Password Update</string>
     <string name="passwordmatch">Password cant match Enter Valid Confirm Password</string>
     <string name="resenedcode">Resend Code Successfully</string>
-
-
+    <string name="fundRaising">Fund Raising</string>
+    <string name="fundInfo">More Info</string>
+    <string name="profileName">Name :</string>
+    <string name="profileNumver">Mobile Number :</string>
+    <string name="profileLocation">Location :</string>
+    <string name="profileDOB">D. O. B. :</string>
+    <string name="profileMemberShipNo">Membership No. :</string>
+    <string name="profileBloodGroud">Blood Group :</string>
+    <string name="profileEmail">Email :</string>
+    <string name="profileFacebook">Facebook :</string>
     <!--Process message-->
     <string name="msgPleaseWait">Please Wait..</string>
     <string name="msgCheckInternet">Please check your internet connection</string>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_gravity="center"
     tools:context="com.madhapar.View.FundRaisingActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
     <android.support.v7.widget.Toolbar android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbarForgotPassword"
@@ -17,21 +17,72 @@
             android:id="@+id/tvToolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text ="@string/forgetPassword"
+            android:text ="@string/fundRaising"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_small"
             android:textColor="@color/colorWhite"/>
 
     </android.support.v7.widget.Toolbar>
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/imgsize"
-        android:background="@drawable/ic_fund_raising"/>
+        android:background="@drawable/img_layout"
+        android:cropToPadding="true"
+        android:src="@drawable/img_food"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bchjdbsvhdb"
+        android:id="@+id/tvFundrainsingName"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="@dimen/activity_top_login_margin"
+        android:layout_marginTop="@dimen/activity_login_margin"
+        android:text="Fund Raising Name"
         android:gravity="center" />
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFundRaisingDate"
+            android:textColor="@color/cardview_light_background"
+            android:layout_below="@+id/tvFundrainsingName"
+            android:layout_marginTop="@dimen/margin_small" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFundRaisingPlace"
+            android:textColor="@color/cardview_light_background"
+            android:layout_below="@+id/tvFundRaisingDate"
+            android:layout_marginTop="@dimen/margin_small"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFundraisingOrganize"
+            android:textColor="@color/cardview_light_background"
+            android:layout_below="@+id/tvFundRaisingPlace"
+            android:layout_marginTop="@dimen/margin_small"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/tvFundraisingOrganize">
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="@dimen/widthfunraising"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/activity_top_login_margin"
+                android:background="@drawable/fund_raising_button"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:text="@string/fundInfo"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

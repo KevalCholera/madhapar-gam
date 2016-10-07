@@ -10,5 +10,5 @@ public interface PresenterClassSecondInt {
     JSONArray getInterestList();
     JSONArray getNotGoingPersonName();
     JSONArray getNewsData();
-
+    JSONArray getProfileData();
 }
