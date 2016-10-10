@@ -17,6 +17,8 @@ public class Constants {
         public static String BaseUrlForImage = "http://139.59.29.185";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
+        public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
+        public static String NewsFeedUrl = BaseUrl + "newsFeedList/";
         public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
         public static String UserListUrl = BaseUrl + "users/";
         public static String OtpUrl = BaseUrl + "sendOTP/";
@@ -52,6 +54,15 @@ public class Constants {
         public static int SuccessCode = 200;
         public static int OtpVerificationSuccess = 204;
         //public static int SignUpSuccessCode1 = 406;
+    }
+
+    public static class PushConstant {
+        public static final String PushActionNews = "PUSH_TYPE_NEWS";
+        public static final String PushActionEvent = "PUSH_TYPE_EVENT";
+        public static final int NewsFeedPush = 2;
+        public static final int EventPush = 1;
+
+
     }
 
 

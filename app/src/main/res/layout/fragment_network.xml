@@ -12,6 +12,7 @@
         android:padding="@dimen/activity_top_login_margin">
 
         <LinearLayout
+            android:id="@+id/llSearchUser"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_siz_large"
             android:layout_gravity="center_vertical"

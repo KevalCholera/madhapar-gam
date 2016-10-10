@@ -169,7 +169,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/feedback"
             android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="13dp"
             android:focusableInTouchMode="true"
             android:text="bhbhj"/>
         <EditText

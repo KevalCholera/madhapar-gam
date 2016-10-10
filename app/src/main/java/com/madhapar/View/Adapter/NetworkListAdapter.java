@@ -1,30 +1,26 @@
 package com.madhapar.View.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Model.NewsObject;
 import com.madhapar.Util.Constants;
+import com.madhapar.View.NetworkViewInt;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Ronak on 10/5/2016.
@@ -34,6 +30,7 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
     private Context context;
     private UserFilter filter;
     private JSONArray tempArray;
+
 
     public NetworkListAdapter(Context context, JSONArray jsonArray) {
         this.profileArry = jsonArray;
@@ -50,9 +47,7 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Log.e("bind", "holder");
         try {
-            Log.e("mdp", "adapter" + "size" + profileArry.length());
             JSONObject userObj = profileArry.optJSONObject(position);
             String userFirstname = userObj.optString("userFirstName");
             String userLastname = userObj.optString("userLastName");
@@ -67,15 +62,14 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
             holder.tvUserCity.setText(userCity.trim().equalsIgnoreCase("") ? "N/A" : userCity);
             Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + profileArry.optJSONObject(position).optString("userProfilePic")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(holder.ivUserPic);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public int getItemCount() {
-
         return this.profileArry.length();
     }
 
@@ -96,6 +90,7 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
         @BindView(R.id.civUserPic)
         com.madhapar.Util.CircleImageView ivUserPic;
 
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -115,7 +110,8 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
             FilterResults result = new FilterResults();
             if (tempArray != null) {
                 for (int i = 0; i < tempArray.length(); i++) {
-                    if (tempArray.optJSONObject(i).optString("userFirstName").toLowerCase().contains(charSequence.toString().toLowerCase()) || tempArray.optJSONObject(i).optString("userLastName").toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                    String name = tempArray.optJSONObject(i).optString("userFirstName").toLowerCase() + " " + tempArray.optJSONObject(i).optString("userLastName").toLowerCase();
+                    if (name.contains(charSequence.toString().toLowerCase())) {
                         filterdArray.put(tempArray.optJSONObject(i));
                     }
                 }

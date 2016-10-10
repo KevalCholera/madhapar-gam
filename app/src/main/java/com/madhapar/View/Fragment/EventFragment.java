@@ -1,6 +1,9 @@
 package com.madhapar.View.Fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +18,8 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Model.EventCalenderModelInt;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.PushUtil.WakeLocker;
+import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.RecylerViewAdapter;
 import com.madhapar.View.EventListInt;
@@ -64,6 +69,7 @@ public class EventFragment extends BaseFragment implements EventListInt {
                 }
             }
         });
+        getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionEvent));
         return view;
     }
 
@@ -73,9 +79,14 @@ public class EventFragment extends BaseFragment implements EventListInt {
         if (rlEventList.isRefreshing()) {
             rlEventList.setRefreshing(false);
         }
-        recylerViewAdapter = new RecylerViewAdapter(getActivity(), eventArray);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(recylerViewAdapter);
+        if (recylerViewAdapter == null) {
+            recylerViewAdapter = new RecylerViewAdapter(getActivity(), eventArray);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setAdapter(recylerViewAdapter);
+
+        } else {
+            recylerViewAdapter.updateAdapter(eventArray);
+        }
 
     }
 
@@ -87,5 +98,28 @@ public class EventFragment extends BaseFragment implements EventListInt {
         }
         UtilClass.displyMessage(errorMessage, getActivity(), 0);
 
+    }
+
+    public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            WakeLocker.acquire(context);
+            if (presenterClass == null) {
+                presenterClass = new RequestPresenter();
+                presenterClass.getEventList(EventFragment.this);
+            }
+            WakeLocker.release();
+
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        try {
+            getActivity().unregisterReceiver(pushReceiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
     }
 }

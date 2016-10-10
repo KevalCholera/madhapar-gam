@@ -63,6 +63,12 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
         return eventArry.length();
     }
 
+    public void updateAdapter(JSONArray eventArray) {
+        this.eventArry = eventArray;
+        notifyDataSetChanged();
+        Log.e("event", "update adater called");
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvEventName)
         TextView tvEventName;

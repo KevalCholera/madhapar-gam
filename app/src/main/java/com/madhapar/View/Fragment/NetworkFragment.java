@@ -1,11 +1,9 @@
 package com.madhapar.View.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +17,12 @@ import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NetworkListAdapter;
 import com.madhapar.View.NetworkViewInt;
-import com.squareup.picasso.Picasso;
-//import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnFocusChange;
+import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 /**
@@ -42,7 +38,14 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
     RecyclerView rvNetworkList;
     @BindView(R.id.llEmptyUserList)
     LinearLayout llEmptyList;
+    @BindView(R.id.llSearchUser)
+    LinearLayout llSearchUser;
 
+
+    @OnClick(R.id.llSearchUser)
+    void searchClick() {
+        etSearch.requestFocus();
+    }
 
     @OnTextChanged(R.id.etSearch)
     public void search() {
@@ -54,7 +57,6 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
         } else {
             iVsearch.setVisibility(View.VISIBLE);
         }
-
 
     }
 
@@ -96,4 +98,6 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
     public void onFailNetworkListRequest() {
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
     }
+
+
 }

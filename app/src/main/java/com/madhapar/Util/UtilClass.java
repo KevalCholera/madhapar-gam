@@ -102,6 +102,17 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getLikeUpdateUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.LikeUpdateUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+
+    public static String getNewsFeedUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.NewsFeedUrl).buildUpon().build();
+        return builder.toString();
+    }
+
     public static String getUserVerifyUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.UserVerifyUrl).buildUpon().build();
         return builder.toString();

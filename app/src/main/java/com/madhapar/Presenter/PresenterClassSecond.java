@@ -17,6 +17,7 @@ public class PresenterClassSecond implements PresenterClassSecondInt {
     private NotGoinListModel notGoinListModel;
     private NewsFeedModel newsFeedModel;
     private ProfileDataModel profileDataModel;
+
     @Override
     public JSONArray getGoingList() {
         goinListModel = new GoinListModel();
@@ -33,12 +34,6 @@ public class PresenterClassSecond implements PresenterClassSecondInt {
     public JSONArray getNotGoingPersonName() {
         notGoinListModel = new NotGoinListModel();
         return notGoinListModel.getNotGoingList();
-    }
-
-    @Override
-    public JSONArray getNewsData() {
-        newsFeedModel = new NewsFeedModel();
-        return newsFeedModel.getNewsData();
     }
 
     @Override
