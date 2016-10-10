@@ -93,7 +93,9 @@
     <string name="msgCheckInternet">Please check your internet connection</string>
     <string name="msgSomethigWentWrong">Something went wrong please try again later.</string>
     <string name="msgOtpNotMatch">Otp does not match</string>
+    <string name="profile">Profile</string>
 
+    <string name="comment">Comments</string>
 
     <!--manifest-->
     <string name="lableUserVerify">Verify Otp</string>
