@@ -64,147 +64,191 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="vertical">
-
+            android:layout_gravity="center"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/profileName"
-                android:textSize="@dimen/activity_vertical_margin" />
-
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileName" />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileNumver"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileLocation"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileDOB"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileMemberShipNo"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileBloodGroud"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileEmail"
-                android:textSize="@dimen/activity_vertical_margin" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/profileFacebook"
-                android:textSize="@dimen/activity_vertical_margin" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvProfileName"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
         </LinearLayout>
-
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_medium"
-            android:layout_weight="1.2"
-            android:orientation="vertical">
-
-            <EditText
-                android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileNumver"/>
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="@dimen/imgsize"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="@dimen/imgsize"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_marginTop="13dp"
-                android:background="@drawable/feedback"
-                android:focusableInTouchMode="true"
-                android:text="bhbhj" />
+                android:id="@+id/tvProfileMobileNumber"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileLocation"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvProfileLocation"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:text="@string/profileDOB"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvDOB"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:text="@string/profileMemberShipNo"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvMembershipNo"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileBloodGroud"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvProfileBloodGroup"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileEmail"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvProfileEmail"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:gravity="right"
+                android:text="@string/profileFacebook"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvProfileFacebbokId"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_weight="1.3"
+                android:textSize="@dimen/activity_top_login_margin"
+                android:background="@color/colorGrey"/>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
