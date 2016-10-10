@@ -97,7 +97,8 @@
 
     <string name="comment">Comments</string>
     <string name="addComment">Add a comment</string>
-
+    <string name="eventInfo">Event Info</string>
+    <string name="organized">Organized By : </string>
     <!--manifest-->
     <string name="lableUserVerify">Verify Otp</string>
 </resources>

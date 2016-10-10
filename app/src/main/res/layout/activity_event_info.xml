@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.madhapar.View.EventInfoActivity">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbarComment"
@@ -12,17 +12,238 @@
             android:id="@+id/tvToolbarTitleGoing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/comment"
+            android:text="@string/eventInfo"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_small"
             android:textColor="@color/colorWhite"/>
-
     </android.support.v7.widget.Toolbar>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_veiwComment"
+    <ImageView
+        android:id="@+id/ivProfileSmall"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_button_width"
+        android:adjustViewBounds="true"
+        android:fitsSystemWindows="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_food" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEventInfoTitle"
+            android:layout_weight="5"
+            android:textStyle="bold"
+            android:textSize="@dimen/activity_vertical_margin"
+            android:textColor="@color/colorPrimary"
+            android:text="bhbchdbc"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/activity_vertical_margin"
+            android:layout_weight="1"
+            android:id="@+id/btnEventInfoShare"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:background="@drawable/buttonshare"
+            android:layout_marginBottom="@dimen/cardElevation"
+            android:text="@string/share"
+            android:layout_gravity="end"/>
 
-</RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="njnjn"
+        android:id="@+id/tvEventInfoDtaeTime"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/cardElevation" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="njnjn"
+        android:id="@+id/tvEventInfoAddress"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/cardElevation" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/organized"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginTop="@dimen/cardElevation"-->
+            <!--android:layout_marginBottom="@dimen/cardElevation"-->
+            <!--android:layout_marginLeft="@dimen/activity_vertical_margin"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAlignment="center"-->
+            <!--android:id="@+id/tvEventInfoOrganized"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="@dimen/cardElevation"-->
+            <!--android:text="ndncdn"/>-->
+    <!--</LinearLayout>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:id="@+id/tvEventDescription"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:textColor="@color/cardview_dark_background"
+        android:layout_marginTop="@dimen/cardElevation"
+        android:layout_marginBottom="@dimen/cardElevation"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_siz_large"
+        android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/activity_top_login_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/padding_text"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/activity_vertical_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/cardview_default_radius"
+                android:background="@mipmap/ic_event_going"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvGoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/going"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/margin_medium" />
+
+            <TextView
+                android:id="@+id/tvEventInfoGoingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/margin_medium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/padding_text"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/activity_vertical_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/cardview_default_radius"
+                android:gravity="center"
+                android:src="@mipmap/ic_event_interest" />
+
+            <TextView
+                android:id="@+id/tvInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/interest"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/margin_medium" />
+
+            <TextView
+                android:id="@+id/tvEventInfoInterestCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/margin_medium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/padding_text"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/activity_vertical_margin"
+                android:layout_height="@dimen/activity_vertical_margin"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/cardview_default_radius"
+                android:background="@mipmap/ic_event_cantgo"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvNotInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/cantgo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/margin_medium" />
+
+            <TextView
+                android:id="@+id/tvEventInfoNotInterestCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/margin_medium" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

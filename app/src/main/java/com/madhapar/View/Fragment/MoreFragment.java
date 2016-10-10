@@ -15,6 +15,7 @@ import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.CommentsActivity;
+import com.madhapar.View.EventInfoActivity;
 import com.madhapar.View.FeedbackActivity;
 import com.madhapar.View.GoingActivity;
 import com.madhapar.View.LoginActivity;
@@ -68,7 +69,7 @@ public class MoreFragment extends BaseFragment {
     public void tvSignOut() {
         SharedPreferenceUtil.clear();
         SharedPreferenceUtil.save();
-        presenter.changeActivity(getActivity(), CommentsActivity.class, true);
+        presenter.changeActivity(getActivity(), EventInfoActivity.class, true);
     }
 
     @Nullable
