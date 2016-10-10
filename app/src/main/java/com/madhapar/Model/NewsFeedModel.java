@@ -90,6 +90,9 @@ public class NewsFeedModel implements NewsFeedModelInt {
                 newsObject.setNewsLikeCount(newsArray.optJSONObject(i).optString("newsLikes"));
                 newsObject.setNewsId(newsArray.optJSONObject(i).optString("newsId"));
                 newsObject.setNewsDataAndTime(newsArray.optJSONObject(i).optString("newsCreatedDate"));
+                newsObject.setCommented(newsArray.optJSONObject(i).optBoolean("isCommented"));
+                newsObject.setCommented(newsArray.optJSONObject(i).optBoolean("isCommented"));
+                newsObject.setNewsStatusId(newsArray.optJSONObject(i).optString("newsStatusId"));
                 newsList.add(newsObject);
             }
         }

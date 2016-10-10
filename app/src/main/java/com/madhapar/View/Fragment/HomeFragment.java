@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     private RequestPresenter requestPresenter;
     @BindView(R.id.rvNewsList)
     RecyclerView rvNewsList;
+    @BindView(R.id.srlNewsList)
+    SwipeRefreshLayout srlNewsList;
     private NewsListAdapter newsDataAdapter;
     private LinearLayoutManager mLayoutManager;
     public Context mContext;
@@ -55,6 +58,24 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+        srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                if (UtilClass.isInternetAvailabel(getActivity())) {
+                    UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+                    if (requestPresenter == null)
+                        requestPresenter = new RequestPresenter();
+                    requestPresenter.getNewsList(HomeFragment.this);
+                    srlNewsList.setRefreshing(true);
+                } else {
+                    if (srlNewsList.isRefreshing()) {
+                        srlNewsList.setRefreshing(false);
+                    }
+                    UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
+                }
+            }
+        });
         mLayoutManager = new LinearLayoutManager(mContext);
         mContext = this.getActivity();
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionNews));
@@ -66,6 +87,9 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onSuccessNewsList(List<NewsObject> newsList) {
+        if (srlNewsList.isRefreshing()) {
+            srlNewsList.setRefreshing(false);
+        }
         UtilClass.hideProgress();
         if (newsDataAdapter == null) {
             newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager);
@@ -79,12 +103,18 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onFailRequest() {
+        if (srlNewsList.isRefreshing()) {
+            srlNewsList.setRefreshing(false);
+        }
         UtilClass.hideProgress();
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
     }
 
     @Override
     public void onFailResponse(String message) {
+        if (srlNewsList.isRefreshing()) {
+            srlNewsList.setRefreshing(false);
+        }
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, getActivity(), 0);
     }
@@ -92,6 +122,9 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (srlNewsList.isRefreshing()) {
+                srlNewsList.setRefreshing(false);
+            }
             WakeLocker.acquire(context);
             if (requestPresenter == null) {
                 requestPresenter = new RequestPresenter();
@@ -103,6 +136,9 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onDestroy() {
+        if (srlNewsList.isRefreshing()) {
+            srlNewsList.setRefreshing(false);
+        }
         try {
             UtilClass.hideProgress();
             getActivity().unregisterReceiver(pushReceiver);

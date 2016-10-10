@@ -15,6 +15,8 @@ import com.madhapar.Model.NewsObject;
 import com.madhapar.PagerUtil.AutoScrollViewPager;
 import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.Util.UtilClass;
+import com.madhapar.View.HomeViewInt;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,13 +31,14 @@ import butterknife.ButterKnife;
 /**
  * Created by Ronak on 10/7/2016.
  */
-public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyViewHolder> implements NewsLikeCommentUpdateCallback {
+public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyViewHolder> implements NewsLikeCommentUpdateCallback, HomeViewInt {
     Context context;
     List<NewsObject> newsList;
-    static String newsId1;
+    String newsId1;
     private RecyclerView rvNewsList;
     private LinearLayoutManager rvManager;
     private NewsObject.ComparatorClass comparator = new NewsObject.ComparatorClass();
+    private RequestPresenter requestPresenter;
 
     public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager) {
         this.rvNewsList = rvNewsList;
@@ -60,18 +63,29 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         holder.tvNewsLikeCount.setText(newsObj.getNewsLikeCount());
         holder.tvNewsCommentCount.setText(newsObj.getNewsCommentCount());
         holder.tvNewsDateTime.setText(newsObj.getNewsDataAndTime());
+        if (newsObj.isCommented()) {
+            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment_filled);
+        } else {
+            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment);
+        }
+        if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
+            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like);
+        } else {
+            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
+        }
         holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newsId1 = newsObj.getNewsId();
-                new RequestPresenter().updateLikeComment(newsObj.getNewsId(), "1", "hello", NewsListAdapter.this);
+                if (requestPresenter == null)
+                    requestPresenter = new RequestPresenter();
+                requestPresenter.updateLikeComment(newsObj.getNewsId(), "1", "hello", NewsListAdapter.this);
             }
         });
         if (newsObj.getNewsImageArray().length() > 0) {
             holder.AsvNewsPager.setVisibility(View.VISIBLE);
             if (newsObj.getNewsImageArray().length() > 1)
                 holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
-
             NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, newsObj.getNewsImageArray());
             holder.AsvNewsPager.setAdapter(imagePagerAdapter);
             holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
@@ -93,26 +107,62 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
 
     @Override
     public void successfulUpdateLike(NewsObject updatedObj) {
-        comparator.newsId = newsId1;
-        int listIndex = newsList.indexOf(comparator);
-        if (listIndex >= 0) {
-            View view = rvManager.getChildAt(listIndex - rvManager.findFirstVisibleItemPosition());
-            if (view != null) {
-                ImageView ivNewsLike = (ImageView) view.findViewById(R.id.ivNewsLike);
-                ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
+        if (UtilClass.isInternetAvailabel(context)) {
+            UtilClass.showProgress(context, context.getString(R.string.msgPleaseWait));
+            if (requestPresenter == null) {
+                requestPresenter = new RequestPresenter();
             }
+            requestPresenter.getNewsList(this);
+        } else {
+            UtilClass.displyMessage(context.getString(R.string.msgPleaseWait), context, 0);
         }
+
+//        comparator.newsId = newsId1;
+//        int listIndex = newsList.indexOf(comparator);
+//        Log.e("update", "index" + listIndex);
+//        if (listIndex >= 0) {
+//            View view = rvManager.getChildAt(listIndex - rvManager.findFirstVisibleItemPosition());
+//            Log.e("view Index", "view" + (listIndex - rvManager.findFirstVisibleItemPosition()));
+//            if (view != null) {
+//                TextView tv = (TextView) view.findViewById(R.id.tvNewsTitle);
+//                String title = tv.getText().toString();
+//                Log.e("title", "title" + title);
+//                ImageView ivNewsLike = (ImageView) view.findViewById(R.id.ivNewsLike);
+//                ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
+//            }
+//        }
 
     }
 
     @Override
     public void failUpdateResponse(String message) {
-        Log.e("update", "message" + message);
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, context, 0);
     }
 
     @Override
     public void failUpdateRequest() {
-        Log.e("update", "failRequest");
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
+    }
+
+    @Override
+    public void onSuccessNewsList(List<NewsObject> newsList) {
+        UtilClass.hideProgress();
+        updateAdapter(newsList);
+    }
+
+
+    @Override
+    public void onFailRequest() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
+    }
+
+    @Override
+    public void onFailResponse(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, context, 0);
     }
 
 
@@ -135,17 +185,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         AutoScrollViewPager AsvNewsPager;
         @BindView(R.id.CpiNewsPageIndicator)
         CirclePageIndicator CpiNewsPageIndicator;
+        @BindView(R.id.ivNewsComment)
+        ImageView ivNewsComment;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
     }
 
     public void updateAdapter(List<NewsObject> newsList) {
+        UtilClass.hideProgress();
         this.newsList = newsList;
         notifyDataSetChanged();
-        Log.e("adapter", "update");
-
     }
 }

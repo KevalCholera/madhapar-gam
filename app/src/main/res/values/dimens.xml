@@ -31,4 +31,5 @@
     <dimen name="homeViewWidth">1dp</dimen>
     <dimen name="viewPagerHeight">150dp</dimen>
     <dimen name="textNewsTitle">16sp</dimen>
+    <dimen name="newsImageHeight">200dp</dimen>
 </resources>

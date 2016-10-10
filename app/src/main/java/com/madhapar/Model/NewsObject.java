@@ -9,6 +9,26 @@ import org.json.JSONArray;
  */
 
 public class NewsObject {
+    public String getNewsStatusId() {
+        return newsStatusId;
+    }
+
+    public void setNewsStatusId(String newsStatusId) {
+        this.newsStatusId = newsStatusId;
+    }
+
+    public String newsStatusId;
+
+    public boolean isCommented() {
+        return isCommented;
+    }
+
+    public void setCommented(boolean commented) {
+        isCommented = commented;
+    }
+
+    public boolean isCommented;
+
     public String getNewsTitle() {
         return newsTitle;
     }
@@ -55,13 +75,6 @@ public class NewsObject {
     public String newsLikeCount;
     public String newsCommentCount;
 
-    public String getNewsDataAndTime() {
-        return newsDataAndTime;
-    }
-
-    public void setNewsDataAndTime(String newsDataAndTime) {
-        this.newsDataAndTime = newsDataAndTime;
-    }
 
     public String newsDataAndTime;
 
@@ -81,6 +94,14 @@ public class NewsObject {
 
     public void setNewsId(String newsId) {
         this.newsId = newsId;
+    }
+
+    public String getNewsDataAndTime() {
+        return newsDataAndTime;
+    }
+
+    public void setNewsDataAndTime(String newsDataAndTime) {
+        this.newsDataAndTime = newsDataAndTime;
     }
 
     public String newsId;

@@ -6,179 +6,205 @@
     android:background="@color/cardview_light_background"
     android:orientation="vertical"
     tools:context="com.madhapar.View.ProfileActivity">
-    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/tvToolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text ="@string/fundRaising"
-            android:textStyle="bold"
+            android:text="@string/fundRaising"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorWhite"/>
+            android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_gravity="center"
-    android:layout_height="wrap_content">
-    <ImageView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_button_width"
-        android:id="@+id/ivProfileSmall"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_food"
-        android:adjustViewBounds="true"
-        android:fitsSystemWindows="true"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_button_width"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/alert"
-        android:src="@drawable/honey"
-        android:id="@+id/circleView" />
-    </LinearLayout>
-    <ImageView
-        android:layout_width="@dimen/activity_login_margin"
-        android:layout_height="@dimen/activity_rightleft_login"
-        android:src="@drawable/ic_home"
-        android:layout_marginTop="@dimen/activity_rightleft_login"
-        android:layout_marginLeft="220dp"/>
-</RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivProfileSmall"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_button_width"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_food" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_button_width"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/alert"
+                android:src="@drawable/honey" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/activity_login_margin"
+            android:layout_height="@dimen/activity_rightleft_login"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="@dimen/activity_rightleft_login"
+            android:src="@drawable/ic_home" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="right"
-        android:layout_weight="1">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/activity_vertical_margin"
-        android:text="@string/profileName"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileNumver"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileLocation"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileDOB"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileMemberShipNo"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileBloodGroud"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileEmail"
-            android:textSize="@dimen/activity_vertical_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/profileFacebook"
-            android:textSize="@dimen/activity_vertical_margin"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_weight="1.2">
-        <EditText
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/profileName"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileNumver"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileLocation"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileDOB"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileMemberShipNo"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileBloodGroud"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileEmail"
+                android:textSize="@dimen/activity_vertical_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/profileFacebook"
+                android:textSize="@dimen/activity_vertical_margin" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginTop="@dimen/imgsize"
-            android:layout_marginRight="@dimen/margin_small"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="@dimen/imgsize"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="14dp"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="13dp"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="13dp"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/feedback"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginTop="13dp"
-            android:focusableInTouchMode="true"
-            android:text="bhbhj"/>
-    </LinearLayout>
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_weight="1.2"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/imgsize"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/imgsize"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/feedback"
+                android:focusableInTouchMode="true"
+                android:text="bhbhj" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
