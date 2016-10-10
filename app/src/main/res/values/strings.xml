@@ -96,6 +96,7 @@
     <string name="profile">Profile</string>
 
     <string name="comment">Comments</string>
+    <string name="addComment">Add a comment</string>
 
     <!--manifest-->
     <string name="lableUserVerify">Verify Otp</string>
