@@ -1,76 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:orientation="horizontal">
-    <com.madhapar.Util.CircleImageView
-        android:id="@+id/civUserPic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_user_placeholder" />
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvCommentName"
-            android:layout_marginLeft="@dimen/margin_medium"
-            android:text="bjjj"
-            android:textSize="@dimen/activity_vertical_margin"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvComment"
-            android:text="bchdbh"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:textSize="@dimen/activity_vertical_margin"
-            android:textColor="@color/colorPrimary" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/activity_vertical_margin">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvCommentTime"
-        android:text="ncjdenjnjedbncf"/>
-    </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cardview_default_elevation"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@color/colorGrey" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_gravity="bottom">
-        <ImageView
+        android:padding="@dimen/margin_small">
+
+        <com.madhapar.Util.CircleImageView
+            android:id="@+id/civUserPic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_user_placeholder" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/addComment" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCommentName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="bjjj"
+                    android:textSize="@dimen/TextCommentListBigText"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="bchdbh"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/TextCommentList" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCommentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="ncjdenjnjedbncf"
+                android:textSize="@dimen/TextCommentList" />
+        </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/commenViewHeight"
+        android:background="@color/colorNewsDetailView" />
+
 </LinearLayout>

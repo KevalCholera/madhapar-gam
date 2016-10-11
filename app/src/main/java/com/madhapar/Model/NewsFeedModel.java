@@ -80,13 +80,12 @@ public class NewsFeedModel implements NewsFeedModelInt {
             for (int i = 0; i < newsArray.length(); i++) {
                 NewsObject newsObject = new NewsObject();
                 newsObject.setNewsTitle(newsArray.optJSONObject(i).optString("newsTitle"));
-
                 JSONObject location = newsArray.optJSONObject(i).optJSONObject("newsLocation");
                 if (location != null)
                     newsObject.setNewsCity(location.optString("locationName"));
                 newsObject.setNewsDescription(newsArray.optJSONObject(i).optString("newsDescription"));
                 newsObject.setNewsCommentCount(newsArray.optJSONObject(i).optString("newsComments"));
-                newsObject.setNewsImageArray(newsArray.optJSONObject(i).optJSONArray("newsImages"));
+                newsObject.setNewsImageArray(newsArray.optJSONObject(i).optJSONArray("newsImages").toString());
                 newsObject.setNewsLikeCount(newsArray.optJSONObject(i).optString("newsLikes"));
                 newsObject.setNewsId(newsArray.optJSONObject(i).optString("newsId"));
                 newsObject.setNewsDataAndTime(newsArray.optJSONObject(i).optString("newsCreatedDate"));
@@ -112,8 +111,10 @@ public class NewsFeedModel implements NewsFeedModelInt {
                         if (likeObj != null) {
                             if (likeObj.optInt("status") == Constants.ResponseCode.SignUpSuccessCode) {
                                 NewsObject newsObject = new NewsObject();
-                                newsObject.setNewsTitle("kdsvjkdfvbdk");
-                                newsLikeCommentUpdateCallback.onSuccessLikeComment(newsObject);
+
+                                newsLikeCommentUpdateCallback.onSuccessLikeComment();
+                            } else {
+                                newsLikeCommentUpdateCallback.onFailResponseNewsLikeComment(likeObj.optString("message"));
                             }
                         }
                     } catch (JSONException e) {
@@ -152,4 +153,152 @@ public class NewsFeedModel implements NewsFeedModelInt {
 
 
     }
+
+    @Override
+    public void removeNewsLike(String newsStatusId, final NewsLikeCommentUpdate updateCallback) {
+        String tag = "removeLike";
+        StringRequest removeLikeRequest = new StringRequest(Request.Method.DELETE, UtilClass.getRemoveLikeUrl(newsStatusId), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Log.e("remove", "response" + response);
+                    JSONObject removeObj = new JSONObject(response);
+                    if (removeObj != null) {
+                        if (removeObj.optInt("status") == Constants.ResponseCode.RemoveLikeSuccess) {
+                            updateCallback.onSuccessLikeComment();
+                        } else {
+                            updateCallback.onFailResponseNewsLikeComment(removeObj.optString("message"));
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                updateCallback.onFailRequestNewsLikeComment();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        removeLikeRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        MadhaparGamApp.getAppInstance().addToRequestQueue(removeLikeRequest, tag);
+    }
+
+    @Override
+    public void getNewsDetail(String newsId, final NewsDetailCallback newsDetailCallback) {
+        String tag = "newsDetail";
+        StringRequest newsDetailRequest = new StringRequest(Request.Method.GET, UtilClass.getNewsDetailUrl(newsId), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    try {
+                        JSONObject newsDataObj = new JSONObject(response);
+                        if (newsDataObj != null) {
+                            Log.e("newsDetail", "response" + response);
+                            if (newsDataObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                                JSONObject newsResponseObj = newsDataObj.optJSONObject("response");
+                                sendNewsData(newsResponseObj, newsDetailCallback);
+                            } else {
+                                newsDetailCallback.onFailNewsDetailResponse(newsDataObj.optString("message"));
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                newsDetailCallback.onFailNewsDetailRequest();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        newsDetailRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(newsDetailRequest, tag);
+    }
+
+
+    private void sendNewsData(JSONObject newsJsonObj, NewsDetailCallback newsDetailCallback) {
+        NewsObject newsObject = new NewsObject();
+        newsObject.setNewsId(newsJsonObj.optString("newsId"));
+        newsObject.setNewsTitle(newsJsonObj.optString("newsTitle"));
+        newsObject.setNewsDescription(newsJsonObj.optString("newsDescription"));
+        newsObject.setNewsDataAndTime(newsJsonObj.optString("newsCreatedDate"));
+        newsObject.setNewsImageArray(newsJsonObj.optJSONArray("newsImages").toString());
+        newsObject.setNewsStatusId(newsJsonObj.optString("newsStatusId"));
+        JSONObject locationObj = newsJsonObj.optJSONObject("newsLocation");
+        if (locationObj != null)
+            newsObject.setNewsCity(locationObj.optString("locationName"));
+        newsObject.setNewsLikeCount(newsJsonObj.optString("newsLikes"));
+        newsObject.setNewsCommentCount(newsJsonObj.optString("newsComments"));
+        newsObject.setCommented(newsJsonObj.optBoolean("isCommented"));
+        newsDetailCallback.onSuccessNewsDetail(newsObject);
+    }
+
+
+    @Override
+    public void getCommentList(String newsId, String newsStausId, final CommentListCallback commentListCallback) {
+        String tag = "commentList";
+        StringRequest commentRequest = new StringRequest(Request.Method.GET, UtilClass.getCommentListUrk(newsId, newsStausId), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    try {
+                        JSONObject commentObj = new JSONObject(response);
+                        if (commentObj != null) {
+                            Log.e("******", "commentResponse" + response);
+                            if (commentObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                                commentListCallback.onSuccessCommentList(commentObj.optJSONArray("response"));
+                            } else {
+                                commentListCallback.onFailCommentResponse(commentObj.optString("message"));
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                commentListCallback.onFailCommentListRequest();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        commentRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(commentRequest, tag);
+    }
+
+
 }

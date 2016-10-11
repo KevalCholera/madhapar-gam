@@ -34,12 +34,4 @@
     <dimen name="newsImageHeight">200dp</dimen>
     <dimen name="textImageDetailDescription">16sp</dimen>
     <dimen name="viewHeightNewsDetail">1dp</dimen>
-
-
-    <!--Comment Screen-->
-    <dimen name="TypeCommentHeight">50dp</dimen>
-    <dimen name="TextCommentList">14sp</dimen>
-    <dimen name="TextCommentListBigText">16sp</dimen>
-    <dimen name="commenViewHeight">0.5dp</dimen>
-    <dimen name="CommentPaddingLeft">2dp</dimen>
 </resources>

@@ -48,6 +48,8 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:1.6.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:1.6.0'
     compile "com.squareup.picasso:picasso:2.4.0"
+    compile 'com.hudomju:swipe-to-dismiss-undo:1.0'
+
 
 
 }

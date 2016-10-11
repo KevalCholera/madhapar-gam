@@ -101,4 +101,12 @@
     <string name="organized">Organized By : </string>
     <!--manifest-->
     <string name="lableUserVerify">Verify Otp</string>
+    <string name="lableNewsDetailActivity">News</string>
+    <string name="lableNewsCommentActivity">Comments</string>
+
+    <!--NewsData-->
+
+    <!--Comment Screen-->
+    <string name="SendComment">Send</string>
+    <string name="hintAddComment">Add a comment</string>
 </resources>

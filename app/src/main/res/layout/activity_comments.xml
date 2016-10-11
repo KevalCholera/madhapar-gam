@@ -1,28 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.madhapar.View.CommentsActivity">
-    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context="com.madhapar.View.NewsCommentActivity">
+
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
+
         <TextView
             android:id="@+id/tvToolbarTitleGoing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/comment"
-            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorWhite"/>
+            android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_veiwComment"
+        android:id="@+id/rvCommentList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/llTypeComment"
+        android:layout_below="@+id/toolbarComment"
         android:scrollbars="vertical" />
-</LinearLayout>
+
+    <View
+        android:id="@+id/viewCommentList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/CommentPaddingLeft"
+        android:layout_below="@+id/rvCommentList"
+        android:background="@color/colorNewsDetailView" />
+
+    <LinearLayout
+        android:id="@+id/llTypeComment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/TypeCommentHeight"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/etCommentText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/hintAddComment"
+            android:paddingLeft="@dimen/CommentPaddingLeft"
+            android:text="fjsdf"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tvSendComment"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:text="@string/SendComment"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
+import com.madhapar.View.NewsDetailActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -35,6 +36,7 @@ public class NewsImagePagerAdapter extends PagerAdapter {
 
     public NewsImagePagerAdapter(Context context, JSONArray imageArray) {
         this.context = context;
+
         this.imageArray = imageArray;
     }
 
@@ -53,35 +55,54 @@ public class NewsImagePagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.element_news_pager_image, container, false);
-        imageView = (ImageView) view.findViewById(R.id.ivNewsImagePager);
+        if (context instanceof NewsDetailActivity) {
+            imageView = (ImageView) view.findViewById(R.id.ivNewsDetailImagePager);
+        } else {
+            imageView = (ImageView) view.findViewById(R.id.ivNewsImagePager);
+        }
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pbImageLoading);
 
-        target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                progressBar.setVisibility(View.GONE);
-                imageView.setVisibility(View.VISIBLE);
-                Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    imageView.setBackground(drawable);
-                } else {
-                    imageView.setBackgroundDrawable(drawable);
+        target = new
+
+                Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        progressBar.setVisibility(View.GONE);
+                        imageView.setVisibility(View.VISIBLE);
+                        Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            imageView.setBackground(drawable);
+                        } else {
+                            imageView.setBackgroundDrawable(drawable);
+                        }
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        Log.e("onBitmap", "fail");
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        progressBar.setVisibility(View.VISIBLE);
+
+                    }
                 }
-            }
 
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-                Log.e("onBitmap", "fail");
-                progressBar.setVisibility(View.GONE);
-            }
+        ;
+        Picasso.with(context).
 
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                progressBar.setVisibility(View.VISIBLE);
+                load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position)
 
-            }
-        };
-        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("newsImg")).into(target);
+                        .
+
+                                optString("newsImg")
+
+                ).
+
+                into(target);
+
         container.addView(view);
         return view;
     }

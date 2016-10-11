@@ -12,6 +12,7 @@
 
 
     <LinearLayout
+        android:id="@+id/llNewsDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/margin_medium"
+            android:padding="@dimen/smallPadding"
             android:visibility="gone"
             app:fillColor="@color/colorPrimary"
             app:radius="5dp"

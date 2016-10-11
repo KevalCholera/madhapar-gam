@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventInfoActivity extends AppCompatActivity implements EventInfoInt {
+public class EventInfoActivity extends AppCompatActivity {
 //    @BindView(R.id.tvEventInfoTitle)
 //    TextView tvEventInfoTitle;
     @BindView(R.id.tvEventInfoDtaeTime)
@@ -43,13 +43,6 @@ public class EventInfoActivity extends AppCompatActivity implements EventInfoInt
         JSONObject eventInfo=presenter.getEventIndo();
         if(eventInfo!=null);
         Log.i("Event Title",eventInfo.optString("EventInfoName"));
-
-
-
     }
 
-    @Override
-    public void onSuccessJsonArry(JSONArray jsonArray) {
-
-    }
 }

@@ -19,7 +19,7 @@ public interface NewsFeedModelInt {
     }
 
     interface NewsLikeCommentUpdate {
-        void onSuccessLikeComment(NewsObject newsObject);
+        void onSuccessLikeComment();
 
         void onFailResponseNewsLikeComment(String message);
 
@@ -27,7 +27,31 @@ public interface NewsFeedModelInt {
     }
 
 
+    interface NewsDetailCallback {
+        void onSuccessNewsDetail(NewsObject newsObject);
+
+        void onFailNewsDetailRequest();
+
+        void onFailNewsDetailResponse(String message);
+    }
+
+    interface CommentListCallback {
+        void onSuccessCommentList(JSONArray commentList);
+
+        void onFailCommentListRequest();
+
+        void onFailCommentResponse(String message);
+    }
+
+
     void getNewsData(NewsListCallback newsListCallback);
 
     void updateNewsLikeComment(String newsId, String newsStatus, String newsComment, NewsLikeCommentUpdate updateCallback);
+
+    void removeNewsLike(String newsStatusId, NewsLikeCommentUpdate updateCallback);
+
+    void getNewsDetail(String newsId, NewsDetailCallback newsDetailCallback);
+
+    void getCommentList(String newsId, String newsStausId, CommentListCallback commentListCallback);
+
 }

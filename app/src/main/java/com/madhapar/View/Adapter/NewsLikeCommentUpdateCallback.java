@@ -9,7 +9,7 @@ import org.json.JSONArray;
  */
 
 public interface NewsLikeCommentUpdateCallback {
-    void successfulUpdateLike(NewsObject updatedObj);
+    void successfulUpdateLike();
 
     void failUpdateResponse(String message);
 

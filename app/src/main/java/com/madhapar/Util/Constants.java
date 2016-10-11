@@ -10,6 +10,8 @@ public class Constants {
         public static final int InterestedPersonName = 2;
         public static final int NotGoingPersonName = 3;
         public static String Check = "check";
+        public static final int ViewPagerInterval = 2000;
+
     }
 
     public static class RequestConstants {
@@ -18,13 +20,16 @@ public class Constants {
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
+        public static String CommentLstUrl = BaseUrl + "newsStatusList/";
         public static String NewsFeedUrl = BaseUrl + "newsFeedList/";
         public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
         public static String UserListUrl = BaseUrl + "users/";
         public static String OtpUrl = BaseUrl + "sendOTP/";
         public static String VerifyOtpUrl = BaseUrl + "verifyOTP/";
         public static String ChangePasswordUrl = BaseUrl + "resetPassword/";
+        public static String RemoveLikeUrl = BaseUrl + "newsStatusDetail/";
         public static String SignupUrl = BaseUrl + "register/";
+        public static String NewsDetailUrl = BaseUrl + "newsDetail/";
         public static String HeaderPostfix = "JWT ";
         public static String DefaultToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjkxOTQwODU4MDgwMSIsInVzZXJNb2JpbGVObyI6IjkxOTQwODU4MDgwMSIsInVzZXJfaWQiOjEsImVtYWlsIjoia2FyYW5AZ21haWwuY29tIiwiZXhwIjoxNDg1NjUzMTIxfQ.nPGJW1rtAl0r9wE31mjjraFj8QHkCZiralX-1jaQs2g";
     }
@@ -53,6 +58,7 @@ public class Constants {
         public static int SignUpSuccessCode = 201;
         public static int SuccessCode = 200;
         public static int OtpVerificationSuccess = 204;
+        public static int RemoveLikeSuccess = 204;
         //public static int SignUpSuccessCode1 = 406;
     }
 

@@ -107,6 +107,17 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getCommentListUrk(String newsId, String newsStatusId) {
+        Uri builder = Uri.parse(Constants.RequestConstants.CommentLstUrl + newsId + "/" + newsStatusId + "/").buildUpon().build();
+        return builder.toString();
+    }
+
+
+    public static String getNewsDetailUrl(String newsId) {
+        Uri uriBuilder = Uri.parse(Constants.RequestConstants.NewsDetailUrl + newsId + "/").buildUpon().build();
+        return uriBuilder.toString();
+    }
+
 
     public static String getNewsFeedUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.NewsFeedUrl).buildUpon().build();
@@ -139,6 +150,10 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getRemoveLikeUrl(String newsStatusId) {
+        Uri builder = Uri.parse(Constants.RequestConstants.RemoveLikeUrl + newsStatusId + "/").buildUpon().build();
+        return builder.toString();
+    }
 
     public static boolean isInternetAvailabel(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -189,5 +204,6 @@ public class UtilClass {
         return
                 (keypadHeight > screenHeight * 0.15);
     }
+
 
 }

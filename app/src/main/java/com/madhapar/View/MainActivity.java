@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
     @BindView(R.id.lvDrawerMain)
     ListView lvDrawerMain;
     private MainDrawerListAdapter mainDrawerListAdapter;
-
     private ActionBarDrawerToggle drawerToggle;
 
     @Override

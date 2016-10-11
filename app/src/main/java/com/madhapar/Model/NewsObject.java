@@ -4,11 +4,13 @@ import com.madhapar.View.Adapter.NewsListAdapter;
 
 import org.json.JSONArray;
 
+import java.io.Serializable;
+
 /**
  * Created by smartsense on 08/10/16.
  */
 
-public class NewsObject {
+public class NewsObject implements Serializable {
     public String getNewsStatusId() {
         return newsStatusId;
     }
@@ -78,15 +80,15 @@ public class NewsObject {
 
     public String newsDataAndTime;
 
-    public JSONArray getNewsImageArray() {
+    public String getNewsImageArray() {
         return newsImageArray;
     }
 
-    public void setNewsImageArray(JSONArray newsImageArray) {
+    public void setNewsImageArray(String newsImageArray) {
         this.newsImageArray = newsImageArray;
     }
 
-    public JSONArray newsImageArray;
+    public String newsImageArray;
 
     public String getNewsId() {
         return newsId;
