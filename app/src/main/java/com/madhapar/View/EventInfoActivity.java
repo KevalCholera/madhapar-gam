@@ -16,8 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EventInfoActivity extends AppCompatActivity {
-//    @BindView(R.id.tvEventInfoTitle)
-//    TextView tvEventInfoTitle;
+    @BindView(R.id.tvEventInfoTitle)
+    TextView tvEventInfoTitle;
     @BindView(R.id.tvEventInfoDtaeTime)
     TextView tvEventInfoDateTime;
     @BindView(R.id.tvEventInfoAddress)
@@ -30,6 +30,8 @@ public class EventInfoActivity extends AppCompatActivity {
     TextView tvEventInfoInterestCount;
     @BindView(R.id.tvEventInfoNotInterestCount)
     TextView tvEventInfoNotInterestedCount;
+    @BindView(R.id.tvEventInfoOrganized)
+    TextView tvEventOrganized;
     public JSONArray eventInfoArry;
     private Context context;
     PresenterClassSecond presenter;
@@ -43,6 +45,15 @@ public class EventInfoActivity extends AppCompatActivity {
         JSONObject eventInfo=presenter.getEventIndo();
         if(eventInfo!=null);
         Log.i("Event Title",eventInfo.optString("EventInfoName"));
+        tvEventInfoTitle.setText(eventInfo.optString("EventInfoName"));
+        tvEventInfoDateTime.setText(eventInfo.optString("EventInfodateTime"));
+        tvEventInfoAddress.setText(eventInfo.optString("EventInfoAddress"));
+        tvEventInfoDescription.setText(eventInfo.optString("EventDescription"));
+        tvEventOrganized.setText(eventInfo.optString("OrganizedBy"));
+        tvEventInfoGoingCount.setText(eventInfo.optString("EventIngoGoing"));
+        tvEventInfoInterestCount.setText(eventInfo.optString("EventIngoInterested"));
+        tvEventInfoNotInterestedCount.setText(eventInfo.optString("EventIngocantgo"));
+
     }
 
 }

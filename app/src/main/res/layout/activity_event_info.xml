@@ -21,10 +21,8 @@
         android:id="@+id/ivProfileSmall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_button_width"
-        android:adjustViewBounds="true"
-        android:fitsSystemWindows="true"
         android:scaleType="fitXY"
-        android:src="@drawable/img_food" />
+        android:src="@drawable/ic_fund_raising" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,9 +35,9 @@
             android:id="@+id/tvEventInfoTitle"
             android:layout_weight="5"
             android:textStyle="bold"
+            android:inputType="text"
             android:textSize="@dimen/activity_vertical_margin"
-            android:textColor="@color/colorPrimary"
-            android:text="bhbchdbc"/>
+            android:textColor="@color/colorPrimary" />
         <Button
             android:layout_width="0dp"
             android:layout_height="@dimen/activity_vertical_margin"
@@ -48,8 +46,7 @@
             android:layout_marginRight="@dimen/margin_medium"
             android:background="@drawable/buttonshare"
             android:layout_marginBottom="@dimen/cardElevation"
-            android:text="@string/share"
-            android:layout_gravity="end"/>
+            android:text="@string/share" />
 
     </LinearLayout>
     <View
@@ -58,9 +55,8 @@
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="njnjn"
         android:id="@+id/tvEventInfoDtaeTime"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/cardElevation" />
@@ -70,9 +66,8 @@
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="njnjn"
         android:id="@+id/tvEventInfoAddress"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/cardElevation" />
@@ -81,28 +76,27 @@
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:orientation="horizontal">-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/organized"-->
-            <!--android:textStyle="bold"-->
-            <!--android:layout_marginTop="@dimen/cardElevation"-->
-            <!--android:layout_marginBottom="@dimen/cardElevation"-->
-            <!--android:layout_marginLeft="@dimen/activity_vertical_margin"/>-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAlignment="center"-->
-            <!--android:id="@+id/tvEventInfoOrganized"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="@dimen/cardElevation"-->
-            <!--android:text="ndncdn"/>-->
-    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/organized"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/cardElevation"
+            android:layout_marginBottom="@dimen/cardElevation"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:id="@+id/tvEventInfoOrganized"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/cardElevation" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"

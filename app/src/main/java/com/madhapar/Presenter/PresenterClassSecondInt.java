@@ -17,5 +17,4 @@ public interface PresenterClassSecondInt {
 
     JSONArray getComments();
 
-    JSONObject getEventInfo();
 }

@@ -55,15 +55,8 @@ public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoMo
     }
 
     @Override
-    public JSONObject getEventInfo() {
-
-        return eventInfoModel.getEventIndo();
-    }
-
-
-    @Override
     public JSONObject getEventIndo() {
         eventInfoModel = new EventInfoModel();
         return  eventInfoModel.getEventIndo();
-            }
+    }
 }

@@ -91,7 +91,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        <activity
+            android:name="com.madhapar.View.EventInfoActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.madhapar.View.ProfileActivity"></activity>
 
         <receiver
