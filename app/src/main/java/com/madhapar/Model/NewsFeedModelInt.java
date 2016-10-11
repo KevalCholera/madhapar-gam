@@ -3,6 +3,7 @@ package com.madhapar.Model;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -19,13 +20,12 @@ public interface NewsFeedModelInt {
     }
 
     interface NewsLikeCommentUpdate {
-        void onSuccessLikeComment();
+        void onSuccessLikeComment(JSONObject updateObject);
 
         void onFailResponseNewsLikeComment(String message);
 
         void onFailRequestNewsLikeComment();
     }
-
 
     interface NewsDetailCallback {
         void onSuccessNewsDetail(NewsObject newsObject);
@@ -53,5 +53,7 @@ public interface NewsFeedModelInt {
     void getNewsDetail(String newsId, NewsDetailCallback newsDetailCallback);
 
     void getCommentList(String newsId, String newsStausId, CommentListCallback commentListCallback);
+
+    void updateComment(String newsId, String newsStatus, String newsStatusId, String newsComment, NewsDetailCallback updateCallback);
 
 }

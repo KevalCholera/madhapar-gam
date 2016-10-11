@@ -17,6 +17,7 @@ import com.madhapar.View.NetworkViewInt;
 import com.madhapar.View.NewsDetailViewInt;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -126,8 +127,8 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
 
 
     @Override
-    public void onSuccessLikeComment() {
-        likeUpdateCallback.successfulUpdateLike();
+    public void onSuccessLikeComment(JSONObject updateObj) {
+        likeUpdateCallback.successfulUpdateLike(updateObj);
     }
 
     @Override
@@ -177,9 +178,10 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
         this.commentListCallback = commentCallback;
         if (newsModel == null) {
             newsModel = new NewsFeedModel();
-            newsModel.getCommentList(newsId, newsStatusId, this);
         }
+        newsModel.getCommentList(newsId, newsStatusId, this);
     }
+
 
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
@@ -195,5 +197,19 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
     public void onFailCommentResponse(String message) {
         commentListCallback.onFailResponse(message);
     }
+
+
+    //_______Update News Comment______//
+
+    @Override
+    public void updateComment(String newsId, String newsStatusId, String newsComment, String newsStatus, NewsLikeCommentUpdateCallback callback) {
+        likeUpdateCallback = callback;
+        if (newsModel == null) {
+            newsModel = new NewsFeedModel();
+        }
+        newsModel.updateComment(newsId, newsStatus, newsStatusId, newsComment, this);
+    }
+
+
 }
 

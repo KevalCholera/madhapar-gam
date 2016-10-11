@@ -42,4 +42,9 @@
     <dimen name="TextCommentListBigText">16sp</dimen>
     <dimen name="commenViewHeight">0.5dp</dimen>
     <dimen name="CommentPaddingLeft">2dp</dimen>
+    <dimen name="CommentUserImage">70dp</dimen>
+    <dimen name="CommentElementHeight">80dp</dimen>
+    <dimen name="CommentOverLayHeight">80.5dp</dimen>
+    <dimen name="CommentOverlayImage">30dp</dimen>
+
 </resources>

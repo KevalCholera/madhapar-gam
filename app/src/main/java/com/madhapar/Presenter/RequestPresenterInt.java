@@ -25,4 +25,8 @@ public interface RequestPresenterInt {
     void getNewsDetail(String newsId, NewsDetailViewInt newsDetailCallback);
 
     void getNewsCommentList(String newsId, String newsStatusId, CommentListCallback commentCallback);
+
+    void updateComment(String newsId, String newsStatus, String newsComment, String newsStatusId, NewsLikeCommentUpdateCallback callback);
+
+
 }

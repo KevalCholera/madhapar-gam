@@ -58,7 +58,7 @@
             android:background="@android:color/transparent"
             android:hint="@string/hintAddComment"
             android:paddingLeft="@dimen/CommentPaddingLeft"
-            android:text="fjsdf"
+            android:text=""
             android:textColor="@color/colorBlack" />
 
         <TextView

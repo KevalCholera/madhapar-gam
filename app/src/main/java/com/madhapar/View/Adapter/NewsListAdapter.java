@@ -2,6 +2,7 @@ package com.madhapar.View.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -78,9 +79,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         } else {
             holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
         }
-        holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
+        holder.clNewsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.e("onClick", "click");
                 Intent intent = new Intent(context, NewsDetailActivity.class);
                 intent.putExtra("NewsData", newsObj);
                 context.startActivity(intent);
@@ -115,8 +117,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
                                                 }
 
         );
-
-
         try {
             JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
             if (imageArray != null && imageArray.length() > 0) {
@@ -145,7 +145,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     }
 
     @Override
-    public void successfulUpdateLike() {
+    public void successfulUpdateLike(JSONObject updateObj) {
         if (UtilClass.isInternetAvailabel(context)) {
             UtilClass.showProgress(context, context.getString(R.string.msgPleaseWait));
             if (requestPresenter == null) {
@@ -226,8 +226,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         CirclePageIndicator CpiNewsPageIndicator;
         @BindView(R.id.ivNewsComment)
         ImageView ivNewsComment;
-        @BindView(R.id.llNewsDetail)
-        LinearLayout llNewsDetail;
+        @BindView(R.id.clNewsCard)
+        CardView clNewsCard;
+        @BindView(R.id.llNewsUpdate)
+        LinearLayout llNewsUpdate;
 
         public MyViewHolder(View itemView) {
             super(itemView);

@@ -109,4 +109,5 @@
     <!--Comment Screen-->
     <string name="SendComment">Send</string>
     <string name="hintAddComment">Add a comment</string>
+    <string name="msgCommentAdded">Comment added</string>
 </resources>

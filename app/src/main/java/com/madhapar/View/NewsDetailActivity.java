@@ -22,6 +22,7 @@ import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,7 +105,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     }
 
     @Override
-    public void successfulUpdateLike() {
+    public void successfulUpdateLike(JSONObject updateObj) {
         UtilClass.hideProgress();
         if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) ;
         // updateView();

@@ -111,8 +111,7 @@ public class NewsFeedModel implements NewsFeedModelInt {
                         if (likeObj != null) {
                             if (likeObj.optInt("status") == Constants.ResponseCode.SignUpSuccessCode) {
                                 NewsObject newsObject = new NewsObject();
-
-                                newsLikeCommentUpdateCallback.onSuccessLikeComment();
+                                newsLikeCommentUpdateCallback.onSuccessLikeComment(likeObj);
                             } else {
                                 newsLikeCommentUpdateCallback.onFailResponseNewsLikeComment(likeObj.optString("message"));
                             }
@@ -165,7 +164,7 @@ public class NewsFeedModel implements NewsFeedModelInt {
                     JSONObject removeObj = new JSONObject(response);
                     if (removeObj != null) {
                         if (removeObj.optInt("status") == Constants.ResponseCode.RemoveLikeSuccess) {
-                            updateCallback.onSuccessLikeComment();
+                            updateCallback.onSuccessLikeComment(removeObj);
                         } else {
                             updateCallback.onFailResponseNewsLikeComment(removeObj.optString("message"));
                         }
@@ -298,6 +297,11 @@ public class NewsFeedModel implements NewsFeedModelInt {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MadhaparGamApp.getAppInstance().addToRequestQueue(commentRequest, tag);
+    }
+
+    @Override
+    public void updateComment(String newsId, String newsStatus, String newsStatusId, String newsComment, NewsDetailCallback updateCallback) {
+        updateCallback.onSuccessNewsDetail(null);
     }
 
 

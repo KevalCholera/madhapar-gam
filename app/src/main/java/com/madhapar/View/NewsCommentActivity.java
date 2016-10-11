@@ -1,7 +1,6 @@
 package com.madhapar.View;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,28 +9,25 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.daimajia.swipe.implments.SwipeItemAdapterMangerImpl;
+import com.daimajia.swipe.util.Attributes;
 import com.example.smartsense.newproject.R;
-import com.hudomju.swipe.OnItemClickListener;
-import com.hudomju.swipe.SwipeToDismissTouchListener;
-import com.hudomju.swipe.SwipeableItemClickListener;
-import com.hudomju.swipe.adapter.RecyclerViewAdapter;
-import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.CommentsListAdapter;
+import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback {
+public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
     @BindView(R.id.toolbarComment)
@@ -41,9 +37,14 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     @BindView(R.id.tvSendComment)
     TextView tvSendComment;
 
+
     @OnClick(R.id.tvSendComment)
     public void sendComment() {
-
+        if (!etCommentText.getText().toString().equalsIgnoreCase("")) {
+            if (presenterClass == null)
+                presenterClass = new RequestPresenter();
+            presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
+        }
     }
 
     CommentsListAdapter commentAdapter;
@@ -63,8 +64,6 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         }
 
         mLayoutManager = new LinearLayoutManager(this);
-
-
     }
 
 
@@ -88,10 +87,16 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
-        commentAdapter = new CommentsListAdapter(this, commentList);
-        rvCommentList.setLayoutManager(mLayoutManager);
-        rvCommentList.setAdapter(commentAdapter);
-
+        if (commentAdapter == null) {
+            commentAdapter = new CommentsListAdapter(this, commentList,getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"),etCommentText,tvSendComment);
+            rvCommentList.setLayoutManager(mLayoutManager);
+            commentAdapter.setMode(Attributes.Mode.Single);
+            (commentAdapter).setMode(Attributes.Mode.Single);
+            rvCommentList.setAdapter(commentAdapter);
+        } else {
+            commentAdapter.updateCommentList(commentList);
+            rvCommentList.smoothScrollToPosition(commentList.length() - 1);
+        }
     }
 
     @Override
@@ -105,4 +110,24 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     }
 
 
+    @Override
+    public void successfulUpdateLike(JSONObject updateObj) {
+        UtilClass.displyMessage(getString(R.string.msgCommentAdded), this, 0);
+        etCommentText.setText("");
+        if (presenterClass == null) {
+            presenterClass = new RequestPresenter();
+        }
+        presenterClass.getNewsCommentList(getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
+        // presenterClass.getNewsCommentList();
+    }
+
+    @Override
+    public void failUpdateResponse(String message) {
+
+    }
+
+    @Override
+    public void failUpdateRequest() {
+
+    }
 }

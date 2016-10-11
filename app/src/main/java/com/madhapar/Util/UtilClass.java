@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 /**
  * Created by smartsense on 21/09/16.
  */
@@ -204,6 +207,20 @@ public class UtilClass {
         return
                 (keypadHeight > screenHeight * 0.15);
     }
+
+
+
+    public static JSONArray removeJson(JSONArray source, int index) throws JSONException {
+        if (index < 0 || index > source.length() - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        final JSONArray copy = new JSONArray();
+        for (int i = 0, count = source.length(); i < count; i++) {
+            if (i != index) copy.put(source.get(i));
+        }
+        return copy;
+    }
+
 
 
 }
