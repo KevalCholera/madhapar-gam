@@ -16,6 +16,7 @@ import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.Adapter.CustomGrid;
 import com.madhapar.View.Adapter.NewsImagePagerAdapter;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 
@@ -65,6 +66,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         if (getIntent().getSerializableExtra("NewsData") != null) {
             newsDetailObj = (NewsObject) getIntent().getSerializableExtra("NewsData");
             setupViews();
+
             setUpViewPager();
         } else {
             if (presenter == null) {

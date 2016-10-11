@@ -61,6 +61,7 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         if (getIntent() != null) {
             presenterClass.getNewsCommentList(getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
         }
+
         mLayoutManager = new LinearLayoutManager(this);
 
 

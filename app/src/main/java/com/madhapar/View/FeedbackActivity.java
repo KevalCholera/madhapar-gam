@@ -55,7 +55,7 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     }
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(FeedbackActivity.this,EventInfoActivity.class,true);    }
+        UtilClass.changeActivity(FeedbackActivity.this,EventPhoto.class,true);    }
 
     @OnClick(R.id.btnFeedbackSend)
     public void feedback(){

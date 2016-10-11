@@ -3,6 +3,7 @@ package com.madhapar.Presenter;
 import com.madhapar.Model.CommentModel;
 import com.madhapar.Model.EventInfoModel;
 import com.madhapar.Model.EventInfoModelInt;
+import com.madhapar.Model.EventPhotosModel;
 import com.madhapar.Model.GoinListModel;
 import com.madhapar.Model.InterestedListModel;
 import com.madhapar.Model.NewsFeedModel;
@@ -11,6 +12,8 @@ import com.madhapar.Model.ProfileDataModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by Ronak on 10/5/2016.
@@ -23,6 +26,8 @@ public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoMo
     private ProfileDataModel profileDataModel;
     private CommentModel commentModel;
     private EventInfoModel eventInfoModel;
+    private EventPhotosModel eventPhotosModel;
+
 
     @Override
     public JSONArray getGoingList() {
@@ -52,6 +57,12 @@ public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoMo
     public JSONArray getComments() {
         commentModel = new CommentModel();
         return commentModel.GetComments();
+    }
+
+    @Override
+    public List<Integer> getEventPhotos() {
+        eventPhotosModel = new EventPhotosModel();
+        return eventPhotosModel.getEventPhotos();
     }
 
     @Override

@@ -98,7 +98,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.madhapar.View.ProfileActivity"></activity>
+        <activity android:name="com.madhapar.View.ProfileActivity" />
 
         <receiver
             android:name="com.onesignal.NotificationOpenedReceiver"
@@ -107,18 +107,19 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.madhapar.PushUtil.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.smartsense.taxinearyou" />
             </intent-filter>
         </receiver>
 
         <service android:name="com.madhapar.PushUtil.GcmIntentService" />
 
+        <activity android:name="com.madhapar.View.EventPhotoActivity" />
     </application>
 
 </manifest>
