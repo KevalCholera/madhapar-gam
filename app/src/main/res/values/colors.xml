@@ -9,4 +9,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorBackground">#FAFAFA</color>
     <color name="colorNewsDetailView">#D3D3D3</color>
+    <color name="colorTransparentBlack">#8000</color>
 </resources>

@@ -2,18 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/ivImageGrid"
-        android:layout_width="@dimen/btn_margin_forgetactivity"
-        android:layout_height="50dp">
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:paddingLeft="@dimen/cardElevation"
+        android:paddingRight="@dimen/cardElevation"
+        android:paddingTop="@dimen/cardElevation"
+        android:layout_height="@dimen/btn_margin_forgetactivity">
     </ImageView>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/CommentOverlayImage"
+        android:layout_alignLeft="@id/ivImageGrid"
+        android:layout_alignRight="@id/ivImageGrid"
+        android:layout_alignBottom="@id/ivImageGrid"
+        android:layout_marginLeft="@dimen/cardElevation"
+        android:layout_marginRight="@dimen/cardElevation"
+        android:textColor="@color/cardview_light_background"
+        android:gravity="center"
+        android:background="@color/colorTransparentBlack"
+        android:textAlignment="center"
+        android:layout_gravity="bottom"
+        android:text="Nature Album"/>
+</RelativeLayout>
+
+    <TextView
         android:id="@+id/tvPhotoDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/CommentOverlayImage"
+        android:layout_marginLeft="@dimen/cardElevation"
+        android:layout_marginRight="@dimen/cardElevation"
+        android:paddingLeft="@dimen/cardElevation"
+        android:paddingRight="@dimen/cardElevation"
+        android:paddingBottom="@dimen/cardElevation"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background"
+        android:gravity="center"
+        android:text="13 july 2016 - 16 july 2016"
         android:textSize="9sp" >
     </TextView>
 

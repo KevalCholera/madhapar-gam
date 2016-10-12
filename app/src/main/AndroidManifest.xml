@@ -119,7 +119,12 @@
 
         <service android:name="com.madhapar.PushUtil.GcmIntentService" />
 
-        <activity android:name="com.madhapar.View.EventPhotoActivity" />
+        <activity android:name="com.madhapar.View.EventPhotoActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

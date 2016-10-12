@@ -31,6 +31,7 @@ public class Constants {
         public static String SignupUrl = BaseUrl + "register/";
         public static String NewsDetailUrl = BaseUrl + "newsDetail/";
         public static String HeaderPostfix = "JWT ";
+        public static String PhotoEvent = "http://139.59.29.185";
         public static String DefaultToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjkxOTQwODU4MDgwMSIsInVzZXJNb2JpbGVObyI6IjkxOTQwODU4MDgwMSIsInVzZXJfaWQiOjEsImVtYWlsIjoia2FyYW5AZ21haWwuY29tIiwiZXhwIjoxNDg1NjUzMTIxfQ.nPGJW1rtAl0r9wE31mjjraFj8QHkCZiralX-1jaQs2g";
     }
 

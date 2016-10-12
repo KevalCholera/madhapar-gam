@@ -19,6 +19,4 @@ public interface PresenterClassSecondInt {
 
     JSONArray getComments();
 
-    List<Integer> getEventPhotos();
-
 }

@@ -60,12 +60,6 @@ public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoMo
     }
 
     @Override
-    public List<Integer> getEventPhotos() {
-        eventPhotosModel = new EventPhotosModel();
-        return eventPhotosModel.getEventPhotos();
-    }
-
-    @Override
     public JSONObject getEventIndo() {
         eventInfoModel = new EventInfoModel();
         return  eventInfoModel.getEventIndo();

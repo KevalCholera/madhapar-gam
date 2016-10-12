@@ -94,6 +94,7 @@
     <string name="msgSomethigWentWrong">Something went wrong please try again later.</string>
     <string name="msgOtpNotMatch">Otp does not match</string>
     <string name="profile">Profile</string>
+    <string name="eventPhotos">Event Photos</string>
 
     <string name="comment">Comments</string>
     <string name="addComment">Add a comment</string>

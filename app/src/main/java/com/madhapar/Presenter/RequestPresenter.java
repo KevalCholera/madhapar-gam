@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.madhapar.Model.EventCalenderModel;
 import com.madhapar.Model.EventCalenderModelInt;
+import com.madhapar.Model.EventInfoModelInt;
+import com.madhapar.Model.EventPhotosModel;
+import com.madhapar.Model.EventPhotosModelInt;
 import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.NetworkModelInt;
 import com.madhapar.Model.NewsFeedModel;
@@ -12,6 +15,7 @@ import com.madhapar.Model.NewsObject;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 import com.madhapar.View.CommentListCallback;
 import com.madhapar.View.EventListInt;
+import com.madhapar.View.EventPhotosInt;
 import com.madhapar.View.HomeViewInt;
 import com.madhapar.View.NetworkViewInt;
 import com.madhapar.View.NewsDetailViewInt;
@@ -25,14 +29,16 @@ import java.util.List;
  * Created by smartsense on 06/10/16.
  */
 
-public class RequestPresenter implements RequestPresenterInt, EventCalenderModelInt.EventListCallback, NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback {
+public class RequestPresenter implements RequestPresenterInt, EventCalenderModelInt.EventListCallback, NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback {
     EventListInt eventListInt;
     NetworkViewInt networkViewInt;
     HomeViewInt homeViewInt;
+    EventPhotosInt eventPhotosInt;
     NewsLikeCommentUpdateCallback likeUpdateCallback;
     private NewsFeedModel newsModel;
     private NewsDetailViewInt newsDetailCallback;
     private CommentListCallback commentListCallback;
+    private EventPhotosModel eventPhotosModel;
 
 
     @Override
@@ -62,7 +68,6 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
 
     }
 
-
     @Override
     public void onSuccessResponse(JSONArray networkList) {
         networkViewInt.onSuccessNetworkList(networkList);
@@ -89,6 +94,12 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
         NewsFeedModel newsFeedModel = new NewsFeedModel();
         newsFeedModel.getNewsData(this);
 
+    }
+
+    @Override
+    public void getEventPhoto(EventPhotosInt eventPhotosInt) {
+        new EventPhotosModel().getEventPhotoList(this);
+        this.eventPhotosInt = eventPhotosInt;
     }
 
 
@@ -211,5 +222,9 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
     }
 
 
+    public void onSuccessEventResponse(JSONArray userList) {
+        eventPhotosInt.onSuccessEventPhotoList(userList);
+
+    }
 }
 
