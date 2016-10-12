@@ -3,7 +3,6 @@ package com.madhapar.Presenter;
 import com.madhapar.Model.EventPhotosModelInt;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 import com.madhapar.View.CommentListCallback;
-import com.madhapar.View.EventListInt;
 import com.madhapar.View.EventPhotosInt;
 import com.madhapar.View.HomeViewInt;
 import com.madhapar.View.NetworkViewInt;
@@ -14,7 +13,7 @@ import com.madhapar.View.NewsDetailViewInt;
  */
 
 public interface RequestPresenterInt {
-    void getEventList(EventListInt callback);
+
 
     void getNetworkList(NetworkViewInt networkViewInt);
 

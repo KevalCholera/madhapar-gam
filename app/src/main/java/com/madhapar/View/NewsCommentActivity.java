@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.daimajia.swipe.implments.SwipeItemAdapterMangerImpl;
 import com.daimajia.swipe.util.Attributes;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.RequestPresenter;
@@ -30,8 +29,7 @@ import butterknife.OnClick;
 public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
-    @BindView(R.id.toolbarComment)
-    Toolbar toolbarComment;
+
     @BindView(R.id.etCommentText)
     EditText etCommentText;
     @BindView(R.id.tvSendComment)
@@ -43,12 +41,16 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         if (!etCommentText.getText().toString().equalsIgnoreCase("")) {
             if (presenterClass == null)
                 presenterClass = new RequestPresenter();
+        }
+        if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
             presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
+        } else {
+            presenterClass.updateComment(getIntent().getStringExtra("newsId"), (String) etCommentText.getTag(), etCommentText.getText().toString(), "1", this);
         }
     }
 
     CommentsListAdapter commentAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     RequestPresenter presenterClass;
 
     @Override
@@ -56,13 +58,12 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarComment);
+        tvSendComment.setTag("add");
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenterClass = new RequestPresenter();
         if (getIntent() != null) {
             presenterClass.getNewsCommentList(getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
         }
-
         mLayoutManager = new LinearLayoutManager(this);
     }
 
@@ -82,20 +83,21 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(NewsCommentActivity.this, MainActivity.class, true);
+        finish();
     }
 
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
         if (commentAdapter == null) {
-            commentAdapter = new CommentsListAdapter(this, commentList,getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"),etCommentText,tvSendComment);
+            commentAdapter = new CommentsListAdapter(this, commentList, getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
             rvCommentList.setLayoutManager(mLayoutManager);
             commentAdapter.setMode(Attributes.Mode.Single);
             (commentAdapter).setMode(Attributes.Mode.Single);
             rvCommentList.setAdapter(commentAdapter);
         } else {
             commentAdapter.updateCommentList(commentList);
-            rvCommentList.smoothScrollToPosition(commentList.length() - 1);
+            if (commentList.length() > 0)
+                rvCommentList.smoothScrollToPosition(commentList.length() - 1);
         }
     }
 
@@ -114,6 +116,7 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     public void successfulUpdateLike(JSONObject updateObj) {
         UtilClass.displyMessage(getString(R.string.msgCommentAdded), this, 0);
         etCommentText.setText("");
+        tvSendComment.setTag("add");
         if (presenterClass == null) {
             presenterClass = new RequestPresenter();
         }
@@ -123,11 +126,18 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void failUpdateResponse(String message) {
-
+        tvSendComment.setTag("add");
     }
 
     @Override
     public void failUpdateRequest() {
+        tvSendComment.setTag("add");
+    }
 
+
+    public void updateComment(String newsComment, String newsStatus, String newsStatusId) {
+        etCommentText.setTag(newsStatusId);
+        tvSendComment.setTag("update");
+        etCommentText.setText(newsComment);
     }
 }

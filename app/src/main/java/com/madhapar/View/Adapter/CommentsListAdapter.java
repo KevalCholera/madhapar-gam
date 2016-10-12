@@ -18,6 +18,7 @@ import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.CommentListCallback;
+import com.madhapar.View.NewsCommentActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 import com.squareup.picasso.Picasso;
 
@@ -39,26 +40,18 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
     private Context context;
     private RequestPresenter presenter;
     protected SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
-    private List<Integer> positionList = new ArrayList<>();
     String newsId;
     String newsStatusId;
-    private EditText etCommentEdit;
-    private TextView sendText;
+    private NewsCommentActivity commentActivity;
 
 
-    public CommentsListAdapter(Context context, JSONArray jsonArray, String newsId, final String newsStatusId, final EditText etCommentEdit, TextView sendText) {
+    public CommentsListAdapter(Context context, JSONArray jsonArray, String newsId, final String newsStatusId, NewsCommentActivity activity) {
         this.commentListArry = jsonArray;
         this.context = context;
         this.newsStatusId = newsStatusId;
         this.newsId = newsId;
-        this.etCommentEdit = etCommentEdit;
-        this.sendText = sendText;
-        sendText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateComment(etCommentEdit.getText().toString(), newsStatusId);
-            }
-        });
+        this.commentActivity = activity;
+
     }
 
     @Override
@@ -98,8 +91,11 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
                 @Override
                 public void onClick(View view) {
                     holder.swipeLayout.close();
+                    if (context instanceof NewsCommentActivity) {
+                        commentActivity.updateComment(commentObj.optString("newsComment"), "2", commentObj.optString("newsStatusId"));
+                    }
                     //   UtilClass.showProgress(context, context.getString(R.string.msgPleaseWait));
-                    etCommentEdit.setText(commentObj.optString("newsComment"));
+
                 }
             });
 
@@ -124,7 +120,6 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
 
     @Override
     public void successfulUpdateLike(JSONObject updateObj) {
-        Log.e("newsCommentUpdate", updateObj.toString());
         if (UtilClass.isInternetAvailabel(context)) {
             if (presenter == null) {
                 presenter = new RequestPresenter();
@@ -134,8 +129,6 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
             UtilClass.hideProgress();
             UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
         }
-
-//        presenter.getNewsCommentList();
     }
 
     @Override
@@ -154,7 +147,6 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
         UtilClass.hideProgress();
-        Log.e("comment", "getList");
         this.commentListArry = commentList;
         notifyDataSetChanged();
     }
@@ -205,14 +197,6 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
     public void updateCommentList(JSONArray updatedCommentArray) {
         this.commentListArry = updatedCommentArray;
         notifyDataSetChanged();
-        Log.e("adapter", "update Called");
-    }
-
-    private void updateComment(String commentText, String newsStatusId) {
-        if (presenter == null) {
-            presenter = new RequestPresenter();
-        }
-        presenter.updateLikeComment(newsId, newsStatusId, commentText, this);
     }
 
 

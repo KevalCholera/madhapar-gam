@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/svEventDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llEventStautsUpdates"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlEventDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:visibility="visible">
+
+                <com.madhapar.PagerUtil.AutoScrollViewPager
+                    android:id="@+id/asvEventDetailPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+                <com.madhapar.PagerUtil.CirclePageIndicator
+                    android:id="@+id/cpiNewsDetailPageIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_medium"
+                    android:visibility="visible"
+                    app:fillColor="@color/colorPrimary"
+                    app:radius="5dp"
+                    app:strokeColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llEventDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlEventDetailImage"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvEventDetailTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:layout_marginLeft="@dimen/magin_large"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:layout_weight="5"
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/textNewsTitle"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnEventInfoShare"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:background="@drawable/buttonshare"
+                        android:text="@string/share"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/viewHeightNewsDetail"
+                    android:background="@color/colorNewsDetailView" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llNewsDetailDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llNewsDetailTitle"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvEventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/text14" />
+
+                <TextView
+                    android:id="@+id/tvEventTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:text=""
+                    android:textSize="@dimen/text14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewHeightNewsDetail"
+                android:layout_below="@+id/llNewsDetailDateTime"
+                android:background="@color/colorNewsDetailView" />
+
+            <TextView
+                android:id="@+id/tvEventLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text=""
+                android:textSize="@dimen/text14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewHeightNewsDetail"
+                android:layout_below="@+id/tvEventLocation"
+                android:background="@color/colorNewsDetailView" />
+
+
+            <LinearLayout
+                android:id="@+id/llEventOrganizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llNewsDetailTitle"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvEventOrganizeBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Organize By:"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text15" />
+
+                <TextView
+                    android:id="@+id/tvEventOrganizer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:text="ncskvnk"
+                    android:textSize="@dimen/text14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewHeightNewsDetail"
+                android:layout_below="@+id/llEventOrganizer"
+                android:background="@color/colorNewsDetailView" />
+
+
+            <TextView
+                android:id="@+id/tEventDetailDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="vsdjgb"
+                android:textSize="@dimen/text15" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llEventStautsUpdates"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_siz_large"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llEventDetailGoing"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/EventStatusImage"
+                android:layout_height="@dimen/EventStatusImage"
+                android:layout_gravity="center"
+                android:background="@mipmap/ic_event_going"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvGoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/going"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text12" />
+
+            <TextView
+                android:id="@+id/tvEventInfoGoingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEventDetailIntrested"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/EventStatusImage"
+                android:layout_height="@dimen/EventStatusImage"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:src="@mipmap/ic_event_interest" />
+
+            <TextView
+                android:id="@+id/tvInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/interest"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text12" />
+
+            <TextView
+                android:id="@+id/tvEventInfoInterestCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEventDetailNotGoing"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/EventStatusImage"
+                android:layout_height="@dimen/EventStatusImage"
+                android:layout_gravity="center"
+                android:background="@mipmap/ic_event_cantgo"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvNotInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/cantgo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text12" />
+
+            <TextView
+                android:id="@+id/tvEventInfoNotInterestCount"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/magin_large"
+                android:background="@drawable/textviewcard"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text12" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

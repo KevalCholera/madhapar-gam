@@ -34,6 +34,10 @@
     <dimen name="newsImageHeight">200dp</dimen>
     <dimen name="textImageDetailDescription">16sp</dimen>
     <dimen name="viewHeightNewsDetail">1dp</dimen>
+    <dimen name="text14">14sp</dimen>
+    <dimen name="text12">12sp</dimen>
+    <dimen name="text15">15sp</dimen>
+    <dimen name="text16">16sp</dimen>
 
 
     <!--Comment Screen-->
@@ -46,5 +50,8 @@
     <dimen name="CommentElementHeight">80dp</dimen>
     <dimen name="CommentOverLayHeight">80.5dp</dimen>
     <dimen name="CommentOverlayImage">30dp</dimen>
+    <dimen name="commentTextMaxHeight">30dp</dimen>
 
+    <!---Event Screent-->
+    <dimen name="EventStatusImage">22dp</dimen>
 </resources>

@@ -105,6 +105,27 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getEventStatusListUrl(String eventId, String eventStatus) {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusListUrl + eventId + "/" + eventStatus).buildUpon().build();
+        return builder.toString();
+    }
+
+    public static String getEventStatudUpdate() {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusUpdateUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+
+    public static String getEventDetailUrl(String eventId) {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventDetailUrl + eventId + "/").buildUpon().build();
+        return builder.toString();
+    }
+
+    public static String getCommentUpdateUrl(String newsStatusID) {
+        Uri builder = Uri.parse(Constants.RequestConstants.CommentUpdateUrl + newsStatusID + "/").buildUpon().build();
+        return builder.toString();
+    }
+
     public static String getLikeUpdateUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.LikeUpdateUrl).buildUpon().build();
         return builder.toString();
@@ -209,7 +230,6 @@ public class UtilClass {
     }
 
 
-
     public static JSONArray removeJson(JSONArray source, int index) throws JSONException {
         if (index < 0 || index > source.length() - 1) {
             throw new IndexOutOfBoundsException();
@@ -220,7 +240,6 @@ public class UtilClass {
         }
         return copy;
     }
-
 
 
 }

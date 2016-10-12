@@ -1,8 +1,6 @@
 package com.madhapar.Presenter;
 
 import com.madhapar.Model.CommentModel;
-import com.madhapar.Model.EventInfoModel;
-import com.madhapar.Model.EventInfoModelInt;
 import com.madhapar.Model.EventPhotosModel;
 import com.madhapar.Model.GoinListModel;
 import com.madhapar.Model.InterestedListModel;
@@ -18,14 +16,13 @@ import java.util.List;
 /**
  * Created by Ronak on 10/5/2016.
  */
-public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoModelInt {
+public class PresenterClassSecond implements PresenterClassSecondInt {
     private GoinListModel goinListModel;
     private InterestedListModel interestedListModel;
     private NotGoinListModel notGoinListModel;
     private NewsFeedModel newsFeedModel;
     private ProfileDataModel profileDataModel;
     private CommentModel commentModel;
-    private EventInfoModel eventInfoModel;
     private EventPhotosModel eventPhotosModel;
 
 
@@ -59,9 +56,4 @@ public class PresenterClassSecond implements PresenterClassSecondInt,EventInfoMo
         return commentModel.GetComments();
     }
 
-    @Override
-    public JSONObject getEventIndo() {
-        eventInfoModel = new EventInfoModel();
-        return  eventInfoModel.getEventIndo();
-    }
 }

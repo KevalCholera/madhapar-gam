@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
-import com.madhapar.Model.EventCalenderModel;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.ForgetPasswordModelInt;
@@ -27,7 +26,6 @@ import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
 import com.madhapar.View.ViewInt;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -44,7 +42,6 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     private LoginModelInt loginModelInt;
     //private SignUpModelInt signUpModelInt;
     private SignUpModel signUpModel;
-    private EventCalenderModel eventCalenderModel;
     private NetworkModel networkModelClass;
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;

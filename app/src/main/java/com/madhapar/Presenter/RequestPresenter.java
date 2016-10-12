@@ -2,9 +2,6 @@ package com.madhapar.Presenter;
 
 import android.util.Log;
 
-import com.madhapar.Model.EventCalenderModel;
-import com.madhapar.Model.EventCalenderModelInt;
-import com.madhapar.Model.EventInfoModelInt;
 import com.madhapar.Model.EventPhotosModel;
 import com.madhapar.Model.EventPhotosModelInt;
 import com.madhapar.Model.NetworkModel;
@@ -14,7 +11,6 @@ import com.madhapar.Model.NewsFeedModelInt;
 import com.madhapar.Model.NewsObject;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 import com.madhapar.View.CommentListCallback;
-import com.madhapar.View.EventListInt;
 import com.madhapar.View.EventPhotosInt;
 import com.madhapar.View.HomeViewInt;
 import com.madhapar.View.NetworkViewInt;
@@ -29,8 +25,7 @@ import java.util.List;
  * Created by smartsense on 06/10/16.
  */
 
-public class RequestPresenter implements RequestPresenterInt, EventCalenderModelInt.EventListCallback, NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback {
-    EventListInt eventListInt;
+public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback {
     NetworkViewInt networkViewInt;
     HomeViewInt homeViewInt;
     EventPhotosInt eventPhotosInt;
@@ -41,23 +36,6 @@ public class RequestPresenter implements RequestPresenterInt, EventCalenderModel
     private EventPhotosModel eventPhotosModel;
 
 
-    @Override
-    public void onSuccessEventList(JSONArray eventArray) {
-        eventListInt.onSuccessEventList(eventArray);
-
-    }
-
-    @Override
-    public void onFailEventList(String errorMessage) {
-        eventListInt.onFailEventList(errorMessage);
-    }
-
-
-    @Override
-    public void getEventList(EventListInt callback) {
-        this.eventListInt = callback;
-        new EventCalenderModel().getEventList(this);
-    }
 
 
     //------------------Network List----------//

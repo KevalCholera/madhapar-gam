@@ -15,8 +15,7 @@ import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.FeedbackActivity;
-import com.madhapar.View.GoingActivity;
-import com.madhapar.View.LoginActivity;
+import com.madhapar.View.StatusListActivity;
 import com.madhapar.View.NewsCommentActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 
@@ -35,16 +34,16 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvIntroHistory)
     public void introHistory() {
-        presenter.changeActivity(getActivity(), GoingActivity.class, true);
+        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.InterestedPersonName);
+
     }
 
     @OnClick(R.id.tvEventPhotos)
     public void eventPhotos() {
-        presenter.changeActivity(getActivity(), GoingActivity.class, true);
+        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.GoingPersonName);
+
     }
 
     @OnClick(R.id.tvFeedback)
@@ -54,9 +53,9 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvAboutUs)
     public void tvAboutUs() {
-        presenter.changeActivity(getActivity(), GoingActivity.class, true);
+        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
         intent = new Intent();
-        intent.putExtra(Constants.DifferentData.Check, Constants.DifferentData.NotGoingPersonName);
+
     }
 
     @OnClick(R.id.tvFundRaising)

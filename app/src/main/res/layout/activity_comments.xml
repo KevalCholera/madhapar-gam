@@ -7,22 +7,6 @@
     android:orientation="vertical"
     tools:context="com.madhapar.View.NewsCommentActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            android:id="@+id/tvToolbarTitleGoing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/comment"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold" />
-
-    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCommentList"

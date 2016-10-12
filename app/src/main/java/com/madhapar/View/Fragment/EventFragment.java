@@ -9,22 +9,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartsense.newproject.R;
-import com.madhapar.Model.EventCalenderModelInt;
-import com.madhapar.Presenter.PresenterClass;
-import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.Presenter.EventPresenter;
 import com.madhapar.PushUtil.WakeLocker;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.Adapter.RecylerViewAdapter;
-import com.madhapar.View.EventListInt;
+import com.madhapar.View.Adapter.EventListAdapter;
+import com.madhapar.View.EventDetailCallback;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,13 +31,13 @@ import butterknife.ButterKnife;
  * Created by smartsense on 24/09/16.
  */
 
-public class EventFragment extends BaseFragment implements EventListInt {
+public class EventFragment extends BaseFragment implements EventDetailCallback.EventListCallback {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.rlEventList)
     SwipeRefreshLayout rlEventList;
-    private RequestPresenter presenterClass;
-    private RecylerViewAdapter recylerViewAdapter;
+    private EventPresenter presenterClass;
+    private EventListAdapter recylerViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
 
@@ -48,7 +46,7 @@ public class EventFragment extends BaseFragment implements EventListInt {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         ButterKnife.bind(this, view);
-        presenterClass = new RequestPresenter();
+        presenterClass = new EventPresenter();
         if (UtilClass.isInternetAvailabel(getActivity())) {
             UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
             presenterClass.getEventList(EventFragment.this);
@@ -73,39 +71,13 @@ public class EventFragment extends BaseFragment implements EventListInt {
         return view;
     }
 
-    @Override
-    public void onSuccessEventList(JSONArray eventArray) {
-        UtilClass.hideProgress();
-        if (rlEventList.isRefreshing()) {
-            rlEventList.setRefreshing(false);
-        }
-        if (recylerViewAdapter == null) {
-            recylerViewAdapter = new RecylerViewAdapter(getActivity(), eventArray);
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setAdapter(recylerViewAdapter);
-
-        } else {
-            recylerViewAdapter.updateAdapter(eventArray);
-        }
-
-    }
-
-    @Override
-    public void onFailEventList(String errorMessage) {
-        UtilClass.hideProgress();
-        if (rlEventList.isRefreshing()) {
-            rlEventList.setRefreshing(false);
-        }
-        UtilClass.displyMessage(errorMessage, getActivity(), 0);
-
-    }
 
     public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             WakeLocker.acquire(context);
             if (presenterClass == null) {
-                presenterClass = new RequestPresenter();
+                presenterClass = new EventPresenter();
                 presenterClass.getEventList(EventFragment.this);
             }
             WakeLocker.release();
@@ -121,5 +93,40 @@ public class EventFragment extends BaseFragment implements EventListInt {
             e.printStackTrace();
         }
         super.onDestroy();
+    }
+
+
+    @Override
+    public void onSuccessEventList(JSONArray eventArray) {
+        UtilClass.hideProgress();
+        if (rlEventList.isRefreshing()) {
+            rlEventList.setRefreshing(false);
+        }
+        if (recylerViewAdapter == null) {
+            recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, getActivity());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setAdapter(recylerViewAdapter);
+
+        } else {
+            recylerViewAdapter.updateAdapter(eventArray);
+        }
+    }
+
+    @Override
+    public void onFailEventListRequest() {
+        UtilClass.hideProgress();
+        if (rlEventList.isRefreshing()) {
+            rlEventList.setRefreshing(false);
+        }
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
+    }
+
+    @Override
+    public void onFailEventListResponse(String message) {
+        UtilClass.hideProgress();
+        if (rlEventList.isRefreshing()) {
+            rlEventList.setRefreshing(false);
+        }
+        UtilClass.displyMessage(message, getActivity(), 0);
     }
 }

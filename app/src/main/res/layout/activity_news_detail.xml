@@ -5,108 +5,114 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rlNewsDetailImage"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:visibility="gone">
-
-        <com.madhapar.PagerUtil.AutoScrollViewPager
-            android:id="@+id/asvNewsDetailPager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:visibility="visible" />
-
-        <com.madhapar.PagerUtil.CirclePageIndicator
-            android:id="@+id/cpiNewsDetailPageIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_medium"
-            android:visibility="gone"
-            app:fillColor="@color/colorPrimary"
-            app:radius="5dp"
-
-            app:strokeColor="@color/colorPrimary" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/llNewsDetailTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlNewsDetailImage"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvNewsDetailTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginLeft="@dimen/magin_large"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/textNewsTitle"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeightNewsDetail"
-            android:background="@color/colorNewsDetailView" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llNewsDetailDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llNewsDetailTitle"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:layout_marginLeft="@dimen/magin_large"
-        android:layout_marginRight="@dimen/magin_large"
-        android:layout_marginTop="@dimen/margin_small"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvNewsDetailDateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/tvNewsDetailCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
-            android:text="" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/viewNewsDetailDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/viewHeightNewsDetail"
-        android:layout_below="@+id/llNewsDetailDateTime"
-        android:background="@color/colorNewsDetailView" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/llNewsDetailLikeComment"
-        android:layout_below="@+id/viewNewsDetailDateTime">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvNewsDetailDescription"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/magin_large"
-            android:layout_marginRight="@dimen/magin_large"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text=""
-            android:textSize="@dimen/textImageDetailDescription" />
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlNewsDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:visibility="gone">
+
+                <com.madhapar.PagerUtil.AutoScrollViewPager
+                    android:id="@+id/asvNewsDetailPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+                <com.madhapar.PagerUtil.CirclePageIndicator
+                    android:id="@+id/cpiNewsDetailPageIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_medium"
+                    android:visibility="gone"
+                    app:fillColor="@color/colorPrimary"
+                    app:radius="5dp"
+                    app:strokeColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llNewsDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlNewsDetailImage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNewsDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginLeft="@dimen/magin_large"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/textNewsTitle"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/viewHeightNewsDetail"
+                    android:background="@color/colorNewsDetailView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNewsDetailDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llNewsDetailTitle"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNewsDetailDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvNewsDetailCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:text="" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewNewsDetailDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewHeightNewsDetail"
+                android:layout_below="@+id/llNewsDetailDateTime"
+                android:background="@color/colorNewsDetailView" />
+
+
+            <TextView
+                android:id="@+id/tvNewsDetailDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text=""
+                android:textSize="@dimen/textImageDetailDescription" />
+        </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout

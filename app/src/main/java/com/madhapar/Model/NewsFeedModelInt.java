@@ -54,6 +54,6 @@ public interface NewsFeedModelInt {
 
     void getCommentList(String newsId, String newsStausId, CommentListCallback commentListCallback);
 
-    void updateComment(String newsId, String newsStatus, String newsStatusId, String newsComment, NewsDetailCallback updateCallback);
+    void updateComment(String newsId, String newsStatus, String newsStatusId, String newsComment, NewsLikeCommentUpdate updateCallback);
 
 }

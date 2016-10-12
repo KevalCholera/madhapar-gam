@@ -6,9 +6,9 @@ package com.madhapar.Util;
 
 public class Constants {
     public static class DifferentData {
-        public static final int GoingPersonName = 1;
-        public static final int InterestedPersonName = 2;
-        public static final int NotGoingPersonName = 3;
+        public static final String GoingStatus = "1";
+        public static final String InterestedStatus = "2";
+        public static final String NotGoingStatus = "3";
         public static String Check = "check";
         public static final int ViewPagerInterval = 2000;
 
@@ -19,8 +19,12 @@ public class Constants {
         public static String BaseUrlForImage = "http://139.59.29.185";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
+        public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
+        public static String EventStatusUpdateUrl = BaseUrl + "eventStatusCreate/";
+        public static String EventDetailUrl = BaseUrl + "eventsDetail/";
         public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
         public static String CommentLstUrl = BaseUrl + "newsStatusList/";
+        public static String CommentUpdateUrl = BaseUrl + "newsStatusDetail/";
         public static String NewsFeedUrl = BaseUrl + "newsFeedList/";
         public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
         public static String UserListUrl = BaseUrl + "users/";

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,9 +18,9 @@ import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.Adapter.CustomGrid;
 import com.madhapar.View.Adapter.NewsImagePagerAdapter;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
+import com.madhapar.View.Adapter.NewsListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,6 +59,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     RelativeLayout rlNewsDetailImage;
     private NewsObject newsDetailObj;
     private RequestPresenter presenter;
+    private String newsStatusId;
 
 
     @Override
@@ -67,7 +70,6 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         if (getIntent().getSerializableExtra("NewsData") != null) {
             newsDetailObj = (NewsObject) getIntent().getSerializableExtra("NewsData");
             setupViews();
-
             setUpViewPager();
         } else {
             if (presenter == null) {
@@ -75,6 +77,13 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
                 presenter.getNewsDetail("1", this);
             }
         }
+        setupActionBar();
+
+
+    }
+
+    private void setupActionBar() {
+        super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
@@ -105,10 +114,44 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     }
 
     @Override
-    public void successfulUpdateLike(JSONObject updateObj) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
+    public void successfulUpdateLike(final JSONObject updateObj) {
         UtilClass.hideProgress();
-        if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) ;
-        // updateView();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (updateObj.optInt("status") == Constants.ResponseCode.SignUpSuccessCode) {
+                    newsDetailObj.setNewsStatusId("");
+                } else {
+                    newsDetailObj.setNewsStatusId(updateObj.optJSONObject("response").optString("newsStatusId"));
+                }
+                if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
+                    ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like);
+                } else {
+                    ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like_filled);
+                }
+            }
+        });
+
     }
 
 
@@ -146,17 +189,21 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             ivNewsDetailLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
-                        if (presenter == null) {
-                            presenter = new RequestPresenter();
-                            if (UtilClass.isInternetAvailabel(NewsDetailActivity.this)) {
-                                UtilClass.showProgress(NewsDetailActivity.this, getString(R.string.msgPleaseWait));
-                                presenter.updateLikeComment(newsDetailObj.getNewsId(), "2", "", NewsDetailActivity.this);
-                            } else {
-                                UtilClass.displyMessage(getString(R.string.msgCheckInternet), NewsDetailActivity.this, 0);
-                            }
-                        }
+
+                    if (presenter == null) {
+                        presenter = new RequestPresenter();
                     }
+                    if (UtilClass.isInternetAvailabel(NewsDetailActivity.this)) {
+                        UtilClass.showProgress(NewsDetailActivity.this, getString(R.string.msgPleaseWait));
+                        if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
+                            presenter.updateLikeComment(newsDetailObj.getNewsId(), "2", "", NewsDetailActivity.this);
+                        } else {
+                            presenter.removeLike(newsDetailObj.getNewsStatusId(), NewsDetailActivity.this);
+                        }
+                    } else {
+                        UtilClass.displyMessage(getString(R.string.msgCheckInternet), NewsDetailActivity.this, 0);
+                    }
+
                 }
             });
             ivNewsDetailComment.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +224,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     @Override
     public void onSuccessNewsDetail(NewsObject newsObject) {
         this.newsDetailObj = newsObject;
+        newsStatusId = newsObject.getNewsStatusId();
         Log.e("newsDetail", "title" + newsObject.getNewsTitle());
         runOnUiThread(new Runnable() {
             @Override

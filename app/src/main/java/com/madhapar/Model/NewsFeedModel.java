@@ -27,13 +27,13 @@ import java.util.Map;
  * Created by Ronak on 10/7/2016.
  */
 public class NewsFeedModel implements NewsFeedModelInt {
-
     @Override
     public void getNewsData(final NewsListCallback newsListCallback) {
         String tag = "newsFeed";
         StringRequest newsRequest = new StringRequest(Request.Method.GET, UtilClass.getNewsFeedUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.e("request","newsList"+response);
                 if (response != null) {
                     try {
                         JSONObject newsObj = new JSONObject(response);
@@ -300,8 +300,54 @@ public class NewsFeedModel implements NewsFeedModelInt {
     }
 
     @Override
-    public void updateComment(String newsId, String newsStatus, String newsStatusId, String newsComment, NewsDetailCallback updateCallback) {
-        updateCallback.onSuccessNewsDetail(null);
+    public void updateComment(final String newsId, final String newsStatus, String newsStatusId, final String newsComment, final NewsLikeCommentUpdate updateCallback) {
+        String tag = "updateComment";
+        StringRequest commentUpdateRequest = new StringRequest(Request.Method.PUT, UtilClass.getCommentUpdateUrl(newsStatusId), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("commnetUpdate","response"+response);
+                if (response != null) {
+                    try {
+                        JSONObject updateObj = new JSONObject(response);
+                        if (updateObj != null && updateObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                            updateCallback.onSuccessLikeComment(updateObj);
+                        } else {
+                            updateCallback.onFailResponseNewsLikeComment(updateObj.optString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("commnetUpdate","response"+error);
+                updateCallback.onFailRequestNewsLikeComment();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("newsId", newsId);
+                params.put("newsComment", newsComment);
+                params.put("newsStatus", newsStatus);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        commentUpdateRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(commentUpdateRequest, tag);
     }
 
 

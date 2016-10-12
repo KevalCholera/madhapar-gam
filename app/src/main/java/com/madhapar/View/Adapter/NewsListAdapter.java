@@ -79,21 +79,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         } else {
             holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
         }
-        holder.clNewsCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("onClick", "click");
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                intent.putExtra("NewsData", newsObj);
-                context.startActivity(intent);
-            }
-        });
         holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
                                                  @Override
                                                  public void onClick(View view) {
                                                      newsId1 = newsObj.getNewsId();
-                                                     if (requestPresenter == null)
+                                                     if (requestPresenter == null) {
                                                          requestPresenter = new RequestPresenter();
+                                                     }
                                                      if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
                                                          requestPresenter.updateLikeComment(newsObj.getNewsId(), "2", "", NewsListAdapter.this);
                                                      } else {
@@ -117,11 +109,27 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
                                                 }
 
         );
+        holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("NewsData", newsObj);
+                context.startActivity(intent);
+            }
+        });
+        holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("clicked", "openImage View Activity");
+            }
+        });
         try {
             JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
             if (imageArray != null && imageArray.length() > 0) {
                 if (imageArray.length() > 1)
                     holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
+                else
+                    holder.CpiNewsPageIndicator.setVisibility(View.GONE);
                 NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
                 holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
                 holder.AsvNewsPager.setAdapter(imagePagerAdapter);
@@ -230,6 +238,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         CardView clNewsCard;
         @BindView(R.id.llNewsUpdate)
         LinearLayout llNewsUpdate;
+        @BindView(R.id.llNewsDetail)
+        LinearLayout llNewsDetail;
 
         public MyViewHolder(View itemView) {
             super(itemView);

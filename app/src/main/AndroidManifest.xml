@@ -52,7 +52,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.madhapar.View.GoingActivity"
+            android:name="com.madhapar.View.StatusListActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
@@ -89,14 +89,14 @@
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/lableNewsDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.madhapar.View.EventInfoActivity"
+            android:name="com.madhapar.View.EventDetailActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/lableNewsDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.madhapar.View.ProfileActivity" />
 
