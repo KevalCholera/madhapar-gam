@@ -44,21 +44,21 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
         if (getIntent().getStringExtra("evetStatus").equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {
             tvEventStatusTitle.setText(getString(R.string.TitleGoing));
             if (getIntent().getStringExtra("isGoingId").equalsIgnoreCase("")) {
-                ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_going_white);
+                //ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_going_white);
             } else {
                 ivEventStautsChangeImage.setVisibility(View.GONE);
             }
         } else if (getIntent().getStringExtra("evetStatus").equalsIgnoreCase(Constants.DifferentData.InterestedStatus)) {
             tvEventStatusTitle.setText(getString(R.string.Titlenterested));
             if (getIntent().getStringExtra("isInterestedId").equalsIgnoreCase("")) {
-                ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_interested_white);
+                //ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_interested_white);
             } else {
                 ivEventStautsChangeImage.setVisibility(View.GONE);
             }
         } else {
             tvEventStatusTitle.setText(getString(R.string.TitleNotGoing));
             if (getIntent().getStringExtra("isMaybeId").equalsIgnoreCase("")) {
-                ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_not_going_white);
+                //ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_not_going_white);
             } else {
                 ivEventStautsChangeImage.setVisibility(View.GONE);
             }

@@ -1,6 +1,7 @@
 package com.madhapar.Presenter;
 
 import com.madhapar.Model.EventPhotosModelInt;
+import com.madhapar.Model.ProfileDataModelInt;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 import com.madhapar.View.CommentListCallback;
 import com.madhapar.View.EventPhotosInt;
@@ -20,6 +21,8 @@ public interface RequestPresenterInt {
     void getNewsList(HomeViewInt homeViewInt);
 
     void getEventPhoto(EventPhotosInt eventPhotosInt);
+
+    void getrofileData(ProfileDataModelInt profileDataModelInt);
 
     void updateLikeComment(String NewsId, String newsStatus, String newsComment, NewsLikeCommentUpdateCallback updateCallback);
 

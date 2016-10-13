@@ -45,12 +45,6 @@ public class PresenterClassSecond implements PresenterClassSecondInt {
     }
 
     @Override
-    public JSONArray getProfileData() {
-        profileDataModel = new ProfileDataModel();
-        return profileDataModel.getProfileData();
-    }
-
-    @Override
     public JSONArray getComments() {
         commentModel = new CommentModel();
         return commentModel.GetComments();

@@ -98,7 +98,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="com.madhapar.View.ProfileActivity" />
+        <activity
+            android:name="com.madhapar.View.ProfileActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <receiver
             android:name="com.onesignal.NotificationOpenedReceiver"
@@ -119,12 +125,19 @@
 
         <service android:name="com.madhapar.PushUtil.GcmIntentService" />
 
-        <activity android:name="com.madhapar.View.EventPhotoActivity"
+        <activity
+            android:name="com.madhapar.View.EventPhotoActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/lableNewsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.madhapar.View.ProfileEditActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
     </application>
 
 </manifest>

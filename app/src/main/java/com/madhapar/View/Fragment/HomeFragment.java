@@ -51,6 +51,13 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragement_home, container, false);
         ButterKnife.bind(this, view);
+        if (UtilClass.isInternetAvailabel(getActivity())) {
+            UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+            requestPresenter = new RequestPresenter();
+            requestPresenter.getNewsList(this);
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
+        }
         srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

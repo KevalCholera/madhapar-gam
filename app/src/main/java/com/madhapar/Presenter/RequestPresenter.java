@@ -9,6 +9,8 @@ import com.madhapar.Model.NetworkModelInt;
 import com.madhapar.Model.NewsFeedModel;
 import com.madhapar.Model.NewsFeedModelInt;
 import com.madhapar.Model.NewsObject;
+import com.madhapar.Model.ProfileDataModel;
+import com.madhapar.Model.ProfileDataModelInt;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
 import com.madhapar.View.CommentListCallback;
 import com.madhapar.View.EventPhotosInt;
@@ -25,15 +27,17 @@ import java.util.List;
  * Created by smartsense on 06/10/16.
  */
 
-public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback {
+public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback, ProfileDataModelInt.ProfileDataResponseCallback {
     NetworkViewInt networkViewInt;
     HomeViewInt homeViewInt;
     EventPhotosInt eventPhotosInt;
+    ProfileDataModelInt profileDataModelInt;
     NewsLikeCommentUpdateCallback likeUpdateCallback;
     private NewsFeedModel newsModel;
     private NewsDetailViewInt newsDetailCallback;
     private CommentListCallback commentListCallback;
     private EventPhotosModel eventPhotosModel;
+    private ProfileDataModel profileDataModel;
 
 
 
@@ -78,6 +82,12 @@ public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.N
     public void getEventPhoto(EventPhotosInt eventPhotosInt) {
         new EventPhotosModel().getEventPhotoList(this);
         this.eventPhotosInt = eventPhotosInt;
+    }
+
+    @Override
+    public void getrofileData(ProfileDataModelInt profileDataModelInt) {
+        new ProfileDataModel().getProfileDataList(this);
+        this.profileDataModelInt = profileDataModelInt;
     }
 
 

@@ -156,8 +156,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/ivNewsShare"

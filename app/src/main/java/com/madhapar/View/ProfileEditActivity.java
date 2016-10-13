@@ -1,6 +1,5 @@
 package com.madhapar.View;
 
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
-import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.mpt.storage.SharedPreferenceUtil;
@@ -19,33 +17,31 @@ import com.mpt.storage.SharedPreferenceUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileActivity extends AppCompatActivity {
-    @BindView(R.id.tvProfileName)
+public class ProfileEditActivity extends AppCompatActivity {
+    @BindView(R.id.tvProfileEditName)
     TextView tvProfileName;
-    @BindView(R.id.tvProfileMobileNumber)
+    @BindView(R.id.tvProfileEditMobileNumber)
     TextView tvProfileMobileNumber;
-    @BindView(R.id.tvProfileLocation)
+    @BindView(R.id.tvProfileEditLocation)
     TextView tvProfileLocation;
-    @BindView(R.id.tvProfileDOB)
+    @BindView(R.id.tvProfileEditDOB)
     TextView tvProfileDOB;
-    @BindView(R.id.tvProfileBloodGroup)
+    @BindView(R.id.tvProfileEditBloodGroup)
     TextView tvProfileBloodGroup;
-    @BindView(R.id.tvMembershipNo)
+    @BindView(R.id.tvEditMembershipNo)
     TextView tvMemberShipNumber;
-    @BindView(R.id.tvProfileEmail)
+    @BindView(R.id.tvProfileEditEmail)
     TextView tvProfileEmail;
-    @BindView(R.id.tvProfileFacebbokId)
+    @BindView(R.id.tvProfileEditFacebbokId)
     TextView tvProfileFacebookId;
-    @BindView(R.id.toolbarProfile)
+    @BindView(R.id.toolbarProfileEdit)
     Toolbar toolbarProfile;
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
-    RequestPresenter presenterClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_edit);
         ButterKnife.bind(this);
         super.setSupportActionBar(toolbarProfile);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,5 +71,5 @@ public class ProfileActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(ProfileActivity.this,FeedbackActivity.class,true);    }
+        UtilClass.changeActivity(ProfileEditActivity.this,ProfileActivity.class,true);    }
 }
