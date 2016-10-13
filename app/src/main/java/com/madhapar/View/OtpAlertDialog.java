@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
@@ -27,7 +26,7 @@ import butterknife.OnTextChanged;
 /**
  * Created by Ronak on 9/28/2016.
  */
-public class AlertDialogClass extends AlertDialog.Builder implements AlertDialofClassInt, ForgetPasswordViewInt {
+public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialogInt, ForgetPasswordViewInt {
     private Activity activity;
     private AlertDialog alert;
     private String contactNumber;
@@ -110,7 +109,7 @@ public class AlertDialogClass extends AlertDialog.Builder implements AlertDialof
         activity.finish();
     }
 
-    public AlertDialogClass(@NonNull final AppCompatActivity context, JSONObject otpObj1, String contactNumber, int type) {
+    public OtpAlertDialog(@NonNull final AppCompatActivity context, JSONObject otpObj1, String contactNumber, int type) {
         super(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.alert_otp_code, null, false);

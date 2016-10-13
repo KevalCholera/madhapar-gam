@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/ivEventStautsChangeImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/EventStatusListTitleImage"
+                android:layout_height="@dimen/EventStatusListTitleImage"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_medium" />

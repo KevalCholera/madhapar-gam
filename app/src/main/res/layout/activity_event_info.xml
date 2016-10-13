@@ -2,120 +2,139 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
+
         <TextView
             android:id="@+id/tvToolbarTitleGoing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/eventInfo"
-            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorWhite"/>
+            android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
+
     <ImageView
         android:id="@+id/ivProfileSmall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_button_width"
         android:scaleType="fitXY"
         android:src="@drawable/ic_fund_raising" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/margin_medium"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tvEventInfoTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvEventInfoTitle"
             android:layout_weight="5"
-            android:textStyle="bold"
             android:inputType="text"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/activity_vertical_margin"
-            android:textColor="@color/colorPrimary" />
+            android:textStyle="bold" />
+
         <Button
+            android:id="@+id/btnEventInfoShare"
             android:layout_width="0dp"
             android:layout_height="@dimen/activity_vertical_margin"
-            android:layout_weight="1"
-            android:id="@+id/btnEventInfoShare"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:background="@drawable/buttonshare"
             android:layout_marginBottom="@dimen/cardElevation"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshare"
             android:text="@string/share" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/tvEventInfoDtaeTime"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/cardElevation" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cardview_default_elevation"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@color/colorGrey" />
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvEventInfoAddress"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/cardElevation" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
+
+    <TextView
+        android:id="@+id/tvEventInfoAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/cardElevation" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorGrey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/organized"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/cardElevation"
             android:layout_marginBottom="@dimen/cardElevation"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"/>
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/cardElevation"
+            android:text="@string/organized"
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/tvEventInfoOrganized"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:id="@+id/tvEventInfoOrganized"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/cardElevation" />
+            android:layout_marginLeft="@dimen/cardElevation"
+            android:textAlignment="center" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
+
     <TextView
+        android:id="@+id/tvEventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:id="@+id/tvEventDescription"
+        android:layout_marginBottom="@dimen/cardElevation"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:textColor="@color/cardview_dark_background"
         android:layout_marginTop="@dimen/cardElevation"
-        android:layout_marginBottom="@dimen/cardElevation"/>
+        android:inputType="textMultiLine"
+        android:textColor="@color/cardview_dark_background" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_default_elevation"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorGrey" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"
@@ -214,7 +233,7 @@
                 android:layout_height="@dimen/activity_vertical_margin"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/cardview_default_radius"
-                android:background="@mipmap/ic_event_cantgo"
+                android:background="@mipmap/ic_event_not_going"
                 android:gravity="center" />
 
             <TextView

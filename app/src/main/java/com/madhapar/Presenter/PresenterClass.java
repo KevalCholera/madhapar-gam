@@ -16,8 +16,8 @@ import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.AlertDialofClassInt;
-import com.madhapar.View.AlertDialogClass;
+import com.madhapar.View.OtpAlertDialogInt;
+import com.madhapar.View.OtpAlertDialog;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
@@ -50,7 +50,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     private FeedbackActivityInt feedbackActivityint;
     private FeedbackModel feedbackModel;
     private ChangePasswordModel changePasswordModel;
-    private AlertDialofClassInt alertIntl;
+    private OtpAlertDialogInt alertIntl;
     LoginModel loginModel;
 
     public PresenterClass(SignUpActivity signUpModel) {
@@ -99,7 +99,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
 
     @Override
     public void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber, int type) {
-        new AlertDialogClass(context, otpResponse, contactNumber, type);
+        new OtpAlertDialog(context, otpResponse, contactNumber, type);
     }
 
     @Override
@@ -331,7 +331,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alertDialogInt) {
+    public void verifyForgotPasswordOtp(String contactNumber, String otpValue, OtpAlertDialogInt alertDialogInt) {
         this.alertIntl = alertDialogInt;
         if (forgetPassModel == null)
             forgetPassModel = new ForgetPasswordModel();
@@ -340,7 +340,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void verifyUserOtp(String contactNumber, String otp, AlertDialofClassInt alertDialofClassInt) {
+    public void verifyUserOtp(String contactNumber, String otp, OtpAlertDialogInt alertDialofClassInt) {
         this.alertIntl = alertDialofClassInt;
         if (forgetPassModel == null) {
             forgetPassModel = new ForgetPasswordModel();

@@ -38,8 +38,7 @@
     <dimen name="text12">12sp</dimen>
     <dimen name="text15">15sp</dimen>
     <dimen name="text16">16sp</dimen>
-    <dimen name="profileicon">20dp</dimen>
-    <dimen name="profileiconmiddle">15dp</dimen>
+
 
     <!--Comment Screen-->
     <dimen name="TypeCommentHeight">50dp</dimen>
@@ -52,8 +51,14 @@
     <dimen name="CommentOverLayHeight">80.5dp</dimen>
     <dimen name="CommentOverlayImage">30dp</dimen>
     <dimen name="commentTextMaxHeight">30dp</dimen>
-    <dimen name="profiletopmargin">60dp</dimen>
-    <dimen name="profileleftmargin">220dp</dimen>
+    <dimen name="CommentStatusChangeLayoutHeight">40dp</dimen>
+
     <!---Event Screent-->
-    <dimen name="EventStatusImage">22dp</dimen>
+    <dimen name="EventStatusImage">20dp</dimen>
+    <dimen name="EventAlertMessageTextHeight">50dp</dimen>
+    <dimen name="EventAlertEditHeight">37dp</dimen>
+    <dimen name="EventAlertButtonMargin">30dp</dimen>
+    <dimen name="EventStatusListTitleImage">24dp</dimen>
+    <dimen name="EventStatusListTitleImagePadding">30dp</dimen>
+    <dimen name="EventUpdateStatusLayoutHeight">50dp</dimen>
 </resources>

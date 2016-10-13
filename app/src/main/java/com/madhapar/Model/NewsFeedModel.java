@@ -33,7 +33,7 @@ public class NewsFeedModel implements NewsFeedModelInt {
         StringRequest newsRequest = new StringRequest(Request.Method.GET, UtilClass.getNewsFeedUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("request","newsList"+response);
+                Log.e("request", "newsList" + response);
                 if (response != null) {
                     try {
                         JSONObject newsObj = new JSONObject(response);
@@ -90,8 +90,8 @@ public class NewsFeedModel implements NewsFeedModelInt {
                 newsObject.setNewsId(newsArray.optJSONObject(i).optString("newsId"));
                 newsObject.setNewsDataAndTime(newsArray.optJSONObject(i).optString("newsCreatedDate"));
                 newsObject.setCommented(newsArray.optJSONObject(i).optBoolean("isCommented"));
-                newsObject.setCommented(newsArray.optJSONObject(i).optBoolean("isCommented"));
-                newsObject.setNewsStatusId(newsArray.optJSONObject(i).optString("newsStatusId"));
+                String newsStatusId = newsArray.optJSONObject(i).optString("newsStatusId");
+                newsObject.setNewsStatusId(newsStatusId);
                 newsList.add(newsObject);
             }
         }
@@ -305,7 +305,7 @@ public class NewsFeedModel implements NewsFeedModelInt {
         StringRequest commentUpdateRequest = new StringRequest(Request.Method.PUT, UtilClass.getCommentUpdateUrl(newsStatusId), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("commnetUpdate","response"+response);
+                Log.e("commnetUpdate", "response" + response);
                 if (response != null) {
                     try {
                         JSONObject updateObj = new JSONObject(response);
@@ -324,7 +324,7 @@ public class NewsFeedModel implements NewsFeedModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("commnetUpdate","response"+error);
+                Log.e("commnetUpdate", "response" + error);
                 updateCallback.onFailRequestNewsLikeComment();
             }
         }) {

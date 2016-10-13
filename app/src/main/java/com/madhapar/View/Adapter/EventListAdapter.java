@@ -3,6 +3,7 @@ package com.madhapar.View.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
@@ -22,6 +24,11 @@ import com.madhapar.View.EventDetailCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,15 +42,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     private Context context;
     private EventPresenter mPresenter;
     private Activity activity;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
 
 
     public EventListAdapter(Context context, JSONArray jsonArray, Activity activity) {
         this.eventArry = jsonArray;
-        Log.e("crete", "list" + jsonArray.length());
         this.context = context;
         this.activity = activity;
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,30 +68,54 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             holder.tvTime.setText(eventObj.optString("eventFromDate"));
             holder.tvGoing.setText(eventObj.optString("going"));
             holder.tvInterest.setText(eventObj.optString("interested"));
+            if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
+                holder.llGoing.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.llGoing.setClickable(false);
+            } else {
+                holder.llGoing.setBackgroundColor(Color.WHITE);
+                holder.llGoing.setClickable(true);
+            }
+            if (isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
+                holder.llNotGoing.setClickable(false);
+                holder.llNotGoing.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+            } else {
+                holder.llNotGoing.setClickable(true);
+                holder.llNotGoing.setBackgroundColor(Color.WHITE);
+            }
+            if (isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
+                holder.llInterested.setClickable(false);
+                holder.llInterested.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+            } else {
+                holder.llInterested.setClickable(true);
+                holder.llInterested.setBackgroundColor(Color.WHITE);
+            }
             holder.llEventDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, EventDetailActivity.class);
                     intent.putExtra("event", eventObj.toString());
+                    intent.putExtra("canEventStatusChange", isEventStatusValid(eventObj));
                     context.startActivity(intent);
 
                 }
             });
+
             holder.llGoing.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mPresenter == null) {
-                        mPresenter = new EventPresenter();
-                    }
                     if (UtilClass.isInternetAvailabel(context)) {
-                        UtilClass.showProgress(context, context.getString(R.string.msgPleaseWait));
-                        if (canCreateNewStatus(eventObj)) {
-                            mPresenter.createEventStatus(eventObj.optString("eventId"), Constants.DifferentData.GoingStatus, "10", EventListAdapter.this);
-                        } else {
-                            mPresenter.updateEventStatus(eventObj.optString("eventId"), Constants.DifferentData.GoingStatus, "5", EventListAdapter.this);
+                        boolean isValid = isEventStatusValid(eventObj);
+                        if (!isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
+                            if (isEventStatusValid(eventObj)) {
+                                if (mPresenter == null) {
+                                    mPresenter = new EventPresenter();
+                                }
+                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.GoingStatus, EventListAdapter.this, EventListAdapter.this);
+                            } else {
+                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+                            }
                         }
                     } else {
-                        UtilClass.hideProgress();
                         UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
                     }
                 }
@@ -93,24 +123,40 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             holder.llInterested.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    if (mPresenter == null) {
-                        mPresenter = new EventPresenter();
-                    }
                     if (UtilClass.isInternetAvailabel(context)) {
-                        UtilClass.showProgress(context, context.getString(R.string.msgPleaseWait));
-                        if (canCreateNewStatus(eventObj)) {
-                            mPresenter.createEventStatus(eventObj.optString("eventId"), Constants.DifferentData.InterestedStatus, "", EventListAdapter.this);
-                        } else {
-                            mPresenter.updateEventStatus(eventObj.optString("eventId"), Constants.DifferentData.InterestedStatus, "", EventListAdapter.this);
+                        if (!isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
+                            if (isEventStatusValid(eventObj)) {
+                                if (mPresenter == null) {
+                                    mPresenter = new EventPresenter();
+                                }
+                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.InterestedStatus, EventListAdapter.this, EventListAdapter.this);
+                            } else {
+                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+                            }
                         }
-
                     } else {
-                        UtilClass.hideProgress();
                         UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
                     }
                 }
-
+            });
+            holder.llNotGoing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (UtilClass.isInternetAvailabel(context)) {
+                        if (!isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
+                            if (isEventStatusValidForNotGoing(eventObj)) {
+                                if (mPresenter == null) {
+                                    mPresenter = new EventPresenter();
+                                }
+                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.NotGoingStatus, EventListAdapter.this, EventListAdapter.this);
+                            } else {
+                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdateNotGoing), context, 0);
+                            }
+                        }
+                    } else {
+                        UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
+                    }
+                }
             });
 
 
@@ -127,7 +173,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     public void updateAdapter(JSONArray eventArray) {
         this.eventArry = eventArray;
         notifyDataSetChanged();
-        Log.e("event", "update adater called");
     }
 
     @Override
@@ -147,19 +192,18 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     public void onFailStautsCreateRequest() {
         UtilClass.hideProgress();
         UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
-        Log.e("eventSuccess", "eventObj Fail Request");
     }
 
     @Override
     public void onFailStautsCreateRequest(String message) {
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, context, 0);
-        Log.e("eventSuccess", "eventObj" + message);
 
     }
 
     @Override
     public void onSuccessEventList(final JSONArray eventArray) {
+        UtilClass.hideProgress();
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -184,17 +228,27 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
 
     @Override
     public void onSuccessStautsUpdate(JSONObject updateObj) {
-
+        if (UtilClass.isInternetAvailabel(context)) {
+            if (mPresenter == null) {
+                mPresenter = new EventPresenter();
+            }
+            mPresenter.getEventList(this);
+        } else {
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
+        }
     }
 
     @Override
     public void onFailStautsUpdateRequest() {
-
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
     }
 
     @Override
     public void onFailStautsUpdateRequest(String message) {
-
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, context, 0);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -225,11 +279,65 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         }
     }
 
-    boolean canCreateNewStatus(JSONObject eventObj) {
-        if (eventObj.optString("isGoingId").equalsIgnoreCase("") && eventObj.optString("isInterestedId").equalsIgnoreCase("") && eventObj.optString("isMaybeId").equalsIgnoreCase("")) {
-            return true;
+    private boolean isSelected(JSONObject eventObj, String statusType) {
+        if (statusType.equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {
+            if (eventObj.optString("isGoingId") != null && !eventObj.optString("isGoingId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (statusType.equalsIgnoreCase(Constants.DifferentData.InterestedStatus)) {
+            if (eventObj.optString("isInterestedId") != null && !eventObj.optString("isInterestedId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (eventObj.optString("isMaybeId") != null && !eventObj.optString("isMaybeId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        return false;
+    }
+
+    private boolean isEventStatusValid(JSONObject eventObj) {
+        boolean isValid = false;
+        try {
+            String fromDate = eventObj.optString("eventFromDate");
+            String finalDate = fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13) + fromDate.substring(16, 18) + ":" + fromDate.substring(19, 21) + " " + fromDate.substring(22);
+            Date date = sdf.parse(finalDate);
+            long Eventtime = date.getTime();
+            long curruntTime = System.currentTimeMillis();
+            if ((Eventtime - curruntTime) > (3 * 24 * 60 * 60 * 1000)) {
+                isValid = true;
+            } else {
+                isValid = false;
+            }
+        } catch (ParseException p) {
+            p.printStackTrace();
+        }
+        return isValid;
+    }
+
+    private boolean isEventStatusValidForNotGoing(JSONObject eventObject) {
+        boolean isValid = false;
+        try {
+            String fromDate = eventObject.optString("eventToDate");
+            String finalDate = fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13) + fromDate.substring(16, 18) + ":" + fromDate.substring(19, 21) + " " + fromDate.substring(22);
+            Date date = sdf.parse(finalDate);
+            long EventLasttime = date.getTime();
+            long curruntTime = System.currentTimeMillis();
+            if ((EventLasttime - curruntTime) > (1 * 24 * 60 * 60 * 1000)) {
+                isValid = true;
+            } else {
+                isValid = false;
+            }
+        } catch (ParseException p) {
+            p.printStackTrace();
+        }
+        return isValid;
+
     }
 
 

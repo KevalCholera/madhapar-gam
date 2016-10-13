@@ -7,6 +7,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
@@ -115,24 +116,24 @@ public class EventModel implements EventModelInt {
 
     @Override
     public void createEventStatus(final String eventId, final String eventStatusType, final String count, final EventStatusCreateListener mEventStatusListener) {
-        String tag = "eventStatus";
-        StringRequest eventStatusRequest = new StringRequest(Request.Method.POST, UtilClass.getEventStatudUpdate(), new Response.Listener<String>() {
+        String tag = "eventStatusCreate";
+        StringRequest eventStatusRequest = new StringRequest(Request.Method.POST, UtilClass.getEventStatusCreateUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("eventStatusUpdate", response.toString());
-                if (response != null) {
-                    try {
+                try {
+                    Log.e("eventStatusUpdate", response.toString());
+                    if (response != null) {
                         JSONObject eventStautsObj = new JSONObject(response);
                         if (eventStautsObj != null) {
-                            if (eventStautsObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
-                                mEventStatusListener.onSuccessStatusCreate(eventStautsObj.optJSONObject("response"));
+                            if (eventStautsObj.optInt("status") == Constants.ResponseCode.SignUpSuccessCode) {
+                                mEventStatusListener.onSuccessStatusCreate(eventStautsObj);
                             } else {
                                 mEventStatusListener.onFailStatusCreateResponse(eventStautsObj.optString("message"));
                             }
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
@@ -164,11 +165,6 @@ public class EventModel implements EventModelInt {
         MadhaparGamApp.getAppInstance().addToRequestQueue(eventStatusRequest, tag);
     }
 
-    @Override
-    public void updateEventStatus(String eventId, String eventStatus, String count, EventStatusUpdateListener mEventUpdateListener) {
-
-    }
-
 
     @Override
     public void getEventStatusList(String eventId, String eventStatus, final EventStautsListListener mEventStatusListListener) {
@@ -177,16 +173,17 @@ public class EventModel implements EventModelInt {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
-                    Log.e("eventStatusList", "response" + response);
                     try {
                         JSONObject statusObj = new JSONObject(response);
+                        Log.e("eventStatusList", "response" + statusObj);
                         if (statusObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
                             mEventStatusListListener.onSuccessEventStatusList(statusObj.optJSONArray("response"));
                         } else {
                             mEventStatusListListener.onFailStatusListResponse(statusObj.optString("message"));
                         }
-                    } catch (JSONException w) {
-                        w.printStackTrace();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
 
@@ -209,6 +206,57 @@ public class EventModel implements EventModelInt {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MadhaparGamApp.getAppInstance().addToRequestQueue(eventStatusListRequest, tag);
 
+    }
+
+    @Override
+    public void updateEventStatus(String eventStatusId, final String eventStatus, final String count, final EventStatusUpdateListener mEventUpdateListener) {
+        String tag = "eventStatusUpdate";
+
+        StringRequest statusUpdateRequest = new StringRequest(Request.Method.PUT, UtilClass.getEventStatusUpdateUrl(eventStatusId), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    Log.e("eventStatusUpdate", "response" + response);
+                    try {
+                        JSONObject updateObj = new JSONObject(response);
+                        if (updateObj != null) {
+                            if (updateObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                                mEventUpdateListener.onSuccessEventUpdate(updateObj);
+                            } else {
+                                mEventUpdateListener.onFailEventUpdateResponse(updateObj.optString("message"));
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mEventUpdateListener.onFailEventUpdateRequest();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("eventUserCount", count);
+                params.put("eventStatusType", eventStatus);
+                Log.e("params", "called" + params);
+                return params;
+            }
+        };
+        statusUpdateRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(statusUpdateRequest, tag);
     }
 
 

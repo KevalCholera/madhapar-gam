@@ -110,11 +110,15 @@ public class UtilClass {
         return builder.toString();
     }
 
-    public static String getEventStatudUpdate() {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusUpdateUrl).buildUpon().build();
+    public static String getEventStatusCreateUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusCreateUrl).buildUpon().build();
         return builder.toString();
     }
 
+    public static String getEventStatusUpdateUrl(String eventId) {
+        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusUpdaetUrl + eventId + "/").buildUpon().build();
+        return builder.toString();
+    }
 
     public static String getEventDetailUrl(String eventId) {
         Uri builder = Uri.parse(Constants.RequestConstants.EventDetailUrl + eventId + "/").buildUpon().build();

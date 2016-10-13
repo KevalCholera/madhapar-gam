@@ -1,9 +1,13 @@
 package com.madhapar.View;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,9 +15,14 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,42 +39,52 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     TextView tvEventLocation;
     @BindView(R.id.tEventDetailDescription)
     TextView tEventDetailDescription;
-    @BindView(R.id.tvEventInfoGoingCount)
-    TextView tvEventInfoGoingCount;
-    @BindView(R.id.tvEventInfoInterestCount)
-    TextView tvEventInfoInterestCount;
-    @BindView(R.id.tvEventInfoNotInterestCount)
-    TextView tvEventInfoNotInterestedCount;
+    @BindView(R.id.tvEventDetailGoingCount)
+    TextView tvEventDetailGoingCount;
+    @BindView(R.id.tvEventDetailInterestCount)
+    TextView tvEventDetailInterestCount;
+    @BindView(R.id.tvEventDetailNotInterestedCount)
+    TextView tvEventDetailNotInterestedCount;
     @BindView(R.id.tvEventOrganizer)
     TextView tvEventOrganizer;
     @BindView(R.id.llEventDetailGoing)
     LinearLayout llEventDetailGoing;
+    @BindView(R.id.ivEventCoverImage)
+    ImageView ivEventCoverImage;
+    @BindView(R.id.llEventDetailNotGoing)
+    LinearLayout llEventDetailNotGoing;
+    @BindView(R.id.llEventDetailIntrested)
+    LinearLayout llEventDetailIntrested;
+    private static final int StatusListActivityConstant = 200;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
 
     @OnClick(R.id.llEventDetailGoing)
     public void going() {
         Intent goingIntent = new Intent(EventDetailActivity.this, StatusListActivity.class);
-        goingIntent.putExtra("isGoingId", eventObj.optString("isGoingId"));
-        goingIntent.putExtra("eventId", eventObj.optString("eventId").trim());
+        goingIntent.putExtra("eventObj", eventObj.toString());
+        goingIntent.putExtra("canChangeStatus", getIntent().getBooleanExtra("canEventStatusChange", false));
         goingIntent.putExtra("evetStatus", Constants.DifferentData.GoingStatus);
-        startActivity(goingIntent);
+        startActivityForResult(goingIntent, StatusListActivityConstant);
     }
 
     @OnClick(R.id.llEventDetailIntrested)
     public void interested() {
         Intent goingIntent = new Intent(EventDetailActivity.this, StatusListActivity.class);
         goingIntent.putExtra("isInterestedId", eventObj.optString("isInterestedId"));
-        goingIntent.putExtra("eventId", eventObj.optString("eventId").trim());
+        goingIntent.putExtra("eventObj", eventObj.toString());
         goingIntent.putExtra("evetStatus", Constants.DifferentData.InterestedStatus);
-        startActivity(goingIntent);
+        goingIntent.putExtra("canChangeStatus", getIntent().getBooleanExtra("canEventStatusChange", false));
+        startActivityForResult(goingIntent, StatusListActivityConstant);
     }
 
     @OnClick(R.id.llEventDetailNotGoing)
     public void notGoing() {
         Intent goingIntent = new Intent(EventDetailActivity.this, StatusListActivity.class);
         goingIntent.putExtra("isMaybeId", eventObj.optString("isMaybeId"));
-        goingIntent.putExtra("eventId", eventObj.optString("eventId").trim());
+        goingIntent.putExtra("eventObj", eventObj.toString());
+        goingIntent.putExtra("canChangeStatus", isEventStatusValidForNotGoing(eventObj));
         goingIntent.putExtra("evetStatus", Constants.DifferentData.NotGoingStatus);
-        startActivity(goingIntent);
+        startActivityForResult(goingIntent, StatusListActivityConstant);
     }
 
 
@@ -77,22 +96,41 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evenet_detail);
         ButterKnife.bind(this);
-
+        setUpActiobBar();
         if (getIntent().getStringExtra("event") != null) {
             try {
                 eventObj = new JSONObject(getIntent().getStringExtra("event"));
                 setUpView();
-                setUpViewPager();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else {
-            getEventdetail("2");
+            getEventdetail(eventObj.optString("eventId"));
         }
     }
 
-    private void setUpViewPager() {
+    private void setUpActiobBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     private void setUpView() {
@@ -103,9 +141,26 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             tvEventLocation.setText(eventObj.optString("eventAddress"));
             tEventDetailDescription.setText(eventObj.optString("eventDescription"));
             tvEventOrganizer.setText(eventObj.optString("eventOrganizedBy"));
-            tvEventInfoGoingCount.setText(eventObj.optString("going"));
-            tvEventInfoInterestCount.setText(eventObj.optString("interested"));
-            tvEventInfoNotInterestedCount.setText(eventObj.optString("cantGo"));
+            tvEventDetailGoingCount.setText(eventObj.optString("going"));
+            tvEventDetailInterestCount.setText(eventObj.optString("interested"));
+            tvEventDetailNotInterestedCount.setText(eventObj.optString("cantGo"));
+            String coverImageUrl = eventObj.optString("coverImage");
+            if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
+                llEventDetailGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+            } else {
+                llEventDetailGoing.setBackgroundColor(Color.WHITE);
+            }
+            if (isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
+                llEventDetailNotGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+            } else {
+                llEventDetailNotGoing.setBackgroundColor(Color.WHITE);
+            }
+            if (isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
+                llEventDetailIntrested.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+            } else {
+                llEventDetailIntrested.setBackgroundColor(Color.WHITE);
+            }
+            Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).error(R.mipmap.ic_event_detail_placeholder).into(ivEventCoverImage);
         }
     }
 
@@ -147,4 +202,65 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, this, 0);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == StatusListActivityConstant) {
+                if (UtilClass.isInternetAvailabel(this)) {
+                    if (mPresenter == null) {
+                        mPresenter = new EventPresenter();
+                    }
+                    String eventId = data.getStringExtra("eventId");
+                    mPresenter.getEventDetail(eventId, this);
+                } else {
+
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private boolean isSelected(JSONObject eventObj, String statusType) {
+        if (statusType.equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {
+            if (eventObj.optString("isGoingId") != null && !eventObj.optString("isGoingId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (statusType.equalsIgnoreCase(Constants.DifferentData.InterestedStatus)) {
+            if (eventObj.optString("isInterestedId") != null && !eventObj.optString("isInterestedId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (eventObj.optString("isMaybeId") != null && !eventObj.optString("isMaybeId").trim().equalsIgnoreCase("")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean isEventStatusValidForNotGoing(JSONObject eventObject) {
+        boolean isValid = false;
+        try {
+            String fromDate = eventObject.optString("eventToDate");
+            String finalDate = fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13) + fromDate.substring(16, 18) + ":" + fromDate.substring(19, 21) + " " + fromDate.substring(22);
+            Date date = sdf.parse(finalDate);
+            long EventLasttime = date.getTime();
+            long curruntTime = System.currentTimeMillis();
+            if ((EventLasttime - curruntTime) > (24 * 60 * 60 * 100)) {
+                isValid = true;
+            } else {
+                isValid = false;
+            }
+        } catch (ParseException p) {
+            p.printStackTrace();
+        }
+        return isValid;
+
+    }
 }
+

@@ -1,18 +1,14 @@
 package com.madhapar.Presenter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.madhapar.View.AlertDialofClassInt;
+import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
-import com.madhapar.View.LoginActivity;
 import com.madhapar.View.LoginInt;
-import com.madhapar.View.ViewInt;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -36,9 +32,9 @@ public interface PresneterInt {
 
     void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt, int type);
 
-    void verifyForgotPasswordOtp(String contactNumber, String otpValue, AlertDialofClassInt alerClasstInt);
+    void verifyForgotPasswordOtp(String contactNumber, String otpValue, OtpAlertDialogInt alerClasstInt);
 
-    void verifyUserOtp(String contactNumber, String otp, AlertDialofClassInt alertDialofClassInt);
+    void verifyUserOtp(String contactNumber, String otp, OtpAlertDialogInt alertDialofClassInt);
 
     void changeFragment(int containerId, int position, AppCompatActivity activity);
 

@@ -20,7 +20,8 @@ public class Constants {
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
-        public static String EventStatusUpdateUrl = BaseUrl + "eventStatusCreate/";
+        public static String EventStatusCreateUrl = BaseUrl + "eventStatusCreate/";
+        public static String EventStatusUpdaetUrl = BaseUrl + "eventStatusDetail/";
         public static String EventDetailUrl = BaseUrl + "eventsDetail/";
         public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
         public static String CommentLstUrl = BaseUrl + "newsStatusList/";

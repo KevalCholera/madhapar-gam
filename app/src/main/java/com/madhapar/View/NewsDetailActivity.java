@@ -59,7 +59,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     RelativeLayout rlNewsDetailImage;
     private NewsObject newsDetailObj;
     private RequestPresenter presenter;
-    private String newsStatusId;
+    private static final int CommentActivityRequestCode = 22;
 
 
     @Override
@@ -67,6 +67,8 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
         ButterKnife.bind(this);
+
+        super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent().getSerializableExtra("NewsData") != null) {
             newsDetailObj = (NewsObject) getIntent().getSerializableExtra("NewsData");
             setupViews();
@@ -74,16 +76,9 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         } else {
             if (presenter == null) {
                 presenter = new RequestPresenter();
-                presenter.getNewsDetail("1", this);
             }
+            presenter.getNewsDetail("1", this);
         }
-        setupActionBar();
-
-
-    }
-
-    private void setupActionBar() {
-        super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
@@ -110,7 +105,6 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             e.printStackTrace();
         }
 
-
     }
 
     @Override
@@ -121,7 +115,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -130,27 +124,20 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     @Override
     public void onBackPressed() {
         finish();
-        super.onBackPressed();
+
     }
 
     @Override
     public void successfulUpdateLike(final JSONObject updateObj) {
-        UtilClass.hideProgress();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (updateObj.optInt("status") == Constants.ResponseCode.SignUpSuccessCode) {
-                    newsDetailObj.setNewsStatusId("");
-                } else {
-                    newsDetailObj.setNewsStatusId(updateObj.optJSONObject("response").optString("newsStatusId"));
-                }
-                if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
-                    ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like);
-                } else {
-                    ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like_filled);
-                }
+        if (UtilClass.isInternetAvailabel(this)) {
+            if (presenter == null) {
+                presenter = new RequestPresenter();
             }
-        });
+            presenter.getNewsDetail(newsDetailObj.getNewsId(), this);
+        } else {
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
+        }
 
     }
 
@@ -168,7 +155,6 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     }
 
     private void setupViews() {
-
         if (newsDetailObj != null) {
             tvNewsDetailTitle.setText(newsDetailObj.getNewsTitle());
             tvNewsDetailDateTime.setText(newsDetailObj.getNewsDataAndTime());
@@ -176,7 +162,9 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             tvNewsDetailDescription.setText(newsDetailObj.getNewsDescription());
             tvNewsDetailLikeCount.setText(newsDetailObj.getNewsLikeCount());
             tvNewsDetailCommentCount.setText(newsDetailObj.getNewsCommentCount());
-            if (newsDetailObj.getNewsStatusId() == null || newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
+            Log.e("newsActivity", newsDetailObj.getNewsStatusId());
+            Log.e("newsId", newsDetailObj.getNewsId());
+            if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("null") || newsDetailObj.getNewsStatusId() == null || newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
                 ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like);
             } else {
                 ivNewsDetailLike.setImageResource(R.mipmap.ic_news_like_filled);
@@ -189,13 +177,12 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             ivNewsDetailLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     if (presenter == null) {
                         presenter = new RequestPresenter();
                     }
                     if (UtilClass.isInternetAvailabel(NewsDetailActivity.this)) {
                         UtilClass.showProgress(NewsDetailActivity.this, getString(R.string.msgPleaseWait));
-                        if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
+                        if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("null") || newsDetailObj.getNewsStatusId() == null || newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
                             presenter.updateLikeComment(newsDetailObj.getNewsId(), "2", "", NewsDetailActivity.this);
                         } else {
                             presenter.removeLike(newsDetailObj.getNewsStatusId(), NewsDetailActivity.this);
@@ -212,19 +199,17 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
                     Intent intent = new Intent(NewsDetailActivity.this, NewsCommentActivity.class);
                     intent.putExtra("newsId", newsDetailObj.getNewsId());
                     intent.putExtra("newsStatusId", "1");
-                    startActivity(intent);
+                    startActivityForResult(intent, CommentActivityRequestCode);
                 }
             });
         }
-
-
     }
 
 
     @Override
     public void onSuccessNewsDetail(NewsObject newsObject) {
         this.newsDetailObj = newsObject;
-        newsStatusId = newsObject.getNewsStatusId();
+        UtilClass.hideProgress();
         Log.e("newsDetail", "title" + newsObject.getNewsTitle());
         runOnUiThread(new Runnable() {
             @Override
@@ -237,12 +222,35 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CommentActivityRequestCode) {
+                if (UtilClass.isInternetAvailabel(this)) {
+                    UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
+                    if (presenter == null) {
+                        presenter = new RequestPresenter();
+                    }
+                    presenter.getNewsDetail(data.getStringExtra("newsId"), this);
+                } else {
+                    UtilClass.hideProgress();
+                    UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onFailRequest() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
         Log.e("onSuccess", "Request Fail");
     }
 
     @Override
     public void onFailResponse(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, this, 0);
         Log.e("onSuccess", "Response Fail" + message);
     }
 }

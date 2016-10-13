@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_medium"
     android:layout_marginLeft="@dimen/activity_top_login_margin"
     android:layout_marginRight="@dimen/activity_top_login_margin"
     android:layout_marginTop="@dimen/margin_medium"
@@ -37,15 +38,6 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/activity_vertical_margin"
                     android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnShare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/activity_top_login_margin"
-                    android:layout_gravity="right"
-                    android:background="@drawable/buttonshare"
-                    android:text="@string/share"
-                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,7 +81,7 @@
             <LinearLayout
                 android:id="@+id/llGoing"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -107,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="@dimen/margin_small"
+                    android:padding="3dp"
                     android:text="@string/going"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text12" />
@@ -125,7 +117,7 @@
             <LinearLayout
                 android:id="@+id/llInterested"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -143,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="@dimen/margin_small"
+                    android:padding="3dp"
                     android:text="@string/interest"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text12" />
@@ -161,7 +153,7 @@
             <LinearLayout
                 android:id="@+id/llNotGoing"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -171,7 +163,7 @@
                     android:layout_width="@dimen/EventStatusImage"
                     android:layout_height="@dimen/EventStatusImage"
                     android:layout_gravity="center"
-                    android:background="@mipmap/ic_event_cantgo"
+                    android:background="@mipmap/ic_event_not_going"
                     android:gravity="center" />
 
                 <TextView
@@ -179,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="@dimen/margin_small"
+                    android:padding="3dp"
                     android:text="@string/cantgo"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text12" />

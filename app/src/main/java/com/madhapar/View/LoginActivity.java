@@ -21,7 +21,6 @@ import butterknife.OnClick;
  */
 
 public class LoginActivity extends BaseActivity implements LoginInt {
-
     @BindView(R.id.etLoginId)
     EditText etLoginId;
     @BindView(R.id.etLoginPassword)

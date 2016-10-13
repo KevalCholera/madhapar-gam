@@ -70,6 +70,11 @@ public class EventStatusListAdapter extends RecyclerView.Adapter<EventStatusList
         return goingListArry.length();
     }
 
+    public void updateStatusAdaptet(JSONArray statusArray) {
+        this.goingListArry = statusArray;
+        notifyDataSetChanged();
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvStatusPersonName)
         TextView tvStatusPersonName;

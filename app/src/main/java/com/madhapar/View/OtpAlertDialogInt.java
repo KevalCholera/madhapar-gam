@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by Ronak on 9/28/2016.
  */
-public interface AlertDialofClassInt {
+public interface OtpAlertDialogInt {
     void otpVerificationSuccessfull(JSONObject verifyObj);
 
     void otpVerificationFail(String message);

@@ -106,6 +106,7 @@
                 android:id="@+id/tvNewsDetailDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_marginLeft="@dimen/magin_large"
                 android:layout_marginRight="@dimen/magin_large"
                 android:layout_marginTop="@dimen/margin_medium"
@@ -118,14 +119,14 @@
     <LinearLayout
         android:id="@+id/llNewsDetailLikeComment"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_login_margin"
+        android:layout_height="@dimen/CommentStatusChangeLayoutHeight"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/activity_login_margin"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center"
@@ -150,7 +151,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/activity_login_margin"
+            android:layout_height="match_parent"
             android:layout_weight="1"
 
             android:background="@color/colorPrimary"
@@ -176,7 +177,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/activity_login_margin"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center"

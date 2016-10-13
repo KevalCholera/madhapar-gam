@@ -17,34 +17,41 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rlEventDetailImage"
+            <ImageView
+                android:id="@+id/ivEventCoverImage"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:visibility="visible">
+                android:scaleType="fitXY" />
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rlEventDetailImage"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:visibility="visible">-->
+            <!---->
 
-                <com.madhapar.PagerUtil.AutoScrollViewPager
-                    android:id="@+id/asvEventDetailPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center"
-                    android:visibility="visible" />
 
-                <com.madhapar.PagerUtil.CirclePageIndicator
-                    android:id="@+id/cpiNewsDetailPageIndicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_medium"
-                    android:visibility="visible"
-                    app:fillColor="@color/colorPrimary"
-                    app:radius="5dp"
-                    app:strokeColor="@color/colorPrimary" />
+            <!--&lt;!&ndash;<com.madhapar.PagerUtil.AutoScrollViewPager&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/asvEventDetailPager"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="fill_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:visibility="visible" />&ndash;&gt;-->
 
-            </RelativeLayout>
+            <!--&lt;!&ndash;<com.madhapar.PagerUtil.CirclePageIndicator&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/cpiNewsDetailPageIndicator"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="@dimen/margin_medium"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="horizontal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:padding="@dimen/margin_medium"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:visibility="visible"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:fillColor="@color/colorPrimary"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:radius="5dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:strokeColor="@color/colorPrimary" />&ndash;&gt;-->
+
+            <!--</RelativeLayout>-->
 
             <LinearLayout
                 android:id="@+id/llEventDetailTitle"
@@ -193,16 +200,18 @@
     <LinearLayout
         android:id="@+id/llEventStautsUpdates"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/text_siz_large"
+        android:layout_height="@dimen/EventUpdateStatusLayoutHeight"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
         <LinearLayout
             android:id="@+id/llEventDetailGoing"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -219,7 +228,6 @@
                 android:id="@+id/tvGoing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/margin_small"
                 android:text="@string/going"
@@ -227,9 +235,9 @@
                 android:textSize="@dimen/text12" />
 
             <TextView
-                android:id="@+id/tvEventInfoGoingCount"
+                android:id="@+id/tvEventDetailGoingCount"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/magin_large"
+                android:layout_height="@dimen/EventStatusImage"
                 android:background="@drawable/textviewcard"
                 android:gravity="center"
                 android:textColor="@color/colorWhite"
@@ -239,7 +247,7 @@
         <LinearLayout
             android:id="@+id/llEventDetailIntrested"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -256,7 +264,6 @@
                 android:id="@+id/tvInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/margin_small"
                 android:text="@string/interest"
@@ -264,12 +271,11 @@
                 android:textSize="@dimen/text12" />
 
             <TextView
-                android:id="@+id/tvEventInfoInterestCount"
+                android:id="@+id/tvEventDetailInterestCount"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/magin_large"
+                android:layout_height="@dimen/EventStatusImage"
                 android:background="@drawable/textviewcard"
                 android:gravity="center"
-                android:padding="@dimen/smallPadding"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text12" />
         </LinearLayout>
@@ -277,7 +283,7 @@
         <LinearLayout
             android:id="@+id/llEventDetailNotGoing"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -287,14 +293,13 @@
                 android:layout_width="@dimen/EventStatusImage"
                 android:layout_height="@dimen/EventStatusImage"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_event_cantgo"
+                android:background="@mipmap/ic_event_not_going"
                 android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvNotInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="@dimen/margin_small"
                 android:text="@string/cantgo"
@@ -302,9 +307,9 @@
                 android:textSize="@dimen/text12" />
 
             <TextView
-                android:id="@+id/tvEventInfoNotInterestCount"
+                android:id="@+id/tvEventDetailNotInterestedCount"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/magin_large"
+                android:layout_height="@dimen/EventStatusImage"
                 android:background="@drawable/textviewcard"
                 android:gravity="center"
                 android:padding="@dimen/smallPadding"

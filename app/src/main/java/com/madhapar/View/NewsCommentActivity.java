@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,6 +84,9 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onBackPressed() {
+        Intent backIntent = new Intent();
+        backIntent.putExtra("newsId", getIntent().getStringExtra("newsId"));
+        setResult(RESULT_OK, backIntent);
         finish();
     }
 

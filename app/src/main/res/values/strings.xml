@@ -116,4 +116,16 @@
     <string name="TitleGoing">Going</string>
     <string name="Titlenterested">Interested</string>
     <string name="TitleNotGoing">Not Going</string>
+    <string name="EventAlertYes">Yes</string>
+    <string name="EventAlertConfirm">Confirm</string>
+    <string name="EventAlertCancel">Cancel</string>
+    <string name="EventAlertNo">No</string>
+    <string name="EventAlertCountHint">Number of family member</string>
+    <string name="EventAlertFaimlyMemberMessage">Number of family member :</string>
+    <string name="EventAlertGoingMessage">Are you going ?</string>
+    <string name="EventAlertInterestMessage">Are you interested ?</string>
+    <string name="EventAlertNotGoingMessage">Are you not going ?</string>
+    <string name="msgEnterFamilyMember">Please enter valid other family member.</string>
+    <string name="msgStatusCanNotUpdate">Cant update status before 3 days</string>
+    <string name="msgStatusCanNotUpdateNotGoing">Cant update status</string>
 </resources>
