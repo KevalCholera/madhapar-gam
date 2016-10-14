@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-
     tools:context="com.madhapar.View.ProfileEditActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarProfileEdit"
@@ -28,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/CommentOverlayImage"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -100,7 +100,9 @@
                         android:focusableInTouchMode="true"
                         android:background="@color/colorGrey"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:inputType="textCapWords"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:gravity="left"
@@ -124,8 +126,11 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/tvProfileEditMobileNumber"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:inputType="phone"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:background="@color/colorGrey"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:textColor="@color/colorPrimary" />
@@ -150,6 +155,8 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:background="@color/colorGrey"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:layout_weight="1.3"
                         android:textColor="@color/colorPrimary"/>
@@ -174,6 +181,8 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:background="@color/colorGrey"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:textColor="@color/colorPrimary"/>
@@ -196,6 +205,9 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/tvEditMembershipNo"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
                         android:background="@color/colorGrey"
@@ -222,6 +234,8 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:background="@color/colorGrey"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:layout_weight="1.3"
                         android:textColor="@color/colorPrimary"/>
@@ -246,6 +260,9 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
                         android:background="@color/colorGrey"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:textColor="@color/colorPrimary"/>
@@ -253,6 +270,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/CommentOverlayImage"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:orientation="horizontal">
                     <TextView
@@ -270,6 +288,9 @@
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
                         android:background="@color/colorGrey"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:textColor="@color/colorPrimary"/>

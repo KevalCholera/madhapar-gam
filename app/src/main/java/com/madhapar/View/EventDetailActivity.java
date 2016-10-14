@@ -141,9 +141,10 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             tvEventLocation.setText(eventObj.optString("eventAddress"));
             tEventDetailDescription.setText(eventObj.optString("eventDescription"));
             tvEventOrganizer.setText(eventObj.optString("eventOrganizedBy"));
-            tvEventDetailGoingCount.setText(eventObj.optString("going"));
-            tvEventDetailInterestCount.setText(eventObj.optString("interested"));
-            tvEventDetailNotInterestedCount.setText(eventObj.optString("cantGo"));
+            String s = tvEventDetailGoingCount.getText().toString();
+            tvEventDetailGoingCount.setText(" "+eventObj.optString("going")+" ");
+            tvEventDetailInterestCount.setText(" "+eventObj.optString("interested")+" ");
+            tvEventDetailNotInterestedCount.setText(" "+eventObj.optString("cantGo")+" ");
             String coverImageUrl = eventObj.optString("coverImage");
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
                 llEventDetailGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
@@ -163,7 +164,6 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).error(R.mipmap.ic_event_detail_placeholder).into(ivEventCoverImage);
         }
     }
-
     private void getEventdetail(String eventId) {
         if (mPresenter == null) {
             mPresenter = new EventPresenter();

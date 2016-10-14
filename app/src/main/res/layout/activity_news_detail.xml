@@ -13,13 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:id="@+id/rlNewsDetailImage"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="@dimen/ImageNewDesc"
                 android:visibility="gone">
-
                 <com.madhapar.PagerUtil.AutoScrollViewPager
                     android:id="@+id/asvNewsDetailPager"
                     android:layout_width="match_parent"
@@ -40,9 +38,7 @@
                     app:fillColor="@color/colorPrimary"
                     app:radius="5dp"
                     app:strokeColor="@color/colorPrimary" />
-
             </RelativeLayout>
-
             <LinearLayout
                 android:id="@+id/llNewsDetailTitle"
                 android:layout_width="match_parent"
@@ -101,19 +97,19 @@
                 android:layout_below="@+id/llNewsDetailDateTime"
                 android:background="@color/colorNewsDetailView" />
 
-
             <TextView
                 android:id="@+id/tvNewsDetailDescription"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_marginLeft="@dimen/magin_large"
                 android:layout_marginRight="@dimen/magin_large"
+                android:paddingBottom="@dimen/activity_rightleft_login"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:text=""
                 android:textSize="@dimen/textImageDetailDescription" />
-        </LinearLayout>
 
+            </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -182,17 +178,12 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/ivDetailNewsShare"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_top_login_margin"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_news_share_filled" />
-
         </LinearLayout>
-
     </LinearLayout>
-
-
 </RelativeLayout>

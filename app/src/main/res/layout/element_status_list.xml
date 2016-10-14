@@ -15,7 +15,6 @@
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/margin_medium"
-            android:padding="@dimen/margin_small"
             android:src="@drawable/honey" />
 
         <LinearLayout

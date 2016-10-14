@@ -34,4 +34,6 @@
     <dimen name="newsImageHeight">200dp</dimen>
     <dimen name="textImageDetailDescription">16sp</dimen>
     <dimen name="viewHeightNewsDetail">1dp</dimen>
+    <dimen name="ImageNewDesc">300dp</dimen>
+
 </resources>

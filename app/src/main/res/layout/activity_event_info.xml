@@ -177,6 +177,7 @@
                 android:layout_height="@dimen/magin_large"
                 android:background="@drawable/textviewcard"
                 android:gravity="center"
+                android:text="343"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/margin_medium" />
         </LinearLayout>

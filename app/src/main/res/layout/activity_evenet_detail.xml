@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
+    android:background="@color/cardview_light_background"
     android:orientation="vertical">
 
     <ScrollView
@@ -17,10 +18,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
             <ImageView
                 android:id="@+id/ivEventCoverImage"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:scaleType="fitXY" />
             <!--<RelativeLayout-->
             <!--android:id="@+id/rlEventDetailImage"-->
@@ -53,6 +59,8 @@
 
             <!--</RelativeLayout>-->
 
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/llEventDetailTitle"
                 android:layout_width="match_parent"
@@ -64,7 +72,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/tvEventDetailTitle"
                         android:layout_width="0dp"
@@ -203,7 +210,6 @@
         android:layout_height="@dimen/EventUpdateStatusLayoutHeight"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="3">

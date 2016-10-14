@@ -6,7 +6,7 @@
             <solid android:color="@color/colorWhite" />
             <stroke
                 android:width="0.05dp"
-                android:color="@color/cardview_dark_background" />
+                android:color="@color/colorGrey" />
 
             <corners
                 android:radius="20dp" />

@@ -52,6 +52,7 @@
     <dimen name="CommentOverlayImage">30dp</dimen>
     <dimen name="commentTextMaxHeight">30dp</dimen>
     <dimen name="CommentStatusChangeLayoutHeight">40dp</dimen>
+    <dimen name="ImageNewDesc">160dp</dimen>
 
     <!---Event Screent-->
     <dimen name="EventStatusImage">20dp</dimen>

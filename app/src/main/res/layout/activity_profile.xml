@@ -30,6 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/CommentOverlayImage"
             android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -248,6 +249,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/CommentOverlayImage"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
