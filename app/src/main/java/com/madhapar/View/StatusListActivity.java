@@ -60,13 +60,12 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_going);
+        ButterKnife.bind(this);
         try {
             eventObj = new JSONObject(getIntent().getStringExtra("eventObj"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ButterKnife.bind(this);
-
         super.setSupportActionBar(toolBarEventStatus);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent().getStringExtra("evetStatus").equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {

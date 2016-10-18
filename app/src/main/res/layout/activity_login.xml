@@ -33,10 +33,10 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
+                    android:layout_width="@dimen/activity_button_width"
+                    android:layout_height="@dimen/activity_button_width"
                     android:layout_gravity="center"
-                    android:src="@drawable/img_login_screen_logo" />
+                    android:src="@mipmap/icon_login_screen_logo" />
 
                 <EditText
                     android:id="@+id/etLoginId"

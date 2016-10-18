@@ -199,7 +199,7 @@
                 android:layout_marginRight="@dimen/magin_large"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:text="vsdjgb"
-                android:textSize="@dimen/text15" />
+                android:textSize="@dimen/text16" />
 
         </LinearLayout>
     </ScrollView>

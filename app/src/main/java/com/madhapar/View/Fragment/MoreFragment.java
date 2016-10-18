@@ -14,7 +14,9 @@ import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.EventPhotoActivity;
 import com.madhapar.View.FeedbackActivity;
+import com.madhapar.View.LoginActivity;
 import com.madhapar.View.StatusListActivity;
 import com.madhapar.View.NewsCommentActivity;
 import com.mpt.storage.SharedPreferenceUtil;
@@ -34,14 +36,14 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvIntroHistory)
     public void introHistory() {
-        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
+        presenter.changeActivity(getActivity(), EventPhotoActivity.class, true);
         intent = new Intent();
 
     }
 
     @OnClick(R.id.tvEventPhotos)
     public void eventPhotos() {
-        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
+        presenter.changeActivity(getActivity(), EventPhotoActivity.class, true);
         intent = new Intent();
 
     }
@@ -53,7 +55,7 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvAboutUs)
     public void tvAboutUs() {
-        presenter.changeActivity(getActivity(), StatusListActivity.class, true);
+        presenter.changeActivity(getActivity(), EventPhotoActivity.class, true);
         intent = new Intent();
 
     }
@@ -67,7 +69,7 @@ public class MoreFragment extends BaseFragment {
     public void tvSignOut() {
         SharedPreferenceUtil.clear();
         SharedPreferenceUtil.save();
-        presenter.changeActivity(getActivity(), NewsCommentActivity.class, true);
+        presenter.changeActivity(getActivity(), LoginActivity.class, true);
     }
 
     @Nullable

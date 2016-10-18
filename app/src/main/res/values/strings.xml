@@ -88,6 +88,8 @@
     <string name="profileBloodGroud">Blood Group :</string>
     <string name="profileEmail">Email :</string>
     <string name="profileFacebook">Facebook :</string>
+
+    <string name="searchNews">Search News Category</string>
     <!--Process message-->
     <string name="msgPleaseWait">Please Wait..</string>
     <string name="msgCheckInternet">Please check your internet connection</string>
@@ -128,4 +130,17 @@
     <string name="msgEnterFamilyMember">Please enter valid other family member.</string>
     <string name="msgStatusCanNotUpdate">Cant update status before 3 days</string>
     <string name="msgStatusCanNotUpdateNotGoing">Cant update status</string>
+    <string name="clear">Clear</string>
+
+    <string name="technology">Technology</string>
+    <string name="business">Business</string>
+    <string name="educational">Educational</string>
+    <string name="politics">Politics</string>
+    <string name="sarpanchNes">Sarpanch News Letter</string>
+    <string name="death">Death</string>
+    <string name="EnterTainment">Entertainment</string>
+    <string name="news">News</string>
+    <string name="sports">Sports</string>
+
+
 </resources>

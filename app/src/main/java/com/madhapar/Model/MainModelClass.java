@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Fragment.EventFragment;
+import com.madhapar.View.Fragment.EventPhotosFragment;
 import com.madhapar.View.Fragment.HomeFragment;
 import com.madhapar.View.Fragment.MoreFragment;
 import com.madhapar.View.Fragment.NetworkFragment;
@@ -42,7 +43,8 @@ public class MainModelClass implements MainModelInt {
         drawerIconList.add(1, R.drawable.ic_event);
         drawerIconList.add(2, R.drawable.ic_user);
         drawerIconList.add(3, R.drawable.ic_network);
-        drawerIconList.add(4, R.drawable.ic_more);
+        drawerIconList.add(4, R.drawable.ic_network);
+        drawerIconList.add(5, R.drawable.ic_more);
         return drawerIconList;
     }
 
@@ -57,8 +59,10 @@ public class MainModelClass implements MainModelInt {
             fragment = new UserFragment();
         } else if (fragmentNo == 3) {
             fragment = new NetworkFragment();
-        } else if (fragmentNo == 4) {
+        } else if (fragmentNo == 5) {
             fragment = new MoreFragment();
+        }else if (fragmentNo == 4){
+            fragment = new EventPhotosFragment();
         }
         return fragment;
     }

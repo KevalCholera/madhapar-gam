@@ -53,11 +53,6 @@ public class CustomGrid extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        try {
-            return (long) eventPhotos.get(i);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         return 0;
     }
 

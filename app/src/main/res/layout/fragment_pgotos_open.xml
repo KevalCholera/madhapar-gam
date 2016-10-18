@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+            <RadioButton
+                android:id="@+id/radioGridFill"
+                android:layout_width="@dimen/activity_top_login_margin"
+                android:layout_height="@dimen/activity_top_login_margin"
+                android:background="@drawable/ic_grid_small"
+                android:layout_marginLeft="@dimen/cardElevation"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_marginRight="@dimen/cardElevation"
+                android:button="@android:color/transparent" />
+            <RadioButton
+                android:id="@+id/radioGridPhtosBack"
+                android:layout_width="@dimen/activity_top_login_margin"
+                android:layout_height="@dimen/activity_top_login_margin"
+                android:background="@drawable/ic_fillgridbig"
+                android:layout_marginLeft="@dimen/cardElevation"
+                android:layout_marginRight="@dimen/cardElevation"
+                android:button="@android:color/transparent" />
+        </RadioGroup>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ivPlaceHolderopen"
+        android:src="@mipmap/ic_user_placeholder"/>
+</LinearLayout>
