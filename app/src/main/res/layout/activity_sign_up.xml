@@ -43,20 +43,28 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/img_login_screen_logo" />
-
+                android:src="@drawable/madhapar_icon" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_rightleft_login"
                 android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:drawableLeft="@mipmap/iconuser"
-                android:gravity="center"
+                android:gravity="left"
+                android:drawablePadding="@dimen/margin_medium"
                 android:hint="@string/firstName"
                 android:singleLine="true" />
-
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etLasttName"
                 android:layout_width="match_parent"
@@ -64,12 +72,17 @@
                 android:layout_marginLeft="@dimen/activity_rightleft_login"
                 android:layout_marginRight="@dimen/activity_rightleft_login"
                 android:layout_marginTop="@dimen/top_margin_small"
+                android:drawablePadding="@dimen/margin_medium"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/iconuser"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="@string/lastName"
                 android:singleLine="true" />
-
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etMobileNumber"
                 android:layout_width="match_parent"
@@ -79,12 +92,17 @@
                 android:layout_marginTop="@dimen/top_margin_small"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/icon_mobile"
-                android:gravity="center"
+                android:gravity="left"
+                android:drawablePadding="@dimen/margin_medium"
                 android:hint="@string/mobileNumberLogin"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:maxLines="1" />
-
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etSignUpPassord"
                 android:layout_width="match_parent"
@@ -94,11 +112,16 @@
                 android:layout_marginTop="@dimen/top_margin_small"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/icon_key"
-                android:gravity="center"
+                android:gravity="left"
+                android:drawablePadding="@dimen/margin_medium"
                 android:hint="@string/passwordLogin"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword" />
-
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etFamilyMember"
                 android:layout_width="match_parent"
@@ -107,12 +130,13 @@
                 android:layout_marginRight="@dimen/activity_rightleft_login"
                 android:layout_marginTop="@dimen/top_margin_small"
                 android:drawableLeft="@mipmap/iconmemberddd"
-                android:gravity="center"
+                android:gravity="left"
+                android:drawablePadding="@dimen/margin_medium"
                 android:hint="@string/familyMember"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:singleLine="true" />
-
+            </android.support.design.widget.TextInputLayout>
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="@dimen/activity_button_width"

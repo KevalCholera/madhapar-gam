@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     android:background="@color/cardview_light_background"
     android:orientation="vertical">
-
     <ScrollView
         android:id="@+id/svEventDetail"
         android:layout_width="match_parent"
@@ -200,6 +199,16 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:text="vsdjgb"
                 android:textSize="@dimen/text16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tvOpenPhotosActivity"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textColor="@color/colorBlueProfile"
+                android:text="@string/seephotos"/>
 
         </LinearLayout>
     </ScrollView>

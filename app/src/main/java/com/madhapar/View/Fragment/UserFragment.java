@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,22 +27,22 @@ import butterknife.OnClick;
  */
 
 public class UserFragment extends BaseFragment {
-    @BindView(R.id.tvProfileName)
-    TextView tvProfileName;
-    @BindView(R.id.tvProfileMobileNumber)
-    TextView tvProfileMobileNumber;
-    @BindView(R.id.tvProfileLocation)
-    TextView tvProfileLocation;
-    @BindView(R.id.tvProfileDOB)
-    TextView tvProfileDOB;
-    @BindView(R.id.tvProfileBloodGroup)
-    TextView tvProfileBloodGroup;
-    @BindView(R.id.tvMembershipNo)
-    TextView tvMemberShipNumber;
-    @BindView(R.id.tvProfileEmail)
-    TextView tvProfileEmail;
-    @BindView(R.id.tvProfileFacebbokId)
-    TextView tvProfileFacebookId;
+    @BindView(R.id.etProfileEditProfileName)
+    EditText tvProfileName;
+    @BindView(R.id.etProfileMobileEditProfileNumber)
+    EditText tvProfileMobileNumber;
+    @BindView(R.id.etEditProfileLocation)
+    EditText tvProfileLocation;
+    @BindView(R.id.etEditProfileDOB)
+    EditText tvProfileDOB;
+    @BindView(R.id.etEditProfileBloodGroup)
+    EditText tvProfileBloodGroup;
+    @BindView(R.id.etEditMembershipNo)
+    EditText tvMemberShipNumber;
+    @BindView(R.id.etEditProfileEmail)
+    EditText tvProfileEmail;
+    @BindView(R.id.etEditProfileFacebbokId)
+    EditText tvProfileFacebookId;
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     private PresenterClass presenter;

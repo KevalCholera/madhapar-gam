@@ -11,4 +11,5 @@
     <color name="colorNewsDetailView">#D3D3D3</color>
     <color name="colorTransparentBlack">#8000</color>
     <color name="colorGreyProfile">#FF969696</color>
+    <color name="colorBlueProfile">#FF5695D8</color>
 </resources>

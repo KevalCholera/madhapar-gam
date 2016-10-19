@@ -32,20 +32,8 @@ import butterknife.OnItemSelected;
 public class EventPhotoActivity extends AppCompatActivity implements EventPhotosInt {
     @BindView(R.id.grid)
     GridView grid;
-    @BindView(R.id.radioGridSmall)
-    RadioButton radioGridSmall;
-    @BindView(R.id.radioGrid)
-    RadioButton radioGrid;
     @BindView(R.id.toolbarEventPhotos)
     Toolbar toolbarEventPhotos;
-    @OnClick(R.id.radioGridSmall)
-    public void gridsmall(){
-        grid.setNumColumns(3);
-    }
-    @OnClick(R.id.radioGrid)
-    public void grid(){
-        grid.setNumColumns(2);
-    }
     RequestPresenter presenterClass;
     private CustomGrid customGrid;
     private LinearLayoutManager mLayoutManager;
@@ -78,7 +66,7 @@ public class EventPhotoActivity extends AppCompatActivity implements EventPhotos
     }
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(EventPhotoActivity.this,FeedbackActivity.class,true);    }
+        finish();    }
 
     @Override
     public void onSuccessEventPhotoList(JSONArray userList) {

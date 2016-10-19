@@ -91,18 +91,14 @@
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileName" />
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditName"
+                        android:id="@+id/tvProfileName"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@color/colorGrey"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
                         android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:gravity="left"
@@ -121,19 +117,18 @@
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileNumver"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditMobileNumber"
+                        android:id="@+id/tvProfileMobileNumber"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
-                        android:inputType="phone"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:background="@color/colorGrey"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
-                        android:textColor="@color/colorPrimary" />
+                        android:gravity="left"
+                        android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,17 +143,17 @@
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileLocation"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditLocation"
+                        android:id="@+id/tvProfileLocation"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
-                        android:background="@color/colorGrey"
-                        android:paddingLeft="@dimen/cardElevation"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:layout_weight="1.3"
+                        android:paddingLeft="@dimen/cardElevation"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
@@ -174,17 +169,17 @@
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileDOB"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditDOB"
+                        android:id="@+id/tvProfileDOB"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:background="@color/colorGrey"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
@@ -200,18 +195,17 @@
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileMemberShipNo"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvEditMembershipNo"
+                        android:id="@+id/tvProfileMembership"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
-                        android:inputType="number"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:background="@color/colorGrey"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
@@ -227,17 +221,17 @@
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileBloodGroud"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditBloodGroup"
+                        android:id="@+id/tvProfileBloddGroup"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
-                        android:background="@color/colorGrey"
-                        android:paddingLeft="@dimen/cardElevation"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
                         android:layout_weight="1.3"
+                        android:paddingLeft="@dimen/cardElevation"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
@@ -253,18 +247,17 @@
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileEmail"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditEmail"
+                        android:id="@+id/tvProfileEmail"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:inputType="textEmailAddress"
-                        android:background="@color/colorGrey"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
@@ -281,18 +274,17 @@
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileFacebook"/>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvProfileEditFacebbokId"
+                        android:id="@+id/tvProfileFacebookId"
                         android:layout_marginLeft="@dimen/activity_vertical_margin"
                         android:layout_weight="1.3"
                         android:paddingLeft="@dimen/cardElevation"
-                        android:inputType="textEmailAddress"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:background="@color/colorGrey"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
 

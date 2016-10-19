@@ -18,21 +18,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProfileEditActivity extends AppCompatActivity {
-    @BindView(R.id.tvProfileEditName)
+    @BindView(R.id.tvProfileName)
     TextView tvProfileName;
-    @BindView(R.id.tvProfileEditMobileNumber)
+    @BindView(R.id.tvProfileMobileNumber)
     TextView tvProfileMobileNumber;
-    @BindView(R.id.tvProfileEditLocation)
+    @BindView(R.id.tvProfileLocation)
     TextView tvProfileLocation;
-    @BindView(R.id.tvProfileEditDOB)
+    @BindView(R.id.tvProfileDOB)
     TextView tvProfileDOB;
-    @BindView(R.id.tvProfileEditBloodGroup)
+    @BindView(R.id.tvProfileBloodGroup)
     TextView tvProfileBloodGroup;
-    @BindView(R.id.tvEditMembershipNo)
+    @BindView(R.id.tvMembershipNo)
     TextView tvMemberShipNumber;
-    @BindView(R.id.tvProfileEditEmail)
+    @BindView(R.id.tvProfileEmail)
     TextView tvProfileEmail;
-    @BindView(R.id.tvProfileEditFacebbokId)
+    @BindView(R.id.tvProfileFacebbokId)
     TextView tvProfileFacebookId;
     @BindView(R.id.toolbarProfileEdit)
     Toolbar toolbarProfile;

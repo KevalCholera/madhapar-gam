@@ -33,6 +33,7 @@
     <string name="resendOTP">Resend OTP</string>
     <string name="enterOTP">Enter OTP</string>
     <string name="changePasswordLabel">Change Password</string>
+    <string name="aboutus">About Us</string>
     <string name="eventName">Event Name</string>
     <string name="share">Share</string>
     <string name="going">Going</string>
@@ -57,7 +58,7 @@
     <string name="more5">Fund Raising</string>
     <string name="more6">Sign Out</string>
 
-    <string name="search">Search Ocassion</string>
+    <string name="search">Search</string>
     <string name="emptyUserList">Curruntly there are no \n users in your network</string>
 
     <string name="enterrequiredfiels">Enter Required Field</string>
@@ -88,6 +89,8 @@
     <string name="profileBloodGroud">Blood Group :</string>
     <string name="profileEmail">Email :</string>
     <string name="profileFacebook">Facebook :</string>
+
+    <string name="seephotos">see photos...</string>
 
     <string name="searchNews">Search News Category</string>
     <!--Process message-->

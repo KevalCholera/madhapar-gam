@@ -5,21 +5,26 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
 import com.example.smartsense.newproject.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FundRaisingActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar_FundRaising)
-    Toolbar toolbarFundRainsing;
+public class AboutUsActivity extends AppCompatActivity {
+    @BindView(R.id.webview)
+    WebView webView;
+    @BindView(R.id.toolbarAboutUs)
+    Toolbar toolbarAboutUs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fund_raising);
+        setContentView(R.layout.activity_about_us);
+        String url= "http://192.168.0.106:8000/api/aboutus.html";
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarFundRainsing);
+        webView.loadUrl(url);
+        super.setSupportActionBar(toolbarAboutUs);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

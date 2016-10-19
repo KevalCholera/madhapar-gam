@@ -28,7 +28,7 @@ public class NetworkModel implements NetworkModelInt {
 
     @Override
     public void getNetworkList(final NetworkListResponseCallback callback) {
-            String tag = "userList";
+        String tag = "userList";
         StringRequest userListRequest = new StringRequest(Request.Method.GET, UtilClass.getUserListUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

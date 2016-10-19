@@ -55,6 +55,12 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     LinearLayout llEventDetailNotGoing;
     @BindView(R.id.llEventDetailIntrested)
     LinearLayout llEventDetailIntrested;
+    @BindView(R.id.tvOpenPhotosActivity)
+    TextView tvOpenPhotosActivity;
+    @OnClick(R.id.tvOpenPhotosActivity)
+    void openPhotos(){
+        UtilClass.changeActivity(EventDetailActivity.this,EventPhotoActivity.class,false);
+    }
     private static final int StatusListActivityConstant = 200;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
 
@@ -105,7 +111,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
                 e.printStackTrace();
             }
         } else {
-            getEventdetail(eventObj.optString("eventId"));
+//            getEventdetail(eventObj.optString("eventId"));
         }
     }
 

@@ -100,16 +100,17 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_login_margin"
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:background="@color/colorPrimary"
-                android:gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:gravity="left"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/ivNewsLike"
-                    android:layout_width="@dimen/activity_top_login_margin"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/activity_top_login_margin"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_top_login_margin"
@@ -125,16 +126,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_login_margin"
                 android:layout_weight="1"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:background="@color/colorPrimary"
-                android:gravity="center"
+                android:gravity="left"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/ivNewsComment"
-                    android:layout_width="@dimen/activity_top_login_margin"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/activity_top_login_margin"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_top_login_margin"
@@ -148,23 +151,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/cardview_light_background" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/activity_login_margin"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/ivNewsShare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/activity_top_login_margin"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_news_share_filled" />
-
             </LinearLayout>
 
         </LinearLayout>

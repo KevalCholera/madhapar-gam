@@ -9,7 +9,7 @@
     tools:context="com.madhapar.View.FundRaisingActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarForgotPassword"
+        android:id="@+id/toolbar_FundRaising"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
@@ -33,8 +33,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/imgsize"
-
-            android:cropToPadding="true"
+            android:scaleType="fitXY"
             android:src="@drawable/img_food" />
 
         <TextView
@@ -77,14 +76,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFundraisingOrganize"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:gravity="center">
 
             <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginTop="@dimen/activity_top_login_margin"
                 android:background="@drawable/fund_raising_button"
                 android:text="@string/fundInfo"

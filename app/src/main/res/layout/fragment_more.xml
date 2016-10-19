@@ -23,25 +23,7 @@
             android:layout_marginLeft="@dimen/activity_top_login_margin"
             android:text="@string/more1"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/activity_top_login_margin"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_photos" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvEventPhotos"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/activity_top_login_margin"
-            android:layout_marginLeft="@dimen/activity_top_login_margin"
-            android:text="@string/more2"/>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="40dp"

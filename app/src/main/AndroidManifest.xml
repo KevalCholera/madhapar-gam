@@ -140,7 +140,22 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.madhapar.View.FundRaisingDetail" />
-        <activity android:name="com.madhapar.View.SearchNewsActivity"
+        <activity
+            android:name="com.madhapar.View.SearchNewsActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.madhapar.View.FundRaisingActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableNewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity android:name="com.madhapar.View.AboutUsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/lableNewsDetailActivity"
             android:screenOrientation="portrait"

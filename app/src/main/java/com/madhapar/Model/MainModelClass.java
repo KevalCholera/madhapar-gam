@@ -43,7 +43,7 @@ public class MainModelClass implements MainModelInt {
         drawerIconList.add(1, R.drawable.ic_event);
         drawerIconList.add(2, R.drawable.ic_user);
         drawerIconList.add(3, R.drawable.ic_network);
-        drawerIconList.add(4, R.drawable.ic_network);
+        drawerIconList.add(4, R.drawable.icon_photos_white);
         drawerIconList.add(5, R.drawable.ic_more);
         return drawerIconList;
     }

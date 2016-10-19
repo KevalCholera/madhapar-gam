@@ -79,6 +79,7 @@
                 <TextView
                     android:id="@+id/tvNewsDetailDateTime"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorGreyProfile"
                     android:layout_height="wrap_content"
                     android:text="" />
 
@@ -86,6 +87,7 @@
                     android:id="@+id/tvNewsDetailCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyProfile"
                     android:layout_marginLeft="@dimen/margin_small"
                     android:text="" />
             </LinearLayout>
@@ -106,7 +108,6 @@
                 android:layout_marginRight="@dimen/magin_large"
                 android:paddingBottom="@dimen/activity_rightleft_login"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:text=""
                 android:textSize="@dimen/textImageDetailDescription" />
 
             </LinearLayout>

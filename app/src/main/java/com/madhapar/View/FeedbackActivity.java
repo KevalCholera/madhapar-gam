@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
@@ -55,7 +56,7 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     }
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(FeedbackActivity.this,ProfileEditActivity.class,true);    }
+        finish();    }
 
     @OnClick(R.id.btnFeedbackSend)
     public void feedback(){
