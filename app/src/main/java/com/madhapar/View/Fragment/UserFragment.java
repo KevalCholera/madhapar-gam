@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Util.Constants;
+import com.madhapar.View.EventDetailActivity;
 import com.madhapar.View.LoginActivity;
 import com.madhapar.View.ProfileEditActivity;
 import com.mpt.storage.SharedPreferenceUtil;
@@ -43,6 +44,8 @@ public class UserFragment extends BaseFragment {
     EditText tvProfileEmail;
     @BindView(R.id.etEditProfileFacebbokId)
     EditText tvProfileFacebookId;
+    @BindView(R.id.etProfileMobileEditLastName)
+    EditText etProfileLastName;
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     private PresenterClass presenter;
@@ -54,6 +57,7 @@ public class UserFragment extends BaseFragment {
         Log.e("log","here"+tvProfileLocation.getText().toString());
         tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName,Constants.RequestConstants.UserListUrl));
         tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup,Constants.RequestConstants.UserListUrl));
+        etProfileLastName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLastName,Constants.RequestConstants.UserListUrl));
         tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB,Constants.RequestConstants.UserListUrl));
         tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName,Constants.RequestConstants.UserListUrl));
         Log.e("log","here"+SharedPreferenceUtil.getString(Constants.UserData.UserLocationName,Constants.RequestConstants.UserListUrl));

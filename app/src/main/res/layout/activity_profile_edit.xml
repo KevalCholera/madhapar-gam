@@ -116,6 +116,33 @@
                         android:layout_gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
+                        android:text="@string/lastName"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvProfileLastNameNumber"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_weight="1.3"
+                        android:paddingLeft="@dimen/cardElevation"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:gravity="left"
+                        android:textColor="@color/colorPrimary"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="right"
+                        android:textColor="@color/colorGreyProfile"
+                        android:gravity="right"
                         android:text="@string/profileNumver"/>
                     <TextView
                         android:layout_width="0dp"

@@ -26,7 +26,7 @@ public interface PresneterInt {
 
     List<Integer> initMainDrawer();
 
-    void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
+    void feedbackValidateCredentials(String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 
     void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember, AppCompatActivity activity);
 

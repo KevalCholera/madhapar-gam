@@ -14,5 +14,5 @@ public interface FeedbackModelInt {
 
         void onFeedbackSuccess();
     }
-     void feedback(String name,String mobile,String subject,String feedback, OnLoginFinishedListener listener);
+     void feedback(String subject,String feedback, OnLoginFinishedListener listener);
 }

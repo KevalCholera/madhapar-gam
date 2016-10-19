@@ -21,10 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FeedbackActivity extends AppCompatActivity implements FeedbackActivityInt {
-    @BindView(R.id.etFeedbackName)
-    EditText etFeedbackName;
-    @BindView(R.id.etFeedbackMobile)
-    EditText etFeedbackMobile;
     @BindView(R.id.etFeedbackSubject)
     EditText etFeedbackSubject;
     @BindView(R.id.etFeedbackFeedback)
@@ -61,7 +57,7 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     @OnClick(R.id.btnFeedbackSend)
     public void feedback(){
         presenter = new PresenterClass();
-        presenter.feedbackValidateCredentials(etFeedbackName.getText().toString(),etFeedbackMobile.getText().toString(),etFeedbackSubject.getText().toString(),etFeedback.getText().toString(),feedbackActivityInt);
+        presenter.feedbackValidateCredentials(etFeedbackSubject.getText().toString(),etFeedback.getText().toString(),feedbackActivityInt);
     }
 
     @Override

@@ -31,30 +31,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/text_siz_large"
-        android:id="@+id/etFeedbackName"
-        android:layout_marginTop="@dimen/top_margin_large"
-        android:layout_marginLeft="@dimen/top_margin_large"
-        android:layout_marginRight="@dimen/top_margin_large"
-        android:paddingLeft="@dimen/margin_small"
-        android:background="@drawable/feedback"
-        android:hint="@string/feedbackName"
-        android:singleLine="true"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/text_siz_large"
-        android:id="@+id/etFeedbackMobile"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:digits="0987654321"
-        android:inputType="phone"
-        android:paddingLeft="@dimen/margin_small"
-        android:layout_marginLeft="@dimen/top_margin_large"
-        android:layout_marginRight="@dimen/top_margin_large"
-        android:background="@drawable/feedback"
-        android:hint="@string/feedbackMobile"
-        android:singleLine="true"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_siz_large"

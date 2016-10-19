@@ -119,10 +119,10 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
     @Override
-    public void feedbackValidateCredentials(String name, String mobileNumber, String subject, String feedback, FeedbackActivityInt feedbackActivityInt) {
+    public void feedbackValidateCredentials(String subject, String feedback, FeedbackActivityInt feedbackActivityInt) {
         feedbackActivityint = feedbackActivityInt;
         feedbackModel = new FeedbackModel();
-        feedbackModel.feedback(name, mobileNumber, subject, feedback, this);
+        feedbackModel.feedback(subject, feedback, this);
     }
 
 

@@ -8,9 +8,9 @@ import android.text.TextUtils;
  */
 public class FeedbackModel implements FeedbackModelInt{
     @Override
-    public void feedback(final String name, final String mobile, final String subject, final String feedback, final OnLoginFinishedListener listener) {
+    public void feedback(final String subject, final String feedback, final OnLoginFinishedListener listener) {
                 boolean error = false;
-                if (TextUtils.isEmpty(subject) && TextUtils.isEmpty(name) && TextUtils.isEmpty(mobile) && TextUtils.isEmpty(feedback)) {
+                if (TextUtils.isEmpty(subject) && TextUtils.isEmpty(feedback)) {
                     listener.onFeddbackRequiredFieldError();
                     error = true;
                 }
