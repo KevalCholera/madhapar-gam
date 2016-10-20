@@ -13,11 +13,12 @@
     <string name="loginFail">Login successfull</string>
     <string name="loginSucess">Login Fail</string>
 
-    <string name="mobileNumberLogin">Mobile Number</string>
+    <string name="mobileNumberLogin">+254 xxxxx1234</string>
     <string name="passwordLogin">Password</string>
     <string name="btnLogin">Log-in</string>
     <string name="forgetPassword">Forget Password</string>
     <string name="newUserSignUp">New here? Sign Up</string>
+    <string name="loginLabel">Login</string>
 
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
@@ -81,7 +82,8 @@
     <string name="resenedcode">Resend Code Successfully</string>
     <string name="fundRaising">Fund Raising</string>
     <string name="fundInfo">More Info</string>
-    <string name="profileName">Name :</string>
+    <string name="profileName">First Name :</string>
+    <string name="lastNameEditProfile">Last Name :</string>
     <string name="profileNumver">Mobile No :</string>
     <string name="profileLocation">Location :</string>
     <string name="profileDOB">D. O. B. :</string>
@@ -109,6 +111,11 @@
     <string name="lableUserVerify">Verify Otp</string>
     <string name="lableNewsDetailActivity">News</string>
     <string name="lableNewsCommentActivity">Comments</string>
+    <string name="labelNewsComment">Comment</string>
+    <string name="labelEventDetail">Event Detail</string>
+    <string name="labelProfile">Profile</string>
+    <string name="labelEventPhotos">Event Photos</string>
+    <string name="labelFundRaising">Fund Raising</string>
 
     <!--NewsData-->
 

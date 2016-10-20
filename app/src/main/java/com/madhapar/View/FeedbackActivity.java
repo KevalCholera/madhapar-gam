@@ -25,8 +25,6 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     EditText etFeedbackSubject;
     @BindView(R.id.etFeedbackFeedback)
     EditText etFeedback;
-    @BindView(R.id.toolbarFeedback)
-    Toolbar toolbarFeedback;
     private PresneterInt presenter;
     private FeedbackActivityInt feedbackActivityInt=this;
     @Override
@@ -34,7 +32,6 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarFeedback);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

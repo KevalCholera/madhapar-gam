@@ -35,21 +35,21 @@
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/forgetPassword"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.ChangePasswordActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/changePasswordLabel"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.FeedbackActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/feedback"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.StatusListActivity"
@@ -87,23 +87,23 @@
         <activity
             android:name="com.madhapar.View.NewsCommentActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelNewsComment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.EventDetailActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelEventDetail"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.ProfileActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelProfile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <receiver
@@ -128,16 +128,16 @@
         <activity
             android:name="com.madhapar.View.EventPhotoActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelEventPhotos"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.ProfileEditActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelProfile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.madhapar.View.FundRaisingDetail" />
         <activity
@@ -150,17 +150,18 @@
         <activity
             android:name="com.madhapar.View.FundRaisingActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/labelFundRaising"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity android:name="com.madhapar.View.AboutUsActivity"
+        <activity
+            android:name="com.madhapar.View.AboutUsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/lableNewsDetailActivity"
+            android:label="@string/aboutus"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.madhapar.View.LocationsActivity"></activity>
     </application>
 
 </manifest>

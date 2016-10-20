@@ -15,8 +15,7 @@ import butterknife.ButterKnife;
 public class AboutUsActivity extends AppCompatActivity {
     @BindView(R.id.webview)
     WebView webView;
-    @BindView(R.id.toolbarAboutUs)
-    Toolbar toolbarAboutUs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,6 @@ public class AboutUsActivity extends AppCompatActivity {
         String url= "http://192.168.0.106:8000/api/aboutus.html";
         ButterKnife.bind(this);
         webView.loadUrl(url);
-        super.setSupportActionBar(toolbarAboutUs);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

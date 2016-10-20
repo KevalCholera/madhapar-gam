@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:id="@+id/llDrawerMain"
-        android:layout_width="75dp"
+        android:layout_width="@dimen/drawerWidth"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
@@ -26,7 +26,7 @@
 
         <ListView
             android:id="@+id/lvDrawerMain"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/listWidth"
             android:layout_height="0dp"
             android:layout_gravity="start"
             android:layout_weight="0.8"

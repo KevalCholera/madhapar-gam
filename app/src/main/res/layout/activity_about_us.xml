@@ -4,25 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.madhapar.View.AboutUsActivity">
-    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbarAboutUs"
-        android:background="@color/colorPrimary">
 
-        <TextView
-            android:id="@+id/tvToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text ="@string/aboutus"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorWhite"/>
-
-    </android.support.v7.widget.Toolbar>
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webview"
-        android:layout_marginTop="@dimen/toolbar"></WebView>
+        android:id="@+id/webview"></WebView>
 
 </RelativeLayout>

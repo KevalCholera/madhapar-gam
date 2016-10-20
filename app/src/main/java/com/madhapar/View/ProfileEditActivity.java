@@ -34,8 +34,6 @@ public class ProfileEditActivity extends AppCompatActivity {
     TextView tvProfileEmail;
     @BindView(R.id.tvProfileFacebbokId)
     TextView tvProfileFacebookId;
-    @BindView(R.id.toolbarProfileEdit)
-    Toolbar toolbarProfile;
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     @Override
@@ -43,7 +41,6 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarProfile);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Log.e("log","here"+tvProfileLocation.getText().toString());
         tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName,Constants.RequestConstants.UserListUrl));

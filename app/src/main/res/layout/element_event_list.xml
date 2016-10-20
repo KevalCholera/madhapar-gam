@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/activity_vertical_margin"
+                    android:textSize="@dimen/text16"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -71,9 +71,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/text_siz_large"
+            android:layout_height="@dimen/eventlistHeight"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/activity_top_login_margin"
+            android:layout_marginTop="@dimen/margin_medium"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="3">

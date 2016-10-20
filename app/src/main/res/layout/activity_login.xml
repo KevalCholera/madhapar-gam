@@ -18,7 +18,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/defaultpadding"
+                android:paddingBottom="@dimen/defaultpadding"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
@@ -29,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginRight="@dimen/activity_login_margin"
-                    android:layout_marginTop="@dimen/activity_top_login_margin"
+                    android:layout_marginTop="@dimen/top_margin_medium"
                     android:src="@drawable/iconclose"
                     android:visibility="gone" />
 
@@ -52,9 +53,10 @@
                     android:layout_marginTop="@dimen/activity_top_login_margin"
                     android:digits="0123456789"
                     android:drawableLeft="@mipmap/icon_mobile"
-                    android:drawablePadding="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/paddingMedium"
+                    android:textColor="@color/colorBlack"
                     android:ems="10"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:hint="@string/mobileNumberLogin"
                     android:inputType="phone"
                     android:maxLength="14"
@@ -73,10 +75,11 @@
                     android:layout_marginTop="@dimen/activity_top_login_margin"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                     android:drawableLeft="@mipmap/icon_key"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:hint="@string/passwordLogin"
                     android:inputType="textPassword"
-                    android:drawablePadding="@dimen/margin_medium"
+                    android:textColor="@color/colorBlack"
+                    android:drawablePadding="@dimen/paddingMedium"
                     android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
                 <Button
@@ -94,9 +97,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_top_large"
+                android:layout_marginTop="@dimen/margin_Top"
+                android:paddingBottom="@dimen/paddinglarge"
+                android:layout_marginBottom="@dimen/paddinglarge"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="@dimen/paddingSmall">
 
                 <TextView
                     android:id="@+id/tvForgetPassword"
@@ -113,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="@dimen/margin_small"
+                    android:padding="@dimen/paddingSmall"
                     android:text="@string/newUserSignUp" />
             </LinearLayout>
         </LinearLayout>

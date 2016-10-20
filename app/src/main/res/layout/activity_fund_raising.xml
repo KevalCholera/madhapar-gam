@@ -8,23 +8,6 @@
     android:orientation="vertical"
     tools:context="com.madhapar.View.FundRaisingActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_FundRaising"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            android:id="@+id/tvToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fundRaising"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold" />
-
-    </android.support.v7.widget.Toolbar>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,9 +15,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/imgsize"
+            android:layout_height="@dimen/imagesize"
             android:scaleType="fitXY"
-            android:src="@drawable/img_food" />
+            android:src="@drawable/img_work" />
 
         <TextView
             android:id="@+id/tvFundrainsingName"
@@ -76,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFundraisingOrganize"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/defaultpadding"
             android:gravity="center">
 
             <Button
@@ -84,7 +67,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/defaultpadding"
                 android:layout_marginTop="@dimen/activity_top_login_margin"
                 android:background="@drawable/fund_raising_button"
                 android:text="@string/fundInfo"

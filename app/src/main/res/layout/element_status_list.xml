@@ -11,8 +11,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivStautsUserImage"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/circulerimageevent"
+            android:layout_height="@dimen/circulerimageevent"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/margin_medium"
             android:src="@drawable/honey" />
@@ -51,7 +51,6 @@
     </LinearLayout>
 
     <View
-
         android:layout_width="fill_parent"
         android:layout_height="@dimen/commenViewHeight"
         android:background="@color/colorNewsDetailView" />

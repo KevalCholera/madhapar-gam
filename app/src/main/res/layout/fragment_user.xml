@@ -11,7 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/CommentOverlayImage"
+            android:paddingBottom="@dimen/paddingButtom"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -22,26 +22,26 @@
                 <ImageView
                     android:id="@+id/ivProfilePhoto"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/activity_button_width"
+                    android:layout_height="@dimen/imageheight"
                     android:adjustViewBounds="true"
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/img_work" />
+                    android:src="@drawable/cover_placeholder" />
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/activity_button_width"
+                    android:layout_height="@dimen/imageheight"
                     android:gravity="center"
-                    android:padding="5dp">
+                    android:padding="@dimen/paddingSmall">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivProfilePhotoSmall"
-                        android:layout_width="@dimen/alert"
-                        android:layout_height="@dimen/alert"
+                        android:layout_width="@dimen/circuleruser"
+                        android:layout_height="@dimen/circuleruser"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="@dimen/margin_medium"
                         android:layout_marginTop="@dimen/margin_medium"
-                        android:src="@drawable/img_work" />
+                        android:src="@drawable/icon_placeholde" />
 
                     <ImageView
                         android:id="@+id/ivEditIcon"
@@ -50,7 +50,7 @@
                         android:layout_alignRight="@+id/ivProfilePhotoSmall"
                         android:layout_alignTop="@+id/ivProfilePhotoSmall"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/cardElevation"
+                        android:layout_marginTop="@dimen/margin_small"
                         android:src="@drawable/icon_edit_white" />
 
                 </RelativeLayout>
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/defaultpadding"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -72,6 +72,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileName" />
@@ -79,59 +80,61 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etProfileEditProfileName"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
-                        android:text="@string/lastName"/>
+                        android:text="@string/lastNameEditProfile"/>
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etProfileMobileEditLastName"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
-                        android:gravity="left"
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:gravity="left|center_vertical"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileNumver"/>
@@ -139,29 +142,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etProfileMobileEditProfileNumber"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileLocation"/>
@@ -169,29 +172,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileLocation"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileDOB"/>
@@ -199,29 +202,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileDOB"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileMemberShipNo"/>
@@ -229,29 +232,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditMembershipNo"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:gravity="right"
                         android:textColor="@color/colorGreyProfile"
                         android:text="@string/profileBloodGroud"/>
@@ -259,29 +262,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileBloodGroup"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileEmail"/>
@@ -289,30 +292,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileEmail"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/defaultpadding"
                     android:paddingBottom="@dimen/CommentOverlayImage"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_gravity="right"
+                        android:layout_gravity="center"
                         android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
                         android:text="@string/profileFacebook"/>
@@ -320,16 +323,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileFacebbokId"
-                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_weight="1.3"
                         android:focusableInTouchMode="true"
                         android:background="@drawable/search"
-                        android:paddingLeft="@dimen/cardElevation"
+                        android:paddingLeft="@dimen/paddingSmall"
                         android:inputType="textPersonName"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                        android:layout_marginRight="@dimen/marginRight"
                         android:gravity="left"
                         android:textColor="@color/colorPrimary"/>
                 </LinearLayout>

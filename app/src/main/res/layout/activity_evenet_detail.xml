@@ -24,7 +24,7 @@
             <ImageView
                 android:id="@+id/ivEventCoverImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/ImageNewDesc"
                 android:layout_weight="1"
                 android:scaleType="fitXY" />
             <!--<RelativeLayout-->
@@ -87,7 +87,7 @@
                     <Button
                         android:id="@+id/btnEventInfoShare"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/activity_vertical_margin"
+                        android:layout_height="@dimen/defaultpadding"
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/margin_small"
                         android:layout_weight="1"

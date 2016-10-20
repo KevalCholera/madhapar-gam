@@ -26,8 +26,6 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
     Button btnRecover;
     @BindView(R.id.btnCancel)
     Button btnCancel;
-    @BindView(R.id.toolbarForgotPassword)
-    Toolbar toolbar;
     private PresneterInt presenter;
     private ForgetPasswordViewInt forgetPasswordViewInt = this;
 
@@ -36,7 +34,6 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbar);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

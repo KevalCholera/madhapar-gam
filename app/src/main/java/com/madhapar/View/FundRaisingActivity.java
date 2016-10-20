@@ -12,14 +12,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FundRaisingActivity extends AppCompatActivity {
-    @BindView(R.id.toolbar_FundRaising)
-    Toolbar toolbarFundRainsing;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fund_raising);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarFundRainsing);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override

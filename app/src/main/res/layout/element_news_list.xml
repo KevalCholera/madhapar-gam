@@ -55,7 +55,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cardview_default_elevation"
+                android:layout_height="@dimen/viewHeight"
                 android:layout_marginTop="@dimen/margin_small"
                 android:background="@color/colorGrey" />
 
@@ -102,9 +102,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_login_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:background="@color/colorPrimary"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/defaultpadding"
                 android:gravity="left"
                 android:orientation="horizontal">
 
@@ -129,8 +129,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/activity_login_margin"
                 android:layout_weight="1"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/defaultpadding"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:background="@color/colorPrimary"
                 android:gravity="left"
                 android:orientation="horizontal">

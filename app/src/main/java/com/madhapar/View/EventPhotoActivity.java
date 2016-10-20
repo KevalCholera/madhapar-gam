@@ -32,8 +32,6 @@ import butterknife.OnItemSelected;
 public class EventPhotoActivity extends AppCompatActivity implements EventPhotosInt {
     @BindView(R.id.grid)
     GridView grid;
-    @BindView(R.id.toolbarEventPhotos)
-    Toolbar toolbarEventPhotos;
     RequestPresenter presenterClass;
     private CustomGrid customGrid;
     private LinearLayoutManager mLayoutManager;
@@ -43,7 +41,6 @@ public class EventPhotoActivity extends AppCompatActivity implements EventPhotos
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_photo);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarEventPhotos);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         presenterClass = new RequestPresenter();
         presenterClass.getEventPhoto(this);

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/top_margin_small"
-    android:layout_marginTop="@dimen/top_margin_small"
+    android:layout_marginLeft="@dimen/margin_small"
+    android:layout_marginTop="@dimen/margin_small"
     android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context="com.madhapar.View.SignUpActivity">
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
+            android:paddingBottom="@dimen/activity_top_login_margin"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
@@ -27,8 +28,8 @@
 
                 <ImageView
                     android:id="@+id/imgBack"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/imagesignup"
+                    android:layout_height="@dimen/imagesignup"
                     android:src="@drawable/iconback" />
 
                 <TextView
@@ -40,8 +41,8 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="@dimen/signuplogo"
+                android:layout_height="@dimen/signuplogo"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/madhapar_icon" />
             <android.support.design.widget.TextInputLayout
@@ -52,48 +53,48 @@
                 android:id="@+id/etFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_rightleft_login"
-                android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/extraLargemargin"
+                android:layout_marginRight="@dimen/extraLargemargin"
+                android:layout_marginTop="@dimen/defaultpadding"
+                android:textColor="@color/colorBlack"
                 android:drawableLeft="@mipmap/iconuser"
-                android:gravity="left"
-                android:drawablePadding="@dimen/margin_medium"
+                android:gravity="left|center"
+                android:drawablePadding="@dimen/paddingMedium"
                 android:hint="@string/firstName"
                 android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etLasttName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_rightleft_login"
-                android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/top_margin_small"
-                android:drawablePadding="@dimen/margin_medium"
+                android:layout_marginLeft="@dimen/extraLargemargin"
+                android:layout_marginRight="@dimen/extraLargemargin"
+                android:drawablePadding="@dimen/paddingMedium"
+                android:textColor="@color/colorBlack"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/iconuser"
-                android:gravity="left"
+                android:gravity="left|center"
                 android:hint="@string/lastName"
                 android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etMobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_rightleft_login"
-                android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_marginLeft="@dimen/extraLargemargin"
+                android:layout_marginRight="@dimen/extraLargemargin"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:textColor="@color/colorBlack"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/icon_mobile"
-                android:gravity="left"
-                android:drawablePadding="@dimen/margin_medium"
+                android:gravity="left|center"
+                android:drawablePadding="@dimen/paddingMedium"
                 android:hint="@string/mobileNumberLogin"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
@@ -101,37 +102,37 @@
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etSignUpPassord"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_rightleft_login"
-                android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_marginLeft="@dimen/extraLargemargin"
+                android:layout_marginRight="@dimen/extraLargemargin"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                 android:drawableLeft="@mipmap/icon_key"
-                android:gravity="left"
-                android:drawablePadding="@dimen/margin_medium"
+                android:gravity="left|center"
+                android:textColor="@color/colorBlack"
+                android:drawablePadding="@dimen/paddingSmall"
                 android:hint="@string/passwordLogin"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etFamilyMember"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_rightleft_login"
-                android:layout_marginRight="@dimen/activity_rightleft_login"
-                android:layout_marginTop="@dimen/top_margin_small"
+                android:layout_marginLeft="@dimen/extraLargemargin"
+                android:layout_marginRight="@dimen/extraLargemargin"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:drawableLeft="@mipmap/iconmemberddd"
-                android:gravity="left"
-                android:drawablePadding="@dimen/margin_medium"
+                android:gravity="left|center"
+                android:drawablePadding="@dimen/paddingSmall"
+                android:textColor="@color/colorBlack"
                 android:hint="@string/familyMember"
                 android:imeOptions="actionNext"
                 android:inputType="number"

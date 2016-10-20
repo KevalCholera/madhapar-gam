@@ -25,6 +25,7 @@
     <dimen name="smallPadding">2dp</dimen>
     <dimen name="padding_text">3dp</dimen>
     <dimen name="imgsize">250dp</dimen>
+    <dimen name="imagesize">350dp</dimen>
     <dimen name="userListPlaceHolderIV">100dp</dimen>
     <dimen name="searchBarPadding">10dp</dimen>
     <dimen name="cardElevation">5dp</dimen>

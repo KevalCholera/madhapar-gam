@@ -7,23 +7,6 @@
     android:background="@color/cardview_light_background"
     android:orientation="vertical"
     tools:context="com.madhapar.View.ProfileActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            android:id="@+id/tvToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold" />
-
-    </android.support.v7.widget.Toolbar>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_button_width"
             android:gravity="center"
-            android:padding="5dp">
+            android:padding="@dimen/paddingSmall">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfilePhotoSmall"
@@ -79,7 +62,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/defaultpadding"
         android:orientation="vertical">
 
         <LinearLayout
@@ -98,19 +81,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileName"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
+                android:paddingLeft="@dimen/paddingSmall"
                 android:inputType="textCapWords"
                 android:layout_gravity="center"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:gravity="left"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -124,16 +107,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileMobileNumber"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -147,16 +130,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileLocation"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:layout_marginLeft="@dimen/defaultpadding"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:layout_weight="1.3"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -170,16 +153,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileDOB"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -193,16 +176,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvMembershipNo"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -216,16 +199,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileBloodGroup"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:layout_marginLeft="@dimen/defaultpadding"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:layout_weight="1.3"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -239,16 +222,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileEmail"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/defaultpadding"
             android:paddingBottom="@dimen/CommentOverlayImage"
             android:orientation="horizontal">
             <TextView
@@ -263,10 +246,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvProfileFacebbokId"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/defaultpadding"
                 android:layout_weight="1.3"
-                android:paddingLeft="@dimen/cardElevation"
-                android:layout_marginRight="@dimen/default_line_indicator_line_width"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:layout_marginRight="@dimen/margin_medium"
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
 

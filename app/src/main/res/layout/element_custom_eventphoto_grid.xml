@@ -9,10 +9,10 @@
         android:id="@+id/ivImageGrid"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
-        android:paddingLeft="@dimen/cardElevation"
-        android:paddingRight="@dimen/cardElevation"
-        android:paddingTop="@dimen/cardElevation"
-        android:layout_height="@dimen/btn_margin_forgetactivity">
+        android:paddingLeft="@dimen/paddingSmall"
+        android:paddingRight="@dimen/paddingSmall"
+        android:paddingTop="@dimen/paddingSmall"
+        android:layout_height="@dimen/EventPhotoHeight">
     </ImageView>
 
     <TextView
@@ -21,8 +21,8 @@
         android:layout_alignLeft="@id/ivImageGrid"
         android:layout_alignRight="@id/ivImageGrid"
         android:layout_alignBottom="@id/ivImageGrid"
-        android:layout_marginLeft="@dimen/cardElevation"
-        android:layout_marginRight="@dimen/cardElevation"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         android:textColor="@color/cardview_light_background"
         android:gravity="center"
         android:background="@color/colorTransparentBlack"
@@ -35,11 +35,11 @@
         android:id="@+id/tvPhotoDate"
         android:layout_width="match_parent"
         android:layout_height="@dimen/CommentOverlayImage"
-        android:layout_marginLeft="@dimen/cardElevation"
-        android:layout_marginRight="@dimen/cardElevation"
-        android:paddingLeft="@dimen/cardElevation"
-        android:paddingRight="@dimen/cardElevation"
-        android:paddingBottom="@dimen/cardElevation"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:paddingLeft="@dimen/paddingSmall"
+        android:paddingRight="@dimen/paddingSmall"
+        android:paddingBottom="@dimen/paddingSmall"
         android:background="@color/colorPrimary"
         android:textColor="@color/cardview_light_background"
         android:gravity="center"

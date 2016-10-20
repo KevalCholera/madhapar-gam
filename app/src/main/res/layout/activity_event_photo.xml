@@ -5,33 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.madhapar.View.EventPhotoActivity">
-    <android.support.v7.widget.Toolbar android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbarEventPhotos"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            android:id="@+id/tvToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text ="@string/eventPhotos"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorWhite"/>
-
-    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/defaultpadding"
+        android:layout_marginLeft="@dimen/defaultpadding"
+        android:layout_marginRight="@dimen/defaultpadding"
+        android:layout_marginTop="@dimen/defaultpadding"
         android:orientation="vertical">
     <GridView
         android:numColumns="@integer/default_title_indicator_footer_indicator_style"
         android:gravity="center"
-        android:columnWidth="100dp"
+        android:columnWidth="@dimen/ColoumnWidth"
         android:stretchMode="columnWidth"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

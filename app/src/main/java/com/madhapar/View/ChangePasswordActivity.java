@@ -30,8 +30,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     EditText etChangeConfirmNewPassword;
     @BindView(R.id.btnSave)
     Button btnSave;
-    @BindView(R.id.toolbarChangePassword)
-    Toolbar toolbarChangePassword;
     private PresneterInt presenter;
     private String otpToken;
     private ChangePasswordViewInt changePasswordViewInt = this;
@@ -41,7 +39,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         ButterKnife.bind(this);
-        super.setSupportActionBar(toolbarChangePassword);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent() != null) {
             otpToken = getIntent().getStringExtra("otpToken");

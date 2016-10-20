@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="@dimen/activity_top_login_margin">
+        android:padding="@dimen/paddinglarge">
 
         <LinearLayout
             android:id="@+id/llSearchUser"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/text_siz_large"
+            android:layout_height="@dimen/margin_Top"
             android:layout_gravity="center_vertical"
             android:background="@drawable/search"
             android:gravity="center">
@@ -30,13 +30,13 @@
             <EditText
                 android:id="@+id/etSearch"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/text_siz_large"
+                android:layout_height="@dimen/margin_Top"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:hint="@string/search"
                 android:padding="@dimen/searchBarPadding"
                 android:textAlignment="center"
-                android:textSize="@dimen/activity_vertical_margin" />
+                android:textSize="@dimen/defaultpadding" />
 
         </LinearLayout>
     </LinearLayout>

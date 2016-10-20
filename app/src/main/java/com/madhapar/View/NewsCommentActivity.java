@@ -30,7 +30,6 @@ import butterknife.OnClick;
 public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
-
     @BindView(R.id.etCommentText)
     EditText etCommentText;
     @BindView(R.id.tvSendComment)

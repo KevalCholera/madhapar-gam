@@ -4,7 +4,7 @@
         <shape>
             android:thickness="0dp"
             android:shape="rectangle">
-            <corners android:radius="5dp" />
+            <corners android:radius="10dp" />
             <padding
                 android:left="@dimen/top_margin_small"
                 android:right="@dimen/activity_top_login_margin"

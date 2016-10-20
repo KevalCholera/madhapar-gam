@@ -13,13 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/llTypeComment"
-        android:layout_below="@+id/toolbarComment"
         android:scrollbars="vertical" />
-
     <View
         android:id="@+id/viewCommentList"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/CommentPaddingLeft"
+        android:layout_height="@dimen/viewHeight"
         android:layout_below="@+id/rvCommentList"
         android:background="@color/colorNewsDetailView" />
 

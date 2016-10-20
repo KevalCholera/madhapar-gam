@@ -68,6 +68,8 @@ public class MoreFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         ButterKnife.bind(this, view);
         presenter = new PresenterClass();
+        getActivity().findViewById(R.id.moreFragment);
+        
         return view;
     }
 }

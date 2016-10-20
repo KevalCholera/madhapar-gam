@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/paddingdefaultLarge"
+    android:paddingLeft="@dimen/defaultpadding"
+    android:paddingRight="@dimen/defaultpadding"
+    android:paddingTop="@dimen/defaultpadding"
+    tools:context="com.madhapar.View.LocationsActivity">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:drawableLeft="@drawable/ic_search"
+        android:gravity="left|center"
+        android:hint="@string/search"
+        android:drawablePadding="@dimen/cardElevation"
+        android:background="@drawable/search"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvEventStatusList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/defaultpadding"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

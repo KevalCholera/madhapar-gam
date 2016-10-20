@@ -6,10 +6,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/defaultpadding"
+        android:layout_marginLeft="@dimen/defaultpadding"
+        android:layout_marginRight="@dimen/defaultpadding"
+        android:layout_marginTop="@dimen/defaultpadding"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,8 +30,8 @@
                     android:id="@+id/radioGridSmall"
                     android:layout_width="@dimen/activity_top_login_margin"
                     android:layout_height="@dimen/activity_top_login_margin"
-                    android:background="@drawable/ic_fillgrid"
-                    android:layout_marginLeft="@dimen/cardElevation"
+                    android:background="@drawable/icon_grid_small"
+                    android:layout_marginLeft="@dimen/margin_small"
                     android:gravity="center"
                     android:layout_marginRight="@dimen/cardElevation"
                     android:button="@android:color/transparent"
@@ -40,9 +40,9 @@
                     android:id="@+id/radioGridfragment"
                     android:layout_width="@dimen/activity_top_login_margin"
                     android:layout_height="@dimen/activity_top_login_margin"
-                    android:background="@drawable/ic_icon"
-                    android:layout_marginLeft="@dimen/cardElevation"
-                    android:layout_marginRight="@dimen/cardElevation"
+                    android:background="@drawable/icon_grid_fill"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/margin_small"
                     android:button="@android:color/transparent"
                     android:checked="true"/>
             </RadioGroup>
