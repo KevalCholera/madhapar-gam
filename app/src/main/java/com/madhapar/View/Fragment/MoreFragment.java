@@ -69,7 +69,7 @@ public class MoreFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         presenter = new PresenterClass();
         getActivity().findViewById(R.id.moreFragment);
-        
+
         return view;
     }
 }

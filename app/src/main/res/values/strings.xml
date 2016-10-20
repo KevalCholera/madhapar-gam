@@ -151,6 +151,13 @@
     <string name="EnterTainment">Entertainment</string>
     <string name="news">News</string>
     <string name="sports">Sports</string>
+    
+    <string name="titlenews">News Feed</string>
+    <string name="titleEvent">Event Calender</string>
+    <string name="titleProfile">Profile</string>
+    <string name="titleNetwork">My Network</string>
+    <string name="titlePhotos">Event Photos</string>
+    <string name="titleMore">More</string>
 
 
 </resources>

@@ -69,7 +69,26 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 presenter.changeFragment(R.id.flMain, position, MainActivity.this);
+
                 dlMain.closeDrawers();
+                if(position==0){
+                    getSupportActionBar().setTitle(getString(R.string.titlenews));
+                }
+                if(position==1){
+                    getSupportActionBar().setTitle(getString(R.string.titleEvent));
+                }
+                if(position==2){
+                    getSupportActionBar().setTitle(getString(R.string.titleProfile));
+                }
+                if(position==3){
+                    getSupportActionBar().setTitle(getString(R.string.titleNetwork));
+                }
+                if(position==4){
+                    getSupportActionBar().setTitle(getString(R.string.titlePhotos));
+                }
+                if(position==4){
+                    getSupportActionBar().setTitle(getString(R.string.titleMore));
+                }
                 //startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 //finish();
             }

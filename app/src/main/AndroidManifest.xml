@@ -13,7 +13,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.madhapar.View.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="@string/titlenews"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
             android:name="com.madhapar.View.SubActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
