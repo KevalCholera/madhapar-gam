@@ -1,7 +1,14 @@
 package com.madhapar.View;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
@@ -25,6 +33,13 @@ import com.madhapar.View.Adapter.NewsListAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,19 +70,66 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     ImageView ivNewsDetailLike;
     @BindView(R.id.ivNewsDetailComment)
     ImageView ivNewsDetailComment;
+    @BindView(R.id.ivDetailNewsShare)
+    ImageView ivDetailNewsShare;
+    @BindView(R.id.screenshot)
+    ImageView screenshot;
+    Bitmap bitmap;
     @BindView(R.id.rlNewsDetailImage)
     RelativeLayout rlNewsDetailImage;
     private NewsObject newsDetailObj;
     private RequestPresenter presenter;
     private static final int CommentActivityRequestCode = 22;
 
+    @OnClick(R.id.ivDetailNewsShare)
+    void screenshotShare(){
+        String imagePath = new String(Environment.getExternalStorageDirectory() + "/screenshot.png");
+        Log.e("pathURL",imagePath);
+        Uri bmpUri = Uri.fromFile(new File(imagePath));
+        shareImage(bmpUri);
+        screenShot(screenshot);
+    }
+    public void screenShot(View v){
+        bitmap = getBitmapOFRootView(ivDetailNewsShare);
+        createImage(bitmap);
+        screenshot.setImageBitmap(bitmap);
+        Log.e("screenshot","here");
+    }
 
+    private void createImage(Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+        File file = new File(Environment.getExternalStorageDirectory() +
+                "/Screenshot.jpg");
+        try {
+            file.createNewFile();
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(bytes.toByteArray());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Bitmap getBitmapOFRootView(View view1) {
+        View rootview = view1.getRootView();
+        rootview.setDrawingCacheEnabled(true);
+        Bitmap bitmap1 = rootview.getDrawingCache();
+        return bitmap1;
+    }
+
+    private void shareImage(Uri imagePath){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imagePath);
+        startActivity(Intent.createChooser(shareIntent, "Share Image"));
+
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
         ButterKnife.bind(this);
-
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent().getSerializableExtra("NewsData") != null) {
             newsDetailObj = (NewsObject) getIntent().getSerializableExtra("NewsData");
@@ -107,6 +169,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -117,6 +180,12 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
+        }
+        if (item.getItemId() == R.id.ivDetailNewsShare) {
+            String imagePath = new String(Environment.getExternalStorageDirectory() + "/screenshot.png");
+            Log.e("pathURL", imagePath);
+            Uri bmpUri = Uri.fromFile(new File(imagePath));
+            shareImage(bmpUri);
         }
         return super.onOptionsItemSelected(item);
     }
