@@ -61,6 +61,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback 
 
     @BindView(R.id.etProfileMobileEditProfileNumber)
     EditText tvProfileMobileNumber;
+
     @BindView(R.id.etEditProfileLocation)
     EditText tvProfileLocation;
     @BindView(R.id.etEditProfileDOB)
@@ -73,8 +74,29 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback 
     EditText tvProfileEmail;
     @BindView(R.id.etEditProfileFacebbokId)
     EditText tvProfileFacebookId;
-    @BindView(R.id.etProfileMobileEditLastName)
+    @BindView(R.id.etProfileEditLastName)
     EditText etProfileLastName;
+
+    @OnFocusChange(R.id.etProfileEditLastName)
+    void UpdateLastChange() {
+        if (!etProfileLastName.hasFocus()) {
+            if (!etProfileFirstName.getTag().toString().equalsIgnoreCase(etProfileFirstName.getText().toString())) {
+                if (mProfileUpdateListener == null) {
+                    mProfileUpdateListener = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                if (TextUtils.isEmpty(etProfileFirstName.getText().toString().trim())) {
+                    UtilClass.displyMessage("First name is required", getActivity(), 0);
+                } else {
+                    params.put("userFirstName", etProfileFirstName.getText().toString());
+                    mProfileUpdateListener.updateUserFirstName(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+
+            }
+        }
+
+    }
+
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     private PresenterClass presenter;

@@ -102,7 +102,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                 @Override
                 public void onClick(View view) {
                     if (UtilClass.isInternetAvailabel(context)) {
-                        boolean isValid = isEventStatusValid(eventObj);
                         if (!isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
                             if (isEventStatusValid(eventObj)) {
                                 if (mPresenter == null) {
