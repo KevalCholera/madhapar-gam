@@ -26,7 +26,8 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
     @BindView(R.id.etFeedbackFeedback)
     EditText etFeedback;
     private PresneterInt presenter;
-    private FeedbackActivityInt feedbackActivityInt=this;
+    private FeedbackActivityInt feedbackActivityInt = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
         ButterKnife.bind(this);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -41,36 +43,65 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
-        finish();    }
+        finish();
+    }
 
     @OnClick(R.id.btnFeedbackSend)
-    public void feedback(){
-        presenter = new PresenterClass();
-        presenter.feedbackValidateCredentials(etFeedbackSubject.getText().toString(),etFeedback.getText().toString(),feedbackActivityInt);
+    public void feedback() {
+        if (UtilClass.isInternetAvailabel(this)) {
+            UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
+            presenter = new PresenterClass();
+            presenter.feedbackValidateCredentials(etFeedbackSubject.getText().toString(), etFeedback.getText().toString(), feedbackActivityInt);
+        } else {
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), FeedbackActivity.this, Toast.LENGTH_SHORT);
+
+        }
+
     }
 
     @Override
     public void feedbackValidateResult(int check) {
-        if(check == UtilClass.RequiredFieldError){
-            UtilClass.displyMessage(getString(R.string.enterrequiredfiels),FeedbackActivity.this, Toast.LENGTH_SHORT);
-        }
-        if(check == UtilClass.FeedbackSubject){
-            UtilClass.displyMessage(getString(R.string.subjectrequired),FeedbackActivity.this,Toast.LENGTH_SHORT);
-        }
-        if(check == UtilClass.Feeedback){
-            UtilClass.displyMessage(getString(R.string.enterFeedback),FeedbackActivity.this,Toast.LENGTH_SHORT);
-        }
-        if(check == UtilClass.Success) {
-            UtilClass.displyMessage(getString(R.string.thanku), FeedbackActivity.this, Toast.LENGTH_SHORT);
-        }
+        UtilClass.hideProgress();
+        if (check == UtilClass.FeedbackFieldError) {
+            UtilClass.displyMessage(getString(R.string.feedbackFeildEmpty), FeedbackActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.FeedbackSubjectRequiredError) {
+            UtilClass.displyMessage(getString(R.string.feedbackSubjetRequired), FeedbackActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.FeedbackSubjectValidateError) {
+            UtilClass.displyMessage(getString(R.string.feedbackSubjectValid), FeedbackActivity.this, Toast.LENGTH_SHORT);
+        } else if (check == UtilClass.FeedbackdRequiredError) {
+            UtilClass.displyMessage(getString(R.string.feedbackRequired), FeedbackActivity.this, Toast.LENGTH_SHORT);
+        } else
+            UtilClass.displyMessage(getString(R.string.feedbackValid), FeedbackActivity.this, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onFeedbackResponseError(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, FeedbackActivity.this, Toast.LENGTH_SHORT);
 
     }
+
+    @Override
+    public void onFeedbackSuccess(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, FeedbackActivity.this, Toast.LENGTH_SHORT);
+        finish();
+
+    }
+
+    @Override
+    public void onFeedbackRequestError() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), FeedbackActivity.this, Toast.LENGTH_SHORT);
+    }
+
 }

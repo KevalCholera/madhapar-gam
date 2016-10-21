@@ -80,7 +80,6 @@
     <string name="passwordupdate">Password Update</string>
     <string name="passwordmatch">Password cant match Enter Valid Confirm Password</string>
     <string name="resenedcode">Resend Code Successfully</string>
-    <string name="fundRaising">Fund Raising</string>
     <string name="fundInfo">More Info</string>
     <string name="profileName">First Name :</string>
     <string name="lastNameEditProfile">Last Name :</string>
@@ -151,13 +150,27 @@
     <string name="EnterTainment">Entertainment</string>
     <string name="news">News</string>
     <string name="sports">Sports</string>
-    
+
     <string name="titlenews">News Feed</string>
     <string name="titleEvent">Event Calender</string>
     <string name="titleProfile">Profile</string>
     <string name="titleNetwork">My Network</string>
     <string name="titlePhotos">Event Photos</string>
     <string name="titleMore">More</string>
+
+    <string name="lableFundRaising">Fund Raising</string>
+    <string name="fundRaising">Fund Raising</string>
+    <string name="fundInfoMore">More info</string>
+    <string name="fundInfoLess">Less info</string>
+    <string name="fundFragmentMoreTextSummary">Summary : </string>
+
+    <!--FeedBack -->
+    <string name="feedbackFeildEmpty">Enter required field.</string>
+    <string name="feedbackSubjectValid">Please enter valid feedback subject(5-50 chars).</string>
+    <string name="feedbackSubjetRequired">Subject is required.</string>
+    <string name="feedbackValid">Please enter valid feedback(10-2000 chars).</string>
+    <string name="feedbackRequired">Feedback is required.</string>
+    <string name="feedbackSuccess">Feedback .</string>
 
 
 </resources>

@@ -6,8 +6,13 @@ import org.json.JSONArray;
  * Created by Ronak on 10/19/2016.
  */
 public interface FundRaisingModelInt {
-    public interface FundRaisingListResponseCallback {
+    interface FundRaisingListResponseCallback {
+        void onSuccessProjectList(JSONArray response);
 
+        void onFailProjectListResponse(String message);
+
+        void onFailProjectListRequest();
     }
-    public void getFundRaisingList(FundRaisingListResponseCallback callback);
+    void getFundRaisingList(FundRaisingListResponseCallback callback);
 }
+

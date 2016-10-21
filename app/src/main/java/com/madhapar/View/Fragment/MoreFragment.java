@@ -38,10 +38,11 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvIntroHistory)
     public void introHistory() {
-        presenter.changeActivity(getActivity(), EventPhotoActivity.class, true);
-        intent = new Intent();
-
+        Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+        intent.putExtra("isAboutUs", false);
+        startActivity(intent);
     }
+
     @OnClick(R.id.tvFeedback)
     public void tvFeedback() {
         presenter.changeActivity(getActivity(), FeedbackActivity.class, false);
@@ -49,8 +50,12 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.tvAboutUs)
     public void tvAboutUs() {
-        presenter.changeActivity(getActivity(), AboutUsActivity.class, false);
+        Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+
+        intent.putExtra("isAboutUs", true);
+        startActivity(intent);
     }
+
     @OnClick(R.id.tvFundRaising)
     public void tvFundRaising() {
         presenter.changeActivity(getActivity(), FundRaisingActivity.class, false);
@@ -62,6 +67,7 @@ public class MoreFragment extends BaseFragment {
         SharedPreferenceUtil.save();
         presenter.changeActivity(getActivity(), LoginActivity.class, true);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

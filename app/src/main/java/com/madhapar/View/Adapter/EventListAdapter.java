@@ -27,7 +27,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -43,7 +42,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     private EventPresenter mPresenter;
     private Activity activity;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
-
 
     public EventListAdapter(Context context, JSONArray jsonArray, Activity activity) {
         this.eventArry = jsonArray;
@@ -64,10 +62,10 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             final JSONObject eventObj = eventArry.getJSONObject(position);
             holder.tvEventName.setText(eventObj.optString("eventTitle"));
             holder.tvAddress.setText(eventObj.optString("eventAddress"));
-            holder.tvNotInterest.setText(" "+eventObj.optString("cantGo")+" ");
+            holder.tvNotInterest.setText(" " + eventObj.optString("cantGo") + " ");
             holder.tvTime.setText(eventObj.optString("eventFromDate"));
-            holder.tvGoing.setText(" "+eventObj.optString("going")+" ");
-            holder.tvInterest.setText(" "+eventObj.optString("interested")+" ");
+            holder.tvGoing.setText(" " + eventObj.optString("going") + " ");
+            holder.tvInterest.setText(" " + eventObj.optString("interested") + " ");
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
                 holder.llGoing.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
                 holder.llGoing.setClickable(false);

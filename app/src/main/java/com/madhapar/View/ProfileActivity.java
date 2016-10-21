@@ -39,24 +39,23 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     RequestPresenter presenterClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Log.e("log","here"+tvProfileLocation.getText().toString());
-        tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName,Constants.RequestConstants.UserListUrl));
-        tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup,Constants.RequestConstants.UserListUrl));
-        tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB,Constants.RequestConstants.UserListUrl));
-        tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName,Constants.RequestConstants.UserListUrl));
-        Log.e("log","here"+SharedPreferenceUtil.getString(Constants.UserData.UserLocationName,Constants.RequestConstants.UserListUrl));
-        tvProfileMobileNumber.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo,Constants.RequestConstants.UserListUrl));
-        tvProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail,Constants.RequestConstants.UserListUrl));
-        tvProfileFacebookId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName,Constants.RequestConstants.UserListUrl));
+        tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, Constants.RequestConstants.UserListUrl));
+        tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, Constants.RequestConstants.UserListUrl));
+        tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, Constants.RequestConstants.UserListUrl));
+        tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, Constants.RequestConstants.UserListUrl));
+        tvProfileMobileNumber.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, Constants.RequestConstants.UserListUrl));
+        tvProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, Constants.RequestConstants.UserListUrl));
+        tvProfileFacebookId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, Constants.RequestConstants.UserListUrl));
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -64,13 +63,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(ProfileActivity.this,FeedbackActivity.class,true);    }
+        UtilClass.changeActivity(ProfileActivity.this, FeedbackActivity.class, true);
+    }
 }

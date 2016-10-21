@@ -32,9 +32,16 @@ dependencies {
     //    testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     //
+    repositories {
+        // ...
+        maven { url "https://jitpack.io" }
+    }
+
 
     // Required for OneSignal, even if you have added FCM.
     // Required for geotagging
+    compile 'com.github.bmarrdev:android-DecoView-charting:v1.2'
+
     compile 'com.android.support:cardview-v7:24.2.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.jakewharton:butterknife:8.4.0'
@@ -49,9 +56,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:1.6.0'
     compile "com.squareup.picasso:picasso:2.4.0"
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
-
-
-
 
 
 }

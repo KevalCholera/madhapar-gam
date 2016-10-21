@@ -4,15 +4,22 @@ package com.madhapar.Model;
  * Created by Ronak on 9/29/2016.
  */
 public interface FeedbackModelInt {
-    interface OnLoginFinishedListener {
-        
-        void onFeddbackSubjectError();
+    interface OnFeedbackPostListener {
 
-        void onFeddbackDescriptionError();
+        void onFeedbackFieldRequiredError();
 
-        void onFeddbackRequiredFieldError();
+        void onFeedbackSubjectRequiredError();
 
-        void onFeedbackSuccess();
+        void onFeedbackSubjectValidError();
+
+        void onFeedbackRequiredError();
+
+        void onFeedbackValidError();
+
+        void onSuccessPostFeedback(String messsage);
+        void onFailFeedbackResponse(String message);
+        void onFailFeedbackRequest();
     }
-     void feedback(String subject,String feedback, OnLoginFinishedListener listener);
+
+    void feedback(String subject, String feedback, OnFeedbackPostListener listener);
 }

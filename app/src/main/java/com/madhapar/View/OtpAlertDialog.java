@@ -127,10 +127,8 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
         code1.requestFocus();
         alert.getWindow().setBackgroundDrawableResource(R.drawable.alertdialogdesign);
     }
-
     @Override
     public void forgetPasswordValidateResult(int check) {
-
     }
 
     @Override

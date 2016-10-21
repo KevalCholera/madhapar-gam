@@ -90,7 +90,6 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
         @BindView(R.id.civUserPic)
         com.madhapar.Util.CircleImageView ivUserPic;
 
-
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -128,7 +127,6 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
                 adapter.profileArry = filterdArray;
                 adapter.notifyDataSetChanged();
             }
-
         }
     }
 

@@ -31,6 +31,7 @@ public class GcmIntentService extends IntentService {
             if (intent.getExtras() != null) {
                 JSONObject pushData = new JSONObject(extras.get("custom").toString());
                 int pushType = 0;
+                Log.e("push", extras.toString());
                 if (pushData != null) {
                     JSONObject aObj = pushData.optJSONObject("a");
                     if (aObj != null) {

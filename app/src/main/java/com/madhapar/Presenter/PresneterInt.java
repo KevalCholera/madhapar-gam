@@ -3,6 +3,7 @@ package com.madhapar.Presenter;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
+import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.ChangePasswordViewInt;
 import com.madhapar.View.FeedbackActivityInt;
@@ -41,4 +42,6 @@ public interface PresneterInt {
     void alert(AppCompatActivity context, JSONObject otpResponse, String contactNumber, int type);
 
     void changePasswordCredential(String newPassword, String confirmNewPassword, String otpToken, String contactNumber, ChangePasswordViewInt changePasswordViewInt1);
+
+    void getFundRaisingList(FundRaisigListCallback fundCallback);
 }

@@ -50,10 +50,12 @@ public class LoginModel implements LoginModelInt {
         StringRequest loginRequest = new StringRequest(Request.Method.POST, UtilClass.getLoginUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.i("*****", "LoginResponse" + response);
                 if (response != null && !response.equalsIgnoreCase("")) {
                     try {
                         JSONObject logiObject = new JSONObject(response);
                         if (logiObject != null) {
+
                             if (logiObject.optInt("status") == Constants.ResponseCode.LoginSuccessCode) {
                                 SharedPreferenceUtil.putValue(Constants.UserData.token, logiObject.optString("token"));
                                 JSONObject userObject = logiObject.optJSONObject("user");
@@ -106,13 +108,14 @@ public class LoginModel implements LoginModelInt {
                 params.put("password", password);
                 params.put("userMobileNo", login);
                 params.put("deviceToken", "12341234123412341234123412341234");
+
                 return params;
             }
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", "JWT" + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                params.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
                 return params;
             }
         };

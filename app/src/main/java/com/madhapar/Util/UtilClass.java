@@ -41,7 +41,14 @@ public class UtilClass {
     public static final int MatchPassword = 10;
     public static final int ConfirmPassword = 11;
     public static final int FeedbackSubject = 12;
-    public static final int Feeedback = 13;
+    public static final int FeedbackFieldError = 13;
+    public static final int FeedbackSubjectRequiredError = 14;
+    public static final int FeedbackdRequiredError = 16;
+    public static final int FeedbackValidateError = 17;
+    public static final int FeedbackSubjectValidateError = 15;
+    public static final int FeedbackSubmitSuccess = 18;
+
+
     public static final int RetryTimeOut = 20000;
     private static ProgressDialog pDialog;
 
@@ -104,6 +111,23 @@ public class UtilClass {
         Uri builder = Uri.parse(Constants.RequestConstants.EventListUrl).buildUpon().build();
         return builder.toString();
     }
+
+    public static String getProfileUpdateUrl(String userId) {
+        Uri builder = Uri.parse(Constants.RequestConstants.ProfileUpdateUrl + userId + "/").buildUpon().build();
+        return builder.toString();
+    }
+
+    public static String getFeedbackUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.FeedbackUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+
+    public static String getProjectListUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.ProjectsListUrl).buildUpon().build();
+        return builder.toString();
+    }
+
 
     public static String getEventStatusListUrl(String eventId, String eventStatus) {
         Uri builder = Uri.parse(Constants.RequestConstants.EventStatusListUrl + eventId + "/" + eventStatus).buildUpon().build();

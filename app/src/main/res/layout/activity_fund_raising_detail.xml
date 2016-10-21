@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.madhapar.View.FundRaisingDetail">
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvEventStatusList"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_fund_raising_banner" />
+
+        <TextView
+            android:id="@+id/tvFundrainsingDetailProjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFundRaisingDetailProjectDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFundrainsingDetailProjectName"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/cardview_light_background"
+            android:textSize="@dimen/text15" />
+
+        <TextView
+            android:id="@+id/tvFundRaisingDetailProjectPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFundRaisingDetailProjectDate"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/cardview_light_background"
+            android:textSize="@dimen/text15" />
+
+        <TextView
+            android:id="@+id/tvFundraisingDetailProjectOrganizer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFundRaisingDetailProjectPlace"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/cardview_light_background"
+            android:textSize="@dimen/text15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFundraisingDetailProjectOrganizer"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnFundRaisingMoreLess"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin20"
+                android:background="@drawable/fund_raising_button"
+                android:elevation="0dp"
+                android:gravity="center"
+                android:text="@string/fundInfoLess"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text12" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/flFundRaisingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </LinearLayout>

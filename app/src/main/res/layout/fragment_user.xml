@@ -8,11 +8,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/paddingButtom"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/paddingButtom">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,6 +29,7 @@
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/cover_placeholder" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/imageheight"
@@ -60,281 +63,297 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/defaultpadding"
+                android:layout_marginBottom="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:gravity="right"
-                        android:textColor="@color/colorGreyProfile"
-                        android:text="@string/profileName" />
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/etProfileEditProfileName"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
                     android:gravity="center"
-                    android:layout_gravity="center"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
-                        android:text="@string/lastNameEditProfile"/>
+                        android:text="@string/profileName"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
+                        android:id="@+id/etProfileEditProfileFirstName"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/etProfileMobileEditLastName"
+                        android:layout_height="30dp"
                         android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
-                        android:layout_gravity="center"
                         android:layout_marginRight="@dimen/marginRight"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
-                        android:textColor="@color/colorPrimary"/>
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/margin_small"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:gravity="center"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:textColor="@color/colorGreyProfile"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/profileNumver"/>
+                        android:text="@string/lastNameEditProfile"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
+                        android:id="@+id/etProfileMobileEditLastName"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/profileNumver"
+                        android:textColor="@color/colorGreyProfile" />
+
+                    <EditText
                         android:id="@+id/etProfileMobileEditProfileNumber"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:textColor="@color/colorGreyProfile"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/profileLocation"/>
+                        android:text="@string/profileLocation"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileLocation"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:textColor="@color/colorGreyProfile"
-                        android:text="@string/profileDOB"/>
+                        android:text="@string/profileDOB"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileDOB"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:textColor="@color/colorGreyProfile"
-                        android:text="@string/profileMemberShipNo"/>
+                        android:text="@string/profileMemberShipNo"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditMembershipNo"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:textColor="@color/colorGreyProfile"
-                        android:text="@string/profileBloodGroud"/>
+                        android:text="@string/profileBloodGroud"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileBloodGroup"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:textColor="@color/colorGreyProfile"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/profileEmail"/>
+                        android:text="@string/profileEmail"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileEmail"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/defaultpadding"
-                    android:paddingBottom="@dimen/CommentOverlayImage"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:textColor="@color/colorGreyProfile"
                         android:gravity="right"
-                        android:text="@string/profileFacebook"/>
+                        android:text="@string/profileFacebook"
+                        android:textColor="@color/colorGreyProfile" />
+
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/etEditProfileFacebbokId"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_weight="1.3"
-                        android:focusableInTouchMode="true"
-                        android:background="@drawable/search"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:imeOptions="actionNext"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
                         android:layout_marginRight="@dimen/marginRight"
-                        android:gravity="left"
-                        android:textColor="@color/colorPrimary"/>
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
 
             </LinearLayout>

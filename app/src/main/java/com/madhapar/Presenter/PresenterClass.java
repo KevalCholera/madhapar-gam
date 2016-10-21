@@ -10,12 +10,15 @@ import com.madhapar.Model.ChangePasswordModel;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.ForgetPasswordModelInt;
+import com.madhapar.Model.FundRaisingModel;
+import com.madhapar.Model.FundRaisingModelInt;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.OtpAlertDialog;
 import com.madhapar.View.ChangePasswordViewInt;
@@ -26,6 +29,7 @@ import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
 import com.madhapar.View.ViewInt;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -34,15 +38,11 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnLoginFinishedListener, ForgetPasswordModelInt.onVerifyOtpListener {
+public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
 
-    private ViewInt viewInt;
     private MainModelClass modelClass;
     private LoginInt loginInt;
-    private LoginModelInt loginModelInt;
-    //private SignUpModelInt signUpModelInt;
     private SignUpModel signUpModel;
-    private NetworkModel networkModelClass;
     private SignUpViewInt signupInt;
     private ForgetPasswordViewInt forgetPasswordViewInt;
     private ForgetPasswordModel forgetPassModel;
@@ -51,7 +51,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     private FeedbackModel feedbackModel;
     private ChangePasswordModel changePasswordModel;
     private OtpAlertDialogInt alertIntl;
-    LoginModel loginModel;
+    private FundRaisigListCallback fundRaisingCallback;
 
     public PresenterClass(SignUpActivity signUpModel) {
         this.signupInt = signUpModel;
@@ -120,7 +120,7 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
 
     @Override
     public void feedbackValidateCredentials(String subject, String feedback, FeedbackActivityInt feedbackActivityInt) {
-        feedbackActivityint = feedbackActivityInt;
+        this.feedbackActivityint = feedbackActivityInt;
         feedbackModel = new FeedbackModel();
         feedbackModel.feedback(subject, feedback, this);
     }
@@ -297,28 +297,6 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
 
-    //____________Feedback ___________//
-    @Override
-    public void onFeddbackSubjectError() {
-        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackSubject);
-    }
-
-    @Override
-    public void onFeddbackDescriptionError() {
-        feedbackActivityint.feedbackValidateResult(UtilClass.Feeedback);
-    }
-
-    @Override
-    public void onFeddbackRequiredFieldError() {
-        feedbackActivityint.feedbackValidateResult(UtilClass.RequiredFieldError);
-    }
-
-    @Override
-    public void onFeedbackSuccess() {
-        feedbackActivityint.feedbackValidateResult(UtilClass.Success);
-    }
-
-
     //__________OTP VERIFICATION_____///
 
 
@@ -349,7 +327,6 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
 
     }
 
-
     @Override
     public void onOtpVerify(JSONObject verifyResponse) {
         alertIntl.otpVerificationSuccessfull(verifyResponse);
@@ -364,4 +341,72 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     public void onVerifyOtpRequestError() {
         alertIntl.otpVerifyRequestError();
     }
+
+
+    //_______________FundRaising____________//
+    @Override
+    public void getFundRaisingList(FundRaisigListCallback fundCallback) {
+        FundRaisingModel fundRaisingModel = new FundRaisingModel();
+        fundRaisingModel.getFundRaisingList(this);
+        this.fundRaisingCallback = fundCallback;
+    }
+
+    @Override
+    public void onSuccessProjectList(JSONArray response) {
+        fundRaisingCallback.onSuccessFundRaisingList(response);
+    }
+
+    @Override
+    public void onFailProjectListResponse(String message) {
+        fundRaisingCallback.onFailFundRaisingList(message);
+    }
+
+    @Override
+    public void onFailProjectListRequest() {
+        fundRaisingCallback.onFailRequestFundRaisingList();
+    }
+
+
+    //____________Feedback ___________//
+    @Override
+    public void onFeedbackFieldRequiredError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackFieldError);
+    }
+
+    @Override
+    public void onFeedbackSubjectRequiredError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackSubjectRequiredError);
+    }
+
+    @Override
+    public void onFeedbackSubjectValidError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackSubjectValidateError);
+    }
+
+    @Override
+    public void onFeedbackRequiredError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackdRequiredError);
+    }
+
+    @Override
+    public void onFeedbackValidError() {
+        feedbackActivityint.feedbackValidateResult(UtilClass.FeedbackValidateError);
+    }
+
+    @Override
+    public void onSuccessPostFeedback(String messsage) {
+        feedbackActivityint.onFeedbackSuccess(messsage);
+    }
+
+    @Override
+    public void onFailFeedbackResponse(String message) {
+        feedbackActivityint.onFeedbackResponseError(message);
+    }
+
+    @Override
+    public void onFailFeedbackRequest() {
+        feedbackActivityint.onFeedbackRequestError();
+    }
+
+
 }

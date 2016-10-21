@@ -21,8 +21,13 @@ public class Constants {
         public static String EventListUrl = BaseUrl + "events/";
         public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
         public static String EventStatusCreateUrl = BaseUrl + "eventStatusCreate/";
+        public static String ProfileUpdateUrl = BaseUrl + "userDetail/";
         public static String EventStatusUpdaetUrl = BaseUrl + "eventStatusDetail/";
         public static String EventDetailUrl = BaseUrl + "eventsDetail/";
+        public static String FeedbackUrl = BaseUrl + "events/";
+        public static String ProjectsListUrl = BaseUrl + "projects/";
+        public static String AboutUsUrl = BaseUrl + "aboutus.html";
+        public static String IntroductionUrl = BaseUrl + "introduction.html";
         public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
         public static String CommentLstUrl = BaseUrl + "newsStatusList/";
         public static String CommentUpdateUrl = BaseUrl + "newsStatusDetail/";
