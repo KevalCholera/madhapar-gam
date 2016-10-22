@@ -3,6 +3,7 @@
     package="com.example.smartsense.newproject">
 
     <permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -15,10 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.madhapar.View.MainActivity"
-            android:screenOrientation="portrait"
             android:label="@string/titlenews"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.madhapar.View.SubActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -167,6 +168,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="com.madhapar.View.LocationsActivity"></activity>
+
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     </application>

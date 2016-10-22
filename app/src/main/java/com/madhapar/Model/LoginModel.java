@@ -55,7 +55,6 @@ public class LoginModel implements LoginModelInt {
                     try {
                         JSONObject logiObject = new JSONObject(response);
                         if (logiObject != null) {
-
                             if (logiObject.optInt("status") == Constants.ResponseCode.LoginSuccessCode) {
                                 SharedPreferenceUtil.putValue(Constants.UserData.token, logiObject.optString("token"));
                                 JSONObject userObject = logiObject.optJSONObject("user");
@@ -65,8 +64,11 @@ public class LoginModel implements LoginModelInt {
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserMobileNo, userObject.optString("userMobileNo"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFirstName, userObject.optString("userFirstName"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserLastName, userObject.optString("userLastName"));
-                                        SharedPreferenceUtil.putValue(Constants.UserData.UserLocationId, userObject.optString("locationId"));
-                                        SharedPreferenceUtil.putValue(Constants.UserData.UserLocationName, userObject.optString("locationName"));
+                                        JSONObject locationObj = userObject.optJSONObject("userLocation");
+                                        if (locationObj != null) {
+                                            SharedPreferenceUtil.putValue(Constants.UserData.UserLocationId, locationObj.optString("locationId"));
+                                            SharedPreferenceUtil.putValue(Constants.UserData.UserLocationName, locationObj.optString("locationName"));
+                                        }
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserProfilePic, userObject.optString("userProfilePic"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserProfession, userObject.optString("userProfession"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserEmail, userObject.optString("email"));

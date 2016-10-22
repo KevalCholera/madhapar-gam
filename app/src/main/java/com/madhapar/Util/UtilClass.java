@@ -112,6 +112,16 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getLocationListUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.LocationListUrl).buildUpon().build();
+        return builder.toString();
+    }
+
+    public static String getCreateLocationUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.CreateLocationListUrl).buildUpon().build();
+        return builder.toString();
+    }
+
     public static String getProfileUpdateUrl(String userId) {
         Uri builder = Uri.parse(Constants.RequestConstants.ProfileUpdateUrl + userId + "/").buildUpon().build();
         return builder.toString();
@@ -267,6 +277,15 @@ public class UtilClass {
             if (i != index) copy.put(source.get(i));
         }
         return copy;
+    }
+
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/alertdialogdesign"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_rightleft_login"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/alertLocationTitle"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text18" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etLocationAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusableInTouchMode="true"
+                android:gravity="center_horizontal|top"
+                android:hint="Add New Location"
+                android:lineSpacingExtra="10dp"
+                android:lineSpacingMultiplier="1"
+                android:textSize="@dimen/text18"
+                android:translationY="6dp" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_login_margin"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvDoneLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/alertDoneText"
+            android:textSize="@dimen/activity_top_login_margin" />
+
+        <TextView
+            android:id="@+id/tvCancelLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin20"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/alertCancelText"
+            android:textSize="@dimen/activity_top_login_margin" />
+
+    </LinearLayout>
+</LinearLayout>

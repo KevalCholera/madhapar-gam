@@ -2,16 +2,11 @@ package com.madhapar.Model;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
-import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Fragment.EventFragment;
-import com.madhapar.View.Fragment.EventPhotosFragment;
+import com.madhapar.View.Fragment.GallaryFragment;
 import com.madhapar.View.Fragment.HomeFragment;
 import com.madhapar.View.Fragment.MoreFragment;
 import com.madhapar.View.Fragment.NetworkFragment;
@@ -62,7 +57,7 @@ public class MainModelClass implements MainModelInt {
         } else if (fragmentNo == 5) {
             fragment = new MoreFragment();
         }else if (fragmentNo == 4){
-            fragment = new EventPhotosFragment();
+            fragment = new GallaryFragment();
         }
         return fragment;
     }

@@ -48,12 +48,12 @@
 
                     <ImageView
                         android:id="@+id/ivEditIcon"
-                        android:layout_width="@dimen/activity_top_login_margin"
-                        android:layout_height="@dimen/activity_top_login_margin"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_alignRight="@+id/ivProfilePhotoSmall"
                         android:layout_alignTop="@+id/ivProfilePhotoSmall"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginTop="2dp"
                         android:src="@drawable/icon_edit_white" />
 
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                         android:textColor="@color/colorGreyProfile" />
 
                     <EditText
-                        android:id="@+id/etProfileMobileEditProfileNumber"
+                        android:id="@+id/etProfileMobileNumber"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -232,7 +232,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="0dp"

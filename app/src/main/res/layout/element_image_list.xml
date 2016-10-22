@@ -6,27 +6,31 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/rlAlbum"
+        android:id="@+id/rlListAlbum"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/EventPhotoHeight"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_medium">
 
         <ImageView
-            android:id="@+id/ivImageGrid"
+            android:id="@+id/ivImageListGrid"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/EventPhotoHeight"
+            android:layout_height="match_parent"
             android:paddingLeft="@dimen/paddingSmall"
             android:paddingRight="@dimen/paddingSmall"
             android:paddingTop="@dimen/paddingSmall"
             android:scaleType="fitXY"></ImageView>
 
         <TextView
-            android:id="@+id/tvAlbumName"
+            android:id="@+id/tvListAlbumName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/CommentOverlayImage"
             android:layout_alignBottom="@id/ivImageGrid"
             android:layout_alignLeft="@id/ivImageGrid"
+            android:layout_alignParentBottom="true"
             android:layout_alignRight="@id/ivImageGrid"
-            android:layout_gravity="bottom"
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginRight="@dimen/margin_small"
             android:background="@color/colorTransparentBlack"
@@ -36,19 +40,5 @@
             android:textColor="@color/cardview_light_background" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvAlbumDate"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/CommentOverlayImage"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:paddingBottom="@dimen/paddingSmall"
-        android:paddingLeft="@dimen/paddingSmall"
-        android:paddingRight="@dimen/paddingSmall"
-        android:text="13 july 2016 - 16 july 2016"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="9sp"></TextView>
 
 </LinearLayout>

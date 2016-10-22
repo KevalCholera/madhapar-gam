@@ -1,7 +1,9 @@
 package com.madhapar.View;
 
+import org.json.JSONArray;
+
 /**
- * Created by smartsense on 20/10/16.
+ * Created by smartsense on 22/10/16.
  */
 
 public interface ProfileUpdateCallback {
@@ -10,4 +12,8 @@ public interface ProfileUpdateCallback {
     void onFailUpdateUesrDate(String message);
 
     void onFailUpdateRequest();
+
+    void onSuccessLocationList(JSONArray jsonArray);
+
+
 }

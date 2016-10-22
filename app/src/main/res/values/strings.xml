@@ -92,6 +92,7 @@
     <string name="profileFacebook">Facebook :</string>
 
     <string name="seephotos">see photos...</string>
+    <string name="lableSelectLocation">Select Location</string>
 
     <string name="searchNews">Search News Category</string>
     <!--Process message-->
@@ -171,6 +172,30 @@
     <string name="feedbackValid">Please enter valid feedback(10-2000 chars).</string>
     <string name="feedbackRequired">Feedback is required.</string>
     <string name="feedbackSuccess">Feedback .</string>
+
+
+    <array name="bloodGroups">
+        <item>O+</item>
+        <item>O-</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </array>
+
+
+    <!--Update Profile-->
+    <string name="addLocation">Add Location</string>
+    <string name="locationRequiredError">Location Required</string>
+    <string name="alertLocationTitle">Add Location</string>
+    <string name="alertDoneText">Done</string>
+    <string name="alertCancelText">Cancel</string>
+    <string name="alertSelectPic">Select</string>
+    <string name="takePhoto">Take photo</string>
+    <string name="selectYourPhoto">Select your photo</string>
+    <string name="selectSources">Select Source</string>
 
 
 </resources>

@@ -1,8 +1,16 @@
 package com.madhapar.View.Fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,26 +18,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.smartsense.newproject.R;
+import com.jzxiang.pickerview.TimePickerDialog;
+import com.jzxiang.pickerview.data.Type;
+import com.jzxiang.pickerview.listener.OnDateSetListener;
+import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.ProfileUpdatePresenter;
 import com.madhapar.Util.Constants;
+import com.madhapar.Util.MultiPartRequestJson;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.EventDetailActivity;
-import com.madhapar.View.LoginActivity;
-import com.madhapar.View.ProfileEditActivity;
+import com.madhapar.View.LocationsActivity;
 import com.madhapar.View.ProfileUpdateCallback;
 import com.mpt.storage.SharedPreferenceUtil;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import cn.qqtheme.framework.picker.OptionPicker;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by smartsense on 24/09/16.
@@ -38,96 +66,278 @@ import butterknife.OnFocusChange;
 public class UserFragment extends BaseFragment implements ProfileUpdateCallback {
     @BindView(R.id.etProfileEditProfileFirstName)
     EditText etProfileFirstName;
-    private ProfileUpdatePresenter mProfileUpdateListener;
+    private ProfileUpdatePresenter mProfileUpdatePresenter;
+    private com.jzxiang.pickerview.TimePickerDialog mDialogAll;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM,yyyy");
+    private Calendar calendar = Calendar.getInstance();
+    private int selectedPosition;
+    private static final int REQUEST_CONSTANT = 200;
+    private int locationId = 0;
+    private int whichSelect = 0;
+
+    private int REQUEST_CAMERA = 102;
+    private int SELECT_FILE = 101;
+    private int PERMISSION_REQUEST_CODE = 103;
+    @BindView(R.id.ivProfilePhotoSmall)
+    de.hdodenhof.circleimageview.CircleImageView ivProfilePhotoSmall;
+    @BindView(R.id.ivProfilePhoto)
+    ImageView ivProfilePhoto;
+    @BindView(R.id.ivEditIcon)
+    ImageView ivEditIcon;
+
+    @OnClick(R.id.ivEditIcon)
+    void updateProfilePic() {
+        updatePhoto();
+    }
 
     @OnFocusChange(R.id.etProfileEditProfileFirstName)
     void updateFirstName() {
         if (!etProfileFirstName.hasFocus()) {
             if (!etProfileFirstName.getTag().toString().equalsIgnoreCase(etProfileFirstName.getText().toString())) {
-                if (mProfileUpdateListener == null) {
-                    mProfileUpdateListener = new ProfileUpdatePresenter();
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
                 }
                 Map<String, String> params = new HashMap();
-                if (TextUtils.isEmpty(etProfileFirstName.getText().toString().trim())) {
-                    UtilClass.displyMessage("First name is required", getActivity(), 0);
-                } else {
+                if (!TextUtils.isEmpty(etProfileFirstName.getText().toString().trim())) {
+                    etProfileFirstName.setTag(etProfileFirstName.getText().toString());
                     params.put("userFirstName", etProfileFirstName.getText().toString());
-                    mProfileUpdateListener.updateUserFirstName(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
                 }
-
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etProfileFirstName);
+            if (!isAnyEmpty) {
+                etProfileFirstName.setCursorVisible(true);
             }
         }
     }
 
-    @BindView(R.id.etProfileMobileEditProfileNumber)
-    EditText tvProfileMobileNumber;
-
-    @BindView(R.id.etEditProfileLocation)
-    EditText tvProfileLocation;
-    @BindView(R.id.etEditProfileDOB)
-    EditText tvProfileDOB;
-    @BindView(R.id.etEditProfileBloodGroup)
-    EditText tvProfileBloodGroup;
-    @BindView(R.id.etEditMembershipNo)
-    EditText tvMemberShipNumber;
-    @BindView(R.id.etEditProfileEmail)
-    EditText tvProfileEmail;
-    @BindView(R.id.etEditProfileFacebbokId)
-    EditText tvProfileFacebookId;
     @BindView(R.id.etProfileEditLastName)
     EditText etProfileLastName;
 
     @OnFocusChange(R.id.etProfileEditLastName)
-    void UpdateLastChange() {
+    void UpdateLastName() {
         if (!etProfileLastName.hasFocus()) {
-            if (!etProfileFirstName.getTag().toString().equalsIgnoreCase(etProfileFirstName.getText().toString())) {
-                if (mProfileUpdateListener == null) {
-                    mProfileUpdateListener = new ProfileUpdatePresenter();
+            if (!etProfileLastName.getTag().toString().equalsIgnoreCase(etProfileLastName.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
                 }
                 Map<String, String> params = new HashMap();
-                if (TextUtils.isEmpty(etProfileFirstName.getText().toString().trim())) {
-                    UtilClass.displyMessage("First name is required", getActivity(), 0);
-                } else {
-                    params.put("userFirstName", etProfileFirstName.getText().toString());
-                    mProfileUpdateListener.updateUserFirstName(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                if (!TextUtils.isEmpty(etProfileLastName.getText().toString().trim())) {
+                    params.put("userLastName", etProfileLastName.getText().toString());
+                    etProfileLastName.setTag(etProfileLastName.getText().toString());
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
                 }
 
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etProfileLastName);
+            if (!isAnyEmpty) {
+                etProfileLastName.setCursorVisible(true);
+            }
+
+        }
+    }
+
+    @BindView(R.id.etProfileMobileNumber)
+    EditText etProfileMobileNumber;
+
+    @OnFocusChange(R.id.etProfileMobileNumber)
+    void updateMobileNumber() {
+        if (!etProfileMobileNumber.hasFocus()) {
+            if (!etProfileMobileNumber.getTag().toString().equalsIgnoreCase(etProfileMobileNumber.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                if (!TextUtils.isEmpty(etProfileMobileNumber.getText().toString().trim())) {
+                    etProfileMobileNumber.setTag(etProfileMobileNumber.getText().toString());
+                    params.put("userMobileNo", etProfileMobileNumber.getText().toString());
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etProfileMobileNumber);
+            if (!isAnyEmpty) {
+                etProfileMobileNumber.setCursorVisible(true);
+            }
+        }
+    }
+
+    @BindView(R.id.etEditProfileFacebbokId)
+    EditText etEditProfileFacebbokId;
+
+    @OnFocusChange(R.id.etEditProfileFacebbokId)
+    void updateFacebookId() {
+        if (!etEditProfileFacebbokId.hasFocus()) {
+            if (!etEditProfileFacebbokId.getTag().toString().equalsIgnoreCase(etEditProfileFacebbokId.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                if (!TextUtils.isEmpty(etEditProfileFacebbokId.getText().toString().trim())) {
+                    etEditProfileFacebbokId.setTag(etEditProfileFacebbokId.getText().toString());
+                    params.put("userFBProfileName", etEditProfileFacebbokId.getText().toString());
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileFacebbokId);
+            if (!isAnyEmpty) {
+                etEditProfileFacebbokId.setCursorVisible(true);
+            }
+        }
+    }
+
+    @BindView(R.id.etEditProfileEmail)
+    EditText etEditProfileEmail;
+
+    @OnFocusChange(R.id.etEditProfileEmail)
+    void updateEmail() {
+        if (!etEditProfileEmail.hasFocus()) {
+            if (!etEditProfileEmail.getTag().toString().equalsIgnoreCase(etEditProfileEmail.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                etEditProfileEmail.setTag(etEditProfileEmail.getText().toString());
+                params.put("email", etEditProfileEmail.getText().toString());
+                mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileEmail);
+            if (!isAnyEmpty) {
+                etEditProfileEmail.setCursorVisible(true);
+            }
+        }
+    }
+
+    @BindView(R.id.etEditProfileBloodGroup)
+    EditText etEditProfileBloodGroup;
+
+    @OnFocusChange(R.id.etEditProfileBloodGroup)
+    void updateBloodGroup() {
+        if (!etEditProfileBloodGroup.hasFocus()) {
+            if (!etEditProfileBloodGroup.getTag().toString().equalsIgnoreCase(etEditProfileBloodGroup.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                if (!TextUtils.isEmpty(etEditProfileBloodGroup.getText().toString().trim())) {
+                    etEditProfileBloodGroup.setTag(etEditProfileBloodGroup.getText().toString());
+                    params.put("userBloodGroup", etEditProfileBloodGroup.getText().toString());
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileBloodGroup);
+            if (!isAnyEmpty) {
+                etEditProfileBloodGroup.setCursorVisible(false);
+                openBloodGroupSelector();
+            }
+        }
+    }
+
+    @BindView(R.id.etEditProfileDOB)
+    EditText etEditProfileDOB;
+
+    @OnFocusChange(R.id.etEditProfileDOB)
+    void updateDateDateOfBirth() {
+        Log.e("focus", "clear1");
+        if (!etEditProfileDOB.hasFocus()) {
+            Log.e("focus", "clear2");
+            if (!etEditProfileDOB.getTag().toString().equalsIgnoreCase(etEditProfileDOB.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                Log.e("focus", "clear4");
+                if (!TextUtils.isEmpty(etEditProfileDOB.getText().toString().trim())) {
+                    Log.e("focus", "clear5");
+                    etEditProfileDOB.setTag(etEditProfileDOB.getText().toString());
+                    Log.e("inside", "update" + etEditProfileDOB.getText().toString());
+
+                    params.put("userDOB", getDateOfBirthToSend(etEditProfileDOB.getText().toString()));
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+            }
+        } else {
+            Log.e("focus", "clear3");
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileDOB);
+            if (!isAnyEmpty) {
+                etEditProfileDOB.setCursorVisible(false);
+                openDateSelector();
+                Log.e("called", "1");
             }
         }
 
     }
 
-    @BindView(R.id.ivProfilePhoto)
-    ImageView ivProfilePhoto;
+
+    @BindView(R.id.etEditProfileLocation)
+    EditText etEditProfileLocation;
+
+    @OnFocusChange(R.id.etEditProfileLocation)
+    void updateCity() {
+        if (!etEditProfileLocation.hasFocus()) {
+            if (!etEditProfileLocation.getTag().toString().equalsIgnoreCase(etEditProfileLocation.getText().toString())) {
+                if (mProfileUpdatePresenter == null) {
+                    mProfileUpdatePresenter = new ProfileUpdatePresenter();
+                }
+                Map<String, String> params = new HashMap();
+                if (!TextUtils.isEmpty(etEditProfileLocation.getText().toString().trim())) {
+                    etEditProfileLocation.setTag(etEditProfileLocation.getText().toString());
+                    params.put("userLocation", locationId + "");
+                    mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
+                }
+            }
+        } else {
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileLocation);
+            if (!isAnyEmpty) {
+                etEditProfileLocation.setCursorVisible(false);
+                startActivityForResult(new Intent(getActivity(), LocationsActivity.class), REQUEST_CONSTANT);
+                etEditProfileDOB.clearFocus();
+            }
+        }
+    }
+
+    @BindView(R.id.etEditMembershipNo)
+    EditText tvMemberShipNumber;
+
     private PresenterClass presenter;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         ButterKnife.bind(this, view);
         etProfileFirstName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, ""));
         etProfileFirstName.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, ""));
-        tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
+        etEditProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
+        etEditProfileBloodGroup.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
         etProfileLastName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLastName, ""));
-        tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
-        tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
-        tvProfileMobileNumber.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
-        tvProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, ""));
-        tvProfileFacebookId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, ""));
+        etProfileLastName.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserLastName, ""));
+        etEditProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
+        etEditProfileDOB.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
+        etEditProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
+        etEditProfileLocation.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
+        etProfileMobileNumber.setHint(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
+        etProfileMobileNumber.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
+        etEditProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, ""));
+        etEditProfileEmail.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, ""));
+        etEditProfileFacebbokId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, ""));
+        etEditProfileFacebbokId.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, ""));
+        etProfileMobileNumber.setEnabled(false);
+        Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + SharedPreferenceUtil.getString(Constants.UserData.UserProfilePic, "")).placeholder(R.drawable.icon_placeholde).error(R.drawable.icon_placeholde).into(ivProfilePhotoSmall);
+        Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + SharedPreferenceUtil.getString(Constants.UserData.UserProfilePic, "")).placeholder(R.drawable.cover_placeholder).error(R.drawable.cover_placeholder).into(ivProfilePhoto);
         presenter = new PresenterClass();
         return view;
     }
 
-    @OnClick(R.id.ivEditIcon)
-    public void editProfile() {
-        presenter.changeActivity(getActivity(), ProfileEditActivity.class, true);
-
-    }
 
     @Override
     public void onSuccessUpdateUserData(String name) {
-
     }
 
     @Override
@@ -139,4 +349,271 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback 
     public void onFailUpdateRequest() {
 
     }
+
+    @Override
+    public void onSuccessLocationList(JSONArray jsonArray) {
+
+    }
+
+
+    private boolean changeFocusIfEmpty(EditText et) {
+        if (mDialogAll != null) {
+            if (!mDialogAll.isVisible()) {
+                etEditProfileDOB.clearFocus();
+            }
+        }
+        if (TextUtils.isEmpty(etProfileFirstName.getText().toString())) {
+            etProfileFirstName.requestFocus();
+            et.setCursorVisible(false);
+            etProfileFirstName.setCursorVisible(true);
+            UtilClass.displyMessage("First name is required", getActivity(), 0);
+            return true;
+        } else if (TextUtils.isEmpty(etProfileLastName.getText().toString())) {
+            etProfileLastName.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage("Last name is required", getActivity(), 0);
+            etProfileLastName.setCursorVisible(true);
+            return true;
+        } else if (TextUtils.isEmpty(etProfileMobileNumber.getHint().toString()) || !(etProfileMobileNumber.getHint().toString().length() > 7 && etProfileMobileNumber.getHint().toString().length() < 14 && TextUtils.isDigitsOnly(etProfileMobileNumber.getHint().toString()))) {
+            etProfileMobileNumber.requestFocus();
+            et.setCursorVisible(false);
+            if (TextUtils.isEmpty(etProfileMobileNumber.getHint().toString())) {
+                UtilClass.displyMessage("Contact number  is required", getActivity(), 0);
+            } else {
+                UtilClass.displyMessage("Please enter valid contact number", getActivity(), 0);
+            }
+            etProfileMobileNumber.setCursorVisible(true);
+            return true;
+        } else if (!TextUtils.isEmpty(etEditProfileEmail.getText().toString()) && !UtilClass.isValidEmail(etEditProfileEmail.getText().toString())) {
+            etEditProfileEmail.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage("Please enter valid Email ", getActivity(), 0);
+            etEditProfileEmail.setCursorVisible(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    private void openDateSelector() {
+        long minMaxTime = 100L * 365 * 1000 * 60 * 60 * 24L;
+        long curruntMillis = System.currentTimeMillis();
+        try {
+            Date date = dateFormat.parse(etEditProfileDOB.getText().toString().trim());
+            calendar.setTime(date);
+            curruntMillis = calendar.getTimeInMillis();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mDialogAll = new com.jzxiang.pickerview.TimePickerDialog.Builder()
+                .setCallBack(new OnDateSetListener() {
+                    @Override
+                    public void onDateSet(TimePickerDialog timePickerView, long millseconds) {
+                        calendar.setTimeInMillis(millseconds);
+                        Date date = calendar.getTime();
+                        if (date != null) {
+                            String selectedDate = dateFormat.format(date);
+                            etEditProfileDOB.setText(selectedDate);
+                            etEditProfileDOB.clearFocus();
+                            updateDateDateOfBirth();
+                            Log.e("Selected", "date" + selectedDate);
+                        }
+                    }
+                })
+                .setCancelStringId("Cancel")
+                .setSureStringId("Done")
+                .setCurrentMillseconds(curruntMillis)
+                .setTitleStringId("")
+                .setYearText("")
+                .setMonthText("")
+                .setDayText("")
+                .setCyclic(true)
+                .setThemeColor(ActivityCompat.getColor(getActivity(), R.color.colorPrimaryDark))
+                .setType(Type.YEAR_MONTH_DAY)
+                .setMaxMillseconds(System.currentTimeMillis() + minMaxTime)
+                .setMinMillseconds(System.currentTimeMillis() - minMaxTime)
+                .setWheelItemTextNormalColor(getResources().getColor(R.color.colorTransparentGray))
+                .setWheelItemTextSelectorColor(ActivityCompat.getColor(getActivity(), R.color.colorBlack))
+                .setWheelItemTextSize(18)
+                .build();
+        mDialogAll.show(getChildFragmentManager(), "month");
+        mDialogAll.setCancelable(false);
+    }
+
+
+    private String getDateOfBirthToSend(String dob) {
+        SimpleDateFormat dateFormate1 = new SimpleDateFormat("yyyy-MM-dd");
+        String returnDate = "";
+        try {
+            Date date = dateFormat.parse(dob);
+            returnDate = dateFormate1.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return returnDate;
+    }
+
+
+    private void openBloodGroupSelector() {
+        final String[] options = getResources().getStringArray(R.array.bloodGroups);
+        OptionPicker picker = new OptionPicker(getActivity(), options);
+        picker.setTextSize(18);
+        picker.setLineColor(ActivityCompat.getColor(getActivity(), R.color.colorPrimary));
+        picker.setTitleTextColor(ActivityCompat.getColor(getActivity(), R.color.colorWhite));
+        picker.setTopBackgroundColor(ActivityCompat.getColor(getActivity(), R.color.colorAccent));
+        picker.setTopLineColor(ActivityCompat.getColor(getActivity(), R.color.colorPrimary));
+        picker.setTextColor(ActivityCompat.getColor(getActivity(), R.color.colorBlack), ActivityCompat.getColor(getActivity(), R.color.colorTransparentGray));
+        picker.setSelectedIndex(selectedPosition);
+        picker.setSubmitText("Done");
+
+        picker.setCancelText("Cancel");
+        picker.setCancelTextColor(ActivityCompat.getColor(getActivity(), R.color.colorWhite));
+        picker.setSubmitTextColor(ActivityCompat.getColor(getActivity(), R.color.colorWhite));
+        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(String option) {
+                int i = Arrays.asList(options).indexOf(option);
+                selectedPosition = i;
+                etEditProfileBloodGroup.setText(option);
+                etEditProfileBloodGroup.clearFocus();
+                updateBloodGroup();
+            }
+        });
+        picker.show();
+        picker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                Log.e("dismiss", "callled");
+                etEditProfileBloodGroup.clearFocus();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CONSTANT) {
+                try {
+                    etEditProfileLocation.clearFocus();
+                    if (data.getBooleanExtra("isSelected", false)) {
+                        JSONObject selectedLocation = new JSONObject(data.getStringExtra("selectedCity"));
+                        Log.e("activityResult", data.toString());
+                        if (selectedLocation != null) {
+                            etEditProfileLocation.setText(selectedLocation.optString("locationName"));
+                            this.locationId = selectedLocation.optInt("locationId");
+                            updateCity();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == REQUEST_CAMERA) {
+            } else {
+                List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+                if (pathList != null) {
+                    Log.e("selected image", "path+" + pathList.get(0));
+                    uploadPhoto(pathList.get(0));
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void updatePhoto() {
+        final CharSequence[] items = {getResources().getString(R.string.takePhoto), getResources().getString(R.string.selectYourPhoto), getResources().getString(R.string.cancel)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getResources().getString(R.string.selectSources));
+        builder.setCancelable(false);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals(getResources().getString(R.string.takePhoto))) {
+                    whichSelect = REQUEST_CAMERA;
+                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                } else if (items[item].equals(getResources().getString(R.string.selectYourPhoto))) {
+                    whichSelect = SELECT_FILE;
+                    if (!checkPermission()) {
+                        requestPermission();
+                    } else {
+                        getPhotoFromGallary();
+                    }
+                } else if (items[item].equals(getResources().getString(R.string.cancel))) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void uploadPhoto(String imageData) {
+        if (mProfileUpdatePresenter == null) {
+            mProfileUpdatePresenter = new ProfileUpdatePresenter();
+        }
+        HashMap<String, String> params = new HashMap<>();
+        File file = new File(imageData);
+        Log.e("selectedImage", "image File" + file);
+       // params.put("userProfilePic", file + "");
+        HashMap<String, String> header = new HashMap<>();
+        header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+        MultiPartRequestJson request = new MultiPartRequestJson(UtilClass.getProfileUpdateUrl(SharedPreferenceUtil.getString(Constants.UserData.UserId, "")), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("response", "picUpload" + response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("response", "picUpload" + error);
+
+            }
+        }, file, params, header);
+        request.setRetryPolicy(new DefaultRetryPolicy(20000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(request, "");
+
+    }
+
+    private void getPhotoFromGallary() {
+        Intent intent = new Intent(getActivity(), MultiImageSelectorActivity.class);
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, false);
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_SINGLE);
+        startActivityForResult(intent, SELECT_FILE);
+    }
+
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            showMessageOKCancel("You need to allow access to external storage",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        PERMISSION_REQUEST_CODE);
+                            }
+                        }
+                    });
+
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
 }

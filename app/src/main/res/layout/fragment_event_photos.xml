@@ -1,66 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentGrid"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/defaultpadding"
-        android:layout_marginLeft="@dimen/defaultpadding"
-        android:layout_marginRight="@dimen/defaultpadding"
-        android:layout_marginTop="@dimen/defaultpadding"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginBottom="@dimen/margin_medium"
-            android:orientation="horizontal">
-            <RadioGroup
-                android:id="@+id/radioGroup1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="horizontal" >
-                <RadioButton
-                    android:id="@+id/radioGridSmall"
-                    android:layout_width="@dimen/activity_top_login_margin"
-                    android:layout_height="@dimen/activity_top_login_margin"
-                    android:background="@drawable/icon_grid_small"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:gravity="center"
-                    android:layout_marginRight="@dimen/cardElevation"
-                    android:button="@android:color/transparent"
-                    android:checked="false" />
-                <RadioButton
-                    android:id="@+id/radioGridfragment"
-                    android:layout_width="@dimen/activity_top_login_margin"
-                    android:layout_height="@dimen/activity_top_login_margin"
-                    android:background="@drawable/icon_grid_fill"
-                    android:layout_marginLeft="@dimen/margin_small"
-                    android:layout_marginRight="@dimen/margin_small"
-                    android:button="@android:color/transparent"
-                    android:checked="true"/>
-            </RadioGroup>
-        </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ivPlaceHolder"
-            android:src="@mipmap/ic_user_placeholder"/>
-        <GridView
-            android:numColumns="@integer/default_title_indicator_footer_indicator_style"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:background="@color/colorWhite"
             android:gravity="center"
-            android:columnWidth="100dp"
-            android:stretchMode="columnWidth"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="none"
-            android:id="@+id/gridfragment"
-            />
-        </LinearLayout>
-    </FrameLayout>
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <RadioButton
+                android:id="@+id/radioAlbumSelector"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/cardElevation"
+                android:background="@drawable/icon_grid_small"
+                android:button="@android:color/transparent"
+                android:checked="false"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:shadowDx="2"
+                android:shadowDy="2" />
+
+            <RadioButton
+                android:id="@+id/radioImageSelector"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:background="@drawable/icon_grid_fill"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:elevation="10dp"
+                android:shadowDx="2"
+                android:shadowDy="2" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flGallaryMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_medium" />
+</LinearLayout>

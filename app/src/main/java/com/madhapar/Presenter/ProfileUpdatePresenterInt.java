@@ -1,5 +1,7 @@
 package com.madhapar.Presenter;
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.madhapar.View.ProfileUpdateCallback;
 
 import java.util.Map;
@@ -9,5 +11,11 @@ import java.util.Map;
  */
 
 public interface ProfileUpdatePresenterInt {
-    void updateUserFirstName(Map<String, String> params, String userId, ProfileUpdateCallback profileUpdateCallback);
+    void updateUserDetail(Map<String, String> params, String userId, ProfileUpdateCallback profileUpdateCallback);
+
+    void getLocationList(ProfileUpdateCallback mProfileUpdateCallback);
+
+    void addNewLocationAlert(AppCompatActivity activity);
+
+    void createNewLocation(String locationName, ProfileUpdateCallback mProfileUpdateCallback);
 }

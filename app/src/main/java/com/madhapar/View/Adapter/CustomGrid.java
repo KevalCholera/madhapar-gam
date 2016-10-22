@@ -3,15 +3,22 @@ package com.madhapar.View.Adapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
+import com.madhapar.View.Fragment.PhotoFragment;
+import com.madhapar.View.Fragment.PhotoListFragment;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -26,24 +33,31 @@ import butterknife.ButterKnife;
  * Created by Ronak on 10/11/2016.
  */
 public class CustomGrid extends BaseAdapter {
-    JSONArray eventPhotos ;
+    JSONArray photoArray;
     Context context;
+    @BindView(R.id.rlAlbum)
+    RelativeLayout rlAlbum;
+    @BindView(R.id.tvAlbumName)
+    TextView tvAlbumName;
+    @BindView(R.id.tvAlbumDate)
+    TextView tvAlbumDate;
+    private FragmentManager fm;
+    private PhotoListFragment photoListFragment;
 
-    private static LayoutInflater inflter = null   ;
     @BindView(R.id.ivImageGrid)
     ImageView ivImageGrid;
-    @BindView(R.id.tvPhotoDate)
-    TextView tvPhotoDate;
 
-    public CustomGrid(Context context, JSONArray list1) {
-        this.eventPhotos =  list1;
-        this.context=context;
-        inflter = ( LayoutInflater )context.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    public CustomGrid(Context context, JSONArray photoArray, FragmentManager fm) {
+        this.photoArray = photoArray;
+        this.context = context;
+        this.fm = fm;
+
     }
+
     @Override
     public int getCount() {
-        return eventPhotos.length();
+        return photoArray.length();
     }
 
     @Override
@@ -58,10 +72,26 @@ public class CustomGrid extends BaseAdapter {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.element_custom_eventphoto_grid,null);
-        ButterKnife.bind(this,view);
-        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + eventPhotos.optJSONObject(position).optString("userProfilePic")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(ivImageGrid);
+    public View getView(final int position, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        view = inflater.inflate(R.layout.element_custom_eventphoto_grid, null);
+        ButterKnife.bind(this, view);
+        rlAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("images", photoArray.optJSONObject(position).optJSONArray("eventPhotos").toString());
+                if (photoListFragment == null) {
+                    photoListFragment = new PhotoListFragment();
+                }
+                photoListFragment.setArguments(bundle);
+                fm.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).commit();
+            }
+        });
+        tvAlbumName.setText(photoArray.optJSONObject(position).optString("eventTitle"));
+        String date = photoArray.optJSONObject(position).optString("eventFromDate").substring(0, 12) + "-" + photoArray.optJSONObject(position).optString("eventToDate").substring(0, 12);
+        tvAlbumDate.setText(date);
+        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + photoArray.optJSONObject(position).optString("coverImage")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(ivImageGrid);
         return view;
     }
 

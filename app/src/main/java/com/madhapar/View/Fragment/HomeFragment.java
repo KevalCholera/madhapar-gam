@@ -11,21 +11,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
-import com.madhapar.Presenter.PresenterClassSecond;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.PushUtil.WakeLocker;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsListAdapter;
 import com.madhapar.View.HomeViewInt;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -58,6 +57,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+        hasOptionsMenu();
         srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -76,14 +76,28 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
                 }
             }
         });
+        setHasOptionsMenu(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mContext = this.getActivity();
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionNews));
         return view;
-
-
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_filter) {
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_news_feed, menu);
+        MenuItem filter = menu.findItem(R.id.action_filter);
+        filter.setVisible(true);
+        return;
+    }
 
     @Override
     public void onResume() {
@@ -99,7 +113,6 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onSuccessNewsList(List<NewsObject> newsList) {
-
         if (srlNewsList.isRefreshing()) {
             srlNewsList.setRefreshing(false);
         }
@@ -111,7 +124,6 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             newsDataAdapter.updateAdapter(newsList);
         }
-
     }
 
     @Override

@@ -19,6 +19,8 @@ public class Constants {
         public static String BaseUrlForImage = "http://139.59.29.185";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
+        public static String LocationListUrl = BaseUrl + "locations/";
+        public static String CreateLocationListUrl = BaseUrl + "createLocation/";
         public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
         public static String EventStatusCreateUrl = BaseUrl + "eventStatusCreate/";
         public static String ProfileUpdateUrl = BaseUrl + "userDetail/";
