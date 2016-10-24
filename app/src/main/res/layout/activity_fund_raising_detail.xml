@@ -91,7 +91,7 @@
                         android:background="@drawable/fund_raising_button"
                         android:elevation="0dp"
                         android:gravity="center"
-                        android:text="@string/fundInfoLess"
+                        android:text="@string/fundInfoMore"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/text12" />

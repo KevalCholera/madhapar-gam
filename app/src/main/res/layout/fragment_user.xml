@@ -156,6 +156,7 @@
                         android:layout_marginRight="@dimen/marginRight"
                         android:layout_weight="1.5"
                         android:background="@drawable/search"
+                        android:textColorHint="@color/colorPrimary"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
                         android:inputType="textPersonName"
@@ -319,7 +320,9 @@
                         android:background="@drawable/search"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:inputType="textPersonName"
+                        android:hint="@string/email"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary" />
@@ -352,6 +355,8 @@
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
                         android:inputType="textPersonName"
+                        android:hint="@string/facebook"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary" />

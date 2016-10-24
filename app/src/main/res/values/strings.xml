@@ -123,6 +123,9 @@
     <string name="labelEventPhotos">Event Photos</string>
     <string name="labelFundRaising">Fund Raising</string>
 
+    <string name="email">Email(Optional)</string>
+    <string name="facebook">FB Username(Optional)</string>
+
     <!--NewsData-->
 
     <!--Comment Screen-->
