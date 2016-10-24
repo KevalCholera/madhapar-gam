@@ -12,9 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
 import com.example.smartsense.newproject.R;
+import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.CommentsListAdapter;
@@ -27,13 +29,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, NewsLikeCommentUpdateCallback {
+public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback,CommentViewInt, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
     @BindView(R.id.etCommentText)
     EditText etCommentText;
     @BindView(R.id.tvSendComment)
     TextView tvSendComment;
+    PresenterClass presenter;
 
 
     @OnClick(R.id.tvSendComment)
@@ -44,6 +47,8 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         }
         if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
             presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
+            presenter = new PresenterClass();
+            presenter.commentCredential(etCommentText.getText().toString(),this);
         } else {
             presenterClass.updateComment(getIntent().getStringExtra("newsId"), (String) etCommentText.getTag(), etCommentText.getText().toString(), "1", this);
         }
@@ -142,5 +147,16 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         etCommentText.setTag(newsStatusId);
         tvSendComment.setTag("update");
         etCommentText.setText(newsComment);
+    }
+
+
+    @Override
+    public void onCommentresult(int checkComment) {
+        if(checkComment == UtilClass.CommentBlankError){
+            UtilClass.displyMessage(getString(R.string.commentEmpty),NewsCommentActivity.this, Toast.LENGTH_SHORT);
+        }
+        else if(checkComment == UtilClass.CommentLenghtError){
+            UtilClass.displyMessage(getString(R.string.commentLength),NewsCommentActivity.this,Toast.LENGTH_SHORT);
+        }
     }
 }

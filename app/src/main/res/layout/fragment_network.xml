@@ -21,10 +21,10 @@
 
             <ImageView
                 android:id="@+id/ic_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
                 android:paddingBottom="@dimen/cardview_default_radius"
-                android:src="@drawable/ic_search"
+                android:src="@drawable/icon_search"
                 android:visibility="visible" />
 
             <EditText
@@ -34,6 +34,7 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:hint="@string/search"
+                android:textColorHint="@color/colorgreySearch"
                 android:padding="@dimen/searchBarPadding"
                 android:textAlignment="center"
                 android:textSize="@dimen/defaultpadding" />

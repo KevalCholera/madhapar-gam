@@ -3,6 +3,8 @@ package com.madhapar.Presenter;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
+import com.madhapar.Model.CommentModelInt;
+import com.madhapar.View.CommentViewInt;
 import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.ChangePasswordViewInt;
@@ -26,6 +28,8 @@ public interface PresneterInt {
     void validateCredentials(String contactNumber, String password, LoginInt loginInt, AppCompatActivity activity);
 
     List<Integer> initMainDrawer();
+
+    void commentCredential(String comment, CommentViewInt commentViewInt);
 
     void feedbackValidateCredentials(String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 

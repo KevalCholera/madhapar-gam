@@ -15,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
 
             <EditText
@@ -26,15 +27,16 @@
                 android:layout_marginRight="@dimen/margin_medium"
                 android:background="@drawable/search"
                 android:gravity="left|center"
-                android:hint="@string/search"
+                android:textColorHint="@color/colorgreySearch"
+                android:hint="@string/searchlocation"
                 android:paddingLeft="40dp" />
 
             <ImageView
                 android:id="@+id/ivSearchHint"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/margin_medium"
-                android:src="@drawable/ic_search" />
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/defaultpadding"
+                android:src="@drawable/icon_search" />
 
         </RelativeLayout>
 

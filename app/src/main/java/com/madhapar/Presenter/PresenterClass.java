@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
+import com.madhapar.Model.CommentModel;
+import com.madhapar.Model.CommentModelInt;
 import com.madhapar.Model.FeedbackModel;
 import com.madhapar.Model.ForgetPasswordModel;
 import com.madhapar.Model.ForgetPasswordModelInt;
@@ -18,6 +20,7 @@ import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.CommentViewInt;
 import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.OtpAlertDialog;
@@ -38,7 +41,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
+public class PresenterClass implements PresneterInt,CommentModelInt.onCommentRequestFinishListener, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
 
     private MainModelClass modelClass;
     private LoginInt loginInt;
@@ -52,6 +55,9 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     private ChangePasswordModel changePasswordModel;
     private OtpAlertDialogInt alertIntl;
     private FundRaisigListCallback fundRaisingCallback;
+    private CommentModelInt commentModelInt;
+    private CommentModel commentModel;
+    private CommentViewInt commentViewInt1;
 
     public PresenterClass(SignUpActivity signUpModel) {
         this.signupInt = signUpModel;
@@ -116,6 +122,14 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
             modelClass = new MainModelClass();
         }
         return modelClass.getMainDrawerData();
+    }
+
+    @Override
+    public void commentCredential(String comment, CommentViewInt commentViewInt) {
+        commentViewInt1 = commentViewInt;
+        commentModel = new CommentModel();
+        commentModel.comment(comment,this);
+
     }
 
     @Override
@@ -409,4 +423,13 @@ public class PresenterClass implements PresneterInt, LoginModelInt.onLoginFinish
     }
 
 
+    @Override
+    public void onCommentBlankError() {
+        commentViewInt1.onCommentresult(UtilClass.CommentBlankError);
+    }
+
+    @Override
+    public void onCommentLengthError() {
+        commentViewInt1.onCommentresult(UtilClass.CommentLenghtError);
+    }
 }

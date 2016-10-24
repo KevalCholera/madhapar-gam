@@ -59,17 +59,21 @@
     <string name="more5">Fund Raising</string>
     <string name="more6">Sign Out</string>
 
-    <string name="search">Search</string>
+    <string name="search">Find Gam Member</string>
+    <string name="searchlocation">Search Location</string>
     <string name="emptyUserList">Curruntly there are no \n users in your network</string>
 
+    <string name="commentEmpty">Enter Comment</string>
+    <string name="commentLength">Can not enter more than 200 characters.</string>
+
     <string name="enterrequiredfiels">Enter Required Field</string>
-    <string name="enterfamilymember">Enter Family Member</string>
-    <string name="enterfirstnm">Enter Valid First Name</string>
-    <string name="enterlastnm">Enter Vlaid Last Name</string>
-    <string name="enterpassword">Enter Password</string>
-    <string name="passwordlength">Password must be greater than 6 letters</string>
-    <string name="contactError">Enter Contact Number</string>
-    <string name="ErrorContactLength">Contact Number must be 7 to 14 digit</string>
+    <string name="enterfamilymember">Family Member is required</string>
+    <string name="enterfirstnm">First Name is required</string>
+    <string name="enterlastnm">Last Name is required</string>
+    <string name="enterpassword">Password is required</string>
+    <string name="passwordlength">Password has to be an alphanumeric and minimum 7 characters long.</string>
+    <string name="contactError">Mobile No. is required</string>
+    <string name="ErrorContactLength">Mobile No. has to be a numeric value (7-14 digits).</string>
     <string name="loginSuccess">Login Success</string>
     <string name="passwordUpdate">password Update</string>
     <string name="subjectrequired">Enter valid Feedback Subject</string>
@@ -158,9 +162,9 @@
 
     <!--FeedBack -->
     <string name="feedbackFeildEmpty">Enter required field.</string>
-    <string name="feedbackSubjectValid">Please enter valid feedback subject(5-50 chars).</string>
+    <string name="feedbackSubjectValid">Please enter valid subject (5-50 chars).</string>
     <string name="feedbackSubjetRequired">Subject is required.</string>
-    <string name="feedbackValid">Please enter valid feedback(10-2000 chars).</string>
+    <string name="feedbackValid">Please enter valid feedback (50-2000 chars).</string>
     <string name="feedbackRequired">Feedback is required.</string>
     <string name="feedbackSuccess">Feedback .</string>
 

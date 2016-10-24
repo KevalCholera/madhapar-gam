@@ -13,11 +13,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivLocation"
-            android:layout_width="26dp"
+            android:layout_width="30dp"
             android:layout_height="26dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/margin_medium"
-            android:src="@drawable/ic_icon" />
+            android:src="@drawable/icon_placeholder_location" />
 
         <TextView
             android:id="@+id/tvLocationCity"

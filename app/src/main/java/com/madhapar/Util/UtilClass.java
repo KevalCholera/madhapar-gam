@@ -48,6 +48,9 @@ public class UtilClass {
     public static final int FeedbackSubjectValidateError = 15;
     public static final int FeedbackSubmitSuccess = 18;
 
+    public static final int CommentBlankError = 19;
+    public static final int CommentLenghtError = 20;
+
 
     public static final int RetryTimeOut = 20000;
     private static ProgressDialog pDialog;

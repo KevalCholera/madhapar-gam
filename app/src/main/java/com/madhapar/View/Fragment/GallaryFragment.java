@@ -1,6 +1,8 @@
 package com.madhapar.View.Fragment;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,22 +49,7 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     private PhotoListFragment photoListFragment;
 
 
-    @OnClick(R.id.radioImageSelector)
-    void openImagePage() {
-        if (photoListFragment == null) {
-            photoListFragment = new PhotoListFragment();
-        }
-        if (albumArray != null) {
-            if (photoListFragment.getArguments() == null) {
-                Bundle bundle = new Bundle();
-                JSONArray imageArray = albumArray.optJSONObject(0).optJSONArray("eventPhotos");
-                bundle.putString("images", imageArray.toString());
-                photoListFragment.setArguments(bundle);
-            }
-            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).addToBackStack(null).commit();
-        }
-    }
-
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.radioAlbumSelector)
     void openAlbumPage() {
         if (fragmentAlbum == null) {
@@ -98,10 +85,6 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         UtilClass.hideProgress();
         this.albumArray = eventArray;
         radioAlbumSelector.performClick();
-
-//        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);
-//        gridAlbum.setAdapter(customGrid);
-
     }
 
     @Override
