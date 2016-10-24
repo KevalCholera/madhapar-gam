@@ -51,8 +51,8 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
             }
             String projectDate = projectObj.optString("projectFromDate") + " - " + projectObj.optString("projectToDate");
             holder.tvFundRaisingProjectDate.setText(projectDate);
-            holder.tvFundRaisingProjectGoal.setText("Goal : " + "$ " + projectObj.optString("projectTotalCost"));
-            holder.tvFundRaisingProjectRaised.setText("Raised : " + "$ " + projectObj.optString("projectTotalRaised"));
+            holder.tvFundRaisingProjectGoal.setText("Goal : " + "₹ " + projectObj.optString("projectTotalCost"));
+            holder.tvFundRaisingProjectRaised.setText("Raised : " + "₹ " + projectObj.optString("projectTotalRaised"));
             holder.llFundRaisingProject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -65,7 +65,6 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
         }
     }
 
-
     @Override
     public int getItemCount() {
         return projectList.length();
@@ -75,7 +74,6 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
         this.projectList = projectList;
         notifyDataSetChanged();
     }
-
 
     public class FundRaisingViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvFundRaisingProjectName)

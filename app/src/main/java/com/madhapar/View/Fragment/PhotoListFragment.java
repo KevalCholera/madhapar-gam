@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.ExpandableGridView;
@@ -28,6 +29,8 @@ public class PhotoListFragment extends BaseFragment {
     ExpandableGridView gvPhotoList;
     private PhotoListCustomGridAdapter photoListAdapter;
     private FragmentManager fm;
+    @BindView(R.id.event_photo_place_holder)
+    ImageView event_photo_place_holder;
 
     @Nullable
     @Override
@@ -40,8 +43,14 @@ public class PhotoListFragment extends BaseFragment {
             try {
                 JSONArray imageArray = new JSONArray(images);
                 if (imageArray != null && imageArray.length() > 0) {
+                    event_photo_place_holder.setVisibility(View.GONE);
+                    gvPhotoList.setVisibility(View.VISIBLE);
                     photoListAdapter = new PhotoListCustomGridAdapter(getActivity(), imageArray, fm);
                     gvPhotoList.setAdapter(photoListAdapter);
+                } else {
+                    event_photo_place_holder.setVisibility(View.VISIBLE);
+                    gvPhotoList.setVisibility(View.GONE);
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

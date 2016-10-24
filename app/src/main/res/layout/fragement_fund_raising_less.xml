@@ -6,16 +6,24 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/interior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:id="@+id/interior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite" />
 
         <LinearLayout
+            android:id="@+id/llGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_small"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -26,10 +34,11 @@
                 android:textSize="@dimen/text18" />
 
             <TextView
+                android:id="@+id/tvGoalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="$1000"
+                android:text=""
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text16" />
         </LinearLayout>
@@ -40,10 +49,12 @@
             android:layout_centerInParent="true" />
 
         <LinearLayout
+            android:id="@+id/llRaised"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,17 +62,17 @@
                 android:gravity="center"
                 android:text="Raised"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
 
             <TextView
+                android:id="@+id/tvRaisedAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="$1000"
+                android:text=""
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </LinearLayout>
-
 
     </RelativeLayout>
 

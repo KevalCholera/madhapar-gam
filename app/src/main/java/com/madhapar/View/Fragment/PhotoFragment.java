@@ -32,6 +32,7 @@ public class PhotoFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_photos, container, false);
         ButterKnife.bind(this, view);
         String images = getArguments().getString("images");
+        int selected = getArguments().getInt("position");
         if (images != null) {
             try {
                 JSONArray imageArray = new JSONArray(images);
@@ -43,6 +44,7 @@ public class PhotoFragment extends BaseFragment {
                 e.printStackTrace();
             }
         }
+        vpPhotos.setCurrentItem(selected);
         vpPhotos.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

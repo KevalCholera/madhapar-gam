@@ -90,6 +90,10 @@ public class NewsFeedModel implements NewsFeedModelInt {
                 newsObject.setNewsId(newsArray.optJSONObject(i).optString("newsId"));
                 newsObject.setNewsDataAndTime(newsArray.optJSONObject(i).optString("newsCreatedDate"));
                 newsObject.setCommented(newsArray.optJSONObject(i).optBoolean("isCommented"));
+                JSONObject newsCatagoryObj = newsArray.optJSONObject(i).optJSONObject("newsCategory");
+                if (newsCatagoryObj != null) {
+                    newsObject.setNewsCatagory(newsCatagoryObj.optString("categoryName"));
+                }
                 String newsStatusId = newsArray.optJSONObject(i).optString("newsStatusId");
                 newsObject.setNewsStatusId(newsStatusId);
                 newsList.add(newsObject);

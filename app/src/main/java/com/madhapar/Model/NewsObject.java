@@ -1,5 +1,7 @@
 package com.madhapar.Model;
 
+import android.util.Log;
+
 import com.madhapar.View.Adapter.NewsListAdapter;
 
 import org.json.JSONArray;
@@ -14,6 +16,17 @@ public class NewsObject implements Serializable {
     public String getNewsStatusId() {
         return newsStatusId;
     }
+
+    public String getNewsCatagory() {
+        return newsCatagory;
+    }
+
+    public void setNewsCatagory(String newsCatagory) {
+        Log.e("newsCatagory", "created" + newsCatagory);
+        this.newsCatagory = newsCatagory;
+    }
+
+    public String newsCatagory;
 
     public void setNewsStatusId(String newsStatusId) {
         this.newsStatusId = newsStatusId;

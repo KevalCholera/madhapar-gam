@@ -37,6 +37,13 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
+            android:name="com.madhapar.View.FilterActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
             android:name="com.madhapar.View.ForgetPasswordActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/forgetPassword"
@@ -101,6 +108,13 @@
             android:name="com.madhapar.View.EventDetailActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/labelEventDetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.madhapar.View.FundRaisingDetailActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/lableFundRaising"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />

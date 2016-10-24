@@ -279,7 +279,6 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     public void onSuccessNewsDetail(NewsObject newsObject) {
         this.newsDetailObj = newsObject;
         UtilClass.hideProgress();
-        Log.e("newsDetail", "title" + newsObject.getNewsTitle());
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -313,13 +312,11 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     public void onFailRequest() {
         UtilClass.hideProgress();
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
-        Log.e("onSuccess", "Request Fail");
     }
 
     @Override
     public void onFailResponse(String message) {
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, this, 0);
-        Log.e("onSuccess", "Response Fail" + message);
     }
 }

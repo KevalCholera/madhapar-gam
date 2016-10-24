@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.example.smartsense.newproject.R;
@@ -37,6 +38,8 @@ public class AlbumFragment extends BaseFragment {
     ExpandableGridView gridAlbum;
     private CustomGrid customGrid;
     private FragmentManager fragmentManager;
+    @BindView(R.id.ivEventPhotoPlaceholder)
+    ImageView ivEventPhotoPlaceholder;
 
     @Nullable
     @Override
@@ -49,8 +52,13 @@ public class AlbumFragment extends BaseFragment {
             try {
                 JSONArray imageArray = new JSONArray(images);
                 if (imageArray != null && imageArray.length() > 0) {
+                    gridAlbum.setVisibility(View.VISIBLE);
+                    ivEventPhotoPlaceholder.setVisibility(View.GONE);
                     customGrid = new CustomGrid(getActivity(), imageArray, fragmentManager);
                     gridAlbum.setAdapter(customGrid);
+                } else {
+                    gridAlbum.setVisibility(View.GONE);
+                    ivEventPhotoPlaceholder.setVisibility(View.VISIBLE);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

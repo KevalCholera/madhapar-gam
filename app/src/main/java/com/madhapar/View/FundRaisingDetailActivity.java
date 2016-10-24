@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.Constants;
 import com.madhapar.View.Fragment.FundRaisingLessFragment;
 import com.madhapar.View.Fragment.FundRaisingMoreFragment;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +42,8 @@ public class FundRaisingDetailActivity extends BaseActivity {
     Button btnFundRaisingMoreLess;
     private FragmentManager mFragmetnManager;
     private JSONObject projectDetail;
+    @BindView(R.id.ivFundRaisingImage)
+    ImageView ivFundRaisingImage;
 
     @OnClick(R.id.btnFundRaisingMoreLess)
     void changeFragment() {
@@ -78,7 +83,7 @@ public class FundRaisingDetailActivity extends BaseActivity {
                     if (locationObj != null) {
                         tvFundRaisingDetailProjectPlace.setText(locationObj.optString("locationName"));
                     }
-                    tvFundraisingDetailProjectOrganizer.setText(projectDetail.optString("projectHandleby"));
+                    tvFundraisingDetailProjectOrganizer.setText("Managed By: " + projectDetail.optString("projectHandleby"));
                     String projectDate = projectDetail.optString("projectFromDate") + " - " + projectDetail.optString("projectToDate");
                     tvFundRaisingDetailProjectDate.setText(projectDate);
                 }
@@ -86,12 +91,12 @@ public class FundRaisingDetailActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+        Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + projectDetail.optString("projectPic")).placeholder(R.mipmap.img_fund_raising_banner).error(R.mipmap.img_fund_raising_banner).into(ivFundRaisingImage);
         Bundle bundle = new Bundle();
 
         bundle.putString("projectDetail", projectDetail.toString());
         Fragment fundRaisingLessFragment = new FundRaisingLessFragment();
         fundRaisingLessFragment.setArguments(bundle);
-
         mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingLessFragment).commit();
     }
 

@@ -11,11 +11,13 @@ public class Constants {
         public static final String NotGoingStatus = "3";
         public static String Check = "check";
         public static final int ViewPagerInterval = 2000;
+        public static final String SelectedCatagory = "selectedCatagory";
 
     }
 
     public static class RequestConstants {
-        public static String BaseUrl = "http://139.59.29.185/api/";
+        //  public static String BaseUrl = "http://139.59.29.185/api/";
+        public static String BaseUrl = "http://192.168.0.106:8000/api/";
         public static String BaseUrlForImage = "http://139.59.29.185";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";

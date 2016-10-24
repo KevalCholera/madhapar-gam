@@ -2,12 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
     <com.madhapar.Util.ExpandableGridView
         android:id="@+id/gvPhotoList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2" />
+        android:numColumns="2"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/event_photo_place_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_event_photo_placeholder"
+        android:visibility="gone" />
+
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.madhapar.View.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,15 +23,18 @@ import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
+import com.madhapar.View.Fragment.HomeFragment;
 import com.madhapar.View.HomeViewInt;
 import com.madhapar.View.NewsCommentActivity;
 import com.madhapar.View.NewsDetailActivity;
+import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +43,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Ronak on 10/7/2016.
  */
-public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyViewHolder> implements NewsLikeCommentUpdateCallback, HomeViewInt {
+public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyViewHolder> implements NewsLikeCommentUpdateCallback, HomeViewInt, Filterable {
     Context context;
     List<NewsObject> newsList;
     String newsId1;
@@ -45,12 +51,20 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     private LinearLayoutManager rvManager;
     private NewsObject.ComparatorClass comparator = new NewsObject.ComparatorClass();
     private RequestPresenter requestPresenter;
+    private List<NewsObject> tempList;
+    private NewsFilter newsFilter;
+    private String[] catagoryList;
+    private HomeFragment hf;
 
-    public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager) {
+
+    public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager, HomeFragment hf) {
         this.rvNewsList = rvNewsList;
         this.newsList = newsList;
         this.context = context;
         this.rvManager = rvManager;
+        this.tempList = newsList;
+        this.hf = hf;
+        catagoryList = context.getResources().getStringArray(R.array.newsCatagory);
     }
 
     @Override
@@ -58,92 +72,97 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         View viewNewsData = LayoutInflater.from(context).inflate(R.layout.element_news_list, parent, false);
         ButterKnife.bind(this, viewNewsData);
         return new MyViewHolder(viewNewsData);
+
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final NewsObject newsObj = newsList.get(position);
-        holder.tvNewsTitle.setText(newsObj.getNewsTitle());
-        holder.tvNewsCity.setText("\u2022 " + newsObj.getNewsCity());
-        holder.tvNewsDescription.setText(newsObj.getNewsDescription());
-        holder.tvNewsLikeCount.setText(newsObj.getNewsLikeCount());
-        holder.tvNewsCommentCount.setText(newsObj.getNewsCommentCount());
-        holder.tvNewsDateTime.setText(newsObj.getNewsDataAndTime());
-        if (newsObj.isCommented()) {
-            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment_filled);
-        } else {
-            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment);
-        }
-        if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
-            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like);
-        } else {
-            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
-        }
-        holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(View view) {
-                                                     newsId1 = newsObj.getNewsId();
-                                                     if (requestPresenter == null) {
-                                                         requestPresenter = new RequestPresenter();
-                                                     }
-                                                     if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
-                                                         requestPresenter.updateLikeComment(newsObj.getNewsId(), "2", "", NewsListAdapter.this);
-                                                     } else {
-                                                         requestPresenter.removeLike(newsObj.getNewsStatusId(), NewsListAdapter.this);
+        if (newsList.size() > 0) {
+            hf.updateViews(true);
+            final NewsObject newsObj = newsList.get(position);
+            holder.tvNewsTitle.setText(newsObj.getNewsTitle());
+            holder.tvNewsCity.setText("\u2022 " + newsObj.getNewsCity());
+            holder.tvNewsDescription.setText(newsObj.getNewsDescription());
+            holder.tvNewsLikeCount.setText(newsObj.getNewsLikeCount());
+            holder.tvNewsCommentCount.setText(newsObj.getNewsCommentCount());
+            holder.tvNewsDateTime.setText(newsObj.getNewsDataAndTime());
+            if (newsObj.isCommented()) {
+                holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment_filled);
+            } else {
+                holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment);
+            }
+            if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
+                holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like);
+            } else {
+                holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
+            }
+            holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(View view) {
+                                                         newsId1 = newsObj.getNewsId();
+                                                         if (requestPresenter == null) {
+                                                             requestPresenter = new RequestPresenter();
+                                                         }
+                                                         if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
+                                                             requestPresenter.updateLikeComment(newsObj.getNewsId(), "2", "", NewsListAdapter.this);
+                                                         } else {
+                                                             requestPresenter.removeLike(newsObj.getNewsStatusId(), NewsListAdapter.this);
+                                                         }
                                                      }
                                                  }
-                                             }
-        );
-        holder.ivNewsComment.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        Intent intent = new Intent(context, NewsCommentActivity.class);
-                                                        intent.putExtra("newsId", newsObj.getNewsId());
-                                                        intent.putExtra("newsStatusId", "1");
-                                                        context.startActivity(intent);
+            );
+            holder.ivNewsComment.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent intent = new Intent(context, NewsCommentActivity.class);
+                                                            intent.putExtra("newsId", newsObj.getNewsId());
+                                                            intent.putExtra("newsStatusId", "1");
+                                                            context.startActivity(intent);
 //                                                        newsId1 = newsObj.getNewsId();
 //                                                        if (requestPresenter == null)
 //                                                            requestPresenter = new RequestPresenter();
 //                                                        requestPresenter.updateLikeComment(newsObj.getNewsId(), "1", "Comments..", NewsListAdapter.this);
+                                                        }
                                                     }
-                                                }
 
-        );
-        holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, NewsDetailActivity.class);
-                intent.putExtra("NewsData", newsObj);
-                context.startActivity(intent);
-            }
-        });
-        holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("clicked", "openImage View Activity");
-            }
-        });
-        try {
-            JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
-            if (imageArray != null && imageArray.length() > 0) {
-                if (imageArray.length() > 1)
+            );
+            holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, NewsDetailActivity.class);
+                    intent.putExtra("NewsData", newsObj);
+                    context.startActivity(intent);
+                }
+            });
+            holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("clicked", "openImage View Activity");
+                }
+            });
+            try {
+                JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
+                if (imageArray != null && imageArray.length() > 0) {
+                    if (imageArray.length() > 1) {
+                        holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.CpiNewsPageIndicator.setVisibility(View.GONE);
+                    }
+                    NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
                     holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
-                else
-                    holder.CpiNewsPageIndicator.setVisibility(View.GONE);
-                NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
-                holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
-                holder.AsvNewsPager.setAdapter(imagePagerAdapter);
-                holder.AsvNewsPager.setVisibility(View.VISIBLE);
-                holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
-                holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
-                holder.AsvNewsPager.startAutoScroll();
-            } else {
-                holder.AsvNewsPager.setVisibility(View.GONE);
-                holder.CpiNewsPageIndicator.setVisibility(View.GONE);
+                    holder.AsvNewsPager.setAdapter(imagePagerAdapter);
+                    holder.AsvNewsPager.setVisibility(View.VISIBLE);
+                    holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
+                    holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
+                    holder.AsvNewsPager.startAutoScroll();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            hf.updateViews(false);
         }
+
 
     }
 
@@ -197,6 +216,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     public void onSuccessNewsList(List<NewsObject> newsList) {
         UtilClass.hideProgress();
         updateAdapter(newsList);
+        applyFilter();
     }
 
 
@@ -210,6 +230,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     public void onFailResponse(String message) {
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, context, 0);
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (newsFilter == null) {
+            newsFilter = new NewsFilter(this);
+        }
+        return newsFilter;
     }
 
 
@@ -245,12 +273,65 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     public void updateAdapter(List<NewsObject> newsList) {
         UtilClass.hideProgress();
         this.newsList = newsList;
+        this.tempList = newsList;
+        notifyDataSetChanged();
+
+    }
+
+    public void updateAdapter() {
+        UtilClass.hideProgress();
+        this.newsList = tempList;
         notifyDataSetChanged();
     }
+
+
+    private class NewsFilter extends Filter {
+        private NewsListAdapter newsListAdapter;
+
+        public NewsFilter(NewsListAdapter newsListAdapter) {
+            this.newsListAdapter = newsListAdapter;
+        }
+
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            FilterResults results = new FilterResults();
+            List<NewsObject> filteredList = new ArrayList<>();
+            for (int i = 0; i < tempList.size(); i++) {
+                if (tempList.get(i).getNewsCatagory().equals(charSequence)) {
+                    filteredList.add(tempList.get(i));
+                }
+            }
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            newsList = (List<NewsObject>) filterResults.values;
+            notifyDataSetChanged();
+        }
+    }
+
+    private void applyFilter() {
+
+        int selectedValue = SharedPreferenceUtil.getInt(Constants.DifferentData.SelectedCatagory, -10);
+        Log.e("selectedValue", "sv" + selectedValue);
+
+        if (selectedValue != -10) {
+            if (selectedValue == -11) {
+                updateAdapter();
+            } else {
+                getFilter().filter(catagoryList[selectedValue]);
+            }
+        }
+    }
+
+
 }

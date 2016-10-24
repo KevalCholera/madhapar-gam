@@ -1,167 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/cardview_light_background"
-    tools:context="com.madhapar.View.SearchNewsActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/defaultpadding"
-        android:paddingLeft="@dimen/defaultpadding"
-        android:paddingRight="@dimen/defaultpadding"
-        android:paddingTop="@dimen/defaultpadding"
-        android:orientation="horizontal">
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/searchNews"
-        android:layout_weight="5"
-        android:drawableLeft="@drawable/ic_search"
-        android:background="@drawable/search_news" />
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <EditText
+            android:id="@+id/etNewsFilterSearch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1.6"
+            android:background="@drawable/news_filter_edittext"
+            android:hint="@string/searchNews"
+            android:padding="@dimen/margin_small" />
+
         <TextView
+            android:id="@+id/tvClearCatagory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/defaultpadding"
-            android:text="@string/clear"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/defaultpadding"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/technology"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/business"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
             android:layout_gravity="center"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/educational"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/politics"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/sarpanchNes"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/death"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/EnterTainment"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/news"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text = "@string/sports"
-            android:paddingBottom="@dimen/defaultpadding"
-            android:paddingLeft="@dimen/defaultpadding"
-            android:paddingRight="@dimen/defaultpadding"
-            android:textSize="@dimen/text16"
-            android:textColor="@color/cardview_dark_background"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/viewHeight"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="@color/colorGrey" />
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:text="Clear"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text18" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/colorPrimary" />
+
+
+    <ListView
+        android:id="@+id/lvNewsFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_medium"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+
 </LinearLayout>

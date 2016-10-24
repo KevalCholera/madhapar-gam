@@ -142,15 +142,6 @@
     <string name="msgStatusCanNotUpdateNotGoing">Cant update status</string>
     <string name="clear">Clear</string>
 
-    <string name="technology">Technology</string>
-    <string name="business">Business</string>
-    <string name="educational">Educational</string>
-    <string name="politics">Politics</string>
-    <string name="sarpanchNes">Sarpanch News Letter</string>
-    <string name="death">Death</string>
-    <string name="EnterTainment">Entertainment</string>
-    <string name="news">News</string>
-    <string name="sports">Sports</string>
 
     <string name="titlenews">News Feed</string>
     <string name="titleEvent">Event Calender</string>
@@ -196,6 +187,21 @@
     <string name="takePhoto">Take photo</string>
     <string name="selectYourPhoto">Select your photo</string>
     <string name="selectSources">Select Source</string>
+
+
+    <!--News Filter-->
+    <array name="newsCatagory">
+        <item>Technology</item>
+        <item>Business</item>
+        <item>Educational</item>
+        <item>Politics</item>
+        <item>Sarpanch News Letter</item>
+        <item>Death</item>
+        <item>Entertainment</item>
+        <item>News</item>
+        <item>Sports</item>
+
+    </array>
 
 
 </resources>

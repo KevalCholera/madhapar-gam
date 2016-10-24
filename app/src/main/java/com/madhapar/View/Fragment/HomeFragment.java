@@ -1,5 +1,6 @@
 package com.madhapar.View.Fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
@@ -24,7 +26,9 @@ import com.madhapar.PushUtil.WakeLocker;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsListAdapter;
+import com.madhapar.View.FilterActivity;
 import com.madhapar.View.HomeViewInt;
+import com.mpt.storage.SharedPreferenceUtil;
 
 import java.util.List;
 
@@ -41,9 +45,14 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     RecyclerView rvNewsList;
     @BindView(R.id.srlNewsList)
     SwipeRefreshLayout srlNewsList;
+    @BindView(R.id.llNewsListPlaceholder)
+    LinearLayout llNewsListPlaceholder;
     private NewsListAdapter newsDataAdapter;
     private LinearLayoutManager mLayoutManager;
     public Context mContext;
+
+    private static final int CATAGORY_REQUEST_CODE = 120;
+    private String[] catagoryList;
 
     @Nullable
     @Override
@@ -57,6 +66,9 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+        SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, -10);
+        SharedPreferenceUtil.save();
+        catagoryList = getResources().getStringArray(R.array.newsCatagory);
         hasOptionsMenu();
         srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -76,6 +88,13 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
                 }
             }
         });
+        if (UtilClass.isInternetAvailabel(getActivity())) {
+            UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+            requestPresenter = new RequestPresenter();
+            requestPresenter.getNewsList(this);
+        } else {
+            UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
+        }
         setHasOptionsMenu(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mContext = this.getActivity();
@@ -86,7 +105,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_filter) {
-
+            startActivityForResult(new Intent(getActivity(), FilterActivity.class), CATAGORY_REQUEST_CODE);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -101,13 +120,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onResume() {
-        if (UtilClass.isInternetAvailabel(getActivity())) {
-            UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
-            requestPresenter = new RequestPresenter();
-            requestPresenter.getNewsList(this);
-        } else {
-            UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
-        }
+
         super.onResume();
     }
 
@@ -118,11 +131,12 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         }
         UtilClass.hideProgress();
         if (newsDataAdapter == null) {
-            newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager);
+            newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager, this);
             rvNewsList.setLayoutManager(mLayoutManager);
             rvNewsList.setAdapter(newsDataAdapter);
         } else {
             newsDataAdapter.updateAdapter(newsList);
+            applyFilter();
         }
     }
 
@@ -174,4 +188,48 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         }
         super.onDestroy();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CATAGORY_REQUEST_CODE) {
+                if (newsDataAdapter != null && newsDataAdapter.getFilter() != null) {
+                    applyFilter();
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void applyFilter() {
+
+        int selectedValue = SharedPreferenceUtil.getInt(Constants.DifferentData.SelectedCatagory, -10);
+        Log.e("selectedValue", "sv" + selectedValue);
+
+        if (selectedValue != -10) {
+            if (selectedValue == -11) {
+                newsDataAdapter.updateAdapter();
+            } else {
+                newsDataAdapter.getFilter().filter(catagoryList[selectedValue]);
+            }
+        }
+    }
+
+    public void updateViews(final boolean listVisible) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (listVisible) {
+                    llNewsListPlaceholder.setVisibility(View.GONE);
+                    srlNewsList.setVisibility(View.VISIBLE);
+                } else {
+                    llNewsListPlaceholder.setVisibility(View.VISIBLE);
+                    srlNewsList.setVisibility(View.GONE);
+                }
+            }
+        });
+
+    }
+
+
 }
