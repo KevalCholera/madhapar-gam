@@ -35,7 +35,7 @@
             android:layout_marginRight="@dimen/margin_small"
             android:background="@color/colorTransparentBlack"
             android:gravity="center"
-            android:text="Nature Album"
+            android:text=" "
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background" />
     </RelativeLayout>

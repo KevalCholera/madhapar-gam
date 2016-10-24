@@ -12,5 +12,4 @@ public interface FeedbackActivityInt {
     void onFeedbackSuccess(String message);
 
     void onFeedbackRequestError();
-
 }

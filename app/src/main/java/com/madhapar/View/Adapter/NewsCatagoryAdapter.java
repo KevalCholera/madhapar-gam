@@ -18,6 +18,9 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
 import com.mpt.storage.SharedPreferenceUtil;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,26 +33,26 @@ import butterknife.ButterKnife;
 
 public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
     private AppCompatActivity activity;
-    public List<String> newsCatagoryList;
+    public JSONArray newsCatagoryList;
     @BindView(R.id.llNewsCatagory)
     LinearLayout llNewsCatagory;
     @BindView(R.id.tvNewsCatagoryName)
     TextView tvNewsCatagoryName;
-    private List<String> tempList;
+    private JSONArray tempList;
     @BindView(R.id.ivSelectedCatagory)
     ImageView ivSelectedCatagory;
     private CatagoryFilter catagoryFilter;
 
 
-    public NewsCatagoryAdapter(AppCompatActivity activity, List<String> newsCatagoryList1) {
-        this.newsCatagoryList = newsCatagoryList1;
+    public NewsCatagoryAdapter(AppCompatActivity activity, JSONArray catagoryArray) {
+        this.newsCatagoryList = catagoryArray;
         this.activity = activity;
-        this.tempList = newsCatagoryList1;
+        this.tempList = catagoryArray;
     }
 
     @Override
     public int getCount() {
-        return newsCatagoryList.size();
+        return newsCatagoryList.length();
     }
 
     @Override
@@ -67,8 +70,9 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
         LayoutInflater inflater = LayoutInflater.from(activity);
         View view1 = inflater.inflate(R.layout.element_news_filter, viewGroup, false);
         ButterKnife.bind(this, view1);
-        tvNewsCatagoryName.setText(newsCatagoryList.get(i));
-        if (SharedPreferenceUtil.getInt(Constants.DifferentData.SelectedCatagory, -10) == i) {
+        final JSONObject catagoryObj = newsCatagoryList.optJSONObject(i);
+        tvNewsCatagoryName.setText(catagoryObj.optString("categoryName"));
+        if (SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "").equalsIgnoreCase(catagoryObj.optString("categoryName"))) {
             ivSelectedCatagory.setVisibility(View.VISIBLE);
         } else {
             ivSelectedCatagory.setVisibility(View.GONE);
@@ -76,7 +80,7 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
         llNewsCatagory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, i);
+                SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, catagoryObj.optString("categoryName"));
                 SharedPreferenceUtil.save();
                 activity.setResult(Activity.RESULT_OK);
                 activity.finish();
@@ -93,6 +97,12 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
         return catagoryFilter;
     }
 
+    public void updateCatagoryList(JSONArray catagoryArray) {
+        this.newsCatagoryList = catagoryArray;
+        this.tempList = catagoryArray;
+        notifyDataSetChanged();
+    }
+
 
     private class CatagoryFilter extends Filter {
         NewsCatagoryAdapter adapter;
@@ -104,21 +114,21 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             FilterResults results = new FilterResults();
-            List<String> filteredList = new ArrayList<>();
-            for (int i = 0; i < tempList.size(); i++) {
-                if (tempList.get(i).toLowerCase().contains(charSequence.toString().toLowerCase())) {
-                    filteredList.add(tempList.get(i));
+            JSONArray filterList = new JSONArray();
+            for (int i = 0; i < tempList.length(); i++) {
+                if (tempList.optJSONObject(i).optString("categoryName").toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                    filterList.put(tempList.optJSONObject(i));
                 }
             }
-            results.values = filteredList;
-            results.count = filteredList.size();
+            results.values = filterList;
+            results.count = filterList.length();
             return results;
 
         }
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            adapter.newsCatagoryList = (List<String>) filterResults.values;
+            adapter.newsCatagoryList = (JSONArray) filterResults.values;
             adapter.notifyDataSetChanged();
         }
     }

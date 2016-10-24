@@ -2,9 +2,6 @@ package com.madhapar.Model;
 
 import android.util.Log;
 
-import com.madhapar.View.Adapter.NewsListAdapter;
-
-import org.json.JSONArray;
 
 import java.io.Serializable;
 
@@ -122,17 +119,5 @@ public class NewsObject implements Serializable {
     public String newsId;
 
 
-    public static class ComparatorClass {
-        public String newsId;
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof NewsObject) {
-                NewsObject that = (NewsObject) obj;
-                return (that.getNewsId().equals(newsId));
-            }
-            return super.equals(obj);
-        }
-    }
 
 }

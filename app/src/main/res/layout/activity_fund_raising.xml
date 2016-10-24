@@ -11,5 +11,13 @@
         android:id="@+id/rvFundRaisingList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivFundRaisingImagePlaceHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:src="@mipmap/img_fund_raising_place_holder" />
 </LinearLayout>

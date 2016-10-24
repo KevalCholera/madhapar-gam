@@ -46,22 +46,24 @@ public class AlbumFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_album, container, false);
         ButterKnife.bind(this, view);
-        String images = getArguments().getString("images");
-        fragmentManager = getFragmentManager();
-        if (images != null) {
-            try {
-                JSONArray imageArray = new JSONArray(images);
-                if (imageArray != null && imageArray.length() > 0) {
-                    gridAlbum.setVisibility(View.VISIBLE);
-                    ivEventPhotoPlaceholder.setVisibility(View.GONE);
-                    customGrid = new CustomGrid(getActivity(), imageArray, fragmentManager);
-                    gridAlbum.setAdapter(customGrid);
-                } else {
-                    gridAlbum.setVisibility(View.GONE);
-                    ivEventPhotoPlaceholder.setVisibility(View.VISIBLE);
+        if (getArguments() != null) {
+            String images = getArguments().getString("images");
+            fragmentManager = getFragmentManager();
+            if (images != null) {
+                try {
+                    JSONArray imageArray = new JSONArray(images);
+                    if (imageArray != null && imageArray.length() > 0) {
+                        gridAlbum.setVisibility(View.VISIBLE);
+                        ivEventPhotoPlaceholder.setVisibility(View.GONE);
+                        customGrid = new CustomGrid(getActivity(), imageArray, fragmentManager);
+                        gridAlbum.setAdapter(customGrid);
+                    } else {
+                        gridAlbum.setVisibility(View.GONE);
+                        ivEventPhotoPlaceholder.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
         return view;

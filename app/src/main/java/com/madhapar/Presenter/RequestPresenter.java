@@ -12,6 +12,7 @@ import com.madhapar.Model.NewsObject;
 import com.madhapar.Model.ProfileDataModel;
 import com.madhapar.Model.ProfileDataModelInt;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
+import com.madhapar.View.CatagoryCallback;
 import com.madhapar.View.CommentListCallback;
 import com.madhapar.View.EventPhotosInt;
 import com.madhapar.View.HomeViewInt;
@@ -27,7 +28,7 @@ import java.util.List;
  * Created by smartsense on 06/10/16.
  */
 
-public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback, ProfileDataModelInt.ProfileDataResponseCallback {
+public class RequestPresenter implements RequestPresenterInt, NetworkModelInt.NetworkListResponseCallback, NewsFeedModelInt.NewsListCallback, NewsFeedModelInt.NewsLikeCommentUpdate, NewsFeedModel.NewsDetailCallback, NewsFeedModelInt.CommentListCallback, EventPhotosModelInt.NetworkListResponseCallback, ProfileDataModelInt.ProfileDataResponseCallback, NewsFeedModelInt.CatagoryListListener {
     NetworkViewInt networkViewInt;
     HomeViewInt homeViewInt;
     EventPhotosInt eventPhotosInt;
@@ -38,8 +39,7 @@ public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.N
     private CommentListCallback commentListCallback;
     private EventPhotosModel eventPhotosModel;
     private ProfileDataModel profileDataModel;
-
-
+    private CatagoryCallback catagoryCallback;
 
 
     //------------------Network List----------//
@@ -213,6 +213,31 @@ public class RequestPresenter implements RequestPresenterInt,  NetworkModelInt.N
     public void onSuccessEventResponse(JSONArray userList) {
         eventPhotosInt.onSuccessEventPhotoList(userList);
 
+    }
+
+
+    @Override
+    public void getCatagoryList(CatagoryCallback catagoryCallback) {
+        this.catagoryCallback = catagoryCallback;
+        if (newsModel == null) {
+            newsModel = new NewsFeedModel();
+        }
+        newsModel.getCatagories(this);
+    }
+
+    @Override
+    public void onSuccessCatagoryList(JSONArray catagoryList) {
+        catagoryCallback.onSuccessCatagoryList(catagoryList);
+    }
+
+    @Override
+    public void onFailCatagoryListRequest() {
+        catagoryCallback.onFailCatagoryListRequest();
+    }
+
+    @Override
+    public void onFailCatagoryListResponse(String message) {
+        catagoryCallback.onFailCatagoryResponse(message);
     }
 }
 

@@ -1,14 +1,21 @@
 package com.madhapar.View;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
@@ -35,6 +42,8 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     TextView tvEventDate;
     @BindView(R.id.tvEventTime)
     TextView tvEventTime;
+    @BindView(R.id.svEventDetail)
+    ScrollView svEventDetail;
     @BindView(R.id.tvEventLocation)
     TextView tvEventLocation;
     @BindView(R.id.tEventDetailDescription)
@@ -57,10 +66,44 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     LinearLayout llEventDetailIntrested;
     @BindView(R.id.tvOpenPhotosActivity)
     TextView tvOpenPhotosActivity;
-    @OnClick(R.id.tvOpenPhotosActivity)
-    void openPhotos(){
-        UtilClass.changeActivity(EventDetailActivity.this,EventPhotoActivity.class,false);
+    @BindView(R.id.btnEventInfoShare)
+    Button btnEventInfoShare;
+
+    @OnClick(R.id.btnEventInfoShare)
+    void shareEvent() {
+        svEventDetail.smoothScrollTo(0, svEventDetail.getTop());
+        Bitmap bitmap = screenShot(this.getWindow().getDecorView().getRootView());
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
+        Uri imageUri = Uri.parse(path);
+        shareImage(imageUri);
+        Log.e("path", "share" + imageUri);
     }
+
+    private void shareImage(Uri imagePath) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imagePath);
+        startActivity(Intent.createChooser(shareIntent, "Share Image"));
+    }
+
+    public Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+
+    @OnClick(R.id.tvOpenPhotosActivity)
+    void openPhotos() {
+        Intent intent = new Intent(EventDetailActivity.this, EventPhotoActivity.class);
+        intent.putExtra("eventPhotos", eventObj.optJSONArray("eventPhotos").toString());
+        intent.putExtra("albumName", eventObj.optString("eventTitle"));
+        startActivity(intent);
+
+    }
+
     private static final int StatusListActivityConstant = 200;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
 
@@ -88,7 +131,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         Intent goingIntent = new Intent(EventDetailActivity.this, StatusListActivity.class);
         goingIntent.putExtra("isMaybeId", eventObj.optString("isMaybeId"));
         goingIntent.putExtra("eventObj", eventObj.toString());
-        goingIntent.putExtra("canChangeStatus", isEventStatusValidForNotGoing(eventObj));
+        // goingIntent.putExtra("canChangeStatus", isEventStatusValidForNotGoing(eventObj));
         goingIntent.putExtra("evetStatus", Constants.DifferentData.NotGoingStatus);
         startActivityForResult(goingIntent, StatusListActivityConstant);
     }
@@ -106,12 +149,11 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         if (getIntent().getStringExtra("event") != null) {
             try {
                 eventObj = new JSONObject(getIntent().getStringExtra("event"));
+                Log.e("eventObj", "eventOb" + eventObj);
                 setUpView();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else {
-//            getEventdetail(eventObj.optString("eventId"));
         }
     }
 
@@ -148,10 +190,15 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             tEventDetailDescription.setText(eventObj.optString("eventDescription"));
             tvEventOrganizer.setText(eventObj.optString("eventOrganizedBy"));
             String s = tvEventDetailGoingCount.getText().toString();
-            tvEventDetailGoingCount.setText(" "+eventObj.optString("going")+" ");
-            tvEventDetailInterestCount.setText(" "+eventObj.optString("interested")+" ");
-            tvEventDetailNotInterestedCount.setText(" "+eventObj.optString("cantGo")+" ");
+            tvEventDetailGoingCount.setText(" " + eventObj.optString("going") + " ");
+            tvEventDetailInterestCount.setText(" " + eventObj.optString("interested") + " ");
+            tvEventDetailNotInterestedCount.setText(" " + eventObj.optString("cantGo") + " ");
             String coverImageUrl = eventObj.optString("coverImage");
+            if (eventObj.optJSONArray("eventPhotos").length() > 0) {
+                tvOpenPhotosActivity.setVisibility(View.VISIBLE);
+            } else {
+                tvOpenPhotosActivity.setVisibility(View.GONE);
+            }
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
                 llEventDetailGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
             } else {
@@ -167,9 +214,10 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             } else {
                 llEventDetailIntrested.setBackgroundColor(Color.WHITE);
             }
-            Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).error(R.mipmap.ic_event_detail_placeholder).into(ivEventCoverImage);
+            Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(ivEventCoverImage);
         }
     }
+
     private void getEventdetail(String eventId) {
         if (mPresenter == null) {
             mPresenter = new EventPresenter();

@@ -27,6 +27,7 @@ import java.util.Map;
  * Created by Ronak on 10/7/2016.
  */
 public class NewsFeedModel implements NewsFeedModelInt {
+
     @Override
     public void getNewsData(final NewsListCallback newsListCallback) {
         String tag = "newsFeed";
@@ -352,6 +353,50 @@ public class NewsFeedModel implements NewsFeedModelInt {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MadhaparGamApp.getAppInstance().addToRequestQueue(commentUpdateRequest, tag);
+    }
+
+
+    @Override
+    public void getCatagories(final CatagoryListListener listener) {
+        String tag = "catagories";
+        StringRequest catagoryRequest = new StringRequest(Request.Method.GET, UtilClass.getCategoryListUrl(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    try {
+                        JSONObject catagoryObj = new JSONObject(response);
+                        if (catagoryObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                            listener.onSuccessCatagoryList(catagoryObj.optJSONArray("response"));
+                        } else {
+                            listener.onFailCatagoryListResponse(catagoryObj.optString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onFailCatagoryListRequest();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        catagoryRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(catagoryRequest, tag);
     }
 
 

@@ -2,6 +2,7 @@ package com.madhapar.View.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,23 +50,23 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     String newsId1;
     private RecyclerView rvNewsList;
     private LinearLayoutManager rvManager;
-    private NewsObject.ComparatorClass comparator = new NewsObject.ComparatorClass();
     private RequestPresenter requestPresenter;
     private List<NewsObject> tempList;
     private NewsFilter newsFilter;
-    private String[] catagoryList;
     private HomeFragment hf;
+    private LinearLayout placeHolder;
 
 
-    public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager, HomeFragment hf) {
+    public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager, HomeFragment hf, LinearLayout placeHolder) {
         this.rvNewsList = rvNewsList;
         this.newsList = newsList;
         this.context = context;
         this.rvManager = rvManager;
         this.tempList = newsList;
         this.hf = hf;
-        catagoryList = context.getResources().getStringArray(R.array.newsCatagory);
+        this.placeHolder = placeHolder;
     }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,90 +78,85 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if (newsList.size() > 0) {
-            hf.updateViews(true);
-            final NewsObject newsObj = newsList.get(position);
-            holder.tvNewsTitle.setText(newsObj.getNewsTitle());
-            holder.tvNewsCity.setText("\u2022 " + newsObj.getNewsCity());
-            holder.tvNewsDescription.setText(newsObj.getNewsDescription());
-            holder.tvNewsLikeCount.setText(newsObj.getNewsLikeCount());
-            holder.tvNewsCommentCount.setText(newsObj.getNewsCommentCount());
-            holder.tvNewsDateTime.setText(newsObj.getNewsDataAndTime());
-            if (newsObj.isCommented()) {
-                holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment_filled);
-            } else {
-                holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment);
-            }
-            if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
-                holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like);
-            } else {
-                holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
-            }
-            holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
-                                                     @Override
-                                                     public void onClick(View view) {
-                                                         newsId1 = newsObj.getNewsId();
-                                                         if (requestPresenter == null) {
-                                                             requestPresenter = new RequestPresenter();
-                                                         }
-                                                         if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
-                                                             requestPresenter.updateLikeComment(newsObj.getNewsId(), "2", "", NewsListAdapter.this);
-                                                         } else {
-                                                             requestPresenter.removeLike(newsObj.getNewsStatusId(), NewsListAdapter.this);
-                                                         }
+        final NewsObject newsObj = newsList.get(position);
+        holder.tvNewsTitle.setText(newsObj.getNewsTitle());
+        holder.tvNewsCity.setText("\u2022 " + newsObj.getNewsCity());
+        holder.tvNewsDescription.setText(newsObj.getNewsDescription());
+        holder.tvNewsLikeCount.setText(newsObj.getNewsLikeCount());
+        holder.tvNewsCommentCount.setText(newsObj.getNewsCommentCount());
+        holder.tvNewsDateTime.setText(newsObj.getNewsDataAndTime());
+        if (newsObj.isCommented()) {
+            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment_filled);
+        } else {
+            holder.ivNewsComment.setImageResource(R.mipmap.ic_news_comment);
+        }
+        if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
+            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like);
+        } else {
+            holder.ivNewsLike.setImageResource(R.mipmap.ic_news_like_filled);
+        }
+        holder.ivNewsLike.setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View view) {
+                                                     newsId1 = newsObj.getNewsId();
+                                                     if (requestPresenter == null) {
+                                                         requestPresenter = new RequestPresenter();
+                                                     }
+                                                     if (newsObj.getNewsStatusId().equalsIgnoreCase("")) {
+                                                         requestPresenter.updateLikeComment(newsObj.getNewsId(), "2", "", NewsListAdapter.this);
+                                                     } else {
+                                                         requestPresenter.removeLike(newsObj.getNewsStatusId(), NewsListAdapter.this);
                                                      }
                                                  }
-            );
-            holder.ivNewsComment.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View view) {
-                                                            Intent intent = new Intent(context, NewsCommentActivity.class);
-                                                            intent.putExtra("newsId", newsObj.getNewsId());
-                                                            intent.putExtra("newsStatusId", "1");
-                                                            context.startActivity(intent);
+                                             }
+        );
+        holder.ivNewsComment.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Intent intent = new Intent(context, NewsCommentActivity.class);
+                                                        intent.putExtra("newsId", newsObj.getNewsId());
+                                                        intent.putExtra("newsStatusId", "1");
+                                                        context.startActivity(intent);
 //                                                        newsId1 = newsObj.getNewsId();
 //                                                        if (requestPresenter == null)
 //                                                            requestPresenter = new RequestPresenter();
 //                                                        requestPresenter.updateLikeComment(newsObj.getNewsId(), "1", "Comments..", NewsListAdapter.this);
-                                                        }
                                                     }
+                                                }
 
-            );
-            holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, NewsDetailActivity.class);
-                    intent.putExtra("NewsData", newsObj);
-                    context.startActivity(intent);
-                }
-            });
-            holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.e("clicked", "openImage View Activity");
-                }
-            });
-            try {
-                JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
-                if (imageArray != null && imageArray.length() > 0) {
-                    if (imageArray.length() > 1) {
-                        holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
-                    } else {
-                        holder.CpiNewsPageIndicator.setVisibility(View.GONE);
-                    }
-                    NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
-                    holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
-                    holder.AsvNewsPager.setAdapter(imagePagerAdapter);
-                    holder.AsvNewsPager.setVisibility(View.VISIBLE);
-                    holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
-                    holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
-                    holder.AsvNewsPager.startAutoScroll();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+        );
+        holder.llNewsDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("NewsData", newsObj);
+                context.startActivity(intent);
             }
-        } else {
-            hf.updateViews(false);
+        });
+        holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("clicked", "openImage View Activity");
+            }
+        });
+        try {
+            JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
+            if (imageArray != null && imageArray.length() > 0) {
+                if (imageArray.length() > 1) {
+                    holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
+                } else {
+                    holder.CpiNewsPageIndicator.setVisibility(View.GONE);
+                }
+                NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
+                holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
+                holder.AsvNewsPager.setAdapter(imagePagerAdapter);
+                holder.AsvNewsPager.setVisibility(View.VISIBLE);
+                holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
+                holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
+                holder.AsvNewsPager.startAutoScroll();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
 
@@ -286,6 +282,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     public void updateAdapter() {
         UtilClass.hideProgress();
         this.newsList = tempList;
+        if (newsList.size() > 0) {
+            hf.updateViews(true);
+        } else {
+            hf.updateViews(false);
+        }
         notifyDataSetChanged();
     }
 
@@ -315,21 +316,24 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             newsList = (List<NewsObject>) filterResults.values;
+            if (newsList.size() > 0) {
+                hf.updateViews(true);
+
+            } else {
+                hf.updateViews(false);
+            }
             notifyDataSetChanged();
         }
     }
 
     private void applyFilter() {
 
-        int selectedValue = SharedPreferenceUtil.getInt(Constants.DifferentData.SelectedCatagory, -10);
-        Log.e("selectedValue", "sv" + selectedValue);
+        String selectedValue = SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "clear");
 
-        if (selectedValue != -10) {
-            if (selectedValue == -11) {
-                updateAdapter();
-            } else {
-                getFilter().filter(catagoryList[selectedValue]);
-            }
+        if (selectedValue.equalsIgnoreCase("clear")) {
+            updateAdapter();
+        } else {
+            getFilter().filter(selectedValue);
         }
     }
 

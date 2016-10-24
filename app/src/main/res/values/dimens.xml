@@ -66,7 +66,7 @@
 
     <dimen name="eventlistHeight">40dp</dimen>
     <!---Comment-->
-    <dimen name="swipeLayout">100dp</dimen>
+    <dimen name="swipeLayout">70dp</dimen>
     <!---News-->
     <dimen name="newsDetailWidthImage">20dp</dimen>
     <!---Feedback-->

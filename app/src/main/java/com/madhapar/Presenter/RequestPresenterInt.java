@@ -3,6 +3,7 @@ package com.madhapar.Presenter;
 import com.madhapar.Model.EventPhotosModelInt;
 import com.madhapar.Model.ProfileDataModelInt;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
+import com.madhapar.View.CatagoryCallback;
 import com.madhapar.View.CommentListCallback;
 import com.madhapar.View.EventPhotosInt;
 import com.madhapar.View.HomeViewInt;
@@ -34,5 +35,6 @@ public interface RequestPresenterInt {
 
     void updateComment(String newsId, String newsStatus, String newsComment, String newsStatusId, NewsLikeCommentUpdateCallback callback);
 
+    void getCatagoryList(CatagoryCallback catagoryCallback);
 
 }

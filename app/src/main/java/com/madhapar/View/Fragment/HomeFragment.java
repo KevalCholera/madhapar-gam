@@ -52,7 +52,6 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     public Context mContext;
 
     private static final int CATAGORY_REQUEST_CODE = 120;
-    private String[] catagoryList;
 
     @Nullable
     @Override
@@ -66,9 +65,8 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
-        SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, -10);
+        SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
         SharedPreferenceUtil.save();
-        catagoryList = getResources().getStringArray(R.array.newsCatagory);
         hasOptionsMenu();
         srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -130,13 +128,20 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
             srlNewsList.setRefreshing(false);
         }
         UtilClass.hideProgress();
-        if (newsDataAdapter == null) {
-            newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager, this);
-            rvNewsList.setLayoutManager(mLayoutManager);
-            rvNewsList.setAdapter(newsDataAdapter);
+        if (newsList.size() > 0) {
+            if (newsDataAdapter == null) {
+                srlNewsList.setVisibility(View.VISIBLE);
+                llNewsListPlaceholder.setVisibility(View.GONE);
+                newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager, this, llNewsListPlaceholder);
+                rvNewsList.setLayoutManager(mLayoutManager);
+                rvNewsList.setAdapter(newsDataAdapter);
+            } else {
+                newsDataAdapter.updateAdapter(newsList);
+                applyFilter();
+            }
         } else {
-            newsDataAdapter.updateAdapter(newsList);
-            applyFilter();
+            srlNewsList.setVisibility(View.GONE);
+            llNewsListPlaceholder.setVisibility(View.VISIBLE);
         }
     }
 
@@ -202,33 +207,22 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     }
 
     private void applyFilter() {
-
-        int selectedValue = SharedPreferenceUtil.getInt(Constants.DifferentData.SelectedCatagory, -10);
-        Log.e("selectedValue", "sv" + selectedValue);
-
-        if (selectedValue != -10) {
-            if (selectedValue == -11) {
-                newsDataAdapter.updateAdapter();
-            } else {
-                newsDataAdapter.getFilter().filter(catagoryList[selectedValue]);
-            }
+        String selectedValue = SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "clear");
+        if (selectedValue.equalsIgnoreCase("clear")) {
+            newsDataAdapter.updateAdapter();
+        } else {
+            newsDataAdapter.getFilter().filter(selectedValue);
         }
     }
 
     public void updateViews(final boolean listVisible) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (listVisible) {
-                    llNewsListPlaceholder.setVisibility(View.GONE);
-                    srlNewsList.setVisibility(View.VISIBLE);
-                } else {
-                    llNewsListPlaceholder.setVisibility(View.VISIBLE);
-                    srlNewsList.setVisibility(View.GONE);
-                }
-            }
-        });
-
+        if (listVisible) {
+            llNewsListPlaceholder.setVisibility(View.GONE);
+            rvNewsList.setVisibility(View.VISIBLE);
+        } else {
+            llNewsListPlaceholder.setVisibility(View.VISIBLE);
+            rvNewsList.setVisibility(View.GONE);
+        }
     }
 
 

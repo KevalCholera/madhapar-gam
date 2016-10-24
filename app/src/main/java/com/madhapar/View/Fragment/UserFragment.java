@@ -243,31 +243,24 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback 
 
     @OnFocusChange(R.id.etEditProfileDOB)
     void updateDateDateOfBirth() {
-        Log.e("focus", "clear1");
         if (!etEditProfileDOB.hasFocus()) {
-            Log.e("focus", "clear2");
             if (!etEditProfileDOB.getTag().toString().equalsIgnoreCase(etEditProfileDOB.getText().toString())) {
                 if (mProfileUpdatePresenter == null) {
                     mProfileUpdatePresenter = new ProfileUpdatePresenter();
                 }
                 Map<String, String> params = new HashMap();
-                Log.e("focus", "clear4");
                 if (!TextUtils.isEmpty(etEditProfileDOB.getText().toString().trim())) {
-                    Log.e("focus", "clear5");
                     etEditProfileDOB.setTag(etEditProfileDOB.getText().toString());
-                    Log.e("inside", "update" + etEditProfileDOB.getText().toString());
 
                     params.put("userDOB", getDateOfBirthToSend(etEditProfileDOB.getText().toString()));
                     mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
                 }
             }
         } else {
-            Log.e("focus", "clear3");
             boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileDOB);
             if (!isAnyEmpty) {
                 etEditProfileDOB.setCursorVisible(false);
                 openDateSelector();
-                Log.e("called", "1");
             }
         }
 
@@ -498,7 +491,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback 
                     etEditProfileLocation.clearFocus();
                     if (data.getBooleanExtra("isSelected", false)) {
                         JSONObject selectedLocation = new JSONObject(data.getStringExtra("selectedCity"));
-                        Log.e("activityResult", data.toString());
                         if (selectedLocation != null) {
                             etEditProfileLocation.setText(selectedLocation.optString("locationName"));
                             this.locationId = selectedLocation.optInt("locationId");

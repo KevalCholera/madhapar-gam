@@ -43,8 +43,8 @@
                 android:layout_marginBottom="@dimen/margin_small"
                 android:layout_marginTop="@dimen/margin_small"
                 android:layout_weight="0.6"
-                android:src="@drawable/ic_icon"
-                android:visibility="visible" />
+                android:src="@mipmap/ic_check"
+                android:visibility="gone" />
 
         </LinearLayout>
 

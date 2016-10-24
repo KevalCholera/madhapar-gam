@@ -97,20 +97,19 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
 
                 }
             });
-
             holder.llGoing.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (UtilClass.isInternetAvailabel(context)) {
                         if (!isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
-                            if (isEventStatusValid(eventObj)) {
-                                if (mPresenter == null) {
-                                    mPresenter = new EventPresenter();
-                                }
-                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.GoingStatus, EventListAdapter.this, EventListAdapter.this);
-                            } else {
-                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+                            //  if (isEventStatusValid(eventObj)) {
+                            if (mPresenter == null) {
+                                mPresenter = new EventPresenter();
                             }
+                            mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.GoingStatus, EventListAdapter.this, EventListAdapter.this);
+//                            } else {
+//                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+//                            }
                         }
                     } else {
                         UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
@@ -122,14 +121,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                 public void onClick(View view) {
                     if (UtilClass.isInternetAvailabel(context)) {
                         if (!isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
-                            if (isEventStatusValid(eventObj)) {
-                                if (mPresenter == null) {
-                                    mPresenter = new EventPresenter();
-                                }
-                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.InterestedStatus, EventListAdapter.this, EventListAdapter.this);
-                            } else {
-                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+//                            if (isEventStatusValid(eventObj)) {
+                            if (mPresenter == null) {
+                                mPresenter = new EventPresenter();
                             }
+                            mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.InterestedStatus, EventListAdapter.this, EventListAdapter.this);
+//                            } else {
+//                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdate), context, 0);
+//                            }
                         }
                     } else {
                         UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);
@@ -141,14 +140,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                 public void onClick(View view) {
                     if (UtilClass.isInternetAvailabel(context)) {
                         if (!isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
-                            if (isEventStatusValidForNotGoing(eventObj)) {
-                                if (mPresenter == null) {
-                                    mPresenter = new EventPresenter();
-                                }
-                                mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.NotGoingStatus, EventListAdapter.this, EventListAdapter.this);
-                            } else {
-                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdateNotGoing), context, 0);
+//                            if (isEventStatusValidForNotGoing(eventObj)) {
+                            if (mPresenter == null) {
+                                mPresenter = new EventPresenter();
                             }
+                            mPresenter.openEventAlert(activity, eventObj, Constants.DifferentData.NotGoingStatus, EventListAdapter.this, EventListAdapter.this);
+//                            } else {
+//                                UtilClass.displyMessage(context.getString(R.string.msgStatusCanNotUpdateNotGoing), context, 0);
+//                            }
                         }
                     } else {
                         UtilClass.displyMessage(context.getString(R.string.msgCheckInternet), context, 0);

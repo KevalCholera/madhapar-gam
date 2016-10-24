@@ -1,8 +1,6 @@
 package com.madhapar.View.Fragment;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +23,7 @@ import com.madhapar.View.EventDetailCallback;
 
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,19 +41,38 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     RadioButton radioImageSelector;
     private JSONArray albumArray;
     private EventPresenter eventPresenter;
-
-
     private FragmentManager mFragmentManager;
     private AlbumFragment fragmentAlbum;
     private PhotoListFragment photoListFragment;
 
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @OnClick(R.id.radioImageSelector)
+    void openImagePage() {
+        if (photoListFragment == null) {
+            photoListFragment = new PhotoListFragment();
+        }
+        updateView(false);
+        if (albumArray != null) {
+            if (photoListFragment.getArguments() == null) {
+                Bundle bundle = new Bundle();
+                JSONObject firstAlbum = albumArray.optJSONObject(0);
+                if (firstAlbum != null) {
+                    JSONArray imageArray = firstAlbum.optJSONArray("eventPhotos");
+                    bundle.putString("images", imageArray.toString());
+                    bundle.putString("albumName", firstAlbum.optString("eventTitle"));
+                    photoListFragment.setArguments(bundle);
+                }
+            }
+            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).addToBackStack(null).commit();
+        }
+    }
+
     @OnClick(R.id.radioAlbumSelector)
     void openAlbumPage() {
         if (fragmentAlbum == null) {
             fragmentAlbum = new AlbumFragment();
         }
+        updateView(true);
         if (albumArray != null) {
             if (fragmentAlbum.getArguments() == null) {
                 Bundle bundle = new Bundle();
@@ -66,7 +84,8 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_photos, container, false);
         ButterKnife.bind(this, view);
         mFragmentManager = getChildFragmentManager();
@@ -85,6 +104,10 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         UtilClass.hideProgress();
         this.albumArray = eventArray;
         radioAlbumSelector.performClick();
+
+//        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);
+//        gridAlbum.setAdapter(customGrid);
+
     }
 
     @Override
@@ -99,5 +122,15 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         UtilClass.displyMessage(message, getActivity(), 0);
     }
 
+    public void updateView(boolean isAlbumSelected) {
+        if (isAlbumSelected) {
+            radioAlbumSelector.setBackgroundResource(R.drawable.ic_grid);
+            radioImageSelector.setBackgroundResource(R.drawable.ic_tiled);
+        } else {
+            radioAlbumSelector.setBackgroundResource(R.drawable.ic_grid_selected);
+            radioImageSelector.setBackgroundResource(R.drawable.ic_tiled_selected);
+
+        }
+    }
 
 }

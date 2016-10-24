@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
@@ -21,6 +23,8 @@ public class FundRaisingActivity extends AppCompatActivity implements FundRaisig
     @BindView(R.id.rvFundRaisingList)
     RecyclerView rvFundRaisingList;
     private PresenterClass mPresenter;
+    @BindView(R.id.ivFundRaisingImagePlaceHolder)
+    ImageView ivFundRaisingImagePlaceHolder;
 
     private FundRaisingListAdapter mFundAdapter;
 
@@ -60,13 +64,20 @@ public class FundRaisingActivity extends AppCompatActivity implements FundRaisig
     @Override
     public void onSuccessFundRaisingList(JSONArray response) {
         UtilClass.hideProgress();
-        if (mFundAdapter == null) {
-            mFundAdapter = new FundRaisingListAdapter(this, response);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            rvFundRaisingList.setLayoutManager(layoutManager);
-            rvFundRaisingList.setAdapter(mFundAdapter);
+        if (response.length() > 0) {
+            rvFundRaisingList.setVisibility(View.VISIBLE);
+            ivFundRaisingImagePlaceHolder.setVisibility(View.GONE);
+            if (mFundAdapter == null) {
+                mFundAdapter = new FundRaisingListAdapter(this, response);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                rvFundRaisingList.setLayoutManager(layoutManager);
+                rvFundRaisingList.setAdapter(mFundAdapter);
+            } else {
+                mFundAdapter.updateAdapter(response);
+            }
         } else {
-            mFundAdapter.updateAdapter(response);
+            rvFundRaisingList.setVisibility(View.GONE);
+            ivFundRaisingImagePlaceHolder.setVisibility(View.VISIBLE);
         }
     }
 

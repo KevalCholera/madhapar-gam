@@ -115,6 +115,11 @@ public class UtilClass {
         return builder.toString();
     }
 
+    public static String getCategoryListUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.NewsCategoryListUrl).buildUpon().build();
+        return builder.toString();
+    }
+
     public static String getLocationListUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.LocationListUrl).buildUpon().build();
         return builder.toString();

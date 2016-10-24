@@ -31,38 +31,38 @@ public class PhotoFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photos, container, false);
         ButterKnife.bind(this, view);
-        String images = getArguments().getString("images");
-        int selected = getArguments().getInt("position");
-        if (images != null) {
-            try {
-                JSONArray imageArray = new JSONArray(images);
-                if (imageArray != null && imageArray.length() > 0) {
-                    imageAdapter = new ImageAdapter(getActivity(), imageArray);
-                    vpPhotos.setAdapter(imageAdapter);
+        if (getArguments() != null) {
+            String images = getArguments().getString("images");
+            int selected = getArguments().getInt("position");
+            if (images != null) {
+                try {
+                    JSONArray imageArray = new JSONArray(images);
+                    if (imageArray != null && imageArray.length() > 0) {
+                        imageAdapter = new ImageAdapter(getActivity(), imageArray);
+                        vpPhotos.setAdapter(imageAdapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+            vpPhotos.setCurrentItem(selected);
+            vpPhotos.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
-        vpPhotos.setCurrentItem(selected);
-        vpPhotos.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-
         return view;
 
 

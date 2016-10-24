@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
+import com.madhapar.View.Fragment.AlbumFragment;
+import com.madhapar.View.Fragment.GallaryFragment;
 import com.madhapar.View.Fragment.PhotoFragment;
 import com.madhapar.View.Fragment.PhotoListFragment;
 import com.squareup.picasso.Picasso;
@@ -81,6 +84,7 @@ public class CustomGrid extends BaseAdapter {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("images", photoArray.optJSONObject(position).optJSONArray("eventPhotos").toString());
+                bundle.putString("albumName", photoArray.optJSONObject(position).optString("eventTitle"));
                 if (photoListFragment == null) {
                     photoListFragment = new PhotoListFragment();
                 }

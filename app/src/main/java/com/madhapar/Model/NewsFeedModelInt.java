@@ -43,6 +43,15 @@ public interface NewsFeedModelInt {
         void onFailCommentResponse(String message);
     }
 
+    interface CatagoryListListener {
+        void onSuccessCatagoryList(JSONArray catagoryList);
+
+        void onFailCatagoryListRequest();
+
+        void onFailCatagoryListResponse(String message);
+    }
+
+    void getCatagories(CatagoryListListener listener);
 
     void getNewsData(NewsListCallback newsListCallback);
 

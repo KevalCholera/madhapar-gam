@@ -1,6 +1,7 @@
 package com.madhapar.View.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.NetworkViewInt;
+import com.madhapar.View.ProfileEditActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -48,7 +50,7 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         try {
-            JSONObject userObj = profileArry.optJSONObject(position);
+            final JSONObject userObj = profileArry.optJSONObject(position);
             String userFirstname = userObj.optString("userFirstName");
             String userLastname = userObj.optString("userLastName");
             String userProfessrion = userObj.optString("userProfession");
@@ -59,8 +61,17 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
             if (locationObj != null && locationObj.has("locationName")) {
                 userCity = locationObj.optString("locationName");
             }
+            holder.llUserMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(context, ProfileEditActivity.class);
+                    intent.putExtra("profileObj", userObj.toString());
+                    context.startActivity(intent);
+                }
+            });
             holder.tvUserCity.setText(userCity.trim().equalsIgnoreCase("") ? "N/A" : userCity);
-            Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + profileArry.optJSONObject(position).optString("userProfilePic")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(holder.ivUserPic);
+            Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + profileArry.optJSONObject(position).optString("userProfilePic")).placeholder(R.drawable.ic_network_place_holder).error(R.drawable.ic_network_place_holder).into(holder.ivUserPic);
 
 
         } catch (Exception e) {
@@ -89,6 +100,8 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
         TextView tvUserCity;
         @BindView(R.id.civUserPic)
         com.madhapar.Util.CircleImageView ivUserPic;
+        @BindView(R.id.llUserMain)
+        LinearLayout llUserMain;
 
         public MyViewHolder(View itemView) {
             super(itemView);

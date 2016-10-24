@@ -23,7 +23,6 @@
                 android:id="@+id/radioGridFill"
                 android:layout_width="@dimen/activity_top_login_margin"
                 android:layout_height="@dimen/activity_top_login_margin"
-                android:background="@drawable/icon_grid_small_fill"
                 android:layout_marginLeft="@dimen/cardElevation"
                 android:gravity="center"
                 android:visibility="visible"
@@ -33,7 +32,6 @@
                 android:id="@+id/radioGridPhtosBack"
                 android:layout_width="@dimen/activity_top_login_margin"
                 android:layout_height="@dimen/activity_top_login_margin"
-                android:background="@drawable/icon_grid"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginRight="@dimen/margin_small"
                 android:button="@android:color/transparent" />

@@ -37,23 +37,25 @@ public class PhotoListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photo_list, container, false);
         ButterKnife.bind(this, view);
-        String images = getArguments().getString("images");
-        fm = getFragmentManager();
-        if (images != null) {
-            try {
-                JSONArray imageArray = new JSONArray(images);
-                if (imageArray != null && imageArray.length() > 0) {
-                    event_photo_place_holder.setVisibility(View.GONE);
-                    gvPhotoList.setVisibility(View.VISIBLE);
-                    photoListAdapter = new PhotoListCustomGridAdapter(getActivity(), imageArray, fm);
-                    gvPhotoList.setAdapter(photoListAdapter);
-                } else {
-                    event_photo_place_holder.setVisibility(View.VISIBLE);
-                    gvPhotoList.setVisibility(View.GONE);
-
+        if (getArguments() != null) {
+            String images = getArguments().getString("images");
+            String albumName = getArguments().getString("albumName");
+            fm = getFragmentManager();
+            if (images != null) {
+                try {
+                    JSONArray imageArray = new JSONArray(images);
+                    if (imageArray != null && imageArray.length() > 0) {
+                        event_photo_place_holder.setVisibility(View.GONE);
+                        gvPhotoList.setVisibility(View.VISIBLE);
+                        photoListAdapter = new PhotoListCustomGridAdapter(getActivity(), albumName, imageArray, fm, true);
+                        gvPhotoList.setAdapter(photoListAdapter);
+                    } else {
+                        event_photo_place_holder.setVisibility(View.VISIBLE);
+                        gvPhotoList.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
         return view;

@@ -10,7 +10,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.Constants;
+import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsCatagoryAdapter;
 import com.mpt.storage.SharedPreferenceUtil;
 
@@ -29,19 +31,19 @@ import butterknife.OnTextChanged;
  * Created by smartsense on 22/10/16.
  */
 
-public class FilterActivity extends BaseActivity {
+public class FilterActivity extends BaseActivity implements CatagoryCallback {
     @BindView(R.id.lvNewsFilter)
     ListView lvNewsFilter;
     @BindView(R.id.etNewsFilterSearch)
     EditText etNewsFilterSearch;
-    private List newsCatagoryList;
     private NewsCatagoryAdapter newsCatagoryAdapter;
     @BindView(R.id.tvClearCatagory)
     TextView tvClearCatagory;
+    private RequestPresenter requestPresenter;
 
     @OnClick(R.id.tvClearCatagory)
     void clearCatagory() {
-        SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, -11);
+        SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
         SharedPreferenceUtil.save();
         setResult(RESULT_OK);
         finish();
@@ -60,11 +62,13 @@ public class FilterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_news);
         ButterKnife.bind(this);
-        newsCatagoryList = Arrays.asList(getResources().getStringArray(R.array.newsCatagory));
-        if (newsCatagoryList != null) {
-            newsCatagoryAdapter = new NewsCatagoryAdapter(this, newsCatagoryList);
-            lvNewsFilter.setAdapter(newsCatagoryAdapter);
+        if (UtilClass.isInternetAvailabel(this)) {
+            if (requestPresenter == null) {
+                requestPresenter = new RequestPresenter();
+            }
+            requestPresenter.getCatagoryList(this);
         }
+
     }
 
     @Override
@@ -79,4 +83,32 @@ public class FilterActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onSuccessCatagoryList(JSONArray catagories) {
+        UtilClass.hideProgress();
+        if (catagories != null) {
+            if (catagories.length() > 0) {
+                if (newsCatagoryAdapter == null) {
+                    newsCatagoryAdapter = new NewsCatagoryAdapter(this, catagories);
+                    lvNewsFilter.setAdapter(newsCatagoryAdapter);
+                } else {
+                    newsCatagoryAdapter.updateCatagoryList(catagories);
+                }
+            } else {
+
+            }
+        }
+    }
+
+    @Override
+    public void onFailCatagoryListRequest() {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
+    }
+
+    @Override
+    public void onFailCatagoryResponse(String message) {
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(message, this, 0);
+    }
 }

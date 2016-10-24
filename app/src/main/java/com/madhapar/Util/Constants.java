@@ -18,9 +18,11 @@ public class Constants {
     public static class RequestConstants {
         //  public static String BaseUrl = "http://139.59.29.185/api/";
         public static String BaseUrl = "http://192.168.0.106:8000/api/";
-        public static String BaseUrlForImage = "http://139.59.29.185";
+        //  public static String BaseUrlForImage = "http://139.59.29.185";
+        public static String BaseUrlForImage = "http://192.168.0.106:8000/api";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
+        public static String NewsCategoryListUrl = BaseUrl + "categories/";
         public static String LocationListUrl = BaseUrl + "locations/";
         public static String CreateLocationListUrl = BaseUrl + "createLocation/";
         public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
@@ -28,7 +30,7 @@ public class Constants {
         public static String ProfileUpdateUrl = BaseUrl + "userDetail/";
         public static String EventStatusUpdaetUrl = BaseUrl + "eventStatusDetail/";
         public static String EventDetailUrl = BaseUrl + "eventsDetail/";
-        public static String FeedbackUrl = BaseUrl + "events/";
+        public static String FeedbackUrl = BaseUrl + "feedback/";
         public static String ProjectsListUrl = BaseUrl + "projects/";
         public static String AboutUsUrl = BaseUrl + "aboutus.html";
         public static String IntroductionUrl = BaseUrl + "introduction.html";

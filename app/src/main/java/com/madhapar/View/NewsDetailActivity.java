@@ -1,8 +1,10 @@
 package com.madhapar.View;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +77,8 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     ImageView ivDetailNewsShare;
     @BindView(R.id.screenshot)
     ImageView screenshot;
-    Bitmap bitmap;
+    @BindView(R.id.svNewsDetail)
+    ScrollView svNewsDetail;
     @BindView(R.id.rlNewsDetailImage)
     RelativeLayout rlNewsDetailImage;
     private NewsObject newsDetailObj;
@@ -82,55 +86,24 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     private static final int CommentActivityRequestCode = 22;
 
     @OnClick(R.id.ivDetailNewsShare)
-    void screenshotShare(){
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/*");
-        String imagePath = new String(Environment.getExternalStorageDirectory() + "screenshot.png");
-        Log.e("pathURL",imagePath);
-        File imagefileToShare = new File(imagePath);
-        Uri bmpUri = Uri.fromFile(imagefileToShare);
-        share.putExtra(Intent.EXTRA_STREAM,bmpUri);
-        startActivity(Intent.createChooser(share, "Share Image"));
-        screenShot(screenshot);
+    void screenshotShare() {
+        svNewsDetail.smoothScrollTo(0, svNewsDetail.getTop());
+        Bitmap bitmap = screenShot(this.getWindow().getDecorView().getRootView());
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
+        Uri imageUri = Uri.parse(path);
+        shareImage(imageUri);
+        Log.e("path", "share" + imageUri);
+
     }
-    private void shareImage(){
+
+    private void shareImage(Uri imagePath) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
-        String image = new String(Environment.getExternalStorageDirectory() + "screenshot.jpg");
-        File imagefile = new File(image);
-        Uri uri = Uri.fromFile(imagefile);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imagePath);
         startActivity(Intent.createChooser(shareIntent, "Share Image"));
 
     }
-    public void screenShot(View v){
-        bitmap = getBitmapOFRootView(ivDetailNewsShare);
-        createImage(bitmap);
-        screenshot.setImageBitmap(bitmap);
-        Log.e("screenshot","here");
-    }
 
-    private void createImage(Bitmap bitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-        File file = new File(Environment.getExternalStorageDirectory() +
-                "/screenshot.jpg");
-        try {
-            file.createNewFile();
-            FileOutputStream outputStream = new FileOutputStream(file);
-            outputStream.write(bytes.toByteArray());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Bitmap getBitmapOFRootView(View view1) {
-        View rootview = view1.getRootView();
-        rootview.setDrawingCacheEnabled(true);
-        Bitmap bitmap1 = rootview.getDrawingCache();
-        return bitmap1;
-    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,12 +160,12 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             onBackPressed();
             return true;
         }
-//        if (item.getItemId() == R.id.ivDetailNewsShare) {
-//            String imagePath = new String(Environment.getExternalStorageDirectory() + "/screenshot.png");
-//            Log.e("pathURL", imagePath);
-//            Uri bmpUri = Uri.fromFile(new File(imagePath));
-//            shareImage(bmpUri);
-//        }
+        if (item.getItemId() == R.id.ivDetailNewsShare) {
+            String imagePath = new String(Environment.getExternalStorageDirectory() + "/screenshot.png");
+            Log.e("pathURL", imagePath);
+            Uri bmpUri = Uri.fromFile(new File(imagePath));
+            shareImage(bmpUri);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -325,4 +298,14 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
         UtilClass.hideProgress();
         UtilClass.displyMessage(message, this, 0);
     }
+
+    public Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+
 }

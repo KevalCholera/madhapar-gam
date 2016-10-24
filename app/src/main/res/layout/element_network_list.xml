@@ -14,6 +14,7 @@
 
 
     <LinearLayout
+        android:id="@+id/llUserMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -25,7 +26,7 @@
             android:layout_width="@dimen/circulerImage"
             android:layout_height="@dimen/circulerImage"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/icon_placeholder_network" />
+            android:src="@drawable/ic_network_place_holder" />
 
         <LinearLayout
             android:layout_width="match_parent"

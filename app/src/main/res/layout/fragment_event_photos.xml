@@ -20,40 +20,29 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
-            android:background="@drawable/ic_grid_back_ground"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp"
             android:visibility="visible">
 
-
             <RadioButton
                 android:id="@+id/radioAlbumSelector"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginRight="@dimen/cardElevation"
-                android:background="@drawable/icon_grid_small"
                 android:button="@android:color/transparent"
                 android:checked="false"
-                android:elevation="10dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:shadowDx="2"
-                android:shadowDy="2" />
+                android:gravity="center" />
 
             <RadioButton
                 android:id="@+id/radioImageSelector"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginRight="@dimen/margin_small"
-                android:background="@drawable/icon_grid_fill"
                 android:button="@android:color/transparent"
-                android:checked="true"
-                android:elevation="10dp"
-                android:shadowDx="2"
-                android:shadowDy="2" />
+                android:checked="true" />
         </RadioGroup>
 
         <LinearLayout
@@ -75,7 +64,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@mipmap/ic_grid_selected" />
+                    android:src="@drawable/ic_grid_selected" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,7 +79,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@mipmap/ic_tiled" />
+                    android:src="@drawable/ic_tiled" />
             </LinearLayout>
         </LinearLayout>
 
@@ -115,7 +104,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_grid" />
+                    android:src="@drawable/ic_grid" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +119,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@mipmap/ic_tiled_selected" />
+                    android:src="@drawable/ic_tiled_selected" />
             </LinearLayout>
 
 

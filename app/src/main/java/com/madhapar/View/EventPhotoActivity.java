@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,30 +12,41 @@ import android.widget.GridView;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.View.Adapter.CustomGrid;
+import com.madhapar.View.Adapter.PhotoListCustomGridAdapter;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventPhotoActivity extends AppCompatActivity implements EventPhotosInt {
+public class EventPhotoActivity extends AppCompatActivity {
+    private PhotoListCustomGridAdapter adapter;
+    private FragmentManager fm;
     @BindView(R.id.grid)
     GridView grid;
-    RequestPresenter presenterClass;
-    private CustomGrid customGrid;
-    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_photo);
         ButterKnife.bind(this);
+        String eventPotos = getIntent().getStringExtra("eventPhotos");
+        Log.e("eventPhotos", "e" + eventPotos);
+        fm = getSupportFragmentManager();
+        if (eventPotos != null) {
+            try {
+                JSONArray eventPhotoArray = new JSONArray(eventPotos);
+                if (eventPhotoArray != null) {
+                    adapter = new PhotoListCustomGridAdapter(this, getIntent().getStringExtra("albumName"), eventPhotoArray, fm, false);
+                    grid.setAdapter(adapter);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        presenterClass = new RequestPresenter();
-        presenterClass.getEventPhoto(this);
-        if (grid == null) {
-            Log.e("Log ", "Here");
-        } else Log.e("Log", "not null");
+
     }
 
     @Override
@@ -55,11 +67,5 @@ public class EventPhotoActivity extends AppCompatActivity implements EventPhotos
         finish();
     }
 
-    @Override
-    public void onSuccessEventPhotoList(JSONArray userList) {
-      //  customGrid = new CustomGrid(this, userList);
-        mLayoutManager = new LinearLayoutManager(this);
-        grid.setAdapter(customGrid);
 
-    }
 }

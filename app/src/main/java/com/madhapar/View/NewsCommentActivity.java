@@ -41,9 +41,13 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @OnClick(R.id.tvSendComment)
     public void sendComment() {
-        if (!etCommentText.getText().toString().equalsIgnoreCase("")) {
+        if (!etCommentText.getText().toString().equalsIgnoreCase("") && etCommentText.getText().toString().length() < 200) {
             if (presenterClass == null)
                 presenterClass = new RequestPresenter();
+        } else {
+            if (etCommentText.getText().toString().length() > 200) {
+                UtilClass.displyMessage(getString(R.string.commentValidationlessthan200), this, 0);
+            }
         }
         if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
             presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
@@ -111,25 +115,25 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onFailRequest() {
-        Log.e("commentListActivity", "response" + "failRequzsr");
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
     }
 
     @Override
     public void onFailResponse(String mesaage) {
-        Log.e("commentListActivity", "response" + "failReuspdvnkl");
+        UtilClass.hideProgress();
+        UtilClass.displyMessage(mesaage, this, 0);
     }
 
 
     @Override
     public void successfulUpdateLike(JSONObject updateObj) {
-        UtilClass.displyMessage(getString(R.string.msgCommentAdded), this, 0);
         etCommentText.setText("");
         tvSendComment.setTag("add");
         if (presenterClass == null) {
             presenterClass = new RequestPresenter();
         }
         presenterClass.getNewsCommentList(getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
-        // presenterClass.getNewsCommentList();
     }
 
     @Override

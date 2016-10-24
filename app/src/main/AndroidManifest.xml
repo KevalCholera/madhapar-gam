@@ -31,6 +31,14 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
+            android:name="com.madhapar.View.PhotoActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/labelEventPhotos"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
             android:name="com.madhapar.View.SignUpActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:screenOrientation="portrait"
