@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,12 +36,14 @@ public class LocationAlertDialog extends AlertDialog.Builder implements ProfileU
 
     @OnClick(R.id.tvCancelLocation)
     void dismissDialog() {
+        UtilClass.closeKeyboard(activity);
         dialog.dismiss();
     }
 
 
     @OnClick(R.id.tvDoneLocation)
     void addLocation() {
+        UtilClass.closeKeyboard(activity);
         if (UtilClass.isInternetAvailabel(activity)) {
             if (mProfileUpdatePresenter == null) {
                 mProfileUpdatePresenter = new ProfileUpdatePresenter();
@@ -72,14 +75,14 @@ public class LocationAlertDialog extends AlertDialog.Builder implements ProfileU
         ButterKnife.bind(this, view);
         dialog = create();
         dialog.show();
-        etLocationAdd.clearFocus();
+        etLocationAdd.requestFocus();
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.alertdialogdesign);
     }
 
     @Override
     public void onSuccessUpdateUserData(String name) {
         dialog.dismiss();
-        UtilClass.closeKeyboard(activity);
         UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
         mProfileUpdatePresenter.getLocationList(this);
     }
@@ -87,7 +90,6 @@ public class LocationAlertDialog extends AlertDialog.Builder implements ProfileU
     @Override
     public void onFailUpdateUesrDate(String message) {
         UtilClass.hideProgress();
-        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(message, activity, 0);
     }
 
@@ -95,7 +97,6 @@ public class LocationAlertDialog extends AlertDialog.Builder implements ProfileU
     public void onFailUpdateRequest() {
         UtilClass.hideProgress();
         dialog.dismiss();
-        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(activity.getString(R.string.msgSomethigWentWrong), activity, 0);
     }
 

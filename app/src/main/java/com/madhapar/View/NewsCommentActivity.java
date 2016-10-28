@@ -10,7 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +30,9 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
-public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback,CommentViewInt, NewsLikeCommentUpdateCallback {
+public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, CommentViewInt, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
     @BindView(R.id.etCommentText)
@@ -37,6 +40,13 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     @BindView(R.id.tvSendComment)
     TextView tvSendComment;
     PresenterClass presenter;
+    @BindView(R.id.ivNoCommentsPlaceholder)
+    ImageView ivNoCommentsPlaceholder;
+
+    @OnFocusChange(R.id.etCommentText)
+    void commentText() {
+        etCommentText.setSelection(etCommentText.getText().length());
+    }
 
 
     @OnClick(R.id.tvSendComment)
@@ -52,7 +62,7 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
             presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
             presenter = new PresenterClass();
-            presenter.commentCredential(etCommentText.getText().toString(),this);
+            presenter.commentCredential(etCommentText.getText().toString(), this);
         } else {
             presenterClass.updateComment(getIntent().getStringExtra("newsId"), (String) etCommentText.getTag(), etCommentText.getText().toString(), "1", this);
         }
@@ -100,16 +110,21 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
-        if (commentAdapter == null) {
-            commentAdapter = new CommentsListAdapter(this, commentList, getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
-            rvCommentList.setLayoutManager(mLayoutManager);
-            commentAdapter.setMode(Attributes.Mode.Single);
-            (commentAdapter).setMode(Attributes.Mode.Single);
-            rvCommentList.setAdapter(commentAdapter);
+        if (commentList.length() > 0) {
+            updateView(true);
+            if (commentAdapter == null) {
+                commentAdapter = new CommentsListAdapter(this, commentList, getIntent().getStringExtra("newsId"), getIntent().getStringExtra("newsStatusId"), this);
+                rvCommentList.setLayoutManager(mLayoutManager);
+                commentAdapter.setMode(Attributes.Mode.Single);
+                (commentAdapter).setMode(Attributes.Mode.Single);
+                rvCommentList.setAdapter(commentAdapter);
+            } else {
+                commentAdapter.updateCommentList(commentList);
+                if (commentList.length() > 0)
+                    rvCommentList.smoothScrollToPosition(commentList.length() - 1);
+            }
         } else {
-            commentAdapter.updateCommentList(commentList);
-            if (commentList.length() > 0)
-                rvCommentList.smoothScrollToPosition(commentList.length() - 1);
+            updateView(false);
         }
     }
 
@@ -139,11 +154,16 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     @Override
     public void failUpdateResponse(String message) {
         tvSendComment.setTag("add");
+        etCommentText.setText("");
+        UtilClass.displyMessage(message, this, 0);
     }
 
     @Override
     public void failUpdateRequest() {
+
         tvSendComment.setTag("add");
+        etCommentText.setText("");
+        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
     }
 
 
@@ -156,11 +176,22 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void onCommentresult(int checkComment) {
-        if(checkComment == UtilClass.CommentBlankError){
-            UtilClass.displyMessage(getString(R.string.commentEmpty),NewsCommentActivity.this, Toast.LENGTH_SHORT);
-        }
-        else if(checkComment == UtilClass.CommentLenghtError){
-            UtilClass.displyMessage(getString(R.string.commentLength),NewsCommentActivity.this,Toast.LENGTH_SHORT);
+        if (checkComment == UtilClass.CommentBlankError) {
+            UtilClass.displyMessage(getString(R.string.commentEmpty), NewsCommentActivity.this, Toast.LENGTH_SHORT);
+        } else if (checkComment == UtilClass.CommentLenghtError) {
+            UtilClass.displyMessage(getString(R.string.commentLength), NewsCommentActivity.this, Toast.LENGTH_SHORT);
         }
     }
+
+    public void updateView(boolean listToDisplay) {
+        if (listToDisplay) {
+            ivNoCommentsPlaceholder.setVisibility(View.GONE);
+            rvCommentList.setVisibility(View.VISIBLE);
+
+        } else {
+            ivNoCommentsPlaceholder.setVisibility(View.VISIBLE);
+            rvCommentList.setVisibility(View.GONE);
+        }
+    }
+
 }

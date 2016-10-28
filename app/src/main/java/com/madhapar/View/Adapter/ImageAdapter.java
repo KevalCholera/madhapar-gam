@@ -22,17 +22,20 @@ import org.json.JSONArray;
 public class ImageAdapter extends PagerAdapter {
     Context context;
     JSONArray imageArray;
+    private Boolean isNews;
 
-    public ImageAdapter(Context context, JSONArray imageArray) {
+    public ImageAdapter(Context context, JSONArray imageArray, boolean isNews) {
         this.imageArray = imageArray;
         Log.e("adapterCreated", "imageArraty" + imageArray);
         this.context = context;
+        this.isNews = isNews;
     }
 
     @Override
     public int getCount() {
         return imageArray.length();
     }
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         RelativeLayout photoLayout = new RelativeLayout(context);
@@ -42,7 +45,12 @@ public class ImageAdapter extends PagerAdapter {
         photoLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
         TouchImageView touchImageView = new TouchImageView(context);
         touchImageView.setLayoutParams(photoLayoutParams);
-        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("eventImage")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_placeholder).into(touchImageView);
+        if (this.isNews) {
+            Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("newsImg")).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(touchImageView);
+        } else {
+            Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("eventImage")).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(touchImageView);
+
+        }
         photoLayout.addView(touchImageView);
         container.addView(photoLayout);
         return photoLayout;

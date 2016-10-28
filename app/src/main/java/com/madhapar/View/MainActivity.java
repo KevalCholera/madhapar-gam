@@ -1,5 +1,6 @@
 package com.madhapar.View;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -22,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.View.Adapter.MainDrawerListAdapter;
@@ -57,12 +59,9 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         getSupportActionBar().setElevation(0);
         dlMain.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
         //---Drawer List---//
         mainDrawerListAdapter = new MainDrawerListAdapter(MainActivity.this, presenter.initMainDrawer());
         lvDrawerMain.setAdapter(mainDrawerListAdapter);
-
-
         //-----Fragment---//
         presenter.changeFragment(R.id.flMain, 0, MainActivity.this);
         lvDrawerMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,4 +116,6 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         }
 
     }
+
+
 }

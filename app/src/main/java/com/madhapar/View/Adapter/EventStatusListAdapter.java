@@ -49,8 +49,9 @@ public class EventStatusListAdapter extends RecyclerView.Adapter<EventStatusList
                 String userName = userObj.optString("userFirstName") + userObj.optString("userLastName");
                 holder.tvStatusPersonName.setText(userName);
                 String picUrl = userObj.optString("userProfilePic");
+                Log.e("picUrl","picture"+picUrl);
                 if (picUrl != null) {
-                    Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + picUrl).error(R.mipmap.ic_user_placeholder).into(holder.ivStautsUserImage);
+                    Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + picUrl).error(R.drawable.ic_network_place_holder).placeholder(R.drawable.ic_network_place_holder).into(holder.ivStautsUserImage);
                 }
                 if (statusObj.optString("eventStatusType").equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {
                     holder.tvGoingPersonCount.setVisibility(View.VISIBLE);

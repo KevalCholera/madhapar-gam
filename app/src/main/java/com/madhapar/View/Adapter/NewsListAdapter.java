@@ -133,27 +133,24 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
                 context.startActivity(intent);
             }
         });
-        holder.AsvNewsPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("clicked", "openImage View Activity");
-            }
-        });
         try {
-            JSONArray imageArray = new JSONArray(newsObj.getNewsImageArray());
+            String newsImages = newsObj.getNewsImageArray();
+            JSONArray imageArray = new JSONArray(newsImages);
             if (imageArray != null && imageArray.length() > 0) {
+                holder.AsvNewsPager.setVisibility(View.VISIBLE);
                 if (imageArray.length() > 1) {
                     holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
                 } else {
                     holder.CpiNewsPageIndicator.setVisibility(View.GONE);
                 }
                 NewsImagePagerAdapter imagePagerAdapter = new NewsImagePagerAdapter(context, imageArray);
-                holder.CpiNewsPageIndicator.setVisibility(View.VISIBLE);
                 holder.AsvNewsPager.setAdapter(imagePagerAdapter);
-                holder.AsvNewsPager.setVisibility(View.VISIBLE);
                 holder.CpiNewsPageIndicator.setViewPager(holder.AsvNewsPager);
-                holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
-                holder.AsvNewsPager.startAutoScroll();
+                //  holder.AsvNewsPager.setInterval(Constants.DifferentData.ViewPagerInterval);
+                //  holder.AsvNewsPager.startAutoScroll();
+            } else {
+                holder.AsvNewsPager.setVisibility(View.GONE);
+                holder.CpiNewsPageIndicator.setVisibility(View.GONE);
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package com.madhapar.View;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,12 +32,19 @@ public class PhotoActivity extends BaseActivity {
         ButterKnife.bind(this);
         String images = getIntent().getStringExtra("images");
         int selected = getIntent().getIntExtra("position", 0);
+        boolean isNews = getIntent().getBooleanExtra("isNews", false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (isNews) {
+            getSupportActionBar().setTitle("News Photos");
+        } else {
+            getSupportActionBar().setTitle("Event Photos");
+        }
+        Log.e("photoActivity", "images" + images);
         if (images != null) {
             try {
                 JSONArray imageArray = new JSONArray(images);
                 if (imageArray != null && imageArray.length() > 0) {
-                    imageAdapter = new ImageAdapter(this, imageArray);
+                    imageAdapter = new ImageAdapter(this, imageArray, isNews);
                     vpPhotos.setAdapter(imageAdapter);
                 }
             } catch (JSONException e) {

@@ -61,7 +61,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     @Override
     public void onBackPressed() {
         UtilClass.hideProgress();
-        UtilClass.changeActivity(ChangePasswordActivity.this, MainActivity.class, true);
+        finish();
     }
 
     @OnClick(R.id.btnSave)

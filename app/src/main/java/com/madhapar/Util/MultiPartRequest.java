@@ -1,7 +1,12 @@
 package com.madhapar.Util;
 
+import android.util.Log;
+
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 /**
@@ -18,14 +23,16 @@ import org.json.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 
 
-public class MultiPartRequest extends JsonRequest<String> {
+public class MultiPartRequest extends StringRequest {
 
     /* To hold the parameter name and the File to upload */
     private Map<String, File> fileUploads = new HashMap<String, File>();
@@ -34,6 +41,7 @@ public class MultiPartRequest extends JsonRequest<String> {
     private Map<String, String> stringUploads = new HashMap<String, String>();
 
     private Map<String, String> headers = new HashMap<String, String>();
+    private File file;
 
     /**
      * Creates a new request.
@@ -47,15 +55,33 @@ public class MultiPartRequest extends JsonRequest<String> {
      */
     public MultiPartRequest(int method, String url, JSONObject jsonRequest,
                             Listener<String> listener, ErrorListener errorListener) {
-        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
+
+        super(method, url, listener,
                 errorListener);
+
+    }
+
+
+    @Override
+    public byte[] getBody() throws AuthFailureError {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        MultipartEntity multipartEntity = new MultipartEntity();
+        multipartEntity.addPart("userProfilePicture", new FileBody(file));
+        Log.e("file","add"+file.getAbsolutePath());
+        try {
+            bos.write(multipartEntity.toString().getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bos.toByteArray();
     }
 
 
     public MultiPartRequest(String url, JSONObject jsonRequest, Listener<String> listener,
-                            ErrorListener errorListener) {
-        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest,
+                            ErrorListener errorListener, File file) {
+        this(jsonRequest == null ? Method.PUT : Method.POST, url, jsonRequest,
                 listener, errorListener);
+        this.file = file;
     }
 
 
@@ -68,6 +94,7 @@ public class MultiPartRequest extends JsonRequest<String> {
     }
 
     public Map<String, File> getFileUploads() {
+        Log.e("file", "getFile called");
         return fileUploads;
     }
 
@@ -77,6 +104,7 @@ public class MultiPartRequest extends JsonRequest<String> {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
+        Log.e("request", "getHeader Called");
         return headers;
     }
 
@@ -87,6 +115,7 @@ public class MultiPartRequest extends JsonRequest<String> {
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         try {
+            Log.e("network", "response" + response);
             String jsonString =
                     new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             return Response.success(new String(jsonString),

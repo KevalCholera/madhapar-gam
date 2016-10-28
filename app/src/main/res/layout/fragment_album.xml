@@ -10,6 +10,7 @@
         android:id="@+id/gridAlbum"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:isScrollContainer="false"
         android:numColumns="2"
         android:visibility="visible" />
 
@@ -18,5 +19,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/ic_event_photo_placeholder"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>

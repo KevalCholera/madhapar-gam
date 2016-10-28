@@ -26,10 +26,12 @@
                 android:layout_marginLeft="@dimen/margin_medium"
                 android:layout_marginRight="@dimen/margin_medium"
                 android:background="@drawable/search"
+                android:focusableInTouchMode="true"
                 android:gravity="left|center"
-                android:textColorHint="@color/colorgreySearch"
                 android:hint="@string/searchlocation"
-                android:paddingLeft="40dp" />
+                android:inputType="textCapSentences"
+                android:paddingLeft="40dp"
+                android:textColorHint="@color/colorgreySearch" />
 
             <ImageView
                 android:id="@+id/ivSearchHint"

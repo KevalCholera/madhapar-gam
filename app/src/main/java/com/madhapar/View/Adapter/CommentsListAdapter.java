@@ -102,7 +102,7 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
             mItemManger.bindView(holder.itemView, position);
             String imagePath = commentObj.optString("userProfilePic");
             if (imagePath != null)
-                Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + userObj.optString("userProfilePic")).error(R.mipmap.ic_user_placeholder).into(holder.civUserPic);
+                Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + userObj.optString("userProfilePic")).error(R.drawable.ic_network_place_holder).placeholder(R.drawable.ic_network_place_holder).into(holder.civUserPic);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -147,8 +147,15 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
     @Override
     public void onSuccessCommentList(JSONArray commentList) {
         UtilClass.hideProgress();
-        this.commentListArry = commentList;
-        notifyDataSetChanged();
+        if (commentList.length() > 0) {
+            commentActivity.updateView(true);
+            this.commentListArry = commentList;
+            notifyDataSetChanged();
+        } else {
+            commentActivity.updateView(false);
+
+        }
+
     }
 
     @Override

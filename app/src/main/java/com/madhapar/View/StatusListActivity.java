@@ -35,6 +35,8 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     TextView tvEventStatusTitle;
     @BindView(R.id.ivEventStautsChangeImage)
     ImageView ivEventStautsChangeImage;
+    @BindView(R.id.ivEventStatusEmpty)
+    ImageView ivEventStatusEmpty;
 
     private LinearLayoutManager mLayoutManager;
     public EventStatusListAdapter eventStatusListAdapter;
@@ -83,7 +85,7 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
                 ivEventStautsChangeImage.setVisibility(View.GONE);
             }
         } else {
-            tvEventStatusTitle.setText(getString(R.string.TitleNotGoing));
+            tvEventStatusTitle.setText(getString(R.string.TitleCantGo));
             if (getIntent().getStringExtra("isMaybeId").equalsIgnoreCase("")) {
                 ivEventStautsChangeImage.setImageResource(R.mipmap.ic_event_not_going_white);
             } else {
@@ -126,13 +128,21 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     @Override
     public void onSuccessEventStatusList(JSONArray statusArray) {
         UtilClass.hideProgress();
-        if (eventStatusListAdapter == null) {
-            eventStatusListAdapter = new EventStatusListAdapter(this, statusArray);
-            mLayoutManager = new LinearLayoutManager(this);
-            rvEventStatusList.setLayoutManager(mLayoutManager);
-            rvEventStatusList.setAdapter(eventStatusListAdapter);
+        if (statusArray.length() > 0) {
+            rvEventStatusList.setVisibility(View.VISIBLE);
+            ivEventStatusEmpty.setVisibility(View.GONE);
+            if (eventStatusListAdapter == null) {
+                eventStatusListAdapter = new EventStatusListAdapter(this, statusArray);
+                mLayoutManager = new LinearLayoutManager(this);
+                rvEventStatusList.setLayoutManager(mLayoutManager);
+                rvEventStatusList.setAdapter(eventStatusListAdapter);
+            } else {
+                eventStatusListAdapter.updateStatusAdaptet(statusArray);
+            }
+
         } else {
-            eventStatusListAdapter.updateStatusAdaptet(statusArray);
+            rvEventStatusList.setVisibility(View.GONE);
+            ivEventStatusEmpty.setVisibility(View.VISIBLE);
         }
     }
 

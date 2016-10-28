@@ -26,6 +26,7 @@ public class PhotoFragment extends BaseFragment {
     ViewPager vpPhotos;
     private ImageAdapter imageAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class PhotoFragment extends BaseFragment {
                 try {
                     JSONArray imageArray = new JSONArray(images);
                     if (imageArray != null && imageArray.length() > 0) {
-                        imageAdapter = new ImageAdapter(getActivity(), imageArray);
+                        imageAdapter = new ImageAdapter(getActivity(), imageArray, false);
                         vpPhotos.setAdapter(imageAdapter);
                     }
                 } catch (JSONException e) {
@@ -54,7 +55,7 @@ public class PhotoFragment extends BaseFragment {
 
                 @Override
                 public void onPageSelected(int position) {
-                    
+
                 }
 
                 @Override
@@ -64,7 +65,7 @@ public class PhotoFragment extends BaseFragment {
             });
         }
         return view;
-
-
     }
+
+
 }

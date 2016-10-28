@@ -1,7 +1,7 @@
 <resources>
 
     <!--application strings-->
-    <string name="app_name">MadhaparGam</string>
+    <string name="app_name">Madhapar</string>
     <string name="oneSignalAppId">05a23f01-4851-4f08-b986-82a82cc901cc</string>
     <string name="googleProjectNumber">23707267697</string>
 
@@ -13,7 +13,8 @@
     <string name="loginFail">Login successfull</string>
     <string name="loginSucess">Login Fail</string>
 
-    <string name="mobileNumberLogin">+254 xxxxx1234</string>
+    <string name="mobileNumberLoginWithCountryCode">254 xxxxx1234</string>
+    <string name="mobileNumberLogin">Mobile Number</string>
     <string name="passwordLogin">Password</string>
     <string name="btnLogin">Log-in</string>
     <string name="forgetPassword">Forget Password</string>
@@ -29,7 +30,7 @@
     <string name="signupButtonText">Sign-Up</string>
     <string name="back">Back</string>
     <string name="recover">Recover</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="resendOTP">Resend OTP</string>
     <string name="enterOTP">Enter OTP</string>
@@ -38,7 +39,7 @@
     <string name="eventName">Event Name</string>
     <string name="share">Share</string>
     <string name="going">Going</string>
-    <string name="interest">Interest</string>
+    <string name="interest">Interested</string>
     <string name="cantgo">Can\'\ t Go</string>
     <string name="noygoing">Not Going</string>
     <string name="eventcalender">Event Calender</string>
@@ -68,25 +69,25 @@
 
     <string name="enterrequiredfiels">Enter Required Field</string>
     <string name="enterfamilymember">Family Member is required</string>
-    <string name="enterfirstnm">First Name is required</string>
-    <string name="enterlastnm">Last Name is required</string>
+    <string name="enterfirstnm">First name is required</string>
+    <string name="enterlastnm">Last name is required</string>
     <string name="enterpassword">Password is required</string>
     <string name="passwordlength">Password has to be an alphanumeric and minimum 7 characters long.</string>
     <string name="contactError">Mobile No. is required</string>
     <string name="ErrorContactLength">Mobile No. has to be a numeric value (7-14 digits).</string>
     <string name="loginSuccess">Login Success</string>
-    <string name="passwordUpdate">password Update</string>
-    <string name="subjectrequired">Enter valid Feedback Subject</string>
-    <string name="enterFeedback">Enter Feedback</string>
+    <string name="passwordUpdate">password update</string>
+    <string name="subjectrequired">Enter valid feedback subject</string>
+    <string name="enterFeedback">Enter feedback</string>
     <string name="thanku">Thank you </string>
     <string name="enternewpassword">Enter New Password</string>
     <string name="enterConfirmPassword">Enter Confirm Password</string>
     <string name="passwordupdate">Password Update</string>
-    <string name="passwordmatch">Password cant match Enter Valid Confirm Password</string>
-    <string name="resenedcode">Resend Code Successfully</string>
+    <string name="passwordmatch">Password cant match enter valid confirm password</string>
+    <string name="resenedcode">Resend code successfully</string>
     <string name="fundInfo">More Info</string>
-    <string name="profileName">First Name :</string>
-    <string name="lastNameEditProfile">Last Name :</string>
+    <string name="profileNameFirst">First Name :</string>
+    <string name="profileNameLast">Last Name :</string>
     <string name="profileNumver">Mobile No :</string>
     <string name="profileLocation">Location :</string>
     <string name="profileDOB">D. O. B. :</string>
@@ -100,7 +101,7 @@
 
     <string name="searchNews">Search News Category</string>
     <!--Process message-->
-    <string name="msgPleaseWait">Please Wait..</string>
+    <string name="msgPleaseWait">Please wait..</string>
     <string name="msgCheckInternet">Please check your internet connection</string>
     <string name="msgInternetAppersOffline">The internet connection appears to be offline.</string>
     <string name="msgSomethigWentWrong">Something went wrong please try again later.</string>
@@ -118,16 +119,13 @@
     <string name="lableNewsDetailActivity">News</string>
     <string name="lableNewsCommentActivity">Comments</string>
     <string name="labelNewsComment">Comment</string>
-    <string name="labelEventDetail">Event Detail</string>
+    <string name="labelEventDetail">Event Info</string>
     <string name="labelProfile">Profile</string>
     <string name="labelEventPhotos">Event Photos</string>
     <string name="labelFundRaising">Fund Raising</string>
 
-    <string name="email">Email(Optional)</string>
-    <string name="facebook">FB Username(Optional)</string>
 
     <!--NewsData-->
-
     <!--Comment Screen-->
     <string name="SendComment">Send</string>
     <string name="hintAddComment">Add a comment</string>
@@ -137,6 +135,7 @@
     <string name="TitleGoing">Going</string>
     <string name="Titlenterested">Interested</string>
     <string name="TitleNotGoing">Not Going</string>
+    <string name="TitleCantGo">Can"\'"t Go</string>
     <string name="EventAlertYes">Yes</string>
     <string name="EventAlertConfirm">Confirm</string>
     <string name="EventAlertCancel">Cancel</string>
@@ -211,6 +210,15 @@
         <item>Sports</item>
 
     </array>
+
+    <!--UserFragment-->
+    <string name="email">Email (Optional)</string>
+    <string name="facebook">FB Username(Optional)</string>
+    <string name="BloodGroop">Blood Group</string>
+    <string name="DateOfBirth">D.O.B.</string>
+    <string name="Location">Location</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
 
 
 </resources>

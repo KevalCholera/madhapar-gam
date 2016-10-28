@@ -60,4 +60,5 @@ public class PhotoListFragment extends BaseFragment {
         }
         return view;
     }
+
 }

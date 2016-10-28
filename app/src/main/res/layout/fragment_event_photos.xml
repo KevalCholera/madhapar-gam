@@ -9,8 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -22,18 +20,20 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:padding="5dp"
             android:visibility="visible">
 
             <RadioButton
                 android:id="@+id/radioAlbumSelector"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginRight="@dimen/cardElevation"
                 android:button="@android:color/transparent"
                 android:checked="false"
                 android:gravity="center" />
+
 
             <RadioButton
                 android:id="@+id/radioImageSelector"
@@ -131,6 +131,5 @@
     <FrameLayout
         android:id="@+id/flGallaryMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_medium" />
+        android:layout_height="match_parent" />
 </LinearLayout>

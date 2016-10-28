@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,6 +42,8 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
     @BindView(R.id.tvClearCatagory)
     TextView tvClearCatagory;
     private RequestPresenter requestPresenter;
+    @BindView(R.id.ic_search)
+    ImageView ic_search;
 
     @OnClick(R.id.tvClearCatagory)
     void clearCatagory() {
@@ -52,6 +56,11 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
 
     @OnTextChanged(R.id.etNewsFilterSearch)
     void filterNews() {
+        if (etNewsFilterSearch.getText().toString().length() > 0) {
+            ic_search.setVisibility(View.GONE);
+        } else {
+            ic_search.setVisibility(View.VISIBLE);
+        }
         if (newsCatagoryAdapter != null && newsCatagoryAdapter.getFilter() != null) {
             newsCatagoryAdapter.getFilter().filter(etNewsFilterSearch.getText().toString());
         }

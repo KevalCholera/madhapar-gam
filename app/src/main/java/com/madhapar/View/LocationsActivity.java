@@ -55,6 +55,8 @@ public class LocationsActivity extends AppCompatActivity implements ProfileUpdat
         setContentView(R.layout.activity_locations);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
+        etLocationSearch.setEnabled(false);
+        etLocationSearch.setEnabled(true);
         mProfilePresenter = new ProfileUpdatePresenter();
         if (UtilClass.isInternetAvailabel(this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
@@ -88,6 +90,7 @@ public class LocationsActivity extends AppCompatActivity implements ProfileUpdat
     @Override
     public void onSuccessLocationList(JSONArray locationList) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         if (locationList != null) {
             if (mLocationAdapter == null) {
                 mLocationAdapter = new LocationsListAdapter(this, locationList);

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context="com.madhapar.View.FeedbackActivity">
 
@@ -17,45 +18,49 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/text_size_large"
-        android:id="@+id/etFeedbackSubject"
-        android:layout_marginTop="@dimen/top_margin_medium"
-        android:paddingLeft="@dimen/paddingSmall"
-        android:layout_marginLeft="@dimen/top_margin_large"
-        android:layout_marginRight="@dimen/top_margin_large"
-        android:background="@drawable/feedback"
-        android:textColor="@color/colorBlack"
-        android:hint="@string/feedbackSubject"
-        android:singleLine="true"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_button_width"
-        android:id="@+id/etFeedbackFeedback"
-        android:textColor="@color/colorBlack"
-        android:gravity="top"
-        android:layout_marginTop="@dimen/top_margin_medium"
-        android:paddingLeft="@dimen/paddingSmall"
-        android:layout_marginLeft="@dimen/top_margin_large"
-        android:layout_marginRight="@dimen/top_margin_large"
-        android:inputType="textMultiLine"
-        android:paddingTop="@dimen/paddingSmall"
-        android:background="@drawable/feedback"
-        android:hint="@string/feedback"
-        android:singleLine="false" />
+            <EditText
+                android:id="@+id/etFeedbackSubject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_size_large"
+                android:layout_marginLeft="@dimen/top_margin_large"
+                android:layout_marginRight="@dimen/top_margin_large"
+                android:layout_marginTop="@dimen/top_margin_medium"
+                android:background="@drawable/feedback"
+                android:hint="@string/feedbackSubject"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/buttonHeight"
-        android:layout_marginTop="@dimen/top_margin_large"
-        android:id="@+id/btnFeedbackSend"
-        android:layout_marginLeft="@dimen/top_margin_large"
-        android:layout_marginRight="@dimen/top_margin_large"
-        android:layout_marginBottom="@dimen/activity_login_margin"
-        android:background="@color/colorPrimary"
-        android:text="@string/feedbackSent"
-        android:textColor="@color/colorWhite"/>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etFeedbackFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_button_width"
+                android:layout_marginLeft="@dimen/top_margin_large"
+                android:layout_marginRight="@dimen/top_margin_large"
+                android:layout_marginTop="@dimen/top_margin_medium"
+                android:background="@drawable/feedback"
+                android:gravity="top"
+                android:hint="@string/feedback"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingSmall"
+                android:singleLine="false"
+                android:textColor="@color/colorBlack" />
+
+            <Button
+                android:id="@+id/btnFeedbackSend"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonHeight"
+                android:layout_marginBottom="@dimen/activity_login_margin"
+                android:layout_marginLeft="@dimen/top_margin_large"
+                android:layout_marginRight="@dimen/top_margin_large"
+                android:layout_marginTop="@dimen/top_margin_large"
+                android:background="@drawable/feed_back_button"
+                android:text="@string/feedbackSent"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text18" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

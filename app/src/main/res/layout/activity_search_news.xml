@@ -16,17 +16,37 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-
-        <EditText
-            android:id="@+id/etNewsFilterSearch"
+        <LinearLayout
+            android:id="@+id/llSearchCatagory"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/margin_Top"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1.6"
-            android:textColorHint="@color/colorgreySearch"
-            android:background="@drawable/news_filter_edittext"
-            android:drawableLeft="@drawable/icon_search_news"
-            android:hint="@string/searchNews"
-            android:padding="@dimen/margin_small" />
+            android:background="@drawable/search"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ic_search"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:paddingBottom="@dimen/cardview_default_radius"
+                android:src="@drawable/icon_search"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/etNewsFilterSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_Top"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:hint="@string/searchNews"
+                android:padding="@dimen/searchBarPadding"
+                android:textAlignment="center"
+                android:textColorHint="@color/colorgreySearch"
+                android:textSize="@dimen/defaultpadding" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvClearCatagory"

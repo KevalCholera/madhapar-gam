@@ -1,5 +1,6 @@
 package com.madhapar.View.Fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,7 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
     LinearLayout llEmptyList;
     @BindView(R.id.llSearchUser)
     LinearLayout llSearchUser;
+    private Activity activity;
 
 
     @OnClick(R.id.llSearchUser)
@@ -70,6 +72,7 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_network, container, false);
         ButterKnife.bind(this, view);
+        this.activity = getActivity();
         presenterClass = new RequestPresenter();
         presenterClass.getNetworkList(this);
         return view;
@@ -83,20 +86,26 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
 
     @Override
     public void onSuccessNetworkList(JSONArray userList) {
-        networkListAdapter = new NetworkListAdapter(getActivity(), userList);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        rvNetworkList.setLayoutManager(mLayoutManager);
-        rvNetworkList.setAdapter(networkListAdapter);
+        if (isAdded() && activity != null) {
+            networkListAdapter = new NetworkListAdapter(getActivity(), userList);
+            mLayoutManager = new LinearLayoutManager(getActivity());
+            rvNetworkList.setLayoutManager(mLayoutManager);
+            rvNetworkList.setAdapter(networkListAdapter);
+        }
     }
 
     @Override
     public void onFailNetworkListResponse(String message) {
-        UtilClass.displyMessage(message, getActivity(), 0);
+        if (isAdded() && activity != null) {
+            UtilClass.displyMessage(message, getActivity(), 0);
+        }
     }
 
     @Override
     public void onFailNetworkListRequest() {
-        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
+        if (isAdded() && activity != null) {
+            UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
+        }
     }
 
 

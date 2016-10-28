@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
@@ -44,7 +45,9 @@
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="@dimen/margin_medium"
                         android:layout_marginTop="@dimen/margin_medium"
-                        android:src="@drawable/icon_placeholde" />
+                        android:src="@drawable/icon_placeholde"
+                        app:civ_border_color="@color/colorWhite"
+                        app:civ_border_width="0.3dp" />
 
                     <ImageView
                         android:id="@+id/ivEditIcon"
@@ -80,7 +83,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/profileName"
+                        android:text="@string/profileNameFirst"
                         android:textColor="@color/colorGreyProfile" />
 
                     <EditText
@@ -91,12 +94,15 @@
                         android:layout_marginRight="@dimen/marginRight"
                         android:layout_weight="1.5"
                         android:background="@drawable/search"
+                        android:capitalize="words"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapWords|textCapCharacters"
                         android:paddingLeft="@dimen/margin_small"
+
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -113,7 +119,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/lastNameEditProfile"
+                        android:text="@string/profileNameLast"
                         android:textColor="@color/colorGreyProfile" />
 
                     <EditText
@@ -125,11 +131,13 @@
                         android:layout_marginRight="@dimen/marginRight"
                         android:layout_weight="1.5"
                         android:background="@drawable/search"
+                        android:capitalize="words"
                         android:gravity="left|center_vertical"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapWords|textCapCharacters"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -156,13 +164,14 @@
                         android:layout_marginRight="@dimen/marginRight"
                         android:layout_weight="1.5"
                         android:background="@drawable/search"
-                        android:textColorHint="@color/colorPrimary"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -194,7 +203,8 @@
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -226,7 +236,8 @@
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -291,7 +302,8 @@
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -320,12 +332,13 @@
                         android:background="@drawable/search"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
-                        android:textColorHint="@color/colorGreyProfile"
-                        android:inputType="textPersonName"
                         android:hint="@string/email"
+                        android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -341,6 +354,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@string/profileFacebook"
+
                         android:textColor="@color/colorGreyProfile" />
 
                     <EditText
@@ -354,12 +368,13 @@
                         android:background="@drawable/search"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
-                        android:inputType="textPersonName"
                         android:hint="@string/facebook"
-                        android:textColorHint="@color/colorGreyProfile"
+                        android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
+                        android:textSize="@dimen/text16" />
                 </LinearLayout>
 
             </LinearLayout>

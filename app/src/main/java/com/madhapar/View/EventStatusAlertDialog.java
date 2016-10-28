@@ -2,6 +2,7 @@ package com.madhapar.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,16 +52,21 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
 
     @OnClick(R.id.tvStatusDialogConfirm)
     public void changeStatusGoingCount() {
-        if (!etStatusDialogCount.getText().toString().trim().equalsIgnoreCase("") && Integer.valueOf(etStatusDialogCount.getText().toString().trim()) > 0) {
-            Log.e("AlertCalss", canCreateNewStatus(eventObj));
-            if (canCreateNewStatus(eventObj).equalsIgnoreCase("not")) {
-                mPresenter.createEventStatus(eventObj.optString("eventId"), evetnStatusType, etStatusDialogCount.getText().toString().trim(), createCallback);
+        try {
+            if (isValidFamilyMember(etStatusDialogCount.getText().toString())) {
+                Log.e("AlertCalss", canCreateNewStatus(eventObj));
+                if (canCreateNewStatus(eventObj).equalsIgnoreCase("not")) {
+                    mPresenter.createEventStatus(eventObj.optString("eventId"), evetnStatusType, etStatusDialogCount.getText().toString().trim(), createCallback);
+                } else {
+                    mPresenter.updateEventStatus(canCreateNewStatus(eventObj), evetnStatusType, etStatusDialogCount.getText().toString().trim(), updateCallback);
+                }
+                alertDialog.cancel();
             } else {
-                mPresenter.updateEventStatus(canCreateNewStatus(eventObj), evetnStatusType, etStatusDialogCount.getText().toString().trim(), updateCallback);
+                UtilClass.displyMessage(activity.getString(R.string.msgEnterFamilyMember), activity, 0);
             }
-            alertDialog.cancel();
-        } else {
+        } catch (Exception e) {
             UtilClass.displyMessage(activity.getString(R.string.msgEnterFamilyMember), activity, 0);
+            e.printStackTrace();
         }
     }
 
@@ -72,7 +78,6 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
 
     @OnClick(R.id.tvStatusDialogYes)
     public void changeStatus() {
-        Log.e("AlertCalss", canCreateNewStatus(eventObj));
         if (evetnStatusType.equalsIgnoreCase(Constants.DifferentData.GoingStatus)) {
             llAlertYesNo.setVisibility(View.GONE);
             llAlertCancelConform.setVisibility(View.VISIBLE);
@@ -139,5 +144,26 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
         }
 
     }
+
+
+    private boolean isValidFamilyMember(String familyMember) {
+        if (TextUtils.isEmpty(familyMember)) {
+            return false;
+        } else {
+            try {
+                Long value = Long.valueOf(familyMember);
+                if (value < 100) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+    }
+
 
 }

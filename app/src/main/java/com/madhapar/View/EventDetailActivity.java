@@ -1,13 +1,23 @@
 package com.madhapar.View;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +34,7 @@ import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,18 +79,29 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     TextView tvOpenPhotosActivity;
     @BindView(R.id.btnEventInfoShare)
     Button btnEventInfoShare;
+    private int PERMISSION_REQUEST_CODE = 103;
 
     @OnClick(R.id.btnEventInfoShare)
     void shareEvent() {
-        svEventDetail.smoothScrollTo(0, svEventDetail.getTop());
-        Bitmap bitmap = screenShot(this.getWindow().getDecorView().getRootView());
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
-        Uri imageUri = Uri.parse(path);
-        shareImage(imageUri);
-        Log.e("path", "share" + imageUri);
+        if (checkPermission()) {
+            svEventDetail.smoothScrollTo(0, svEventDetail.getTop());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = loadBitmapFromView(this, this.getWindow().getDecorView().getRootView());
+            String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
+            Uri imageUri = Uri.parse(path);
+            shareImage(imageUri);
+            Log.e("path", "share" + imageUri);
+        } else {
+            requestPermission();
+        }
     }
 
     private void shareImage(Uri imagePath) {
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         shareIntent.putExtra(Intent.EXTRA_STREAM, imagePath);
@@ -103,6 +125,26 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         startActivity(intent);
 
     }
+
+    @OnClick(R.id.ivEventCoverImage)
+    void openPhotosForCoverImage() {
+        Intent intent = new Intent(EventDetailActivity.this, PhotoActivity.class);
+        try {
+            JSONArray jsonArray = new JSONArray();
+            JSONObject coverImageObj = new JSONObject();
+            coverImageObj.put("eventImage", eventObj.optString("coverImage"));
+            jsonArray.put(coverImageObj);
+            intent.putExtra("images", jsonArray.toString());
+            intent.putExtra("position", 0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        intent.putExtra("albumName", eventObj.optString("eventTitle"));
+        startActivity(intent);
+
+    }
+
 
     private static final int StatusListActivityConstant = 200;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm a");
@@ -176,8 +218,10 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onBackPressed() {
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -200,21 +244,21 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
                 tvOpenPhotosActivity.setVisibility(View.GONE);
             }
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
-                llEventDetailGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                llEventDetailGoing.setBackgroundColor(getResources().getColor(R.color.colorEventSelected));
             } else {
                 llEventDetailGoing.setBackgroundColor(Color.WHITE);
             }
             if (isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
-                llEventDetailNotGoing.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                llEventDetailNotGoing.setBackgroundColor(getResources().getColor(R.color.colorEventSelected));
             } else {
                 llEventDetailNotGoing.setBackgroundColor(Color.WHITE);
             }
             if (isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
-                llEventDetailIntrested.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                llEventDetailIntrested.setBackgroundColor(getResources().getColor(R.color.colorEventSelected));
             } else {
                 llEventDetailIntrested.setBackgroundColor(Color.WHITE);
             }
-            Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(ivEventCoverImage);
+            Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + coverImageUrl).placeholder(R.mipmap.img_event_detail_photo_place_holder).error(R.mipmap.img_event_detail_photo_place_holder).into(ivEventCoverImage);
         }
     }
 
@@ -231,7 +275,6 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         }
 
     }
-
 
     @Override
     public void onSuccessEventDetail(JSONObject response) {
@@ -260,16 +303,14 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            if (requestCode == StatusListActivityConstant) {
-                if (UtilClass.isInternetAvailabel(this)) {
-                    if (mPresenter == null) {
-                        mPresenter = new EventPresenter();
-                    }
-                    String eventId = data.getStringExtra("eventId");
-                    mPresenter.getEventDetail(eventId, this);
-                } else {
-
+            Log.e("onActivity", "result called");
+            if (UtilClass.isInternetAvailabel(this)) {
+                if (mPresenter == null) {
+                    mPresenter = new EventPresenter();
                 }
+                String eventId = data.getStringExtra("eventId");
+                mPresenter.getEventDetail(eventId, this);
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -316,5 +357,65 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         return isValid;
 
     }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            showMessageOKCancel("You need to allow access to external storage",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        PERMISSION_REQUEST_CODE);
+                            }
+                        }
+                    });
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                shareEvent();
+            } else {
+
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public static Bitmap loadBitmapFromView(Context context, View v) {
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        v.measure(View.MeasureSpec.makeMeasureSpec(dm.widthPixels, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(dm.heightPixels, View.MeasureSpec.EXACTLY));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+        Bitmap returnedBitmap = Bitmap.createBitmap(v.getMeasuredWidth(),
+                v.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(returnedBitmap);
+        v.draw(c);
+
+        return returnedBitmap;
+    }
+
 }
 

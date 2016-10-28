@@ -1,5 +1,6 @@
 package com.madhapar.View.Fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     private EventListAdapter recylerViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
+    private static final int REQUEST_CODE_FOR_EVENT_STATUS = 102;
 
     @Nullable
     @Override
@@ -72,16 +75,27 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     }
 
 
+    @Override
+    public void onResume() {
+        if (UtilClass.isInternetAvailabel(mContext)) {
+            if (presenterClass == null) {
+                presenterClass = new EventPresenter();
+            }
+            presenterClass.getEventList(EventFragment.this);
+        }
+        super.onResume();
+    }
+
     public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             WakeLocker.acquire(context);
             if (presenterClass == null) {
                 presenterClass = new EventPresenter();
-                presenterClass.getEventList(EventFragment.this);
             }
-            WakeLocker.release();
+            presenterClass.getEventList(EventFragment.this);
 
+            WakeLocker.release();
         }
     };
 
@@ -114,19 +128,41 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
 
     @Override
     public void onFailEventListRequest() {
-        UtilClass.hideProgress();
-        if (rlEventList.isRefreshing()) {
-            rlEventList.setRefreshing(false);
+        if (isAdded() && getActivity() != null) {
+            UtilClass.hideProgress();
+            if (rlEventList.isRefreshing()) {
+                rlEventList.setRefreshing(false);
+            }
+            UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
         }
-        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
     }
+
 
     @Override
     public void onFailEventListResponse(String message) {
-        UtilClass.hideProgress();
-        if (rlEventList.isRefreshing()) {
-            rlEventList.setRefreshing(false);
+        if (isAdded() && getActivity() != null) {
+            UtilClass.hideProgress();
+            if (rlEventList.isRefreshing()) {
+                rlEventList.setRefreshing(false);
+            }
+            UtilClass.displyMessage(message, getActivity(), 0);
         }
-        UtilClass.displyMessage(message, getActivity(), 0);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Log.e("HomeFragment", "onActivity" + "result" + requestCode);
+            if (requestCode == REQUEST_CODE_FOR_EVENT_STATUS) {
+                if (UtilClass.isInternetAvailabel(mContext)) {
+                    if (presenterClass == null) {
+                        presenterClass = new EventPresenter();
+                    }
+                    presenterClass.getEventList(EventFragment.this);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

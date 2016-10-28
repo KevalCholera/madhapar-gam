@@ -30,7 +30,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
     private Activity activity;
     private AlertDialog alert;
     private String contactNumber;
-    private JSONObject otpObj;
+    // private JSONObject otpObj;
     private PresenterClass presenter;
     private int type;
     @BindView(R.id.etCode1)
@@ -72,22 +72,20 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
 
             String insertedOtp = code1.getText().toString().trim() + code2.getText().toString().trim() + code3.getText().toString().trim() + code4.getText().toString().trim();
             Log.e("otp", "inserted" + insertedOtp);
-            Log.e("otp", this.otpObj.optString("otpValue"));
-            if (insertedOtp.equals(this.otpObj.optString("otpValue"))) {
-                if (UtilClass.isInternetAvailabel(activity)) {
-                    UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
-                    if (this.type == 1)
-                        new PresenterClass().verifyForgotPasswordOtp(this.contactNumber, insertedOtp, this);
-                    else {
-                        new PresenterClass().verifyUserOtp(this.contactNumber, insertedOtp, this);
-                    }
-                } else {
-                    UtilClass.displyMessage(activity.getString(R.string.msgSomethigWentWrong), this.activity, 0);
-                }
-            } else {
-                UtilClass.displyMessage(activity.getString(R.string.msgOtpNotMatch), this.activity, 0);
+            // Log.e("otp", this.otpObj.optString("otpValue"));
+//            if (insertedOtp.equals(this.otpObj.optString("otpValue"))) {
+//                if (UtilClass.isInternetAvailabel(activity)) {
+            UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
+            if (this.type == 1)
+                new PresenterClass().verifyForgotPasswordOtp(this.contactNumber, insertedOtp, this);
+            else {
+                new PresenterClass().verifyUserOtp(this.contactNumber, insertedOtp, this);
             }
         }
+//            } else {
+//                UtilClass.displyMessage(activity.getString(R.string.msgOtpNotMatch), this.activity, 0);
+//            }
+        // }
     }
 
     @OnClick(R.id.tvResendCode)
@@ -98,7 +96,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
             UtilClass.showProgress(activity, activity.getString(R.string.msgPleaseWait));
             new PresenterClass().forgetPasswordCredentials(this.contactNumber, this, this.type);
         } else {
-            UtilClass.displyMessage(activity.getString(R.string.msgSomethigWentWrong), this.activity, 0);
+            UtilClass.displyMessage(activity.getString(R.string.msgCheckInternet), this.activity, 0);
         }
     }
 
@@ -118,7 +116,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
         this.contactNumber = contactNumber;
         SharedPreferenceUtil.putValue(Constants.UserData.UserMobileNo, contactNumber);
         SharedPreferenceUtil.save();
-        this.otpObj = otpObj1;
+        //  this.otpObj = otpObj1;
         ButterKnife.bind(this, view);
         this.type = type;
         alert = create();
@@ -127,6 +125,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
         code1.requestFocus();
         alert.getWindow().setBackgroundDrawableResource(R.drawable.alertdialogdesign);
     }
+
     @Override
     public void forgetPasswordValidateResult(int check) {
     }
@@ -139,13 +138,12 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
         code3.setText("");
         code4.setText("");
         code1.requestFocus();
-        this.otpObj = otpResponse;
+        //this.otpObj = otpResponse;
     }
 
     @Override
     public void forgotPasswrodFail(String message) {
         UtilClass.hideProgress();
-        Log.e("resend success", "otpFail" + message);
     }
 
     @Override
@@ -174,6 +172,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
     @Override
     public void otpVerificationFail(String message) {
         UtilClass.hideProgress();
+        Log.e("varificationF", "message" + message);
         UtilClass.displyMessage(message, activity, 0);
     }
 

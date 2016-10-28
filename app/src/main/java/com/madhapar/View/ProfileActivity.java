@@ -71,6 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        UtilClass.changeActivity(ProfileActivity.this, FeedbackActivity.class, true);
+
     }
 }

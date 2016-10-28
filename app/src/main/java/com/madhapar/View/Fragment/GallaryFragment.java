@@ -1,25 +1,23 @@
 package com.madhapar.View.Fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
-import com.madhapar.Presenter.PresenterClass;
-import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.Adapter.CustomGrid;
 import com.madhapar.View.EventDetailCallback;
+import com.madhapar.View.UpdatefragmetnView;
 
 
 import org.json.JSONArray;
@@ -28,7 +26,6 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 /**
  * Created by smartsense on 24/09/16.
@@ -44,7 +41,7 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     private FragmentManager mFragmentManager;
     private AlbumFragment fragmentAlbum;
     private PhotoListFragment photoListFragment;
-
+    public static GallaryFragment parentFragment;
 
     @OnClick(R.id.radioImageSelector)
     void openImagePage() {
@@ -88,6 +85,10 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
             container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_photos, container, false);
         ButterKnife.bind(this, view);
+        parentFragment = this;
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("updateView");
+        getActivity().registerReceiver(receiver, filter);
         mFragmentManager = getChildFragmentManager();
         if (fragmentAlbum == null) {
             fragmentAlbum = new AlbumFragment();
@@ -100,11 +101,18 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     }
 
     @Override
-    public void onSuccessEventList(JSONArray eventArray) {
-        UtilClass.hideProgress();
-        this.albumArray = eventArray;
-        radioAlbumSelector.performClick();
+    public void onDestroy() {
+        getActivity().unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 
+    @Override
+    public void onSuccessEventList(JSONArray eventArray) {
+        if (isAdded() && getActivity() != null) {
+            UtilClass.hideProgress();
+            this.albumArray = eventArray;
+            radioAlbumSelector.performClick();
+        }
 //        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);
 //        gridAlbum.setAdapter(customGrid);
 
@@ -112,25 +120,39 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
 
     @Override
     public void onFailEventListRequest() {
-        UtilClass.hideProgress();
-        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
+        if (isAdded() && getActivity() != null) {
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
+        }
     }
 
     @Override
     public void onFailEventListResponse(String message) {
-        UtilClass.hideProgress();
-        UtilClass.displyMessage(message, getActivity(), 0);
+        if (isAdded() && getActivity() != null) {
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(message, getActivity(), 0);
+        }
     }
 
     public void updateView(boolean isAlbumSelected) {
         if (isAlbumSelected) {
-            radioAlbumSelector.setBackgroundResource(R.drawable.ic_grid);
-            radioImageSelector.setBackgroundResource(R.drawable.ic_tiled);
-        } else {
             radioAlbumSelector.setBackgroundResource(R.drawable.ic_grid_selected);
             radioImageSelector.setBackgroundResource(R.drawable.ic_tiled_selected);
-
+        } else {
+            radioAlbumSelector.setBackgroundResource(R.drawable.ic_grid);
+            radioImageSelector.setBackgroundResource(R.drawable.ic_tiled);
         }
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+                intent.getAction().equalsIgnoreCase("updateView");
+                updateView(intent.getBooleanExtra("isAlbumSelected", false));
+            }
+        }
+    };
+
 
 }

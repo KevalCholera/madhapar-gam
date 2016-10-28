@@ -34,9 +34,9 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:hint="@string/search"
-                android:textColorHint="@color/colorgreySearch"
                 android:padding="@dimen/searchBarPadding"
                 android:textAlignment="center"
+                android:textColorHint="@color/colorgreySearch"
                 android:textSize="@dimen/defaultpadding" />
 
         </LinearLayout>

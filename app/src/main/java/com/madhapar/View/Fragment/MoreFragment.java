@@ -1,5 +1,6 @@
 package com.madhapar.View.Fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,19 +29,19 @@ public class MoreFragment extends BaseFragment {
     private PresenterClass presenter;
     Intent intent;
 
-    @OnClick(R.id.tvIntroHistory)
+    @OnClick(R.id.llIntroHistory)
     public void introHistory() {
         Intent intent = new Intent(getActivity(), AboutUsActivity.class);
         intent.putExtra("isAboutUs", false);
         startActivity(intent);
     }
 
-    @OnClick(R.id.tvFeedback)
+    @OnClick(R.id.llFeedback)
     public void tvFeedback() {
         presenter.changeActivity(getActivity(), FeedbackActivity.class, false);
     }
 
-    @OnClick(R.id.tvAboutUs)
+    @OnClick(R.id.llAboutUs)
     public void tvAboutUs() {
         Intent intent = new Intent(getActivity(), AboutUsActivity.class);
 
@@ -48,12 +49,12 @@ public class MoreFragment extends BaseFragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.tvFundRaising)
+    @OnClick(R.id.llFundRaising)
     public void tvFundRaising() {
         presenter.changeActivity(getActivity(), FundRaisingActivity.class, false);
     }
 
-    @OnClick(R.id.tvSignOut)
+    @OnClick(R.id.llSignOut)
     public void tvSignOut() {
         SharedPreferenceUtil.clear();
         SharedPreferenceUtil.save();
@@ -66,6 +67,7 @@ public class MoreFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         ButterKnife.bind(this, view);
         presenter = new PresenterClass();
+
         getActivity().findViewById(R.id.moreFragment);
 
         return view;

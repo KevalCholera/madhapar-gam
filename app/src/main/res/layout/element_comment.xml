@@ -61,7 +61,7 @@
                     android:layout_width="@dimen/CommentUserImage"
                     android:layout_height="@dimen/CommentUserImage"
                     android:layout_centerHorizontal="true"
-                    android:src="@mipmap/ic_user_placeholder" />
+                    android:src="@drawable/ic_network_place_holder" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:singleLine="false"
                         android:text=""
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorGreyProfile"
                         android:textSize="@dimen/TextCommentList" />
 
                 </LinearLayout>

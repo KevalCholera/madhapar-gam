@@ -1,105 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/moreFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/moreFragment"
     android:layout_marginLeft="@dimen/margin_top_medium"
     android:layout_marginTop="@dimen/margin_top_medium"
     android:orientation="vertical">
+
     <LinearLayout
+        android:id="@+id/llIntroHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_history" />
+
         <TextView
+            android:id="@+id/tvIntroHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvIntroHistory"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
             android:layout_marginLeft="@dimen/activity_top_login_margin"
-            android:text="@string/more1"/>
+            android:text="@string/more1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llFeedback"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:gravity="center"
         android:layout_marginTop="@dimen/activity_top_login_margin"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_feedback" />
+
         <TextView
+            android:id="@+id/tvFeedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvFeedback"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
             android:layout_marginLeft="@dimen/activity_top_login_margin"
-            android:text="@string/more3"/>
+            android:text="@string/more3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/llAboutUs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="@dimen/activity_top_login_margin"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_about_us" />
+
         <TextView
+            android:id="@+id/tvAboutUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvAboutUs"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
             android:layout_marginLeft="@dimen/margin_top_medium"
-            android:text="@string/more4"/>
+            android:text="@string/more4"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/llFundRaising"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="@dimen/margin_top_medium"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_fundraising" />
+
         <TextView
+            android:id="@+id/tvFundRaising"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvFundRaising"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_small"
             android:layout_marginLeft="@dimen/margin_top_medium"
-            android:text="@string/more5"/>
+            android:text="@string/more5"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/llSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="@dimen/margin_top_medium"
+        android:gravity="center"
 
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_signout" />
+
         <TextView
+            android:id="@+id/tvSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvSignOut"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
             android:layout_marginLeft="@dimen/margin_top_medium"
-            android:text="@string/more6"/>
+            android:text="@string/more6"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 </LinearLayout>

@@ -21,6 +21,7 @@ import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.CustomGrid;
 import com.madhapar.View.Adapter.ImageAdapter;
 import com.madhapar.View.EventDetailCallback;
+import com.madhapar.View.UpdatefragmetnView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +70,7 @@ public class AlbumFragment extends BaseFragment {
         return view;
 
     }
+
 
 
 }

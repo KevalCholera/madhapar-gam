@@ -15,6 +15,8 @@ import com.madhapar.Util.UtilClass;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
+import butterknife.OnTextChanged;
 
 /**
  * Created by smartsense on 22/09/16.
@@ -23,6 +25,15 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity implements LoginInt {
     @BindView(R.id.etLoginId)
     EditText etLoginId;
+
+    @OnFocusChange(R.id.etLoginId)
+    void onChangeHint() {
+        if (etLoginId.hasFocus()) {
+            etLoginId.setHint(getString(R.string.mobileNumberLoginWithCountryCode));
+        } else {
+            etLoginId.setHint("");
+        }
+    }
     @BindView(R.id.etLoginPassword)
     EditText etLoginPassword;
     @BindView(R.id.ivClose)
@@ -41,7 +52,6 @@ public class LoginActivity extends BaseActivity implements LoginInt {
         super.setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
     }
-
     @OnClick(R.id.btnLogin)
     public void submit() {
         UtilClass.closeKeyboard(LoginActivity.this);

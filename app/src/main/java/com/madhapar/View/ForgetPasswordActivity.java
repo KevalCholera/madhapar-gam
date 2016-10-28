@@ -2,6 +2,7 @@ package com.madhapar.View;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -95,6 +96,7 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
     @Override
     public void forgotPasswordRequestError() {
         UtilClass.hideProgress();
+        Log.e("inActivity", "errorCalled");
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
     }
 

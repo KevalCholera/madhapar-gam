@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin20"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_medium"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rlListAlbum"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/EventPhotoHeight"
+    <LinearLayout
+        android:id="@+id/llImageMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
-        android:layout_marginLeft="@dimen/margin_small"
-        android:layout_marginRight="@dimen/margin_small"
-        android:layout_marginTop="@dimen/margin_medium">
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivImageListGrid"
+        <RelativeLayout
+            android:id="@+id/rlListAlbum"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/paddingSmall"
-            android:paddingRight="@dimen/paddingSmall"
-            android:paddingTop="@dimen/paddingSmall"
-            android:scaleType="fitXY"></ImageView>
+            android:layout_height="wrap_content"
+            android:background="@drawable/gallary_album_corner">
 
-        <TextView
-            android:id="@+id/tvListAlbumName"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/CommentOverlayImage"
-            android:layout_alignBottom="@id/ivImageGrid"
-            android:layout_alignLeft="@id/ivImageGrid"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@id/ivImageGrid"
-            android:layout_marginLeft="@dimen/margin_small"
-            android:layout_marginRight="@dimen/margin_small"
-            android:background="@color/colorTransparentBlack"
-            android:gravity="center"
-            android:text=" "
-            android:textAlignment="center"
-            android:textColor="@color/cardview_light_background" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/ivImageListGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/cover_placeholder"
+                android:scaleType="fitXY"
+                android:src="@drawable/news_image_corner"></ImageView>
 
+            <TextView
+                android:id="@+id/tvListAlbumName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/CommentOverlayImage"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/transparent_corner"
+                android:gravity="center"
+                android:text=""
+                android:layout_marginTop="-3dp"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_light_background" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

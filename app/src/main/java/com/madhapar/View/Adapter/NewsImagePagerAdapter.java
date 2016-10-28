@@ -1,6 +1,7 @@
 package com.madhapar.View.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.NewsDetailActivity;
+import com.madhapar.View.PhotoActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -51,23 +53,33 @@ public class NewsImagePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
-
+        Log.e("imageArray", "called" + imageArray);
         View view = inflater.inflate(R.layout.element_news_pager_image, container, false);
         if (context instanceof NewsDetailActivity) {
             imageView = (ImageView) view.findViewById(R.id.ivNewsDetailImagePager);
         } else {
             imageView = (ImageView) view.findViewById(R.id.ivNewsImagePager);
         }
-        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pbImageLoading);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PhotoActivity.class);
+                intent.putExtra("images", imageArray.toString());
+                intent.putExtra("position", position);
+                intent.putExtra("isNews", true);
+                context.startActivity(intent);
+            }
+
+        });
+
 
         target = new
-
                 Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        progressBar.setVisibility(View.GONE);
+
                         imageView.setVisibility(View.VISIBLE);
                         Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -80,29 +92,18 @@ public class NewsImagePagerAdapter extends PagerAdapter {
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) {
                         Log.e("onBitmap", "fail");
-                        progressBar.setVisibility(View.GONE);
+
                     }
 
                     @Override
                     public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        progressBar.setVisibility(View.VISIBLE);
+
 
                     }
                 }
 
         ;
-        Picasso.with(context).
-
-                load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position)
-
-                        .
-
-                                optString("newsImg")
-
-                ).
-
-                into(target);
-
+        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("newsImg")).placeholder(R.mipmap.img_news_detail_place_holder).error(R.mipmap.img_news_detail_place_holder).into(target);
         container.addView(view);
         return view;
     }

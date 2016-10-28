@@ -61,7 +61,7 @@
     <dimen name="EventStatusListTitleImage">24dp</dimen>
     <dimen name="EventStatusListTitleImagePadding">30dp</dimen>
     <dimen name="EventUpdateStatusLayoutHeight">50dp</dimen>
-    <dimen name="EventPhotoHeight">120dp</dimen>
+    <dimen name="EventPhotoHeight">160dp</dimen>
     <dimen name="ColoumnWidth">100dp</dimen>
 
     <dimen name="eventlistHeight">40dp</dimen>
@@ -127,5 +127,13 @@
     <dimen name="margin20">20dp</dimen>
     <dimen name="text18">18sp</dimen>
     <dimen name="FundRaisingDiscriptionTextMargin">15dp</dimen>
+    <dimen name="FundRaisingTextMarginTop">10dp</dimen>
 
+
+    <!--Gallary Adapter-->
+    <dimen name="mailRelativeLayoutWidth">160dp</dimen>
+    <dimen name="mailRelativeLayoutHeight">160dp</dimen>
+    <dimen name="albumImageHeight">130dp</dimen>
+    <dimen name="margin30">30dp</dimen>
+    <dimen name="AlbumNameHeight">30dp</dimen>
 </resources>

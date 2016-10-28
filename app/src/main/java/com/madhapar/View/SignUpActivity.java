@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
 public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     @BindView(R.id.etFirstName)
@@ -32,6 +34,27 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     Button btnSignUp;
     @BindView(R.id.imgBack)
     ImageView imgBack;
+    @BindView(R.id.llSignupBack)
+    LinearLayout llSignupBack;
+
+    @OnFocusChange(R.id.etMobileNumber)
+    void changeHint() {
+        if (etMobileNumber.hasFocus()) {
+            etMobileNumber.setHint(getString(R.string.mobileNumberLoginWithCountryCode));
+        } else {
+            etMobileNumber.setHint("");
+        }
+    }
+
+
+    @OnClick(R.id.llSignupBack)
+    public void back() {
+        UtilClass.closeKeyboard(this);
+        UtilClass.hideProgress();
+        finish();
+
+    }
+
     private PresneterInt presenter;
 
     @Override
@@ -53,12 +76,6 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
         }
     }
 
-    @OnClick(R.id.imgBack)
-    public void back() {
-        UtilClass.hideProgress();
-        finish();
-
-    }
 
     @Override
     public void signUpValidateResult(int check) {
@@ -89,7 +106,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
                 break;
             }
             case UtilClass.Success: {
-                UtilClass.changeActivity(SignUpActivity.this, MainActivity.class, true);
+                UtilClass.changeActivity(SignUpActivity.this, LoginActivity.class, true);
                 break;
             }
             case UtilClass.UserIdError: {

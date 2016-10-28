@@ -42,6 +42,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     private EventPresenter mPresenter;
     private Activity activity;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
+    private static final int REQUEST_CODE_FOR_EVENT_STATUS = 102;
 
     public EventListAdapter(Context context, JSONArray jsonArray, Activity activity) {
         this.eventArry = jsonArray;
@@ -67,7 +68,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             holder.tvGoing.setText(" " + eventObj.optString("going") + " ");
             holder.tvInterest.setText(" " + eventObj.optString("interested") + " ");
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
-                holder.llGoing.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.llGoing.setBackgroundColor(context.getResources().getColor(R.color.colorEventSelected));
                 holder.llGoing.setClickable(false);
             } else {
                 holder.llGoing.setBackgroundColor(Color.WHITE);
@@ -75,14 +76,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             }
             if (isSelected(eventObj, Constants.DifferentData.NotGoingStatus)) {
                 holder.llNotGoing.setClickable(false);
-                holder.llNotGoing.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.llNotGoing.setBackgroundColor(context.getResources().getColor(R.color.colorEventSelected));
             } else {
                 holder.llNotGoing.setClickable(true);
                 holder.llNotGoing.setBackgroundColor(Color.WHITE);
             }
             if (isSelected(eventObj, Constants.DifferentData.InterestedStatus)) {
                 holder.llInterested.setClickable(false);
-                holder.llInterested.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.llInterested.setBackgroundColor(context.getResources().getColor(R.color.colorEventSelected));
             } else {
                 holder.llInterested.setClickable(true);
                 holder.llInterested.setBackgroundColor(Color.WHITE);
@@ -93,7 +94,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                     Intent intent = new Intent(context, EventDetailActivity.class);
                     intent.putExtra("event", eventObj.toString());
                     intent.putExtra("canEventStatusChange", isEventStatusValid(eventObj));
-                    context.startActivity(intent);
+                    activity.startActivityForResult(intent, REQUEST_CODE_FOR_EVENT_STATUS);
 
                 }
             });

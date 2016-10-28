@@ -14,39 +14,45 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text18" />
 
+    <EditText
+        android:id="@+id/etLocationAdd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:hint="Add New Location"
+        android:text=""
+        android:textSize="@dimen/text18" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin20"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="30dp"
+        android:cursorVisible="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:lineSpacingExtra="10dp"
+        android:textSize="@dimen/text18"
+        android:visibility="gone" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
         android:layout_marginTop="30dp"
-        android:orientation="vertical">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/etLocationAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:cursorVisible="false"
-                android:focusableInTouchMode="true"
-                android:gravity="center_horizontal|top"
-                android:hint="Add New Location"
-                android:lineSpacingExtra="10dp"
-                android:lineSpacingMultiplier="1"
-                android:textSize="@dimen/text18"
-                android:translationY="6dp" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_login_margin"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tvDoneLocation"

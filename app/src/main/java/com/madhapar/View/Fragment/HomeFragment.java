@@ -38,7 +38,6 @@ import butterknife.ButterKnife;
 /**
  * Created by smartsense on 22/09/16.
  */
-
 public class HomeFragment extends BaseFragment implements HomeViewInt {
     private RequestPresenter requestPresenter;
     @BindView(R.id.rvNewsList)
@@ -50,7 +49,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     private NewsListAdapter newsDataAdapter;
     private LinearLayoutManager mLayoutManager;
     public Context mContext;
-
+    private Activity activity;
     private static final int CATAGORY_REQUEST_CODE = 120;
 
     @Nullable
@@ -65,27 +64,33 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+
+        this.activity = getActivity();
         SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
         SharedPreferenceUtil.save();
         hasOptionsMenu();
+
         srlNewsList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (UtilClass.isInternetAvailabel(getActivity())) {
-                    UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
-                    if (requestPresenter == null) {
-                        requestPresenter = new RequestPresenter();
+                if (isAdded() && activity != null) {
+                    if (UtilClass.isInternetAvailabel(getActivity())) {
+                        UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+                        if (requestPresenter == null) {
+                            requestPresenter = new RequestPresenter();
+                        }
+                        requestPresenter.getNewsList(HomeFragment.this);
+                        srlNewsList.setRefreshing(true);
+                    } else {
+                        if (srlNewsList.isRefreshing()) {
+                            srlNewsList.setRefreshing(false);
+                        }
+                        UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
                     }
-                    requestPresenter.getNewsList(HomeFragment.this);
-                    srlNewsList.setRefreshing(true);
-                } else {
-                    if (srlNewsList.isRefreshing()) {
-                        srlNewsList.setRefreshing(false);
-                    }
-                    UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
                 }
             }
         });
+
         if (UtilClass.isInternetAvailabel(getActivity())) {
             UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
             requestPresenter = new RequestPresenter();
@@ -101,9 +106,24 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     }
 
     @Override
+    public void onStart() {
+        getActivity().invalidateOptionsMenu();
+        if (isAdded() && activity != null) {
+            if (UtilClass.isInternetAvailabel(activity)) {
+                requestPresenter = new RequestPresenter();
+                requestPresenter.getNewsList(this);
+            } else {
+                UtilClass.displyMessage(getString(R.string.msgCheckInternet), activity, 0);
+            }
+            super.onStart();
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_filter) {
-            startActivityForResult(new Intent(getActivity(), FilterActivity.class), CATAGORY_REQUEST_CODE);
+        if (item.getItemId() == R.id.action_filter || item.getItemId() == R.id.action_filter_filled) {
+            if (isAdded() && activity != null)
+                startActivityForResult(new Intent(activity, FilterActivity.class), CATAGORY_REQUEST_CODE);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -112,7 +132,15 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_news_feed, menu);
         MenuItem filter = menu.findItem(R.id.action_filter);
-        filter.setVisible(true);
+        MenuItem filterFilled = menu.findItem(R.id.action_filter_filled);
+        if (SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "clear").equalsIgnoreCase("clear")) {
+            filter.setVisible(true);
+            filterFilled.setVisible(false);
+        } else {
+            filterFilled.setVisible(true);
+            filter.setVisible(false);
+        }
+
         return;
     }
 
@@ -129,15 +157,17 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         }
         UtilClass.hideProgress();
         if (newsList.size() > 0) {
-            if (newsDataAdapter == null) {
-                srlNewsList.setVisibility(View.VISIBLE);
-                llNewsListPlaceholder.setVisibility(View.GONE);
-                newsDataAdapter = new NewsListAdapter(getActivity(), newsList, rvNewsList, mLayoutManager, this, llNewsListPlaceholder);
-                rvNewsList.setLayoutManager(mLayoutManager);
-                rvNewsList.setAdapter(newsDataAdapter);
-            } else {
-                newsDataAdapter.updateAdapter(newsList);
-                applyFilter();
+            if (isAdded() && activity != null) {
+                if (newsDataAdapter == null) {
+                    srlNewsList.setVisibility(View.VISIBLE);
+                    llNewsListPlaceholder.setVisibility(View.GONE);
+                    newsDataAdapter = new NewsListAdapter(activity, newsList, rvNewsList, mLayoutManager, this, llNewsListPlaceholder);
+                    rvNewsList.setLayoutManager(mLayoutManager);
+                    rvNewsList.setAdapter(newsDataAdapter);
+                } else {
+                    newsDataAdapter.updateAdapter(newsList);
+                    applyFilter();
+                }
             }
         } else {
             srlNewsList.setVisibility(View.GONE);
@@ -147,22 +177,26 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onFailRequest() {
-        Log.e("onFailRequest", "newsList");
-        if (srlNewsList.isRefreshing()) {
-            srlNewsList.setRefreshing(false);
+        if (isAdded() && activity != null) {
+            Log.e("onFailRequest", "newsList");
+            if (srlNewsList.isRefreshing()) {
+                srlNewsList.setRefreshing(false);
+            }
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), activity, 0);
         }
-        UtilClass.hideProgress();
-        UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), getActivity(), 0);
     }
 
     @Override
     public void onFailResponse(String message) {
         Log.e("onFailResponse", "newsList");
-        if (srlNewsList.isRefreshing()) {
-            srlNewsList.setRefreshing(false);
+        if (isAdded() && activity != null) {
+            if (srlNewsList.isRefreshing()) {
+                srlNewsList.setRefreshing(false);
+            }
+            UtilClass.hideProgress();
+            UtilClass.displyMessage(message, activity, 0);
         }
-        UtilClass.hideProgress();
-        UtilClass.displyMessage(message, getActivity(), 0);
     }
 
     public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
@@ -224,6 +258,4 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
             rvNewsList.setVisibility(View.GONE);
         }
     }
-
-
 }

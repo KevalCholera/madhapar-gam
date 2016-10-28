@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:textColor="@color/colorGreyProfile"
-                android:text="@string/profileName" />
+                android:text="@string/profileNameFirst" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

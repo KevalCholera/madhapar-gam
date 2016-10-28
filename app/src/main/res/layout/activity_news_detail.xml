@@ -8,7 +8,9 @@
     <ScrollView
         android:id="@+id/svNewsDetail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llNewsDetailLikeComment"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,18 +107,12 @@
             <TextView
                 android:id="@+id/tvNewsDetailDescription"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 android:layout_marginLeft="@dimen/magin_large"
                 android:layout_marginRight="@dimen/magin_large"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:paddingBottom="@dimen/paddinglarge"
                 android:textSize="@dimen/textImageDetailDescription" />
-
-            <ImageView
-                android:id="@+id/screenshot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
@@ -192,7 +188,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/newsDetailWidthImage"
                 android:layout_gravity="center"
-                android:onClick="screenShot"
                 android:src="@mipmap/ic_news_share_filled" />
         </LinearLayout>
     </LinearLayout>

@@ -44,7 +44,7 @@ public class SignUpModel implements SignUpModelInt {
             listener.onsignUpPasswordError();
         } else if ((!(password.toString().length() > 6))) {
             listener.onSignupPasswordLengthError();
-        } else if (TextUtils.isEmpty(familyMember)) {
+        } else if (!isValidFamilyMember(familyMember)) {
             listener.onSignUpFamilyMemberError();
         } else {
             doSignup(firstName, lastName, contactNumber, password, familyMember, listener, activity);
@@ -78,7 +78,8 @@ public class SignUpModel implements SignUpModelInt {
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, responseObj.optString("userFBProfileName"));
                                     SharedPreferenceUtil.save();
                                     if (!responseObj.optBoolean("isVerified")) {
-                                        UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
+                                        listener.onSignUpSuccess();
+                                        //UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
                                     } else {
                                         listener.onSignUpSuccess();
                                     }
@@ -122,6 +123,25 @@ public class SignUpModel implements SignUpModelInt {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MadhaparGamApp.getAppInstance().addToRequestQueue(signUpRequest, tag);
+    }
+
+    private boolean isValidFamilyMember(String familyMember) {
+        if (TextUtils.isEmpty(familyMember)) {
+            return false;
+        } else {
+            try {
+                Long value = Long.valueOf(familyMember);
+                if (value < 100) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
     }
 
 }

@@ -47,22 +47,21 @@ public class FundRaisingDetailActivity extends BaseActivity {
 
     @OnClick(R.id.btnFundRaisingMoreLess)
     void changeFragment() {
-        if (btnFundRaisingMoreLess.getText().toString().equalsIgnoreCase(getString(R.string.fundInfoLess))) {
-            btnFundRaisingMoreLess.setText(getString(R.string.fundInfoMore));
+        if (btnFundRaisingMoreLess.getText().toString().equalsIgnoreCase(getString(R.string.fundInfoMore))) {
+            btnFundRaisingMoreLess.setText(getString(R.string.fundInfoLess));
             Bundle bundle = new Bundle();
             bundle.putString("projectDescription", projectDetail.optString("projectDescription"));
             Fragment fundRaisingMoreFragment = new FundRaisingMoreFragment();
             fundRaisingMoreFragment.setArguments(bundle);
             mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingMoreFragment).commit();
         } else {
-            btnFundRaisingMoreLess.setText(getString(R.string.fundInfoLess));
+            btnFundRaisingMoreLess.setText(getString(R.string.fundInfoMore));
             Bundle bundle = new Bundle();
             bundle.putString("projectDetail", projectDetail.toString());
             Fragment fundRaisingLessFragment = new FundRaisingLessFragment();
             fundRaisingLessFragment.setArguments(bundle);
             mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingLessFragment).commit();
         }
-
     }
 
 
@@ -73,7 +72,7 @@ public class FundRaisingDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mFragmetnManager = getSupportFragmentManager();
-        btnFundRaisingMoreLess.setText(getString(R.string.fundInfoLess));
+        btnFundRaisingMoreLess.setText(getString(R.string.fundInfoMore));
         if (getIntent().getStringExtra("projectDetail") != null) {
             try {
                 projectDetail = new JSONObject(getIntent().getStringExtra("projectDetail"));

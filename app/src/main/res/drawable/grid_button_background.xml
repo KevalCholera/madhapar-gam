@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" android:thickness="0.dp">
+            <corners android:radius="20dp" />
+            <padding android:left="@dimen/top_margin_small" android:right="@dimen/activity_top_login_margin" />
+
+            <gradient android:angle="270" android:endColor="@color/colorWhite" android:startColor="@color/colorWhite" android:type="linear" />
+        </shape>
+    </item>
+</selector>

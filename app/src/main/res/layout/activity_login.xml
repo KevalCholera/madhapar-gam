@@ -17,12 +17,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginTop="@dimen/defaultpadding"
-                android:paddingBottom="@dimen/defaultpadding"
+                android:layout_weight="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/defaultpadding">
 
                 <ImageView
                     android:id="@+id/ivClose"
@@ -39,49 +39,54 @@
                     android:layout_height="@dimen/activity_button_width"
                     android:layout_gravity="center"
                     android:src="@mipmap/madhapar_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_layout_password"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/etLoginId"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_rightleft_login"
-                    android:layout_marginRight="@dimen/activity_rightleft_login"
-                    android:layout_marginTop="@dimen/activity_top_login_margin"
-                    android:digits="0123456789"
-                    android:drawableLeft="@mipmap/icon_mobile"
-                    android:drawablePadding="@dimen/paddingMedium"
-                    android:textColor="@color/colorBlack"
-                    android:ems="10"
-                    android:gravity="left|center"
-                    android:hint="@string/mobileNumberLogin"
-                    android:inputType="phone"
-                    android:maxLength="14"
-                    android:singleLine="true" />
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:hint="@string/mobileNumberLogin">
+
+                    <EditText
+                        android:id="@+id/etLoginId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_rightleft_login"
+                        android:layout_marginRight="@dimen/activity_rightleft_login"
+                        android:layout_marginTop="@dimen/activity_top_login_margin"
+                        android:digits="0123456789"
+                        android:drawableLeft="@mipmap/icon_mobile"
+                        android:drawablePadding="@dimen/paddingMedium"
+                        android:ems="10"
+                        android:gravity="left|center"
+                        android:inputType="phone"
+                        android:maxLength="14"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack" />
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/etLoginPassword"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_rightleft_login"
-                    android:layout_marginRight="@dimen/activity_rightleft_login"
-                    android:layout_marginTop="@dimen/activity_top_login_margin"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-                    android:drawableLeft="@mipmap/icon_key"
-                    android:gravity="left|center"
-                    android:hint="@string/passwordLogin"
-                    android:inputType="textPassword"
-                    android:textColor="@color/colorBlack"
-                    android:drawablePadding="@dimen/paddingMedium"
-                    android:singleLine="true" />
+                    android:layout_marginTop="@dimen/margin_medium">
+
+                    <EditText
+                        android:id="@+id/etLoginPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_rightleft_login"
+                        android:layout_marginRight="@dimen/activity_rightleft_login"
+                        android:layout_marginTop="@dimen/activity_top_login_margin"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                        android:drawableLeft="@mipmap/icon_key"
+                        android:drawablePadding="@dimen/paddingMedium"
+                        android:gravity="left|center"
+                        android:hint="@string/passwordLogin"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack" />
                 </android.support.design.widget.TextInputLayout>
+
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="@dimen/activity_button_width"
@@ -89,7 +94,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/activity_top_login_margin"
                     android:background="@drawable/loginbtn"
+                    android:shadowDy="0"
+                    android:stateListAnimator="@null"
                     android:text="@string/btnLogin"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
@@ -97,11 +105,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_Top"
-                android:paddingBottom="@dimen/paddinglarge"
                 android:layout_marginBottom="@dimen/paddinglarge"
+                android:layout_marginTop="@dimen/margin_Top"
                 android:orientation="horizontal"
-                android:padding="@dimen/paddingSmall">
+                android:padding="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddinglarge">
 
                 <TextView
                     android:id="@+id/tvForgetPassword"
@@ -110,7 +118,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="@dimen/margin_small"
-                    android:text="@string/forgetPassword" />
+                    android:text="@string/forgetPassword"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvUserSignUp"

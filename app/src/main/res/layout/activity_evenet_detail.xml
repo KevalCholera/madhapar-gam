@@ -29,7 +29,7 @@
                     android:layout_height="@dimen/ImageNewDesc"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/img_event_photo_place_holder" />
+                    android:src="@mipmap/img_event_detail_photo_place_holder" />
                 <!--<RelativeLayout-->
                 <!--android:id="@+id/rlEventDetailImage"-->
                 <!--android:layout_width="match_parent"-->
