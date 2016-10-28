@@ -41,28 +41,27 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
     private FragmentManager mFragmentManager;
     private AlbumFragment fragmentAlbum;
     private PhotoListFragment photoListFragment;
-    public static GallaryFragment parentFragment;
 
-    @OnClick(R.id.radioImageSelector)
-    void openImagePage() {
-        if (photoListFragment == null) {
-            photoListFragment = new PhotoListFragment();
-        }
-        updateView(false);
-        if (albumArray != null) {
-            if (photoListFragment.getArguments() == null) {
-                Bundle bundle = new Bundle();
-                JSONObject firstAlbum = albumArray.optJSONObject(0);
-                if (firstAlbum != null) {
-                    JSONArray imageArray = firstAlbum.optJSONArray("eventPhotos");
-                    bundle.putString("images", imageArray.toString());
-                    bundle.putString("albumName", firstAlbum.optString("eventTitle"));
-                    photoListFragment.setArguments(bundle);
-                }
-            }
-            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).addToBackStack(null).commit();
-        }
-    }
+    // @OnClick(R.id.radioImageSelector)
+//    void openImagePage() {
+//        if (photoListFragment == null) {
+//            photoListFragment = new PhotoListFragment();
+//        }
+//        updateView(false);
+//        if (albumArray != null) {
+//            if (photoListFragment.getArguments() == null) {
+//                Bundle bundle = new Bundle();
+//                JSONObject firstAlbum = albumArray.optJSONObject(0);
+//                if (firstAlbum != null) {
+//                    JSONArray imageArray = firstAlbum.optJSONArray("eventPhotos");
+//                    bundle.putString("images", imageArray.toString());
+//                    bundle.putString("albumName", firstAlbum.optString("eventTitle"));
+//                    photoListFragment.setArguments(bundle);
+//                }
+//            }
+//            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).addToBackStack(null).commit();
+//        }
+    // }
 
     @OnClick(R.id.radioAlbumSelector)
     void openAlbumPage() {
@@ -85,7 +84,6 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
             container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_photos, container, false);
         ButterKnife.bind(this, view);
-        parentFragment = this;
         IntentFilter filter = new IntentFilter();
         filter.addAction("updateView");
         getActivity().registerReceiver(receiver, filter);
@@ -111,6 +109,7 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         if (isAdded() && getActivity() != null) {
             UtilClass.hideProgress();
             this.albumArray = eventArray;
+            Log.e("albumArray in Fragment", albumArray.toString());
             radioAlbumSelector.performClick();
         }
 //        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);

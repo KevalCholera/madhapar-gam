@@ -39,22 +39,12 @@ import butterknife.ButterKnife;
  * Created by Ronak on 10/11/2016.
  */
 public class CustomGrid extends BaseAdapter {
+    private final LayoutInflater inflater;
     JSONArray photoArray;
     Context context;
-    @BindView(R.id.rlAlbum)
-    RelativeLayout rlAlbum;
-    @BindView(R.id.tvAlbumName)
-    TextView tvAlbumName;
-    @BindView(R.id.tvAlbumDate)
-    TextView tvAlbumDate;
-    @BindView(R.id.llAlbumMain)
-    LinearLayout llAlbumMain;
     final List<Target> targets = new ArrayList<Target>();
-
     private FragmentManager fm;
     private PhotoListFragment photoListFragment;
-    @BindView(R.id.ivImageGrid)
-    ImageView ivImageGrid;
     private DisplayMetrics displayMetrics;
 
     public CustomGrid(Context context, JSONArray photoArray, FragmentManager fm) {
@@ -62,7 +52,7 @@ public class CustomGrid extends BaseAdapter {
         this.context = context;
         this.fm = fm;
         displayMetrics = context.getResources().getDisplayMetrics();
-
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -72,25 +62,36 @@ public class CustomGrid extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return i;
+        return photoArray.optJSONObject(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.element_custom_eventphoto_grid, null);
-        Log.e("photoArray", photoArray.toString());
-        ButterKnife.bind(this, view);
-        // llAlbumMain.getLayoutParams().height = (displayMetrics.widthPixels - 10) / 2;
-        llAlbumMain.getLayoutParams().width = (displayMetrics.widthPixels - 40) / 2;
-        llAlbumMain.getLayoutParams().height = (displayMetrics.widthPixels - 40) / 2;
-        rlAlbum.setOnClickListener(new View.OnClickListener() {
+        Log.e("adapter", "position" + position);
+        final ViewHolder holder;
+        if (view == null) {
+            view = inflater.inflate(R.layout.element_custom_eventphoto_grid, viewGroup, false);
+            holder = new ViewHolder();
+            holder.rlAlbum = (RelativeLayout) view.findViewById(R.id.rlAlbum);
+            holder.tvAlbumName = (TextView) view.findViewById(R.id.tvAlbumName);
+            holder.tvAlbumDate = (TextView) view.findViewById(R.id.tvAlbumDate);
+            holder.llAlbumMain = (LinearLayout) view.findViewById(R.id.llAlbumMain);
+            holder.ivImageGrid = (ImageView) view.findViewById(R.id.ivImageGrid);
+            view.setTag(holder);
+
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
+
+        holder.llAlbumMain.getLayoutParams().width = (displayMetrics.widthPixels - 40) / 2;
+        holder.llAlbumMain.getLayoutParams().height = (displayMetrics.widthPixels - 40) / 2;
+        holder.rlAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -110,18 +111,18 @@ public class CustomGrid extends BaseAdapter {
             }
         });
 
-        tvAlbumName.setText(photoArray.optJSONObject(position).optString("eventTitle"));
+        holder.tvAlbumName.setText(photoArray.optJSONObject(position).optString("eventTitle"));
         String date = photoArray.optJSONObject(position).optString("eventFromDate").substring(0, 12) + "-" + photoArray.optJSONObject(position).optString("eventToDate").substring(0, 12);
-        tvAlbumDate.setText(date);
+        holder.tvAlbumDate.setText(date);
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 targets.remove(this);
                 Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    ivImageGrid.setBackground(drawable);
+                    holder.ivImageGrid.setBackground(drawable);
                 } else {
-                    ivImageGrid.setBackgroundDrawable(drawable);
+                    holder.ivImageGrid.setBackgroundDrawable(drawable);
                 }
             }
 
@@ -137,6 +138,23 @@ public class CustomGrid extends BaseAdapter {
         };
         targets.add(target);
         Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + photoArray.optJSONObject(position).optString("coverImage")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_place_holder).into(target);
+
+
         return view;
     }
+
+    public class ViewHolder {
+        RelativeLayout rlAlbum;
+
+        TextView tvAlbumName;
+
+        TextView tvAlbumDate;
+
+        LinearLayout llAlbumMain;
+
+        ImageView ivImageGrid;
+
+
+    }
+
 }

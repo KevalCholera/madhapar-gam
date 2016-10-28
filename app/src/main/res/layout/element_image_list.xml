@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         android:orientation="vertical">
 
@@ -33,10 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/CommentOverlayImage"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="-3dp"
                 android:background="@drawable/transparent_corner"
                 android:gravity="center"
                 android:text=""
-                android:layout_marginTop="-3dp"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background" />
         </RelativeLayout>

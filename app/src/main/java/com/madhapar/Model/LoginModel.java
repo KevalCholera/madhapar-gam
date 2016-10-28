@@ -103,6 +103,7 @@ public class LoginModel implements LoginModelInt {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onRequestError();
+                //listener.onLoginSuccess();
                 error.printStackTrace();
             }
         }) {

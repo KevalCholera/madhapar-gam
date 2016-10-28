@@ -26,8 +26,14 @@ import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.smartsense.newproject.R.id.rlListAlbum;
+import static com.example.smartsense.newproject.R.id.tvListAlbumName;
 
 /**
  * Created by smartsense on 22/10/16.
@@ -36,19 +42,14 @@ import butterknife.ButterKnife;
 public class PhotoListCustomGridAdapter extends BaseAdapter {
     private JSONArray imageArray;
     private Context context;
-    @BindView(R.id.ivImageListGrid)
-    ImageView ivImageListGrid;
-    @BindView(R.id.tvListAlbumName)
-    TextView tvListAlbumName;
-    @BindView(R.id.rlListAlbum)
-    RelativeLayout rlListAlbum;
-    @BindView(R.id.llImageMain)
-    LinearLayout llImageMain;
+
+
     private PhotoFragment photoFragment;
     private FragmentManager fragmentManager;
     private Boolean isFromGallary;
     private String albumName;
     private DisplayMetrics displayMetrics;
+    final List<Target> targets = new ArrayList<Target>();
 
     public PhotoListCustomGridAdapter(Context context, String albumName, JSONArray imageArray, FragmentManager fm, boolean isFromGallary) {
         this.context = context;
@@ -76,13 +77,23 @@ public class PhotoListCustomGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.element_image_list, viewGroup, false);
-        ButterKnife.bind(this, view);
-        llImageMain.getLayoutParams().width = (displayMetrics.widthPixels - 40) / 2;
-        llImageMain.getLayoutParams().height = (displayMetrics.widthPixels - 40) / 2;
-        tvListAlbumName.setText(albumName);
-        rlListAlbum.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder viewHolder;
+        if (view == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            view = inflater.inflate(R.layout.element_image_list, viewGroup, false);
+            viewHolder = new ViewHolder();
+            viewHolder.tvListAlbumName = (TextView) view.findViewById(R.id.tvListAlbumName);
+            viewHolder.rlListAlbum = (RelativeLayout) view.findViewById(R.id.rlListAlbum);
+            viewHolder.ivImageListGrid = (ImageView) view.findViewById(R.id.ivImageListGrid);
+            viewHolder.llImageMain = (LinearLayout) view.findViewById(R.id.llImageMain);
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        viewHolder.llImageMain.getLayoutParams().width = (displayMetrics.widthPixels - 40) / 2;
+        viewHolder.llImageMain.getLayoutParams().height = (displayMetrics.widthPixels - 40) / 2;
+        viewHolder.tvListAlbumName.setText(albumName);
+        viewHolder.rlListAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isFromGallary) {
@@ -112,16 +123,17 @@ public class PhotoListCustomGridAdapter extends BaseAdapter {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
+                targets.remove(this);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    ivImageListGrid.setBackground(drawable);
+                    viewHolder.ivImageListGrid.setBackground(drawable);
                 } else {
-                    ivImageListGrid.setBackgroundDrawable(drawable);
+                    viewHolder.ivImageListGrid.setBackgroundDrawable(drawable);
                 }
             }
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-
+                targets.remove(this);
             }
 
             @Override
@@ -129,8 +141,18 @@ public class PhotoListCustomGridAdapter extends BaseAdapter {
 
             }
         };
-//        targets.add(target);
+        targets.add(target);
         Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("eventImage")).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(target);
         return view;
     }
+
+    public class ViewHolder {
+        ImageView ivImageListGrid;
+        TextView tvListAlbumName;
+        RelativeLayout rlListAlbum;
+        LinearLayout llImageMain;
+
+    }
 }
+
+

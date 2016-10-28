@@ -91,7 +91,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     private static final int REQUEST_CONSTANT = 200;
     private int locationId = 0;
     private int whichSelect = 0;
-
     private int REQUEST_CAMERA = 102;
     private int SELECT_FILE = 101;
     private int PERMISSION_REQUEST_CODE = 103;
@@ -655,20 +654,17 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     @Override
     public void onFailUpload(String message) {
         Log.e("onFailed", "called");
-
     }
-
     private void loadProfilePic(final String url) {
         if (isAdded() && activity != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("string url","url"+url);
+                    Log.e("string url", "url" + url.toString().trim());
                     Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + url).placeholder(R.drawable.icon_placeholde).error(R.drawable.icon_placeholde).into(ivProfilePhotoSmall);
                     Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + url).placeholder(R.drawable.cover_placeholder).error(R.drawable.cover_placeholder).into(ivProfilePhoto);
                 }
             });
-
 
 
         }
