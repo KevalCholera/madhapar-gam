@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -130,6 +129,7 @@ public class PhotoListCustomGridAdapter extends BaseAdapter {
 
             }
         };
+//        targets.add(target);
         Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("eventImage")).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(target);
         return view;
     }

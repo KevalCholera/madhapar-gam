@@ -1,37 +1,23 @@
 package com.madhapar.View;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.Volley;
 import com.example.smartsense.newproject.R;
-import com.madhapar.Util.Constants;
-import com.madhapar.Util.UtilClass;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.View.Adapter.MainDrawerListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
-import butterknife.OnItemSelected;
 
 
 public class MainActivity extends BaseActivity implements ViewInt, View.OnClickListener {
@@ -43,6 +29,7 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
     ListView lvDrawerMain;
     private MainDrawerListAdapter mainDrawerListAdapter;
     private ActionBarDrawerToggle drawerToggle;
+    private boolean doubleBackToExitPressedOnce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +102,32 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
             presenter = new PresenterClass();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (dlMain.isDrawerOpen(GravityCompat.START)) {
+            dlMain.closeDrawer(GravityCompat.START);
+        } else {
+            dlMain.openDrawer(GravityCompat.START);
+//            super.onBackPressed();
+        }
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 

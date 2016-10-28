@@ -13,9 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.NewsDetailActivity;
@@ -25,6 +23,9 @@ import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by smartsense on 08/10/16.
  */
@@ -32,9 +33,9 @@ import org.json.JSONArray;
 public class NewsImagePagerAdapter extends PagerAdapter {
     private JSONArray imageArray;
     private Context context;
-    Target target;
+//    Target target;
     private ImageView imageView;
-
+    final List<Target> targets = new ArrayList<Target>();
 
     public NewsImagePagerAdapter(Context context, JSONArray imageArray) {
         this.context = context;
@@ -75,11 +76,11 @@ public class NewsImagePagerAdapter extends PagerAdapter {
         });
 
 
-        target = new
+        Target target = new
                 Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-
+                        targets.remove(this);
                         imageView.setVisibility(View.VISIBLE);
                         Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -91,6 +92,7 @@ public class NewsImagePagerAdapter extends PagerAdapter {
 
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) {
+                        targets.remove(this);
                         Log.e("onBitmap", "fail");
 
                     }
@@ -100,9 +102,8 @@ public class NewsImagePagerAdapter extends PagerAdapter {
 
 
                     }
-                }
-
-        ;
+                };
+        targets.add(target);
         Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + imageArray.optJSONObject(position).optString("newsImg")).placeholder(R.mipmap.img_news_detail_place_holder).error(R.mipmap.img_news_detail_place_holder).into(target);
         container.addView(view);
         return view;

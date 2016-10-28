@@ -102,6 +102,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         mLayoutManager = new LinearLayoutManager(mContext);
         mContext = this.getActivity();
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionNews));
+        rvNewsList.setNestedScrollingEnabled(true);
         return view;
     }
 

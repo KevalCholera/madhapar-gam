@@ -4,40 +4,32 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
-import com.madhapar.View.Fragment.AlbumFragment;
-import com.madhapar.View.Fragment.GallaryFragment;
-import com.madhapar.View.Fragment.PhotoFragment;
 import com.madhapar.View.Fragment.PhotoListFragment;
-import com.madhapar.View.UpdatefragmetnView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,7 +49,7 @@ public class CustomGrid extends BaseAdapter {
     TextView tvAlbumDate;
     @BindView(R.id.llAlbumMain)
     LinearLayout llAlbumMain;
-
+    final List<Target> targets = new ArrayList<Target>();
 
     private FragmentManager fm;
     private PhotoListFragment photoListFragment;
@@ -124,6 +116,7 @@ public class CustomGrid extends BaseAdapter {
         Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                targets.remove(this);
                 Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     ivImageGrid.setBackground(drawable);
@@ -134,7 +127,7 @@ public class CustomGrid extends BaseAdapter {
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-
+                targets.remove(this);
             }
 
             @Override
@@ -142,6 +135,7 @@ public class CustomGrid extends BaseAdapter {
 
             }
         };
+        targets.add(target);
         Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + photoArray.optJSONObject(position).optString("coverImage")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_place_holder).into(target);
         return view;
     }
