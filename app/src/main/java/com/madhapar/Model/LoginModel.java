@@ -13,7 +13,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.UserVerifyActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -120,7 +119,7 @@ public class LoginModel implements LoginModelInt {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+//                params.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
                 return params;
             }
         };

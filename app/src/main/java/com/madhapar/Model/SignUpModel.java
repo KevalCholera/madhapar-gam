@@ -3,6 +3,7 @@ package com.madhapar.Model;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -13,7 +14,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.UserVerifyActivity;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONException;
@@ -83,6 +83,7 @@ public class SignUpModel implements SignUpModelInt {
                                     } else {
                                         listener.onSignUpSuccess();
                                     }
+                                    UtilClass.displyMessage(signUpObject.optString("message"), MadhaparGamApp.getAppInstance(), Toast.LENGTH_SHORT);
                                 }
                             } else {
                                 listener.onSignUpFailError(signUpObject.optString("message"));

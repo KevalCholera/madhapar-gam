@@ -171,8 +171,10 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
                 }
             }
         } else {
-            srlNewsList.setVisibility(View.GONE);
-            llNewsListPlaceholder.setVisibility(View.VISIBLE);
+            Log.e("onFailRequest", "visi");
+            updateViews(false);
+//            srlNewsList.setVisibility(View.GONE);
+//            llNewsListPlaceholder.setVisibility(View.VISIBLE);
         }
     }
 

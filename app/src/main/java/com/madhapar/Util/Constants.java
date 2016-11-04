@@ -18,8 +18,8 @@ public class Constants {
     public static class RequestConstants {
                 public static String BaseUrl = "http://139.59.29.185/api/";
         public static String BaseUrlForImage = "http:139.59.29.185";
-//        public static String BaseUrl = "http://192.168.0.111:8000/api/";
-//        public static String BaseUrlForImage = "http://192.168.0.111:8000";
+//        public static String BaseUrl = "http://192.168.0.109:8000/api/";
+//        public static String BaseUrlForImage = "http://192.168.0.109:8000";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String NewsCategoryListUrl = BaseUrl + "categories/";

@@ -12,8 +12,6 @@ import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
 import com.madhapar.Util.UtilClass;
 
-import org.json.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -106,6 +104,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
                 break;
             }
             case UtilClass.Success: {
+
                 UtilClass.changeActivity(SignUpActivity.this, LoginActivity.class, true);
                 break;
             }

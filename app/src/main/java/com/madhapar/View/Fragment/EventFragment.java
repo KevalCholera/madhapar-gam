@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
@@ -24,7 +25,6 @@ import com.madhapar.View.Adapter.EventListAdapter;
 import com.madhapar.View.EventDetailCallback;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +38,8 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     RecyclerView recyclerView;
     @BindView(R.id.rlEventList)
     SwipeRefreshLayout rlEventList;
+    @BindView(R.id.llNewsListPlaceholder)
+    LinearLayout llNewsListPlaceholder;
     private EventPresenter presenterClass;
     private EventListAdapter recylerViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -116,13 +118,17 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         if (rlEventList.isRefreshing()) {
             rlEventList.setRefreshing(false);
         }
-        if (recylerViewAdapter == null) {
-            recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, getActivity());
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setAdapter(recylerViewAdapter);
+        if (eventArray.length() > 0) {
+            if (recylerViewAdapter == null) {
+                recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, getActivity());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setAdapter(recylerViewAdapter);
 
+            } else {
+                recylerViewAdapter.updateAdapter(eventArray);
+            }
         } else {
-            recylerViewAdapter.updateAdapter(eventArray);
+            updateViews(false);
         }
     }
 
@@ -164,5 +170,15 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void updateViews(final boolean listVisible) {
+        if (listVisible) {
+            llNewsListPlaceholder.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        } else {
+            llNewsListPlaceholder.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 }

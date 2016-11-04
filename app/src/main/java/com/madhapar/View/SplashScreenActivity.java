@@ -1,9 +1,6 @@
 package com.madhapar.View;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
@@ -27,10 +24,10 @@ public class SplashScreenActivity extends BaseActivity {
                 try {
                     Thread.sleep(2000);
 //
-                    if (!SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, "").equalsIgnoreCase("") && !SharedPreferenceUtil.getString(Constants.UserData.UserId, "").equalsIgnoreCase("")) {
-                        UtilClass.changeActivity(SplashScreenActivity.this, MainActivity.class, true);
-                    } else {
+                    if (SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken).equalsIgnoreCase(Constants.RequestConstants.DefaultToken)) {
                         UtilClass.changeActivity(SplashScreenActivity.this, LoginActivity.class, true);
+                    } else {
+                        UtilClass.changeActivity(SplashScreenActivity.this, MainActivity.class, true);
                     }
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
