@@ -49,10 +49,10 @@ import butterknife.OnClick;
 public class EventDetailActivity extends AppCompatActivity implements EventDetailCallback {
     @BindView(R.id.tvEventDetailTitle)
     TextView tvEventDetailTitle;
-    @BindView(R.id.tvEventDate)
-    TextView tvEventDate;
-    @BindView(R.id.tvEventTime)
-    TextView tvEventTime;
+    @BindView(R.id.tvEventFromDate)
+    TextView tvEventFromDate;
+    @BindView(R.id.tvEventToDate)
+    TextView tvEventToDate;
     @BindView(R.id.svEventDetail)
     ScrollView svEventDetail;
     @BindView(R.id.tvEventLocation)
@@ -229,7 +229,8 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         Log.e("eventObj", eventObj.toString());
         if (eventObj != null) {
             tvEventDetailTitle.setText(eventObj.optString("eventTitle"));
-            tvEventDate.setText(eventObj.optString("eventFromDate"));
+            tvEventFromDate.setText(eventObj.optString("eventFromDate"));
+            tvEventToDate.setText(eventObj.optString("eventToDate"));
             tvEventLocation.setText(eventObj.optString("eventAddress"));
             tEventDetailDescription.setText(eventObj.optString("eventDescription"));
             tvEventOrganizer.setText(eventObj.optString("eventOrganizedBy"));

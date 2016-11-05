@@ -24,9 +24,15 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/FundRaisingImageHeight"
+                    android:src="@color/colorTransparentBlack" />
+
+
+                <ImageView
                     android:id="@+id/ivFundRaisingImage"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="@dimen/FundRaisingImageHeight"
                     android:scaleType="fitXY"
                     android:src="@mipmap/img_fund_raising_banner" />
 

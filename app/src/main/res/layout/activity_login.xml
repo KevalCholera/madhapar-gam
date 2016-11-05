@@ -62,7 +62,7 @@
                         android:inputType="phone"
                         android:maxLength="14"
                         android:singleLine="true"
-                        android:text="918866332300"
+                        android:text=""
                         android:textColor="@color/colorBlack" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +85,7 @@
                         android:hint="@string/passwordLogin"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:text="abcd1234"
+                        android:text=""
                         android:textColor="@color/colorBlack" />
                 </android.support.design.widget.TextInputLayout>
 

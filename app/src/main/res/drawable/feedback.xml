@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape>
+        <shape
             android:thickness="0dp"
             android:shape="rectangle">
 
             <corners android:radius="5dp" />
             <gradient
-                android:startColor="@color/colorNewsDetailView"
-                android:endColor="@color/colorNewsDetailView"
+                android:startColor="@color/colorUserBackground"
+                android:endColor="@color/colorUserBackground"
                 android:type="linear"
                 android:angle="270"/>
         </shape>

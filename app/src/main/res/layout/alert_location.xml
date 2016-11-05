@@ -25,6 +25,8 @@
         android:gravity="center"
         android:hint="Add New Location"
         android:text=""
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyProfile"
         android:textSize="@dimen/text18" />
 
 

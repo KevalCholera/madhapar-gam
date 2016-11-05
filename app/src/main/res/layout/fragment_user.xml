@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/magin_large"
-                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -99,9 +99,9 @@
                         android:gravity="left|center_vertical"
                         android:inputType="textCapWords|textCapCharacters"
                         android:paddingLeft="@dimen/margin_small"
-
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
 
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -137,13 +137,14 @@
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -177,7 +178,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -204,13 +205,14 @@
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -221,6 +223,7 @@
                         android:gravity="right"
                         android:text="@string/profileDOB"
                         android:textColor="@color/colorGreyProfile" />
+
 
                     <EditText
                         android:id="@+id/etEditProfileDOB"
@@ -237,13 +240,16 @@
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
@@ -270,13 +276,14 @@
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -297,19 +304,21 @@
                         android:layout_marginRight="@dimen/marginRight"
                         android:layout_weight="1.5"
                         android:background="@drawable/search"
+                        android:drawableRight="@mipmap/ic_down_arrow"
                         android:focusableInTouchMode="true"
                         android:gravity="left|center_vertical"
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/paddingSmall"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -344,7 +353,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal">
 
                     <TextView
@@ -354,7 +363,6 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@string/profileFacebook"
-
                         android:textColor="@color/colorGreyProfile" />
 
                     <EditText

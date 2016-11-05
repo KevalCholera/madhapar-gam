@@ -31,6 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Created by smartsense on 21/09/16.
@@ -319,6 +321,20 @@ public class UtilClass {
         cursor.moveToFirst();
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
+    }
+
+
+    public static String formatValue(double value) {
+        int power;
+        String suffix = " kmbt";
+        String formattedNumber = "";
+
+        NumberFormat formatter = new DecimalFormat("#,###.#");
+        power = (int) StrictMath.log10(value);
+        value = value / (Math.pow(10, (power / 3) * 3));
+        formattedNumber = formatter.format(value);
+        formattedNumber = formattedNumber + suffix.charAt(power / 3);
+        return formattedNumber.length() > 4 ? formattedNumber.replaceAll("\\.[0-9]+", "") : formattedNumber;
     }
 
 

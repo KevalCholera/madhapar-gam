@@ -272,7 +272,6 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
                         presenter = new RequestPresenter();
                     }
                     if (UtilClass.isInternetAvailabel(NewsDetailActivity.this)) {
-                        UtilClass.showProgress(NewsDetailActivity.this, getString(R.string.msgPleaseWait));
                         if (newsDetailObj.getNewsStatusId().equalsIgnoreCase("null") || newsDetailObj.getNewsStatusId() == null || newsDetailObj.getNewsStatusId().equalsIgnoreCase("")) {
                             presenter.updateLikeComment(newsDetailObj.getNewsId(), "2", "", NewsDetailActivity.this);
                         } else {

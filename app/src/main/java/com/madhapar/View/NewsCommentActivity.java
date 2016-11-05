@@ -20,6 +20,7 @@ import com.daimajia.swipe.util.Attributes;
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.CommentsListAdapter;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
@@ -143,6 +144,13 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void successfulUpdateLike(JSONObject updateObj) {
+        if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentAdded)) {
+            UtilClass.displyMessage(getString(R.string.commnetAddad), this, 0);
+        } else if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentEdited)) {
+            UtilClass.displyMessage(getString(R.string.commnetUpdate), this, 0);
+        } else if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentDeleted)) {
+            UtilClass.displyMessage(getString(R.string.commnetDelete), this, 0);
+        }
         etCommentText.setText("");
         tvSendComment.setTag("add");
         if (presenterClass == null) {

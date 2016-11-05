@@ -239,7 +239,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
     @OnFocusChange(R.id.etEditProfileBloodGroup)
     void updateBloodGroup() {
-
         if (!etEditProfileBloodGroup.hasFocus()) {
             if (!etEditProfileBloodGroup.getTag().toString().equalsIgnoreCase(etEditProfileBloodGroup.getText().toString())) {
                 if (mProfileUpdatePresenter == null) {
@@ -274,7 +273,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                 Map<String, String> params = new HashMap();
                 if (!TextUtils.isEmpty(etEditProfileDOB.getText().toString().trim())) {
                     etEditProfileDOB.setTag(etEditProfileDOB.getText().toString());
-
                     params.put("userDOB", getDateOfBirthToSend(etEditProfileDOB.getText().toString()));
                     mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
                 }
@@ -295,7 +293,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
     @OnFocusChange(R.id.etEditProfileLocation)
     void updateCity() {
-
         if (!etEditProfileLocation.hasFocus()) {
             if (!etEditProfileLocation.getTag().toString().equalsIgnoreCase(etEditProfileLocation.getText().toString())) {
                 if (mProfileUpdatePresenter == null) {
@@ -346,18 +343,32 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
 
         etEditProfileBloodGroup.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
-        etEditProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
-        etEditProfileBloodGroup.setHint(getString(R.string.BloodGroop));
+
+        if (SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, "").equalsIgnoreCase("") || SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, "").equalsIgnoreCase("null")) {
+            etEditProfileBloodGroup.setText("");
+        } else {
+            etEditProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
+        }
+        etEditProfileBloodGroup.setHint(getString(R.string.HintBloodGroup));
 
 
         etEditProfileDOB.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
-        etEditProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
+        if (SharedPreferenceUtil.getString(Constants.UserData.UserDOB, "").equalsIgnoreCase("") || SharedPreferenceUtil.getString(Constants.UserData.UserDOB, "").equalsIgnoreCase("null")) {
+            etEditProfileDOB.setText("");
+            etEditProfileDOB.setHint(getString(R.string.HintD_O_B));
+        } else {
+            etEditProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, ""));
+        }
         etEditProfileDOB.setTag(getString(R.string.DateOfBirth));
 
 
-        etEditProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
         etEditProfileLocation.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
-        etEditProfileLocation.setHint(getString(R.string.Location));
+        if (SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, "").equalsIgnoreCase("") || SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, "").equalsIgnoreCase("null")) {
+            etEditProfileLocation.setText("");
+        } else {
+            etEditProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, ""));
+        }
+        etEditProfileLocation.setHint(getString(R.string.HintLocation));
 
         etProfileMobileNumber.setHint(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
         etProfileMobileNumber.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
@@ -397,6 +408,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     private boolean changeFocusIfEmpty(EditText et) {
         if (mDialogAll != null) {
             if (!mDialogAll.isVisible()) {
+                Log.e("clear", "dob");
                 etEditProfileDOB.clearFocus();
             }
         }
@@ -504,7 +516,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         picker.setTextColor(ActivityCompat.getColor(getActivity(), R.color.colorBlack), ActivityCompat.getColor(getActivity(), R.color.colorTransparentGray));
         picker.setSelectedIndex(selectedPosition);
         picker.setSubmitText("Done");
-
         picker.setCancelText("Cancel");
         picker.setCancelTextColor(ActivityCompat.getColor(getActivity(), R.color.colorWhite));
         picker.setSubmitTextColor(ActivityCompat.getColor(getActivity(), R.color.colorWhite));
@@ -522,7 +533,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         picker.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                Log.e("dismiss", "callled");
                 etEditProfileBloodGroup.clearFocus();
             }
         });
@@ -547,10 +557,11 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                 }
             } else if (requestCode == REQUEST_CAMERA) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
                 String imageBase64 =
                         UtilClass.getRealPathFromURI(UtilClass.getImageUri(getActivity(), bitmap), getActivity());
-                uploadPhoto(imageBase64);
+                if (imageBase64 != null) {
+                    uploadPhoto(imageBase64);
+                }
             } else {
                 List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                 if (pathList != null) {
@@ -591,6 +602,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     }
 
     private void uploadPhoto(String imageData) {
+        UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
         File file = new File(imageData);
         HashMap<String, String> params = new HashMap<>();
         params.put("userProfilePicture", file.getAbsoluteFile().toString());
@@ -645,6 +657,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     @Override
     public void onSuccessUploadImage(JSONObject response) {
         Log.e("onSuccess", "called" + response);
+        UtilClass.hideProgress();
         SharedPreferenceUtil.putValue(Constants.UserData.UserProfilePic, response.optJSONObject("response").optString("userProfilePic"));
         SharedPreferenceUtil.save();
         loadProfilePic(response.optJSONObject("response").optString("userProfilePic"));
@@ -654,13 +667,14 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     @Override
     public void onFailUpload(String message) {
         Log.e("onFailed", "called");
+        UtilClass.hideProgress();
     }
+
     private void loadProfilePic(final String url) {
         if (isAdded() && activity != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("string url", "url" + url.toString().trim());
                     Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + url).placeholder(R.drawable.icon_placeholde).error(R.drawable.icon_placeholde).into(ivProfilePhotoSmall);
                     Picasso.with(getActivity()).load(Constants.RequestConstants.BaseUrlForImage + url).placeholder(R.drawable.cover_placeholder).error(R.drawable.cover_placeholder).into(ivProfilePhoto);
                 }
@@ -673,11 +687,8 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
-
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getPhotoFromGallary();
-            } else {
-
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

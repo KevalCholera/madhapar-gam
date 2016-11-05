@@ -64,7 +64,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
             holder.tvEventName.setText(eventObj.optString("eventTitle"));
             holder.tvAddress.setText(eventObj.optString("eventAddress"));
             holder.tvNotInterest.setText(" " + eventObj.optString("cantGo") + " ");
-            holder.tvTime.setText(eventObj.optString("eventFromDate"));
+            holder.tvTime.setText(getDisplayTime(eventObj));
             holder.tvGoing.setText(" " + eventObj.optString("going") + " ");
             holder.tvInterest.setText(" " + eventObj.optString("interested") + " ");
             if (isSelected(eventObj, Constants.DifferentData.GoingStatus)) {
@@ -156,11 +156,22 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
                 }
             });
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+    private String getDisplayTime(JSONObject eventObj) {
+        return getDates(eventObj.optString("eventFromDate")) + " - " + getDates(eventObj.optString("eventToDate"));
+
+    }
+
+    private String getDates(String fromDate) {
+        return   fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13);
+
+
+    }
+
 
     @Override
     public int getItemCount() {

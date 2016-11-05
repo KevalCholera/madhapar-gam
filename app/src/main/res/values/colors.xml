@@ -15,4 +15,6 @@
     <color name="colorTransparentGray">#4000</color>
     <color name="colorGreyProfile">#FF969696</color>
     <color name="colorBlueProfile">#FF5695D8</color>
+    <color name="colorBlue">#1874CD</color>
+    <color name="colorUserBackground">#EEEEEE</color>
 </resources>

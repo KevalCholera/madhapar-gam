@@ -39,8 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/defaultpadding"
-                android:textStyle="bold" />
+                android:textSize="@dimen/text18"/>
 
             <TextView
                 android:id="@+id/tvUserProfession"

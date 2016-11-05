@@ -112,16 +112,15 @@ public class LoginModel implements LoginModelInt {
                 params.put("password", password);
                 params.put("userMobileNo", login);
                 params.put("deviceToken", "12341234123412341234123412341234");
-
                 return params;
             }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
 //                params.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
-                return params;
-            }
+//                return params;
+//            }
         };
 
         loginRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,

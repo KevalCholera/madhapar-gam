@@ -120,6 +120,14 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
 
     @Override
     public void successfulUpdateLike(JSONObject updateObj) {
+        if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentAdded)) {
+            UtilClass.displyMessage(context.getString(R.string.commnetAddad), context, 0);
+        } else if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentEdited)) {
+            UtilClass.displyMessage(context.getString(R.string.commnetUpdate), context, 0);
+        } else if (updateObj.optString("message").equalsIgnoreCase(Constants.DifferentData.CommentDeleted)) {
+            UtilClass.displyMessage(context.getString(R.string.commnetDelete), context, 0);
+        }
+
         if (UtilClass.isInternetAvailabel(context)) {
             if (presenter == null) {
                 presenter = new RequestPresenter();

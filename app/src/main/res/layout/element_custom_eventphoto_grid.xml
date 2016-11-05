@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/margin30"
-                android:background="@drawable/cover_placeholder"
+                android:background="@mipmap/img_event_photo_place_holder"
                 android:scaleType="fitXY"
                 android:src="@drawable/gallary_album_corner"></ImageView>
 

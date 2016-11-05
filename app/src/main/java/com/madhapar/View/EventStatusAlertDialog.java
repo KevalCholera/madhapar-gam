@@ -117,7 +117,7 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
         alertDialog = create();
         alertDialog.show();
         alertDialog.setCancelable(true);
-        alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.alertdialogdesign);
+        alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.alert_dialog_white_border);
         if (mPresenter == null) {
             mPresenter = new EventPresenter();
         }

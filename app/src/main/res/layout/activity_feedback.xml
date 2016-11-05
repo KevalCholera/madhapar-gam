@@ -26,6 +26,7 @@
                 android:layout_marginRight="@dimen/top_margin_large"
                 android:layout_marginTop="@dimen/top_margin_medium"
                 android:background="@drawable/feedback"
+                android:capitalize="words"
                 android:hint="@string/feedbackSubject"
                 android:padding="10dp"
                 android:singleLine="true"

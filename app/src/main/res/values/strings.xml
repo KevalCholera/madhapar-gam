@@ -16,7 +16,7 @@
     <string name="mobileNumberLoginWithCountryCode">254 xxxxx1234</string>
     <string name="mobileNumberLogin">Mobile Number</string>
     <string name="passwordLogin">Password</string>
-    <string name="btnLogin">Log-in</string>
+    <string name="btnLogin">Login</string>
     <string name="forgetPassword">Forget Password</string>
     <string name="newUserSignUp">New here? Sign Up</string>
     <string name="loginLabel">Login</string>
@@ -27,7 +27,7 @@
     <string name="textContact">Enter Your Mobile Number</string>
 
     <string name="signUp">Sign Up</string>
-    <string name="signupButtonText">Sign-Up</string>
+    <string name="signupButtonText">Sign up</string>
     <string name="back">Back</string>
     <string name="recover">Recover</string>
     <string name="cancel">Cancel</string>
@@ -88,7 +88,7 @@
     <string name="fundInfo">More Info</string>
     <string name="profileNameFirst">First Name :</string>
     <string name="profileNameLast">Last Name :</string>
-    <string name="profileNumver">Mobile No :</string>
+    <string name="profileNumver">Mobile No. :</string>
     <string name="profileLocation">Location :</string>
     <string name="profileDOB">D. O. B. :</string>
     <string name="profileMemberShipNo">Membership No. :</string>
@@ -118,14 +118,15 @@
     <string name="lableUserVerify">Verify Otp</string>
     <string name="lableNewsDetailActivity">News</string>
     <string name="lableNewsCommentActivity">Comments</string>
-    <string name="labelNewsComment">Comment</string>
+    <string name="labelNewsComment">Comments</string>
     <string name="labelEventDetail">Event Info</string>
     <string name="labelProfile">Profile</string>
     <string name="labelEventPhotos">Event Photos</string>
     <string name="labelFundRaising">Fund Raising</string>
 
 
-    <!--NewsData-->
+    <!--Location-->
+    <string name="lableLocation">Select Location</string>
     <!--Comment Screen-->
     <string name="SendComment">Send</string>
     <string name="hintAddComment">Add a comment</string>
@@ -152,7 +153,7 @@
 
 
     <string name="titlenews">News Feed</string>
-    <string name="titleEvent">Event Calender</string>
+    <string name="titleEvent">Event Calendar</string>
     <string name="titleProfile">Profile</string>
     <string name="titleNetwork">My Network</string>
     <string name="titlePhotos">Event Photos</string>
@@ -160,8 +161,8 @@
 
     <string name="lableFundRaising">Fund Raising</string>
     <string name="fundRaising">Fund Raising</string>
-    <string name="fundInfoMore">More info</string>
-    <string name="fundInfoLess">Less info</string>
+    <string name="fundInfoMore">More Info</string>
+    <string name="fundInfoLess">Less Info</string>
     <string name="fundFragmentMoreTextSummary">Summary : </string>
 
     <!--FeedBack -->
@@ -192,8 +193,8 @@
     <string name="alertDoneText">Done</string>
     <string name="alertCancelText">Cancel</string>
     <string name="alertSelectPic">Select</string>
-    <string name="takePhoto">Take photo</string>
-    <string name="selectYourPhoto">Select your photo</string>
+    <string name="takePhoto">Camera</string>
+    <string name="selectYourPhoto">Photo Library</string>
     <string name="selectSources">Select Source</string>
 
 
@@ -213,12 +214,20 @@
 
     <!--UserFragment-->
     <string name="email">Email (Optional)</string>
-    <string name="facebook">FB Username(Optional)</string>
+    <string name="facebook">FB Username (Optional)</string>
     <string name="BloodGroop">Blood Group</string>
     <string name="DateOfBirth">D.O.B.</string>
     <string name="Location">Location</string>
     <string name="FirstName">First Name</string>
     <string name="LastName">Last Name</string>
+    <string name="HintD.O.B">D.O.B. (optional)</string>
+    <string name="HintLocation">Location (optional)</string>
+    <string name="HintBloodGroup">Blood Group (optional)</string>
+
+    <!--LikeCommentUpdate-->
+    <string name="commnetAddad">Comment added.</string>
+    <string name="commnetUpdate">Comment edited.</string>
+    <string name="commnetDelete">Comment deleted.</string>
 
 
 </resources>

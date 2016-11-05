@@ -133,6 +133,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
                 context.startActivity(intent);
             }
         });
+        holder.tvNewsDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("NewsData", newsObj);
+                context.startActivity(intent);
+            }
+        });
         try {
             String newsImages = newsObj.getNewsImageArray();
             JSONArray imageArray = new JSONArray(newsImages);

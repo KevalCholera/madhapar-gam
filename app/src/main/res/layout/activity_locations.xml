@@ -31,6 +31,7 @@
                 android:hint="@string/searchlocation"
                 android:inputType="textCapSentences"
                 android:paddingLeft="40dp"
+                android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorgreySearch" />
 
             <ImageView

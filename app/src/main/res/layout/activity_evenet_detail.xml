@@ -95,6 +95,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/margin_small"
                         android:layout_weight="1"
+                        android:textAllCaps="false"
                         android:background="@drawable/buttonshare"
                         android:text="@string/share"
                         android:textSize="12sp" />
@@ -109,7 +110,7 @@
 
 
             <LinearLayout
-                android:id="@+id/llNewsDetailDateTime"
+                android:id="@+id/llNewsDetailFromDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llNewsDetailTitle"
@@ -120,20 +121,41 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvEventDate"
+                    android:id="@+id/tvEventFromDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="@dimen/text14" />
 
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/viewHeightNewsDetail"
+                android:layout_below="@+id/llNewsDetailDateTime"
+                android:background="@color/colorNewsDetailView" />
+
+
+            <LinearLayout
+                android:id="@+id/llNewsDetailToDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llNewsDetailTitle"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/magin_large"
+                android:layout_marginRight="@dimen/magin_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/tvEventTime"
+                    android:id="@+id/tvEventToDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_small"
                     android:text=""
                     android:textSize="@dimen/text14" />
+
             </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"

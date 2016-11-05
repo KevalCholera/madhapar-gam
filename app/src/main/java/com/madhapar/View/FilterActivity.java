@@ -45,6 +45,7 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
     @BindView(R.id.ic_search)
     ImageView ic_search;
 
+
     @OnClick(R.id.tvClearCatagory)
     void clearCatagory() {
         SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
@@ -103,8 +104,6 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
                 } else {
                     newsCatagoryAdapter.updateCatagoryList(catagories);
                 }
-            } else {
-
             }
         }
     }

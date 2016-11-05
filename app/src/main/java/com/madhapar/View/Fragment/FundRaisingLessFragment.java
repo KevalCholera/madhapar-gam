@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.UtilClass;
 import com.triggertrap.seekarc.SeekArc;
 
 import org.json.JSONException;
@@ -39,12 +40,10 @@ public class FundRaisingLessFragment extends BaseFragment {
             String projectDetail = getArguments().getString("projectDetail", "");
             try {
                 JSONObject projectDetailObj = new JSONObject(projectDetail);
-                int goalValue = (int) projectDetailObj.optLong("projectTotalCost");
-                tvGoalAmount.setText("₹" + goalValue);
-                Log.e("value", "goalValue" + goalValue);
-                int raisedValue = (int) projectDetailObj.optLong("projectTotalRaised");
-                tvRaisedAmount.setText(raisedValue + "");
-                Log.e("value", "raisedValue" + raisedValue);
+                long goalValue = (int) projectDetailObj.optDouble("projectTotalCost");
+                tvGoalAmount.setText("₹" + UtilClass.formatValue(projectDetailObj.optDouble("projectTotalCost")));
+                long raisedValue = (int) projectDetailObj.optDouble("projectTotalRaised");
+                tvRaisedAmount.setText(UtilClass.formatValue(projectDetailObj.optDouble("projectTotalRaised")) + " ");
                 try {
                     per = (raisedValue * 100 / goalValue);
                     seekArc.setProgress((int) per);

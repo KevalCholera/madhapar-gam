@@ -112,7 +112,7 @@ public class CustomGrid extends BaseAdapter {
         });
 
         holder.tvAlbumName.setText(photoArray.optJSONObject(position).optString("eventTitle"));
-        String date = photoArray.optJSONObject(position).optString("eventFromDate").substring(0, 12) + "-" + photoArray.optJSONObject(position).optString("eventToDate").substring(0, 12);
+        String date = photoArray.optJSONObject(position).optString("eventFromDate").substring(0, 12) + " - " + photoArray.optJSONObject(position).optString("eventToDate").substring(0, 12);
         holder.tvAlbumDate.setText(date);
         Target target = new Target() {
             @Override
@@ -137,7 +137,7 @@ public class CustomGrid extends BaseAdapter {
             }
         };
         targets.add(target);
-        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + photoArray.optJSONObject(position).optString("coverImage")).placeholder(R.mipmap.ic_user_placeholder).error(R.mipmap.ic_user_place_holder).into(target);
+        Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + photoArray.optJSONObject(position).optString("coverImage")).placeholder(R.mipmap.img_event_photo_place_holder).error(R.mipmap.img_event_photo_place_holder).into(target);
 
 
         return view;

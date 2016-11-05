@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
+import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.MainDrawerListAdapter;
 
 import butterknife.BindView;
@@ -119,13 +120,12 @@ public class MainActivity extends BaseActivity implements ViewInt, View.OnClickL
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
+        UtilClass.displyMessage("Please click BACK again to exit", this, 0);
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

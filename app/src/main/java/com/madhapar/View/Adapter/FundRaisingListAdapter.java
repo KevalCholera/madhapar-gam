@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.smartsense.newproject.R;
+import com.madhapar.Util.UtilClass;
 import com.madhapar.View.FundRaisingDetailActivity;
 
 import org.json.JSONArray;
@@ -44,6 +46,7 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
     public void onBindViewHolder(FundRaisingViewHolder holder, int position) {
         final JSONObject projectObj = projectList.optJSONObject(position);
         if (projectObj != null) {
+            Log.e("project", "obj" + projectObj);
             holder.tvFundRaisingProjectName.setText(projectObj.optString("projectName"));
             JSONObject location = projectObj.optJSONObject("newsLocation");
             if (location != null) {
@@ -51,8 +54,13 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
             }
             String projectDate = projectObj.optString("projectFromDate") + " - " + projectObj.optString("projectToDate");
             holder.tvFundRaisingProjectDate.setText(projectDate);
-            holder.tvFundRaisingProjectGoal.setText("Goal : " + "₹ " + projectObj.optString("projectTotalCost"));
-            holder.tvFundRaisingProjectRaised.setText("Raised : " + "₹ " + projectObj.optString("projectTotalRaised"));
+            try {
+                holder.tvFundRaisingProjectGoal.setText("Goal : " + "₹ " + UtilClass.formatValue(projectObj.optDouble("projectTotalCost")));
+                holder.tvFundRaisingProjectRaised.setText("Raised : " + "₹ " + UtilClass.formatValue(projectObj.optDouble("projectTotalRaised")));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             holder.llFundRaisingProject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
