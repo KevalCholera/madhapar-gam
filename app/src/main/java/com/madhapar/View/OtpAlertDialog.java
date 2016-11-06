@@ -71,7 +71,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
         if (code4.getText().toString().trim().length() == 1) {
 
             String insertedOtp = code1.getText().toString().trim() + code2.getText().toString().trim() + code3.getText().toString().trim() + code4.getText().toString().trim();
-            Log.e("otp", "inserted" + insertedOtp);
+
             // Log.e("otp", this.otpObj.optString("otpValue"));
 //            if (insertedOtp.equals(this.otpObj.optString("otpValue"))) {
 //                if (UtilClass.isInternetAvailabel(activity)) {
@@ -172,7 +172,7 @@ public class OtpAlertDialog extends AlertDialog.Builder implements OtpAlertDialo
     @Override
     public void otpVerificationFail(String message) {
         UtilClass.hideProgress();
-        Log.e("varificationF", "message" + message);
+
         UtilClass.displyMessage(message, activity, 0);
     }
 

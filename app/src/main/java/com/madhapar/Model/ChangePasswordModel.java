@@ -61,13 +61,13 @@ public class ChangePasswordModel implements ChangePasswordModelInt {
                         e.printStackTrace();
                     }
                 }
-                Log.e("changePassword", "request" + response);
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onChangePasswordRequestError();
-                Log.e("changePassword", "request" + error);
+
             }
         }) {
             @Override

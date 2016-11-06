@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -101,6 +102,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     ImageView ivProfilePhoto;
     @BindView(R.id.ivEditIcon)
     ImageView ivEditIcon;
+
 
     @OnClick(R.id.ivEditIcon)
     void updateProfilePic() {
@@ -381,6 +383,8 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         this.activity = getActivity();
         loadProfilePic(SharedPreferenceUtil.getString(Constants.UserData.UserProfilePic, ""));
         presenter = new PresenterClass();
+
+
         return view;
     }
 
@@ -408,7 +412,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     private boolean changeFocusIfEmpty(EditText et) {
         if (mDialogAll != null) {
             if (!mDialogAll.isVisible()) {
-                Log.e("clear", "dob");
+
                 etEditProfileDOB.clearFocus();
             }
         }
@@ -467,7 +471,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                             etEditProfileDOB.setText(selectedDate);
                             etEditProfileDOB.clearFocus();
                             updateDateDateOfBirth();
-                            Log.e("Selected", "date" + selectedDate);
                         }
                     }
                 })
@@ -540,6 +543,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CONSTANT) {
                 try {
@@ -557,15 +561,15 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                 }
             } else if (requestCode == REQUEST_CAMERA) {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                String imageBase64 =
-                        UtilClass.getRealPathFromURI(UtilClass.getImageUri(getActivity(), bitmap), getActivity());
-                if (imageBase64 != null) {
+                if (bitmap != null) {
+                    String imageBase64 =
+                            UtilClass.getRealPathFromURI(UtilClass.getImageUri(getActivity(), bitmap), getActivity());
                     uploadPhoto(imageBase64);
                 }
+
             } else {
                 List<String> pathList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                 if (pathList != null) {
-                    Log.e("selected image", "path+" + pathList.get(0));
                     uploadPhoto(pathList.get(0));
                 }
             }
@@ -575,6 +579,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
 
     private void updatePhoto() {
+
         final CharSequence[] items = {getResources().getString(R.string.takePhoto), getResources().getString(R.string.selectYourPhoto), getResources().getString(R.string.cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getResources().getString(R.string.selectSources));
@@ -582,10 +587,19 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+
                 if (items[item].equals(getResources().getString(R.string.takePhoto))) {
+
+
                     whichSelect = REQUEST_CAMERA;
-                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
+                    if (!checkPermission()) {
+                        requestPermission();
+                    } else {
+                        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, REQUEST_CAMERA);
+                    }
+
+
                 } else if (items[item].equals(getResources().getString(R.string.selectYourPhoto))) {
                     whichSelect = SELECT_FILE;
                     if (!checkPermission()) {
@@ -656,7 +670,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
     @Override
     public void onSuccessUploadImage(JSONObject response) {
-        Log.e("onSuccess", "called" + response);
         UtilClass.hideProgress();
         SharedPreferenceUtil.putValue(Constants.UserData.UserProfilePic, response.optJSONObject("response").optString("userProfilePic"));
         SharedPreferenceUtil.save();
@@ -666,7 +679,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
 
     @Override
     public void onFailUpload(String message) {
-        Log.e("onFailed", "called");
         UtilClass.hideProgress();
     }
 
@@ -693,4 +705,5 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }

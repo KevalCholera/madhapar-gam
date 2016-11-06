@@ -54,7 +54,7 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
     public void changeStatusGoingCount() {
         try {
             if (isValidFamilyMember(etStatusDialogCount.getText().toString())) {
-                Log.e("AlertCalss", canCreateNewStatus(eventObj));
+
                 if (canCreateNewStatus(eventObj).equalsIgnoreCase("not")) {
                     mPresenter.createEventStatus(eventObj.optString("eventId"), evetnStatusType, etStatusDialogCount.getText().toString().trim(), createCallback);
                 } else {

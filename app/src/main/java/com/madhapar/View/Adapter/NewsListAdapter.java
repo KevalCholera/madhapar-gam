@@ -56,7 +56,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     private HomeFragment hf;
     private LinearLayout placeHolder;
 
-
     public NewsListAdapter(Context context, List<NewsObject> newsList, RecyclerView rvNewsList, LinearLayoutManager rvManager, HomeFragment hf, LinearLayout placeHolder) {
         this.rvNewsList = rvNewsList;
         this.newsList = newsList;
@@ -66,7 +65,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         this.hf = hf;
         this.placeHolder = placeHolder;
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -278,6 +276,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
 
     public void updateAdapter(List<NewsObject> newsList) {
         UtilClass.hideProgress();
+
         this.newsList = newsList;
         this.tempList = newsList;
         notifyDataSetChanged();
@@ -295,14 +294,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         notifyDataSetChanged();
     }
 
-
     private class NewsFilter extends Filter {
         private NewsListAdapter newsListAdapter;
 
         public NewsFilter(NewsListAdapter newsListAdapter) {
             this.newsListAdapter = newsListAdapter;
         }
-
 
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
@@ -332,9 +329,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
     }
 
     private void applyFilter() {
-
         String selectedValue = SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "clear");
-
         if (selectedValue.equalsIgnoreCase("clear")) {
             updateAdapter();
         } else {

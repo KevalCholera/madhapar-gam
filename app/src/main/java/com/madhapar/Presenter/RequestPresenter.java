@@ -156,7 +156,7 @@ public class RequestPresenter implements RequestPresenterInt, NetworkModelInt.Ne
 
     @Override
     public void onSuccessNewsDetail(NewsObject newsObject) {
-        Log.e("onPresenter", "newsDetail" + newsObject);
+
         newsDetailCallback.onSuccessNewsDetail(newsObject);
     }
 

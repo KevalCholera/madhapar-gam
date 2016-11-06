@@ -67,7 +67,7 @@ public class MultiPartRequest extends StringRequest {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         MultipartEntity multipartEntity = new MultipartEntity();
         multipartEntity.addPart("userProfilePicture", new FileBody(file));
-        Log.e("file","add"+file.getAbsolutePath());
+
         try {
             bos.write(multipartEntity.toString().getBytes());
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class MultiPartRequest extends StringRequest {
     }
 
     public Map<String, File> getFileUploads() {
-        Log.e("file", "getFile called");
+
         return fileUploads;
     }
 
@@ -104,7 +104,7 @@ public class MultiPartRequest extends StringRequest {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        Log.e("request", "getHeader Called");
+
         return headers;
     }
 
@@ -115,7 +115,7 @@ public class MultiPartRequest extends StringRequest {
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         try {
-            Log.e("network", "response" + response);
+
             String jsonString =
                     new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             return Response.success(new String(jsonString),

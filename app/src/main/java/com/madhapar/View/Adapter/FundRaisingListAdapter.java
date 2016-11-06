@@ -46,7 +46,7 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
     public void onBindViewHolder(FundRaisingViewHolder holder, int position) {
         final JSONObject projectObj = projectList.optJSONObject(position);
         if (projectObj != null) {
-            Log.e("project", "obj" + projectObj);
+
             holder.tvFundRaisingProjectName.setText(projectObj.optString("projectName"));
             JSONObject location = projectObj.optJSONObject("newsLocation");
             if (location != null) {

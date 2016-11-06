@@ -29,7 +29,7 @@ public class SignUpModel implements SignUpModelInt {
 
     @Override
     public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnSignUpFinishedListener listener, AppCompatActivity activity) {
-        Log.e("Password", password);
+
         if (TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(familyMember) && TextUtils.isEmpty(lastName)) {
             listener.onSignUpRequiredFieldError();
         } else if (TextUtils.isEmpty(firstName)) {
@@ -93,7 +93,7 @@ public class SignUpModel implements SignUpModelInt {
                         e.printStackTrace();
                     }
                 }
-                Log.e("signup", "response" + response);
+
             }
         }, new Response.ErrorListener() {
             @Override

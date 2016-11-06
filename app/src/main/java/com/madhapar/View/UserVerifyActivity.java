@@ -33,7 +33,7 @@ public class UserVerifyActivity extends BaseActivity implements ForgetPasswordVi
 
     @Override
     public void forgetPasswordValidateResult(int check) {
-        Log.e("verify", "check0" + check);
+
     }
 
     @Override

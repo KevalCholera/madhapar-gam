@@ -96,7 +96,6 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
     @Override
     public void forgotPasswordRequestError() {
         UtilClass.hideProgress();
-        Log.e("inActivity", "errorCalled");
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), ForgetPasswordActivity.this, Toast.LENGTH_SHORT);
     }
 

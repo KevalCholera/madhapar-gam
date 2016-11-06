@@ -54,7 +54,7 @@ public class VolleyStringRequest {
 			@Override
 			public void onResponse(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e("OnVolleySuccess", arg0);
+
 				try {
 					mVolleyResponseListener.OnSuccessListener(new JSONObject(arg0));
 				} catch (JSONException e) {
@@ -83,12 +83,12 @@ public class VolleyStringRequest {
 	public void Execute(RequestQueue queue){
 		Map<String, String> Params  = mVolleyResponseListener.OnPreExecute();
 		
-		Log.e("Api", this.url);
+
 		if(Params!=null && Params.size()>0){
 			
 			try{
 				for(String key : Params.keySet()) {
-					Log.e("params", key + "=>" + Params.get(key));
+
 				}
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -96,7 +96,7 @@ public class VolleyStringRequest {
 			}
 			
 		}else{
-			Log.e("Params", "Null");
+
 		}
 		
 		

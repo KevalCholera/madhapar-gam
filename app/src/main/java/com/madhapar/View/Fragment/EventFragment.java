@@ -159,7 +159,7 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            Log.e("HomeFragment", "onActivity" + "result" + requestCode);
+
             if (requestCode == REQUEST_CODE_FOR_EVENT_STATUS) {
                 if (UtilClass.isInternetAvailabel(mContext)) {
                     if (presenterClass == null) {

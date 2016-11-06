@@ -72,7 +72,7 @@ public class UtilClass {
         context.setTheme(R.style.NewTStyle);
         Toast.makeText(context, msg, toastLenght).show();
         context.setTheme(R.style.AppTheme);
-        Log.e(context.getPackageName(), "Log:  " + msg + "");
+
     }
 
     public static void showProgress(Context activity, String message) {
@@ -106,7 +106,7 @@ public class UtilClass {
             try {
                 pDialog.cancel();
                 pDialog.dismiss();
-                Log.e("progress", "dismiss");
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -309,11 +309,15 @@ public class UtilClass {
     }
 
     static public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-
-        // inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            // inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+            return Uri.parse(path);
+        } catch (Exception e) {
+            e.getMessage();
+            return Uri.parse("");
+        }
     }
 
     static public String getRealPathFromURI(Uri uri, Activity a) {

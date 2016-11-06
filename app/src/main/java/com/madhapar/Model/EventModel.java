@@ -75,7 +75,7 @@ public class EventModel implements EventModelInt {
             public void onResponse(String response) {
                 try {
                     JSONObject eventObject = new JSONObject(response);
-                    Log.e("event", "response" + response);
+
                     if (eventObject.optInt("status") == Constants.ResponseCode.SuccessCode) {
                         if (eventObject.has("response")) {
                             mEventListener.onSuccessEventList(eventObject.optJSONArray("response"));
@@ -121,7 +121,7 @@ public class EventModel implements EventModelInt {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.e("eventStatusUpdate", response.toString());
+
                     if (response != null) {
                         JSONObject eventStautsObj = new JSONObject(response);
                         if (eventStautsObj != null) {
@@ -175,7 +175,7 @@ public class EventModel implements EventModelInt {
                 if (response != null) {
                     try {
                         JSONObject statusObj = new JSONObject(response);
-                        Log.e("eventStatusList", "response" + statusObj);
+
                         if (statusObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
                             mEventStatusListListener.onSuccessEventStatusList(statusObj.optJSONArray("response"));
                         } else {
@@ -216,7 +216,7 @@ public class EventModel implements EventModelInt {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
-                    Log.e("eventStatusUpdate", "response" + response);
+
                     try {
                         JSONObject updateObj = new JSONObject(response);
                         if (updateObj != null) {
@@ -249,7 +249,7 @@ public class EventModel implements EventModelInt {
                 Map<String, String> params = new HashMap<>();
                 params.put("eventUserCount", count);
                 params.put("eventStatusType", eventStatus);
-                Log.e("params", "called" + params);
+
                 return params;
             }
         };

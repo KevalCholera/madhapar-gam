@@ -55,7 +55,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             try {
                 JSONObject profieObj = new JSONObject(profileString);
                 if (profieObj != null) {
-                    Log.e("profiel", "prfiel" + profieObj);
+
                     tvProfilFirstName.setText(profieObj.optString("userFirstName"));
                     tvProfileLastName.setText(profieObj.optString("userLastName"));
                     tvProfileBloddGroup.setText(profieObj.optString("userBloodGroup").equalsIgnoreCase("") ? "N/A" : profieObj.optString("userBloodGroup"));

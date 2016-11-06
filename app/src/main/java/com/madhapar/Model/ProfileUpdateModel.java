@@ -42,7 +42,7 @@ public class ProfileUpdateModel implements ProfileUpdateModelInt {
                     e.printStackTrace();
                 }
                 mProfileUpdateListener.onSuccessUpdateProfile("update");
-                Log.e("response", "profileUpdate" + response);
+
             }
         }, new Response.ErrorListener() {
             @Override

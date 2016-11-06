@@ -27,7 +27,7 @@ import java.util.Map;
 public class FeedbackModel implements FeedbackModelInt {
     @Override
     public void feedback(final String subject, final String feedback, final OnFeedbackPostListener listener) {
-        Log.e("feedback", "valid " + feedback);
+
         if (TextUtils.isEmpty(subject) && TextUtils.isEmpty(feedback)) {
             listener.onFeedbackFieldRequiredError();
         } else if (TextUtils.isEmpty(subject)) {
@@ -65,7 +65,7 @@ public class FeedbackModel implements FeedbackModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("error", "erroro" + error.getMessage());
+
                 listener.onFailFeedbackRequest();
             }
         }) {

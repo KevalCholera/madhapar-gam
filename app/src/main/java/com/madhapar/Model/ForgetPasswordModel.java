@@ -47,7 +47,7 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
 
     @Override
     public void sendOtp(final String contactNumber, final onSendOtpListener listener, int type) {
-        Log.e("request", "1");
+
         if (TextUtils.isEmpty(contactNumber)) {
             listener.onForgetContactNumberError();
         } else if (!(contactNumber.toString().length() > 7 && contactNumber.toString().length() < 14)) {
@@ -65,7 +65,7 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
         StringRequest otpRequest = new StringRequest(Request.Method.POST, UtilClass.getOtpUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("otpSend", "response" + response);
+
                 if (response != null) {
                     try {
                         JSONObject otpObj = new JSONObject(response);
@@ -116,7 +116,7 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
         StringRequest verifyOtpRequest = new StringRequest(Request.Method.PUT, UtilClass.getVerifyOtpUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("otpVerification", "response" + response);
+
                 if (response != null) {
                     try {
                         JSONObject verifyObjet = new JSONObject(response);
@@ -186,7 +186,7 @@ public class ForgetPasswordModel implements ForgetPasswordModelInt {
             public void onResponse(String response) {
                 if (response != null) {
                     try {
-                        Log.e("otpUserVerified", "response" + response);
+
                         JSONObject verifyObject = new JSONObject(response);
                         if (verifyObject.optInt("status") == Constants.ResponseCode.OtpVerificationSuccess) {
                             listener.onOtpVerify(verifyObject);

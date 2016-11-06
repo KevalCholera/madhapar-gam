@@ -70,19 +70,14 @@ public class WebServiceUtil extends AsyncTask<String, Integer, String> {
                 String value = entry.getValue();
                 mu.addFormField(key, value);
             }
-
             if (uploadFile) {
-
                 for (Map.Entry<String, String> entry : fileValues.entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
                     File file = new File(value);
                     mu.addFilePart(key, file);
-
                 }
-
             }
-
             response = mu.finish();
 
 
@@ -99,6 +94,7 @@ public class WebServiceUtil extends AsyncTask<String, Integer, String> {
     }
 
     protected void onPostExecute(String result) {
+
         if (result != null) {
             try {
                 JSONArray picArray = new JSONArray(result);
@@ -110,9 +106,11 @@ public class WebServiceUtil extends AsyncTask<String, Integer, String> {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                uploadInterface.onFailUpload("");
             }
         }
-        Log.e("resonse", "result" + result);
+        uploadInterface.onFailUpload("");
+
 
     }
 

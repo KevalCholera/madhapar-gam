@@ -32,7 +32,7 @@ public class EventPhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_photo);
         ButterKnife.bind(this);
         String eventPotos = getIntent().getStringExtra("eventPhotos");
-        Log.e("eventPhotos", "e" + eventPotos);
+
         fm = getSupportFragmentManager();
         if (eventPotos != null) {
             try {

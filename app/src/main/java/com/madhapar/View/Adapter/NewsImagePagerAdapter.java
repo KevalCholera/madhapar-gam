@@ -33,7 +33,7 @@ import java.util.List;
 public class NewsImagePagerAdapter extends PagerAdapter {
     private JSONArray imageArray;
     private Context context;
-//    Target target;
+    //    Target target;
     private ImageView imageView;
     final List<Target> targets = new ArrayList<Target>();
 
@@ -56,7 +56,7 @@ public class NewsImagePagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        Log.e("imageArray", "called" + imageArray);
+
         View view = inflater.inflate(R.layout.element_news_pager_image, container, false);
         if (context instanceof NewsDetailActivity) {
             imageView = (ImageView) view.findViewById(R.id.ivNewsDetailImagePager);
@@ -93,13 +93,22 @@ public class NewsImagePagerAdapter extends PagerAdapter {
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) {
                         targets.remove(this);
-                        Log.e("onBitmap", "fail");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            imageView.setBackground(context.getResources().getDrawable(R.mipmap.img_news_detail_place_holder));
+                        } else {
+                            imageView.setBackgroundDrawable(context.getResources().getDrawable(R.mipmap.img_news_detail_place_holder));
+                        }
+
 
                     }
 
                     @Override
                     public void onPrepareLoad(Drawable placeHolderDrawable) {
-
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            imageView.setBackground(context.getResources().getDrawable(R.mipmap.img_news_detail_place_holder));
+                        } else {
+                            imageView.setBackgroundDrawable(context.getResources().getDrawable(R.mipmap.img_news_detail_place_holder));
+                        }
 
                     }
                 };

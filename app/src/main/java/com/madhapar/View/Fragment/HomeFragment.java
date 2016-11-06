@@ -171,7 +171,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
                 }
             }
         } else {
-            Log.e("onFailRequest", "visi");
+
             updateViews(false);
 //            srlNewsList.setVisibility(View.GONE);
 //            llNewsListPlaceholder.setVisibility(View.VISIBLE);
@@ -181,7 +181,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     @Override
     public void onFailRequest() {
         if (isAdded() && activity != null) {
-            Log.e("onFailRequest", "newsList");
+
             if (srlNewsList.isRefreshing()) {
                 srlNewsList.setRefreshing(false);
             }

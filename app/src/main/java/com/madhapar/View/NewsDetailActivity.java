@@ -109,7 +109,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
             Uri imageUri = Uri.parse(path);
             shareImage(imageUri);
-            Log.e("path", "share" + imageUri);
+
         } else {
             requestPermission();
         }

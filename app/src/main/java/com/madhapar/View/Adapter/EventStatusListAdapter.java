@@ -29,7 +29,7 @@ public class EventStatusListAdapter extends RecyclerView.Adapter<EventStatusList
 
     public EventStatusListAdapter(Context context, JSONArray jsonArray) {
         this.goingListArry = jsonArray;
-        Log.e("crete", "list" + jsonArray.length());
+
         this.context = context;
     }
 
@@ -49,7 +49,7 @@ public class EventStatusListAdapter extends RecyclerView.Adapter<EventStatusList
                 String userName = userObj.optString("userFirstName") + userObj.optString("userLastName");
                 holder.tvStatusPersonName.setText(userName);
                 String picUrl = userObj.optString("userProfilePic");
-                Log.e("picUrl","picture"+picUrl);
+
                 if (picUrl != null) {
                     Picasso.with(context).load(Constants.RequestConstants.BaseUrlForImage + picUrl).error(R.drawable.ic_network_place_holder).placeholder(R.drawable.ic_network_place_holder).into(holder.ivStautsUserImage);
                 }

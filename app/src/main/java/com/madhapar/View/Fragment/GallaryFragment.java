@@ -109,7 +109,7 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         if (isAdded() && getActivity() != null) {
             UtilClass.hideProgress();
             this.albumArray = eventArray;
-            Log.e("albumArray in Fragment", albumArray.toString());
+
             radioAlbumSelector.performClick();
         }
 //        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);

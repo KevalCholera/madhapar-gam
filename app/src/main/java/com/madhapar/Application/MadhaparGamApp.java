@@ -26,6 +26,7 @@ public class MadhaparGamApp extends Application {
     public void onCreate() {
         super.onCreate();
         OneSignal.startInit(this).init();
+        OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
         SharedPreferenceUtil.init(this);
         appInstnace = this;
     }

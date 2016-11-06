@@ -49,13 +49,13 @@ public class VolleyCustomStringRequest extends StringRequest {
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        Log.e("get", "body called");
+
         return super.getBody();
     }
 
     @Override
     public String getBodyContentType() {
-        Log.e("get", "body content typec alled");
+
         return super.getBodyContentType();
     }
 
@@ -66,7 +66,7 @@ public class VolleyCustomStringRequest extends StringRequest {
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         mStatusCode = response.statusCode;
-        Log.e("StatusCode", "" + mStatusCode);
+       // Log.e("StatusCode", "" + mStatusCode);
         return super.parseNetworkResponse(response);
     }
 
@@ -74,7 +74,7 @@ public class VolleyCustomStringRequest extends StringRequest {
     public void deliverError(VolleyError error) {
         // TODO Auto-generated method stub
 
-        Log.e("Deliver Error", "True");
+       // Log.e("Deliver Error", "True");
         if (error == null || error.getMessage() == null || error.getMessage().trim().length() == 0) {
             error = new VolleyError(VolleySetup.ErrorMessage);
         }

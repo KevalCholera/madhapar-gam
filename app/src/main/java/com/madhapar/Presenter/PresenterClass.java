@@ -212,7 +212,7 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
     @Override
     public void onSignupPasswordLengthError() {
         signupInt.signUpValidateResult(UtilClass.PasswordLengthError);
-        Log.e("password", "length");
+
     }
 
     @Override

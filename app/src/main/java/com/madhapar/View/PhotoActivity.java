@@ -39,7 +39,7 @@ public class PhotoActivity extends BaseActivity {
         } else {
             getSupportActionBar().setTitle("Event Photos");
         }
-        Log.e("photoActivity", "images" + images);
+
         if (images != null) {
             try {
                 JSONArray imageArray = new JSONArray(images);

@@ -73,7 +73,7 @@ public class CustomGrid extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        Log.e("adapter", "position" + position);
+
         final ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.element_custom_eventphoto_grid, viewGroup, false);

@@ -56,7 +56,7 @@ public class MainModelClass implements MainModelInt {
             fragment = new NetworkFragment();
         } else if (fragmentNo == 5) {
             fragment = new MoreFragment();
-        }else if (fragmentNo == 4){
+        } else if (fragmentNo == 4) {
             fragment = new GallaryFragment();
         }
         return fragment;

@@ -228,6 +228,8 @@
     <string name="commnetAddad">Comment added.</string>
     <string name="commnetUpdate">Comment edited.</string>
     <string name="commnetDelete">Comment deleted.</string>
+    <string name="permission_message">We need to write on disk to use camera.</string>
+
 
 
 </resources>

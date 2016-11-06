@@ -26,17 +26,18 @@ public class GcmIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
         Bundle extras = intent.getExtras();
         try {
             if (intent.getExtras() != null) {
                 JSONObject pushData = new JSONObject(extras.get("custom").toString());
                 int pushType = 0;
-                Log.e("push", extras.toString());
+
                 if (pushData != null) {
                     JSONObject aObj = pushData.optJSONObject("a");
                     if (aObj != null) {
                         pushType = aObj.optInt("pushType");
-                        Log.e("pushType", "push" + pushType);
+
                     }
                     String i = pushData.optString("i");
                 }

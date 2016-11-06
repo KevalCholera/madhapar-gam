@@ -15,15 +15,13 @@ public class Constants {
         public static final String CommentAdded = "Done";
         public static final String CommentEdited = "Updated";
         public static final String CommentDeleted = "Removed";
-
-
     }
 
     public static class RequestConstants {
-//        public static String BaseUrl = "http://139.59.29.185/api/";
-//        public static String BaseUrlForImage = "http://139.59.29.185";
-                public static String BaseUrl = "http://192.168.0.107:8000/api/";
-        public static String BaseUrlForImage = "http://192.168.0.107:8000";
+        public static String BaseUrl = "http://139.59.29.185/api/";
+        public static String BaseUrlForImage = "http://139.59.29.185";
+//                public static String BaseUrl = "http://192.168.0.105:8000/api/";
+//        public static String BaseUrlForImage = "http://192.168.0.105:8000";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String NewsCategoryListUrl = BaseUrl + "categories/";

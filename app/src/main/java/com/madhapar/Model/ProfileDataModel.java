@@ -35,7 +35,7 @@ public class ProfileDataModel implements ProfileDataModelInt {
                    if (response != null) {
                        try {
                            JSONObject userObject = new JSONObject(response);
-                           Log.e("response", "userlist" + response);
+
                            if (userObject != null) {
                                if (userObject.optInt("status") == Constants.ResponseCode.SuccessCode) {
                                    JSONArray userList = userObject.optJSONArray("response");

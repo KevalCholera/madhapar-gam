@@ -94,7 +94,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
             String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
             Uri imageUri = Uri.parse(path);
             shareImage(imageUri);
-            Log.e("path", "share" + imageUri);
+
         } else {
             requestPermission();
         }
@@ -191,7 +191,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         if (getIntent().getStringExtra("event") != null) {
             try {
                 eventObj = new JSONObject(getIntent().getStringExtra("event"));
-                Log.e("eventObj", "eventOb" + eventObj);
+
                 setUpView();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -226,7 +226,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     }
 
     private void setUpView() {
-        Log.e("eventObj", eventObj.toString());
+
         if (eventObj != null) {
             tvEventDetailTitle.setText(eventObj.optString("eventTitle"));
             tvEventFromDate.setText(eventObj.optString("eventFromDate"));
@@ -304,7 +304,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Log.e("onActivity", "result called");
+
             if (UtilClass.isInternetAvailabel(this)) {
                 if (mPresenter == null) {
                     mPresenter = new EventPresenter();

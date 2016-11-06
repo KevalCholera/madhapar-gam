@@ -313,7 +313,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
         boolean isValid = false;
         try {
             String fromDate = eventObj.optString("eventFromDate");
-            Log.e("Date", "date" + fromDate);
+
             String finalDate = fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13) + fromDate.substring(16, 18) + ":" + fromDate.substring(19, 21) + ":" + "00" + " " + fromDate.substring(22);
             Date date = sdf.parse(finalDate);
             long Eventtime = date.getTime();

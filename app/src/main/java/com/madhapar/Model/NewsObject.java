@@ -19,7 +19,7 @@ public class NewsObject implements Serializable {
     }
 
     public void setNewsCatagory(String newsCatagory) {
-        Log.e("newsCatagory", "created" + newsCatagory);
+
         this.newsCatagory = newsCatagory;
     }
 
