@@ -19,10 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
 import com.madhapar.Presenter.RequestPresenter;
 import com.madhapar.PushUtil.WakeLocker;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsListAdapter;
@@ -34,7 +34,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * Created by smartsense on 22/09/16.
  */

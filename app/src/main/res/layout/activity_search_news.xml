@@ -70,16 +70,32 @@
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorPrimary" />
 
-
-    <ListView
-        android:id="@+id/lvNewsFilter"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/viewFilterSearch"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
+        android:layout_below="@+id/viewFilterSearch">
 
+        <ListView
+            android:id="@+id/lvNewsFilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnDoneFilter"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+
+        <Button
+            android:id="@+id/btnDoneFilter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/FilterDoneHeight"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/DoneFilter"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text18" />
+    </RelativeLayout>
 </RelativeLayout>

@@ -3,24 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@color/colorWhite"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.madhapar.Util.ExpandableGridView
+        android:id="@+id/grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
-        android:orientation="vertical">
-
-        <GridView
-            android:id="@+id/grid"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:columnWidth="@dimen/ColoumnWidth"
-            android:gravity="center"
-            android:numColumns="@integer/default_title_indicator_footer_indicator_style"
-            android:scrollbars="none"
-            android:stretchMode="columnWidth" />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:numColumns="2"
+        android:visibility="visible" />
 </LinearLayout>

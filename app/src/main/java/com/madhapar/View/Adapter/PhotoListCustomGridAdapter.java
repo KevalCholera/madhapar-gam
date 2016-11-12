@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.Fragment.PhotoFragment;
 import com.madhapar.View.PhotoActivity;
@@ -28,13 +28,6 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.example.smartsense.newproject.R.id.rlListAlbum;
-import static com.example.smartsense.newproject.R.id.tvListAlbumName;
-
 /**
  * Created by smartsense on 22/10/16.
  */

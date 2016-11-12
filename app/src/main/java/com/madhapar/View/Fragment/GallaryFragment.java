@@ -7,21 +7,17 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.EventDetailCallback;
-import com.madhapar.View.UpdatefragmetnView;
-
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +26,6 @@ import butterknife.OnClick;
 /**
  * Created by smartsense on 24/09/16.
  */
-
 public class GallaryFragment extends BaseFragment implements EventDetailCallback.EventListCallback {
     @BindView(R.id.radioAlbumSelector)
     RadioButton radioAlbumSelector;

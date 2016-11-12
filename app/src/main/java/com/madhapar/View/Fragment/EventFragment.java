@@ -8,17 +8,17 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
 import com.madhapar.PushUtil.WakeLocker;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.EventListAdapter;
@@ -32,7 +32,6 @@ import butterknife.ButterKnife;
 /**
  * Created by smartsense on 24/09/16.
  */
-
 public class EventFragment extends BaseFragment implements EventDetailCallback.EventListCallback {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -75,7 +74,6 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionEvent));
         return view;
     }
-
 
     @Override
     public void onResume() {
@@ -120,7 +118,7 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         }
         if (eventArray.length() > 0) {
             if (recylerViewAdapter == null) {
-                recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, getActivity());
+                recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, (AppCompatActivity) getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setAdapter(recylerViewAdapter);
 

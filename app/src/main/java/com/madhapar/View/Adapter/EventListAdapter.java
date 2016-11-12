@@ -1,21 +1,18 @@
 package com.madhapar.View.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.EventDetailActivity;
@@ -40,11 +37,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     private JSONArray eventArry;
     private Context context;
     private EventPresenter mPresenter;
-    private Activity activity;
+    private AppCompatActivity activity;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
     private static final int REQUEST_CODE_FOR_EVENT_STATUS = 102;
 
-    public EventListAdapter(Context context, JSONArray jsonArray, Activity activity) {
+    public EventListAdapter(Context context, JSONArray jsonArray, AppCompatActivity activity) {
         this.eventArry = jsonArray;
         this.context = context;
         this.activity = activity;

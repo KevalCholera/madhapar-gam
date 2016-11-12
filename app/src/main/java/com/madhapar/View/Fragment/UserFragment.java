@@ -8,59 +8,38 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.example.smartsense.newproject.R;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
-import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.ProfileUpdatePresenter;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
-import com.madhapar.Util.MultiPartRequest;
-import com.madhapar.Util.MultiPartRequestJson;
-import com.madhapar.Util.MultipartUtility;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.Util.WebServiceUtil;
 import com.madhapar.View.LocationsActivity;
 import com.madhapar.View.ProfileUpdateCallback;
 import com.madhapar.View.UploadInterface;
 import com.mpt.storage.SharedPreferenceUtil;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Picasso;
 
-import org.apache.http.HttpClientConnection;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.entity.mime.HttpMultipart;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.FileBody;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -80,7 +59,6 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 /**
  * Created by smartsense on 24/09/16.
  */
-
 public class UserFragment extends BaseFragment implements ProfileUpdateCallback, UploadInterface {
     @BindView(R.id.etProfileEditProfileFirstName)
     EditText etProfileFirstName;
@@ -186,28 +164,28 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         }
     }
 
-    @BindView(R.id.etEditProfileFacebbokId)
-    EditText etEditProfileFacebbokId;
+    @BindView(R.id.etEditProfileMiddleName)
+    EditText etEditProfileMiddleName;
 
-    @OnFocusChange(R.id.etEditProfileFacebbokId)
+    @OnFocusChange(R.id.etEditProfileMiddleName)
     void updateFacebookId() {
         UtilClass.closeKeyboard(getActivity());
-        if (!etEditProfileFacebbokId.hasFocus()) {
-            if (!etEditProfileFacebbokId.getTag().toString().equalsIgnoreCase(etEditProfileFacebbokId.getText().toString())) {
+        if (!etEditProfileMiddleName.hasFocus()) {
+            if (!etEditProfileMiddleName.getTag().toString().equalsIgnoreCase(etEditProfileMiddleName.getText().toString())) {
                 if (mProfileUpdatePresenter == null) {
                     mProfileUpdatePresenter = new ProfileUpdatePresenter();
                 }
                 Map<String, String> params = new HashMap();
-                if (!TextUtils.isEmpty(etEditProfileFacebbokId.getText().toString().trim())) {
-                    etEditProfileFacebbokId.setTag(etEditProfileFacebbokId.getText().toString());
-                    params.put("userFBProfileName", etEditProfileFacebbokId.getText().toString());
+                if (!TextUtils.isEmpty(etEditProfileMiddleName.getText().toString().trim())) {
+                    etEditProfileMiddleName.setTag(etEditProfileMiddleName.getText().toString());
+                    params.put("userMiddleName", etEditProfileMiddleName.getText().toString());
                     mProfileUpdatePresenter.updateUserDetail(params, SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), this);
                 }
             }
         } else {
-            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileFacebbokId);
+            boolean isAnyEmpty = changeFocusIfEmpty(etEditProfileMiddleName);
             if (!isAnyEmpty) {
-                etEditProfileFacebbokId.setCursorVisible(true);
+                etEditProfileMiddleName.setCursorVisible(true);
             }
         }
     }
@@ -337,7 +315,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         }
         String lastName = SharedPreferenceUtil.getString(Constants.UserData.UserLastName, "");
         etProfileLastName.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserLastName, ""));
-        etProfileFirstName.setHint(getString(R.string.lastName));
+        etProfileLastName.setHint(getString(R.string.lastName));
         if (lastName != null && lastName.length() > 0) {
             String first = String.valueOf(lastName.charAt(0)).toUpperCase();
             etProfileLastName.setText(first + lastName.substring(1));
@@ -376,8 +354,9 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         etProfileMobileNumber.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, ""));
         etEditProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, ""));
         etEditProfileEmail.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, ""));
-        etEditProfileFacebbokId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, ""));
-        etEditProfileFacebbokId.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, ""));
+
+        etEditProfileMiddleName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMiddleName, ""));
+        etEditProfileMiddleName.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserMiddleName, ""));
         etProfileMobileNumber.setEnabled(false);
         etProfileFirstName.setCursorVisible(false);
         this.activity = getActivity();
@@ -422,11 +401,35 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
             etProfileFirstName.setCursorVisible(true);
             UtilClass.displyMessage("First name is required", getActivity(), 0);
             return true;
+        } else if (etProfileFirstName.getText().toString().length() > 50) {
+            etProfileFirstName.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage(getString(R.string.firsrNameCharacter50), getActivity(), 0);
+            etProfileFirstName.setCursorVisible(true);
+            return true;
         } else if (TextUtils.isEmpty(etProfileLastName.getText().toString())) {
             etProfileLastName.requestFocus();
             et.setCursorVisible(false);
             UtilClass.displyMessage("Last name is required", getActivity(), 0);
             etProfileLastName.setCursorVisible(true);
+            return true;
+        } else if (etProfileLastName.getText().toString().length() > 50) {
+            etProfileLastName.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage(getString(R.string.lastNameCharacter50), getActivity(), 0);
+            etProfileLastName.setCursorVisible(true);
+            return true;
+        } else if (TextUtils.isEmpty(etEditProfileMiddleName.getText().toString())) {
+            etEditProfileMiddleName.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage("Father's full name is required", getActivity(), 0);
+            etEditProfileMiddleName.setCursorVisible(true);
+            return true;
+        } else if (etEditProfileMiddleName.getText().toString().length() > 50) {
+            etEditProfileMiddleName.requestFocus();
+            et.setCursorVisible(false);
+            UtilClass.displyMessage(getString(R.string.middleNameCharacter50), getActivity(), 0);
+            etEditProfileMiddleName.setCursorVisible(true);
             return true;
         } else if (TextUtils.isEmpty(etProfileMobileNumber.getHint().toString()) || !(etProfileMobileNumber.getHint().toString().length() > 7 && etProfileMobileNumber.getHint().toString().length() < 14 && TextUtils.isDigitsOnly(etProfileMobileNumber.getHint().toString()))) {
             etProfileMobileNumber.requestFocus();
@@ -648,6 +651,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                                         PERMISSION_REQUEST_CODE);
+
                             }
                         }
                     });

@@ -28,14 +28,22 @@ import java.util.Map;
 public class SignUpModel implements SignUpModelInt {
 
     @Override
-    public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String familyMember, final OnSignUpFinishedListener listener, AppCompatActivity activity) {
+    public void signup(final String firstName, final String lastName, final String contactNumber, final String password, final String middleName, final OnSignUpFinishedListener listener, AppCompatActivity activity) {
 
-        if (TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(familyMember) && TextUtils.isEmpty(lastName)) {
+        if (TextUtils.isEmpty(contactNumber) && TextUtils.isEmpty(password) && TextUtils.isEmpty(firstName) && TextUtils.isEmpty(middleName) && TextUtils.isEmpty(lastName)) {
             listener.onSignUpRequiredFieldError();
         } else if (TextUtils.isEmpty(firstName)) {
             listener.onSignUpFirstNameError();
+        } else if (firstName.length() > 50) {
+            listener.onFirstNameLengthError();
+        } else if (TextUtils.isEmpty(middleName)) {
+            listener.onMiddleNameError();
+        } else if (middleName.length() > 50) {
+            listener.onFatherstNameLengthError();
         } else if (TextUtils.isEmpty(lastName)) {
             listener.onSignUplastNameError();
+        } else if (lastName.length() > 50) {
+            listener.onLasttNameLengthError();
         } else if (TextUtils.isEmpty(contactNumber)) {
             listener.onSignupContactNumberError();
         } else if (!(contactNumber.toString().length() > 7 && contactNumber.toString().length() < 14)) {
@@ -44,14 +52,12 @@ public class SignUpModel implements SignUpModelInt {
             listener.onsignUpPasswordError();
         } else if ((!(password.toString().length() > 6))) {
             listener.onSignupPasswordLengthError();
-        } else if (!isValidFamilyMember(familyMember)) {
-            listener.onSignUpFamilyMemberError();
         } else {
-            doSignup(firstName, lastName, contactNumber, password, familyMember, listener, activity);
+            doSignup(firstName, lastName, contactNumber, password, middleName, listener, activity);
         }
     }
 
-    private void doSignup(final String userFirstName, final String userLastName, final String userMobileNo, final String password, final String familyMemberCount, final SignUpModelInt.OnSignUpFinishedListener listener, final AppCompatActivity activity) {
+    private void doSignup(final String userFirstName, final String userLastName, final String userMobileNo, final String password, final String middleName, final SignUpModelInt.OnSignUpFinishedListener listener, final AppCompatActivity activity) {
         String tag = "signUp";
         StringRequest signUpRequest = new StringRequest(Request.Method.POST, UtilClass.getSignupUrl(), new Response.Listener<String>() {
             @Override
@@ -71,8 +77,8 @@ public class SignUpModel implements SignUpModelInt {
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserProfession, responseObj.optString("userProfession"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserEmail, responseObj.optString("email"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserDOB, responseObj.optString("userDOB"));
+                                    SharedPreferenceUtil.putValue(Constants.UserData.UserMiddleName, responseObj.optString("userMiddleName"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserBloodGroup, responseObj.optString("userBloodGroup"));
-                                    SharedPreferenceUtil.putValue(Constants.UserData.UserFamilyMemberCount, responseObj.optString("userFamilyMemberCount"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationId, responseObj.optString("userRegistrationId"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.isVerified, responseObj.optString("isVerified"));
                                     SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, responseObj.optString("userFBProfileName"));
@@ -108,7 +114,7 @@ public class SignUpModel implements SignUpModelInt {
                 params.put("userLastName", userLastName);
                 params.put("userMobileNo", userMobileNo);
                 params.put("password", password);
-                params.put("userFamilyMemberCount", familyMemberCount);
+                params.put("userMiddleName", middleName);
                 Log.i("signup", "params" + params);
                 return params;
             }

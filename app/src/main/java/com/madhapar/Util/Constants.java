@@ -18,10 +18,10 @@ public class Constants {
     }
 
     public static class RequestConstants {
-        public static String BaseUrl = "http://139.59.29.185/api/";
-        public static String BaseUrlForImage = "http://139.59.29.185";
-//                public static String BaseUrl = "http://192.168.0.105:8000/api/";
-//        public static String BaseUrlForImage = "http://192.168.0.105:8000";
+                 public static String BaseUrl = "http://139.59.29.185/api/";
+          public static String BaseUrlForImage = "http://139.59.29.185";
+//        public static String BaseUrl = "http://192.168.0.106:8000/api/";
+//        public static String BaseUrlForImage = "http://192.168.0.106:8000";
         public static String LoginUrl = BaseUrl + "login/";
         public static String EventListUrl = BaseUrl + "events/";
         public static String NewsCategoryListUrl = BaseUrl + "categories/";
@@ -64,6 +64,7 @@ public class Constants {
         public static String UserProfession = "userProfession";
         public static String UserEmail = "email";
         public static String UserDOB = "userDOB";
+        public static String UserMiddleName = "userMiddleName";
         public static String UserBloodGroup = "userBloodGroup";
         public static String UserFamilyMemberCount = "userFamilyMemberCount";
         public static String UserRegistrationId = "userRegistrationId";

@@ -21,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpClientStack;
 import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.StringRequest;
-import com.example.smartsense.newproject.R;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.CustomHurlStack;

@@ -1,20 +1,18 @@
 package com.madhapar.View;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.ProfileUpdatePresenter;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.LocationsListAdapter;
 
@@ -22,9 +20,7 @@ import org.json.JSONArray;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-
 public class LocationsActivity extends AppCompatActivity implements ProfileUpdateCallback {
 
     @BindView(R.id.rvLocationList)

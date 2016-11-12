@@ -23,7 +23,8 @@
 
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
-    <string name="familyMember">Family Member</string>
+    <string name="familyMember">Middle Name</string>
+    <string name="middleName">Father\'s\  Full Name</string>
     <string name="textContact">Enter Your Mobile Number</string>
 
     <string name="signUp">Sign Up</string>
@@ -68,12 +69,16 @@
     <string name="commentLength">Can not enter more than 200 characters.</string>
 
     <string name="enterrequiredfiels">Enter Required Field</string>
-    <string name="enterfamilymember">Family Member is required</string>
+    <string name="enterfamilymember">Father\'s\ full name is required</string>
     <string name="enterfirstnm">First name is required</string>
     <string name="enterlastnm">Last name is required</string>
     <string name="enterpassword">Password is required</string>
     <string name="passwordlength">Password has to be an alphanumeric and minimum 7 characters long.</string>
     <string name="contactError">Mobile No. is required</string>
+    <string name="firsrNameCharacter50">Please enter valid first name (1-50 chars).</string>
+    <string name="lastNameCharacter50">Please enter valid last name (1-50 chars).</string>
+    <string name="middleNameCharacter50">Please enter valid father\'s\ full name (1-50 chars).</string>
+
     <string name="ErrorContactLength">Mobile No. has to be a numeric value (7-14 digits).</string>
     <string name="loginSuccess">Login Success</string>
     <string name="passwordUpdate">password update</string>
@@ -94,7 +99,7 @@
     <string name="profileMemberShipNo">Membership No. :</string>
     <string name="profileBloodGroud">Blood Group :</string>
     <string name="profileEmail">Email :</string>
-    <string name="profileFacebook">Facebook :</string>
+    <string name="profileMiddleName">Father\'s\  full name :</string>
 
     <string name="seephotos">see photos...</string>
     <string name="lableSelectLocation">Select Location</string>
@@ -214,7 +219,7 @@
 
     <!--UserFragment-->
     <string name="email">Email (Optional)</string>
-    <string name="facebook">FB Username (Optional)</string>
+    <string name="hintMiddleName">Father\'s\ Full  Name</string>
     <string name="BloodGroop">Blood Group</string>
     <string name="DateOfBirth">D.O.B.</string>
     <string name="Location">Location</string>
@@ -229,7 +234,7 @@
     <string name="commnetUpdate">Comment edited.</string>
     <string name="commnetDelete">Comment deleted.</string>
     <string name="permission_message">We need to write on disk to use camera.</string>
-
+    <string name="DoneFilter">Done</string>
 
 
 </resources>

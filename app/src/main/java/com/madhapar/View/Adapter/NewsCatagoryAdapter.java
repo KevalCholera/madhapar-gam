@@ -1,9 +1,5 @@
 package com.madhapar.View.Adapter;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
-import com.madhapar.Util.Constants;
-import com.mpt.storage.SharedPreferenceUtil;
+import com.madhapar.R;
+import com.madhapar.View.FilterActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,30 +19,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by smartsense on 23/10/16.
  */
 
 public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
-    private AppCompatActivity activity;
+    private FilterActivity activity;
     public JSONArray newsCatagoryList;
-    @BindView(R.id.llNewsCatagory)
-    LinearLayout llNewsCatagory;
-    @BindView(R.id.tvNewsCatagoryName)
-    TextView tvNewsCatagoryName;
     private JSONArray tempList;
-    @BindView(R.id.ivSelectedCatagory)
-    ImageView ivSelectedCatagory;
     private CatagoryFilter catagoryFilter;
+    private List<String> selectedCatagorList;
+    LayoutInflater inflater;
 
 
-    public NewsCatagoryAdapter(AppCompatActivity activity, JSONArray catagoryArray) {
+    public NewsCatagoryAdapter(FilterActivity activity, JSONArray catagoryArray) {
         this.newsCatagoryList = catagoryArray;
         this.activity = activity;
         this.tempList = catagoryArray;
+        selectedCatagorList = new ArrayList<>();
+        inflater = LayoutInflater.from(activity);
     }
 
     @Override
@@ -57,7 +47,7 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public Object getItem(int i) {
-        return 0;
+        return i;
     }
 
     @Override
@@ -67,27 +57,54 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = LayoutInflater.from(activity);
-        View view1 = inflater.inflate(R.layout.element_news_filter, viewGroup, false);
-        ButterKnife.bind(this, view1);
-        final JSONObject catagoryObj = newsCatagoryList.optJSONObject(i);
-        tvNewsCatagoryName.setText(catagoryObj.optString("categoryName"));
-        if (SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "").equalsIgnoreCase(catagoryObj.optString("categoryName"))) {
-            ivSelectedCatagory.setVisibility(View.VISIBLE);
+        final ViewHolder viewHolder;
+        if (view == null) {
+            view = inflater.inflate(R.layout.element_news_filter, viewGroup, false);
+            viewHolder = new ViewHolder();
+            viewHolder.ivSelectedCatagory = (ImageView) view.findViewById(R.id.ivSelectedCatagory);
+            viewHolder.tvNewsCatagoryName = (TextView) view.findViewById(R.id.tvNewsCatagoryName);
+            viewHolder.llNewsCatagory = (LinearLayout) view.findViewById(R.id.llNewsCatagory);
+            view.setTag(viewHolder);
         } else {
-            ivSelectedCatagory.setVisibility(View.GONE);
+            viewHolder = (ViewHolder) view.getTag();
         }
-        llNewsCatagory.setOnClickListener(new View.OnClickListener() {
+        final JSONObject catagoryObj = newsCatagoryList.optJSONObject(i);
+        viewHolder.tvNewsCatagoryName.setText(catagoryObj.optString("categoryName"));
+
+        if (activity.filterList.contains(newsCatagoryList.optJSONObject(i).optString("categoryName"))) {
+            viewHolder.ivSelectedCatagory.setVisibility(View.VISIBLE);
+
+        } else {
+            viewHolder.ivSelectedCatagory.setVisibility(View.GONE);
+
+        }
+//        if (SharedPreferenceUtil.getString(Constants.DifferentData.SelectedCatagory, "").equalsIgnoreCase(catagoryObj.optString("categoryName"))) {
+//            ivSelectedCatagory.setVisibility(View.VISIBLE);
+//        } else {
+//            ivSelectedCatagory.setVisibility(View.GONE);
+//        }
+        viewHolder.llNewsCatagory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, catagoryObj.optString("categoryName"));
-                SharedPreferenceUtil.save();
-                activity.setResult(Activity.RESULT_OK);
-                activity.finish();
+                if (activity.filterList.contains(newsCatagoryList.optJSONObject(i).optString("categoryName"))) {
+                    activity.filterList.remove(newsCatagoryList.optJSONObject(i).optString("categoryName"));
+                    viewHolder.ivSelectedCatagory.setVisibility(View.GONE);
+                } else {
+                    activity.filterList.add(newsCatagoryList.optJSONObject(i).optString("categoryName"));
+                    viewHolder.ivSelectedCatagory.setVisibility(View.VISIBLE);
+                }
             }
         });
-        return view1;
+        return view;
     }
+
+    private class ViewHolder {
+        LinearLayout llNewsCatagory;
+        TextView tvNewsCatagoryName;
+        ImageView ivSelectedCatagory;
+
+    }
+
 
     @Override
     public Filter getFilter() {
@@ -131,5 +148,7 @@ public class NewsCatagoryAdapter extends BaseAdapter implements Filterable {
             adapter.newsCatagoryList = (JSONArray) filterResults.values;
             adapter.notifyDataSetChanged();
         }
+
     }
+
 }

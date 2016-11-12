@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.smartsense.newproject">
+    package="com.madhapar">
 
     <permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -211,6 +211,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="43698dfcfee39f09447ffa2493cb07890d3f1595" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

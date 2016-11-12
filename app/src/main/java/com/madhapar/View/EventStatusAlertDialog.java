@@ -1,17 +1,16 @@
 package com.madhapar.View;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.EventPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 
@@ -28,7 +27,7 @@ import butterknife.OnClick;
 public class EventStatusAlertDialog extends AlertDialog.Builder {
     private EventPresenter mPresenter;
     private JSONObject eventObj;
-    private Activity activity;
+    private AppCompatActivity activity;
     private EventDetailCallback.EventStatusUpdateCallback updateCallback;
     private EventDetailCallback.EventStatusCreateCallback createCallback;
     private String evetnStatusType;
@@ -103,7 +102,7 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
     }
 
 
-    public EventStatusAlertDialog(Activity activity, JSONObject eventObj, String statusType, EventDetailCallback.EventStatusCreateCallback createCallback, EventDetailCallback.EventStatusUpdateCallback updateCallback) {
+    public EventStatusAlertDialog(AppCompatActivity activity, JSONObject eventObj, String statusType, EventDetailCallback.EventStatusCreateCallback createCallback, EventDetailCallback.EventStatusUpdateCallback updateCallback) {
         super(activity);
         this.activity = activity;
         this.eventObj = eventObj;

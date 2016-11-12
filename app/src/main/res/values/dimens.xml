@@ -90,8 +90,9 @@
     <!---profile-->
     <dimen name="imageheight">200dp</dimen>
     <dimen name="paddingButtom">30dp</dimen>
-    <dimen name="circuleruser">70dp</dimen>
+    <dimen name="circuleruser">140dp</dimen>
     <dimen name="marginRight">12dp</dimen>
+    <dimen name="editProfilePicImage">30dp</dimen>
 
     <!---Margin-->
     <dimen name="margin_top_large">50dp</dimen>
@@ -137,4 +138,5 @@
     <dimen name="margin30">30dp</dimen>
     <dimen name="AlbumNameHeight">30dp</dimen>
     <dimen name="FundRaisingImageHeight">220dp</dimen>
+    <dimen name="FilterDoneHeight">40dp</dimen>
 </resources>

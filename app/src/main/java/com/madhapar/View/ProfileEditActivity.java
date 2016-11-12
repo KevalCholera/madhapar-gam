@@ -1,18 +1,14 @@
 package com.madhapar.View;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
-import com.madhapar.Util.UtilClass;
-import com.mpt.storage.SharedPreferenceUtil;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -37,8 +33,8 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     @BindView(R.id.tvProfileEmail)
     TextView tvProfileEmail;
-    @BindView(R.id.tvProfileFacebookId)
-    TextView tvProfileFacebookId;
+    @BindView(R.id.tvProfileMiddleName)
+    TextView tvProfileMiddleName;
     @BindView(R.id.ivProfilePhoto)
     ImageView ivProfilePhoto;
     @BindView(R.id.ivProfilePhotoSmall)
@@ -68,7 +64,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                     }
                     tvProfileMobileNumber.setText(profieObj.optString("userMobileNo"));
                     tvProfileEmail.setText(profieObj.optString("email").equalsIgnoreCase("") ? "N/A" : profieObj.optString("email"));
-                    tvProfileFacebookId.setText(profieObj.optString("userFBProfileName").equalsIgnoreCase("") ? "N/A" : profieObj.optString("userFBProfileName"));
+                    tvProfileMiddleName.setText(profieObj.optString("userMiddleName").equalsIgnoreCase("") ? "N/A" : profieObj.optString("userMiddleName"));
                     Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + profieObj.optString("userProfilePicture")).error(R.drawable.ic_network_place_holder).placeholder(R.drawable.ic_network_place_holder).into(ivProfilePhotoSmall);
                     Picasso.with(this).load(Constants.RequestConstants.BaseUrlForImage + profieObj.optString("userProfilePicture")).error(R.drawable.cover_placeholder).placeholder(R.drawable.cover_placeholder).into(ivProfilePhoto);
                 }

@@ -1,24 +1,19 @@
 package com.madhapar.View;
 
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
-import com.madhapar.Util.UtilClass;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.tvProfileName)
     TextView tvProfileName;

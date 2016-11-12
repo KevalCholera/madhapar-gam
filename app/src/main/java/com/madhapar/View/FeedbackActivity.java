@@ -1,25 +1,20 @@
 package com.madhapar.View;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.Fragment.EventFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 public class FeedbackActivity extends AppCompatActivity implements FeedbackActivityInt {
     @BindView(R.id.etFeedbackSubject)
     EditText etFeedbackSubject;

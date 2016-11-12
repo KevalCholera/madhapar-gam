@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 
 import org.json.JSONObject;
 
@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 /**
  * Created by smartsense on 20/10/16.
  */
-
 public class FundRaisingMoreFragment extends BaseFragment {
     @BindView(R.id.tvFundRaisingDescription)
     TextView tvFundRaisingDescription;

@@ -8,13 +8,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.NewsDetailActivity;
 import com.madhapar.View.PhotoActivity;
@@ -25,7 +24,6 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by smartsense on 08/10/16.
  */

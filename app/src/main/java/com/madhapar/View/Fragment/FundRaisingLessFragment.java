@@ -2,13 +2,12 @@ package com.madhapar.View.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.triggertrap.seekarc.SeekArc;
 
@@ -21,7 +20,6 @@ import butterknife.ButterKnife;
 /**
  * Created by smartsense on 20/10/16.
  */
-
 public class FundRaisingLessFragment extends BaseFragment {
     @BindView(R.id.tvGoalAmount)
     TextView tvGoalAmount;

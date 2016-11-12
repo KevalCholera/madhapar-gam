@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NetworkListAdapter;
 import com.madhapar.View.NetworkViewInt;
@@ -29,7 +28,6 @@ import butterknife.OnTextChanged;
 /**
  * Created by smartsense on 24/09/16.
  */
-
 public class NetworkFragment extends BaseFragment implements NetworkViewInt {
     @BindView(R.id.ic_search)
     ImageView iVsearch;

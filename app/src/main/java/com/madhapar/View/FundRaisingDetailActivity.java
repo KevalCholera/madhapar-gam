@@ -6,13 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.Fragment.FundRaisingLessFragment;
 import com.madhapar.View.Fragment.FundRaisingMoreFragment;
@@ -28,7 +26,6 @@ import butterknife.OnClick;
 /**
  * Created by smartsense on 20/10/16.
  */
-
 public class FundRaisingDetailActivity extends BaseActivity {
     @BindView(R.id.tvFundrainsingDetailProjectName)
     TextView tvFundrainsingDetailProjectName;

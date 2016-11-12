@@ -8,9 +8,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
+import com.crashlytics.android.Crashlytics;
 import com.mpt.storage.SharedPreferenceUtil;
 import com.onesignal.OneSignal;
 
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 
 /**
@@ -25,6 +27,7 @@ public class MadhaparGamApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         OneSignal.startInit(this).init();
         OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
         SharedPreferenceUtil.init(this);

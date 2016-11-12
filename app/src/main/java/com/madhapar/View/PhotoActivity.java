@@ -3,11 +3,10 @@ package com.madhapar.View;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.View.Adapter.ImageAdapter;
 
 import org.json.JSONArray;
@@ -15,7 +14,6 @@ import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * Created by smartsense on 24/10/16.
  */

@@ -1,20 +1,15 @@
 package com.madhapar.View;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +17,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,29 +24,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
 import com.madhapar.PagerUtil.AutoScrollViewPager;
 import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
-import com.madhapar.Util.Constants;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsImagePagerAdapter;
 import com.madhapar.View.Adapter.NewsLikeCommentUpdateCallback;
-import com.madhapar.View.Adapter.NewsListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,7 +45,6 @@ import butterknife.OnClick;
 /**
  * Created by smartsense on 10/10/16.
  */
-
 public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentUpdateCallback, NewsDetailViewInt {
     @BindView(R.id.asvNewsDetailPager)
     AutoScrollViewPager asvNewsDetailPager;

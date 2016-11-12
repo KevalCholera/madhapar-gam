@@ -3,12 +3,10 @@ package com.madhapar.View;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.widget.Button;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
-
+import com.madhapar.R;
 
 /**
  * Created by smartsense on 21/09/16.

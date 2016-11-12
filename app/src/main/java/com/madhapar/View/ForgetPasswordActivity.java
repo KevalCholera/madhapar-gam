@@ -1,17 +1,15 @@
 package com.madhapar.View;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 
 import org.json.JSONObject;
@@ -19,7 +17,6 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswordViewInt {
     @BindView(R.id.etForgetMobileNumber)
     EditText etForgetMobileNumber;

@@ -1,6 +1,5 @@
 package com.madhapar.View.Adapter;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Application.MadhaparGamApp;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.View.Fragment.PhotoListFragment;
 import com.squareup.picasso.Picasso;
@@ -31,10 +29,6 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by Ronak on 10/11/2016.
  */

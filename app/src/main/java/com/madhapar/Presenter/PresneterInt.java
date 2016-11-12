@@ -3,14 +3,13 @@ package com.madhapar.Presenter;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
-import com.madhapar.Model.CommentModelInt;
-import com.madhapar.View.CommentViewInt;
-import com.madhapar.View.FundRaisigListCallback;
-import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.ChangePasswordViewInt;
+import com.madhapar.View.CommentViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
+import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.LoginInt;
+import com.madhapar.View.OtpAlertDialogInt;
 
 import org.json.JSONObject;
 
@@ -33,7 +32,7 @@ public interface PresneterInt {
 
     void feedbackValidateCredentials(String subject, String feedback, FeedbackActivityInt feedbackActivityInt);
 
-    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember, AppCompatActivity activity);
+    void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String middleName, AppCompatActivity activity);
 
     void forgetPasswordCredentials(String contactNumber, ForgetPasswordViewInt forgetPasswordViewInt, int type);
 

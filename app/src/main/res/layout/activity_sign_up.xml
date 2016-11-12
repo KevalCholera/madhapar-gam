@@ -63,6 +63,28 @@
                     android:drawablePadding="@dimen/paddingMedium"
                     android:gravity="left|center"
                     android:hint="@string/firstName"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etMiddleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/extraLargemargin"
+                    android:layout_marginRight="@dimen/extraLargemargin"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:drawableLeft="@mipmap/iconuser"
+                    android:drawablePadding="@dimen/paddingSmall"
+                    android:gravity="left|center"
+                    android:hint="@string/middleName"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textColor="@color/colorBlack" />
             </android.support.design.widget.TextInputLayout>
@@ -82,6 +104,7 @@
                     android:drawablePadding="@dimen/paddingMedium"
                     android:gravity="left|center"
                     android:hint="@string/lastName"
+                    android:inputType="textPersonName"
                     android:singleLine="true"
                     android:textColor="@color/colorBlack" />
             </android.support.design.widget.TextInputLayout>
@@ -129,26 +152,6 @@
                     android:textColor="@color/colorBlack" />
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etFamilyMember"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/extraLargemargin"
-                    android:layout_marginRight="@dimen/extraLargemargin"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:drawableLeft="@mipmap/iconmemberddd"
-                    android:drawablePadding="@dimen/paddingSmall"
-                    android:gravity="left|center"
-                    android:hint="@string/familyMember"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:textColor="@color/colorBlack" />
-            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btnSignUp"

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.View.Fragment.EventFragment;
 import com.madhapar.View.Fragment.GallaryFragment;
 import com.madhapar.View.Fragment.HomeFragment;
@@ -14,8 +14,6 @@ import com.madhapar.View.Fragment.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 /**
  * Created by smartsense on 21/09/16.
  */

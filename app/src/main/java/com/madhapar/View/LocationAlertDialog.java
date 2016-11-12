@@ -1,6 +1,5 @@
 package com.madhapar.View;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +9,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.ProfileUpdatePresenter;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 
 import org.json.JSONArray;
@@ -19,12 +18,10 @@ import org.json.JSONArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 /**
  * Created by smartsense on 22/10/16.
  */
-
 public class LocationAlertDialog extends AlertDialog.Builder implements ProfileUpdateCallback {
     private AlertDialog dialog;
     private AppCompatActivity activity;

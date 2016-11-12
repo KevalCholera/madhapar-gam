@@ -1,17 +1,13 @@
 package com.madhapar.View;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 
-import com.example.smartsense.newproject.R;
-import com.madhapar.Presenter.RequestPresenter;
-import com.madhapar.View.Adapter.CustomGrid;
+import com.madhapar.R;
+import com.madhapar.Util.ExpandableGridView;
 import com.madhapar.View.Adapter.PhotoListCustomGridAdapter;
 
 import org.json.JSONArray;
@@ -19,12 +15,11 @@ import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 public class EventPhotoActivity extends AppCompatActivity {
     private PhotoListCustomGridAdapter adapter;
     private FragmentManager fm;
     @BindView(R.id.grid)
-    GridView grid;
+    ExpandableGridView grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

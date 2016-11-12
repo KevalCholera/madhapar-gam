@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.ExpandableGridView;
-import com.madhapar.View.Adapter.CustomGrid;
-import com.madhapar.View.Adapter.ImageAdapter;
 import com.madhapar.View.Adapter.PhotoListCustomGridAdapter;
 
 import org.json.JSONArray;
@@ -19,7 +17,6 @@ import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * Created by smartsense on 22/10/16.
  */

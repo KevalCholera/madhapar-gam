@@ -2,14 +2,12 @@ package com.madhapar.Model;
 
 import android.support.v7.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
 /**
  * Created by Ronak on 9/26/2016.
  */
 public interface SignUpModelInt {
 
-    void signup(String firstName, String lastName, String contactNumber, String password, String familyMember, SignUpModelInt.OnSignUpFinishedListener listener, AppCompatActivity activity);
+    void signup(String firstName, String lastName, String contactNumber, String password, String middleName, SignUpModelInt.OnSignUpFinishedListener listener, AppCompatActivity activity);
 
     interface OnSignUpFinishedListener {
 
@@ -23,7 +21,7 @@ public interface SignUpModelInt {
 
         void onSignUplastNameError();
 
-        void onSignUpFamilyMemberError();
+        void onMiddleNameError();
 
         void onSignupPasswordLengthError();
 
@@ -34,5 +32,11 @@ public interface SignUpModelInt {
         void onSignupContactNumberError();
 
         void onSignUpRequiredFieldError();
+
+        void onFirstNameLengthError();
+
+        void onLasttNameLengthError();
+
+        void onFatherstNameLengthError();
     }
 }

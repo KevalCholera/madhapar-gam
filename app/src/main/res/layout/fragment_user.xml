@@ -29,7 +29,8 @@
                     android:adjustViewBounds="true"
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/cover_placeholder" />
+                    android:src="@drawable/cover_placeholder"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -51,12 +52,12 @@
 
                     <ImageView
                         android:id="@+id/ivEditIcon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/editProfilePicImage"
+                        android:layout_height="@dimen/editProfilePicImage"
                         android:layout_alignRight="@+id/ivProfilePhotoSmall"
                         android:layout_alignTop="@+id/ivProfilePhotoSmall"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="5dp"
                         android:src="@drawable/icon_edit_white" />
 
                 </RelativeLayout>
@@ -104,6 +105,42 @@
                         android:textColorHint="@color/colorGreyProfile"
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/middleName"
+                        android:textColor="@color/colorGreyProfile" />
+
+                    <EditText
+                        android:id="@+id/etEditProfileMiddleName"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/defaultpadding"
+                        android:layout_marginRight="@dimen/marginRight"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/search"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left|center_vertical"
+                        android:hint="@string/hintMiddleName"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="@dimen/paddingSmall"
+                        android:singleLine="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorHint="@color/colorGreyProfile"
+                        android:textSize="@dimen/text16" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -350,40 +387,6 @@
                         android:textSize="@dimen/text16" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:text="@string/profileFacebook"
-                        android:textColor="@color/colorGreyProfile" />
-
-                    <EditText
-                        android:id="@+id/etEditProfileFacebbokId"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/defaultpadding"
-                        android:layout_marginRight="@dimen/marginRight"
-                        android:layout_weight="1.5"
-                        android:background="@drawable/search"
-                        android:focusableInTouchMode="true"
-                        android:gravity="left|center_vertical"
-                        android:hint="@string/facebook"
-                        android:inputType="textPersonName"
-                        android:paddingLeft="@dimen/paddingSmall"
-                        android:singleLine="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textColorHint="@color/colorGreyProfile"
-                        android:textSize="@dimen/text16" />
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

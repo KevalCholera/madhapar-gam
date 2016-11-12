@@ -2,12 +2,9 @@ package com.madhapar.View.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Model.NewsObject;
 import com.madhapar.PagerUtil.AutoScrollViewPager;
 import com.madhapar.PagerUtil.CirclePageIndicator;
 import com.madhapar.Presenter.RequestPresenter;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Fragment.HomeFragment;
@@ -34,7 +31,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -304,9 +300,20 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.MyView
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             FilterResults results = new FilterResults();
+            String filterString = charSequence.toString();
+            List<String> selectedList = new ArrayList<>();
+            if (filterString.contains(",")) {
+                String[] filterArray = filterString.split(",");
+                for (int i = 0; i < filterArray.length; i++) {
+                    selectedList.add(filterArray[i].trim());
+                }
+            } else {
+                selectedList.add(filterString);
+            }
             List<NewsObject> filteredList = new ArrayList<>();
             for (int i = 0; i < tempList.size(); i++) {
-                if (tempList.get(i).getNewsCatagory().equals(charSequence)) {
+
+                if (selectedList.contains(tempList.get(i).getNewsCatagory())) {
                     filteredList.add(tempList.get(i));
                 }
             }

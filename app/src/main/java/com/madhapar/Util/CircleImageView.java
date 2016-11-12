@@ -20,8 +20,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 
 
 /**

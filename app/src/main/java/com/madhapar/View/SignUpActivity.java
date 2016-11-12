@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 
 import butterknife.BindView;
@@ -22,8 +22,8 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
     EditText etFirstName;
     @BindView(R.id.etLasttName)
     EditText etLastName;
-    @BindView(R.id.etFamilyMember)
-    EditText etFamilyMember;
+    @BindView(R.id.etMiddleName)
+    EditText etMiddleName;
     @BindView(R.id.etSignUpPassord)
     EditText etSignUpPassword;
     @BindView(R.id.etMobileNumber)
@@ -68,7 +68,7 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
         if (UtilClass.isInternetAvailabel(SignUpActivity.this)) {
             UtilClass.showProgress(this, getString(R.string.msgPleaseWait));
             presenter = new PresenterClass(this);
-            presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etFamilyMember.getText().toString(), this);
+            presenter.signUpValidationCredentials(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etSignUpPassword.getText().toString(), etMiddleName.getText().toString(), this);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), this, 0);
         }
@@ -83,12 +83,24 @@ public class SignUpActivity extends BaseActivity implements SignUpViewInt {
                 UtilClass.displyMessage(getString(R.string.enterrequiredfiels), SignUpActivity.this, Toast.LENGTH_SHORT);
                 break;
             }
-            case UtilClass.FamilyMemberError: {
+            case UtilClass.MiddleNameError: {
                 UtilClass.displyMessage(getString(R.string.enterfamilymember), SignUpActivity.this, Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.FirstNameError: {
                 UtilClass.displyMessage(getString(R.string.enterfirstnm), SignUpActivity.this, Toast.LENGTH_SHORT);
+                break;
+            }
+            case UtilClass.FirstNameLenght: {
+                UtilClass.displyMessage(getString(R.string.firsrNameCharacter50), SignUpActivity.this, Toast.LENGTH_SHORT);
+                break;
+            }
+            case UtilClass.LastNameLength: {
+                UtilClass.displyMessage(getString(R.string.lastNameCharacter50), SignUpActivity.this, Toast.LENGTH_SHORT);
+                break;
+            }
+            case UtilClass.MiddleNameLength: {
+                UtilClass.displyMessage(getString(R.string.middleNameCharacter50), SignUpActivity.this, Toast.LENGTH_SHORT);
                 break;
             }
             case UtilClass.LastNameError: {

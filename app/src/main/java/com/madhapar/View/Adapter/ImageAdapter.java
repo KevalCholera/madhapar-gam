@@ -3,18 +3,16 @@ package com.madhapar.View.Adapter;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.TouchImageView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
-
 /**
  * Created by smartsense on 22/10/16.
  */

@@ -3,6 +3,7 @@ package com.madhapar.View.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,8 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.smartsense.newproject.R;
-import com.madhapar.Model.NewsObject;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
-import com.madhapar.View.NetworkViewInt;
 import com.madhapar.View.ProfileEditActivity;
 import com.squareup.picasso.Picasso;
 
@@ -55,12 +54,13 @@ public class NetworkListAdapter extends RecyclerView.Adapter<NetworkListAdapter.
             String userLastname = userObj.optString("userLastName");
             String userProfessrion = userObj.optString("userProfession");
             holder.tvUserName.setText(userFirstname + " " + userLastname);
-            holder.tvUserProfession.setText(userProfessrion.trim().equalsIgnoreCase("") ? "N/A" : userProfessrion);
+//            holder.tvUserProfession.setText(userProfessrion.trim().equalsIgnoreCase("") ? "N/A" : userProfessrion);
             JSONObject locationObj = userObj.optJSONObject("userLocation");
             String userCity = "";
             if (locationObj != null && locationObj.has("locationName")) {
                 userCity = locationObj.optString("locationName");
             }
+            Log.e("networkList", profileArry.optJSONObject(position).toString());
             holder.llUserMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

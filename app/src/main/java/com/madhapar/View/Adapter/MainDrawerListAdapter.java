@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 
 import java.util.List;
-
 /**
  * Created by smartsense on 24/09/16.
  */

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.madhapar.Model.ChangePasswordModel;
 import com.madhapar.Model.CommentModel;
@@ -17,20 +16,18 @@ import com.madhapar.Model.FundRaisingModelInt;
 import com.madhapar.Model.LoginModel;
 import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
-import com.madhapar.Model.NetworkModel;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.CommentViewInt;
-import com.madhapar.View.FundRaisigListCallback;
-import com.madhapar.View.OtpAlertDialogInt;
-import com.madhapar.View.OtpAlertDialog;
 import com.madhapar.View.ChangePasswordViewInt;
+import com.madhapar.View.CommentViewInt;
 import com.madhapar.View.FeedbackActivityInt;
 import com.madhapar.View.ForgetPasswordViewInt;
+import com.madhapar.View.FundRaisigListCallback;
 import com.madhapar.View.LoginInt;
+import com.madhapar.View.OtpAlertDialog;
+import com.madhapar.View.OtpAlertDialogInt;
 import com.madhapar.View.SignUpActivity;
 import com.madhapar.View.SignUpViewInt;
-import com.madhapar.View.ViewInt;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,7 +38,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt,CommentModelInt.onCommentRequestFinishListener, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
+public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRequestFinishListener, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
 
     private MainModelClass modelClass;
     private LoginInt loginInt;
@@ -83,10 +80,10 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
     }
 
     @Override
-    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String familyMember, AppCompatActivity activity) {
+    public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String middleName, AppCompatActivity activity) {
 
         signUpModel = new SignUpModel();
-        signUpModel.signup(firstName, lastName, contactNumber, password, familyMember, this, activity);
+        signUpModel.signup(firstName, lastName, contactNumber, password, middleName, this, activity);
     }
 
 
@@ -99,6 +96,7 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.
                 replace(containerId, modelClass.getFragment(position));
+
 
         fragmentTransaction.commitAllowingStateLoss();
     }
@@ -128,7 +126,7 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
     public void commentCredential(String comment, CommentViewInt commentViewInt) {
         commentViewInt1 = commentViewInt;
         commentModel = new CommentModel();
-        commentModel.comment(comment,this);
+        commentModel.comment(comment, this);
 
     }
 
@@ -205,9 +203,10 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
     }
 
     @Override
-    public void onSignUpFamilyMemberError() {
-        signupInt.signUpValidateResult(UtilClass.FamilyMemberError);
+    public void onMiddleNameError() {
+        signupInt.signUpValidateResult(UtilClass.MiddleNameError);
     }
+
 
     @Override
     public void onSignupPasswordLengthError() {
@@ -233,6 +232,22 @@ public class PresenterClass implements PresneterInt,CommentModelInt.onCommentReq
     @Override
     public void onSignUpRequiredFieldError() {
         signupInt.signUpValidateResult(UtilClass.RequiredFieldError);
+    }
+
+    @Override
+    public void onFirstNameLengthError() {
+        signupInt.signUpValidateResult(UtilClass.FirstNameLenght);
+    }
+
+    @Override
+    public void onLasttNameLengthError() {
+        signupInt.signUpValidateResult(UtilClass.LastNameLength);
+    }
+
+    @Override
+    public void onFatherstNameLengthError() {
+        signupInt.signUpValidateResult(UtilClass.MiddleNameLength);
+
     }
 
 

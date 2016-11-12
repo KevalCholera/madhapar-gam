@@ -1,6 +1,5 @@
 package com.madhapar.Presenter;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.madhapar.View.EventDetailCallback;
@@ -22,5 +21,5 @@ public interface EventPresenterInt {
 
     void updateEventStatus(String eventId, String eventStatus, String count, EventDetailCallback.EventStatusUpdateCallback mEventStatusUpdateCallback);
 
-    void openEventAlert(Activity activity, JSONObject eventObj, String statusType, EventDetailCallback.EventStatusCreateCallback createCallback, EventDetailCallback.EventStatusUpdateCallback updateCallback);
+    void openEventAlert(AppCompatActivity activity, JSONObject eventObj, String statusType, EventDetailCallback.EventStatusCreateCallback createCallback, EventDetailCallback.EventStatusUpdateCallback updateCallback);
 }

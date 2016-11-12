@@ -10,17 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.MainDrawerListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-
 public class MainActivity extends BaseActivity implements ViewInt, View.OnClickListener {
     private PresenterClass presenter;
     private ViewInt mainViewInt;

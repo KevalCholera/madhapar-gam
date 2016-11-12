@@ -2,17 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_medium"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/llImageMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin20"
+        android:gravity="center"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -39,7 +37,8 @@
                 android:gravity="center"
                 android:text=""
                 android:textAlignment="center"
-                android:textColor="@color/cardview_light_background" />
+                android:textColor="@color/cardview_light_background"
+                android:textSize="@dimen/text12" />
         </RelativeLayout>
     </LinearLayout>
 

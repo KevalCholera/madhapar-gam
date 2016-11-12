@@ -2,11 +2,10 @@ package com.madhapar.View;
 
 import android.os.Bundle;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.mpt.storage.SharedPreferenceUtil;
-
+import com.madhapar.R;
 /**
  * Created by smartsense on 30/09/16.
  */

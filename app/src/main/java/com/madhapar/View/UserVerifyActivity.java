@@ -2,16 +2,14 @@ package com.madhapar.View;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
+import com.madhapar.R;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONObject;
-
 /**
  * Created by smartsense on 06/10/16.
  */

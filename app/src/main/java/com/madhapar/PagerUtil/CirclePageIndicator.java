@@ -33,12 +33,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.example.smartsense.newproject.R;
+import com.madhapar.R;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.widget.LinearLayout.HORIZONTAL;
 import static android.widget.LinearLayout.VERTICAL;
-
 /**
  * Draws circles (one for each view). The current view position is filled and
  * others are only stroked.

@@ -7,21 +7,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.smartsense.newproject.R;
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.Presenter.PresneterInt;
+import com.madhapar.R;
 import com.madhapar.Util.UtilClass;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
-import butterknife.OnTextChanged;
 
 /**
  * Created by smartsense on 22/09/16.
  */
-
 public class LoginActivity extends BaseActivity implements LoginInt {
     @BindView(R.id.etLoginId)
     EditText etLoginId;

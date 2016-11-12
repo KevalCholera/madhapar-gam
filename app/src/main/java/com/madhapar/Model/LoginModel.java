@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -73,11 +72,12 @@ public class LoginModel implements LoginModelInt {
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserEmail, userObject.optString("email"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserDOB, userObject.optString("userDOB"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserBloodGroup, userObject.optString("userBloodGroup"));
-                                        SharedPreferenceUtil.putValue(Constants.UserData.UserFamilyMemberCount, userObject.optString("userFamilyMemberCount"));
+                                        SharedPreferenceUtil.putValue(Constants.UserData.UserMiddleName, userObject.optString("userMiddleName"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationId, userObject.optString("userRegistrationId"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.isVerified, userObject.optBoolean("isVerified"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, userObject.optString("userFBProfileName"));
                                         SharedPreferenceUtil.save();
+
                                         if (!userObject.optBoolean("isVerified")) {
                                             listener.onLoginSuccess();
                                             // UtilClass.changeActivity(activity, UserVerifyActivity.class, false);

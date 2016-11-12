@@ -38,6 +38,7 @@
                 android:background="@color/colorTransparentBlack"
                 android:gravity="center"
                 android:text=""
+                android:textSize="@dimen/text12"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite" />
 
