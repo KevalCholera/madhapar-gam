@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.madhapar.Presenter.PresenterClass;
 import com.madhapar.R;
+import com.madhapar.Util.Constants;
 import com.madhapar.View.AboutUsActivity;
 import com.madhapar.View.FeedbackActivity;
 import com.madhapar.View.FundRaisingActivity;
@@ -54,7 +55,9 @@ public class MoreFragment extends BaseFragment {
 
     @OnClick(R.id.llSignOut)
     public void tvSignOut() {
+        long registrationTime = SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0);
         SharedPreferenceUtil.clear();
+        SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationTime, registrationTime);
         SharedPreferenceUtil.save();
         presenter.changeActivity(getActivity(), LoginActivity.class, true);
     }
@@ -65,7 +68,6 @@ public class MoreFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_more, container, false);
         ButterKnife.bind(this, view);
         presenter = new PresenterClass();
-
         getActivity().findViewById(R.id.moreFragment);
 
         return view;

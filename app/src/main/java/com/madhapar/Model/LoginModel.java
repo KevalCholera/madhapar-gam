@@ -5,9 +5,12 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
@@ -17,6 +20,7 @@ import com.mpt.storage.SharedPreferenceUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +40,7 @@ public class LoginModel implements LoginModelInt {
             listener.onLoginContactLenghtError();
         } else if (TextUtils.isEmpty(password)) {
             listener.onLoginPasswordError();
-        } else if (((password.length() < 6))) {
+        } else if (((password.length() < 7))) {
             listener.onLoginPasswordLengthError();
         } else {
             doLogin(listener, loginId, password, activity);
@@ -77,7 +81,6 @@ public class LoginModel implements LoginModelInt {
                                         SharedPreferenceUtil.putValue(Constants.UserData.isVerified, userObject.optBoolean("isVerified"));
                                         SharedPreferenceUtil.putValue(Constants.UserData.UserFBProfileName, userObject.optString("userFBProfileName"));
                                         SharedPreferenceUtil.save();
-
                                         if (!userObject.optBoolean("isVerified")) {
                                             listener.onLoginSuccess();
                                             // UtilClass.changeActivity(activity, UserVerifyActivity.class, false);
@@ -90,6 +93,8 @@ public class LoginModel implements LoginModelInt {
                                 }
                                 SharedPreferenceUtil.save();
                             } else {
+
+
                                 listener.onLoginFailError(logiObject.optString("message"));
                             }
                         }
@@ -101,9 +106,23 @@ public class LoginModel implements LoginModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onRequestError();
-                //listener.onLoginSuccess();
-                error.printStackTrace();
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        if (obj != null) {
+                            listener.onLoginFailError(obj.optString("message"));
+                        } else {
+                            listener.onRequestError();
+                        }
+                    } catch (UnsupportedEncodingException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e2) {
+                        e2.printStackTrace();
+                    }
+                }
             }
         }) {
             @Override
@@ -111,7 +130,7 @@ public class LoginModel implements LoginModelInt {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("password", password);
                 params.put("userMobileNo", login);
-                params.put("deviceToken", "12341234123412341234123412341234");
+//                params.put("deviceToken", "12341234123412341234123412341234");
                 return params;
             }
 

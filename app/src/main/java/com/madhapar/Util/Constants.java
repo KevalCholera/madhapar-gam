@@ -18,38 +18,48 @@ public class Constants {
     }
 
     public static class RequestConstants {
-                 public static String BaseUrl = "http://139.59.29.185/api/";
-          public static String BaseUrlForImage = "http://139.59.29.185";
-//        public static String BaseUrl = "http://192.168.0.106:8000/api/";
-//        public static String BaseUrlForImage = "http://192.168.0.106:8000";
-        public static String LoginUrl = BaseUrl + "login/";
-        public static String EventListUrl = BaseUrl + "events/";
-        public static String NewsCategoryListUrl = BaseUrl + "categories/";
-        public static String LocationListUrl = BaseUrl + "locations/";
-        public static String CreateLocationListUrl = BaseUrl + "createLocation/";
-        public static String EventStatusListUrl = BaseUrl + "eventStatuses/";
-        public static String EventStatusCreateUrl = BaseUrl + "eventStatusCreate/";
-        public static String ProfileUpdateUrl = BaseUrl + "userDetail/";
-        public static String EventStatusUpdaetUrl = BaseUrl + "eventStatusDetail/";
-        public static String EventDetailUrl = BaseUrl + "eventsDetail/";
-        public static String FeedbackUrl = BaseUrl + "feedback/";
-        public static String ProjectsListUrl = BaseUrl + "projects/";
-        public static String AboutUsUrl = BaseUrl + "aboutus.html";
-        public static String IntroductionUrl = BaseUrl + "introduction.html";
-        public static String LikeUpdateUrl = BaseUrl + "newsStatusCreate/";
-        public static String CommentLstUrl = BaseUrl + "newsStatusList/";
-        public static String CommentUpdateUrl = BaseUrl + "newsStatusDetail/";
-        public static String NewsFeedUrl = BaseUrl + "newsFeedList/";
-        public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
-        public static String UserListUrl = BaseUrl + "users/";
+        //        public static String BaseUrl = "http://139.59.29.185/api/";
+//        public static String BaseUrlForImage = "http://139.59.29.185";
+
+
+        public static String BaseUrl = "http://139.59.29.185:90/api/";
+        public static String BaseUrlForImage = "http://139.59.29.185:90";
+
+        /* OTP Password Url*/
         public static String OtpUrl = BaseUrl + "sendOTP/";
         public static String VerifyOtpUrl = BaseUrl + "verifyOTP/";
         public static String ChangePasswordUrl = BaseUrl + "resetPassword/";
-        public static String RemoveLikeUrl = BaseUrl + "newsStatusDetail/";
+        public static String UserVerifyUrl = BaseUrl + "verifyUserVerificationOTP/";
+
+        /*Login Register Url*/
+
         public static String SignupUrl = BaseUrl + "register/";
-        public static String NewsDetailUrl = BaseUrl + "newsDetail/";
+        public static String LoginUrl = BaseUrl + "login/";
+
+
+        /*________News__________*/
+        public static String NewsFeedUrl = BaseUrl + "newsfeed/";
+        public static String NewsCategoryListUrl = BaseUrl + "category/";
+        public static String NewsStatusUrl = BaseUrl + "newsStatus/";
+
+        /*__________Events_______*/
+        public static String EventsUrl = BaseUrl + "event/";
+        public static String EventStatusUrl = BaseUrl + "eventStatus/";
+
+
+        /*________Network & User  Frgment__________*/
+        public static String UserUrl = BaseUrl + "user/";
+        public static String LocationUrl = BaseUrl + "location/";
+
+
+        /*______More Fragment_______*/
+        public static String AboutUsUrl = BaseUrl + "aboutus.html";
+        public static String FeedbackUrl = BaseUrl + "feedback/";
+        public static String IntroductionUrl = BaseUrl + "introduction.html";
+        public static String ProjectsListUrl = BaseUrl + "project/";
+
+
         public static String HeaderPostfix = "JWT ";
-        public static String PhotoEvent = "http://139.59.29.185";
         public static String DefaultToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjkxOTQwODU4MDgwMSIsInVzZXJNb2JpbGVObyI6IjkxOTQwODU4MDgwMSIsInVzZXJfaWQiOjEsImVtYWlsIjoia2FyYW5AZ21haWwuY29tIiwiZXhwIjoxNDg1NjUzMTIxfQ.nPGJW1rtAl0r9wE31mjjraFj8QHkCZiralX-1jaQs2g";
     }
 
@@ -70,6 +80,7 @@ public class Constants {
         public static String UserRegistrationId = "userRegistrationId";
         public static String isVerified = "isVerified";
         public static String UserFBProfileName = "userFBProfileName";
+        public static String UserRegistrationTime = "userRegistrationTime";
         public static String token = "token";
     }
 

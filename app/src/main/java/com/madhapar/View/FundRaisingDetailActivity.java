@@ -50,14 +50,14 @@ public class FundRaisingDetailActivity extends BaseActivity {
             bundle.putString("projectDescription", projectDetail.optString("projectDescription"));
             Fragment fundRaisingMoreFragment = new FundRaisingMoreFragment();
             fundRaisingMoreFragment.setArguments(bundle);
-            mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingMoreFragment).commit();
+            mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingMoreFragment).commitAllowingStateLoss();
         } else {
             btnFundRaisingMoreLess.setText(getString(R.string.fundInfoMore));
             Bundle bundle = new Bundle();
             bundle.putString("projectDetail", projectDetail.toString());
             Fragment fundRaisingLessFragment = new FundRaisingLessFragment();
             fundRaisingLessFragment.setArguments(bundle);
-            mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingLessFragment).commit();
+            mFragmetnManager.beginTransaction().replace(R.id.flFundRaisingContainer, fundRaisingLessFragment).commitAllowingStateLoss();
         }
     }
 

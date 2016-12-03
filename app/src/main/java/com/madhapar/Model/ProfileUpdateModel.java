@@ -27,10 +27,11 @@ public class ProfileUpdateModel implements ProfileUpdateModelInt {
     @Override
     public void updateProfileUserName(final Map<String, String> params, String userId, final ProfileUpdateListener mProfileUpdateListener) {
         String tag = "updateProfile";
-        StringRequest profileRequest = new StringRequest(Request.Method.PUT, UtilClass.getProfileUpdateUrl(userId), new Response.Listener<String>() {
+        StringRequest profileRequest = new StringRequest(Request.Method.PUT, UtilClass.getUserUrl(userId, false), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("profileUpdate", "response" + response);
                     JSONObject infoObj = new JSONObject(response);
                     if (infoObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
                         mProfileUpdateListener.onSuccessUpdateProfile(infoObj.optString("message"));
@@ -72,10 +73,9 @@ public class ProfileUpdateModel implements ProfileUpdateModelInt {
     @Override
     public void getLocationList(final ProfileUpdateListener mProfileUpdateListener) {
         String tag = "getLocationList";
-        StringRequest locationRequest = new StringRequest(Request.Method.GET, UtilClass.getLocationListUrl(), new Response.Listener<String>() {
+        StringRequest locationRequest = new StringRequest(Request.Method.GET, UtilClass.getLocationUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i("****", "LocationList" + response);
                 if (response != null) {
                     try {
                         JSONObject locationObj = new JSONObject(response);
@@ -122,7 +122,7 @@ public class ProfileUpdateModel implements ProfileUpdateModelInt {
     @Override
     public void createNewLocation(final String locationName, final ProfileUpdateListener mProfileUpdateListener) {
         String tag = "CreateLocation";
-        StringRequest createLocationRequest = new StringRequest(Request.Method.POST, UtilClass.getCreateLocationUrl(), new Response.Listener<String>() {
+        StringRequest createLocationRequest = new StringRequest(Request.Method.POST, UtilClass.getLocationUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {

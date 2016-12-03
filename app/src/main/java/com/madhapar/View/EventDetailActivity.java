@@ -44,6 +44,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 public class EventDetailActivity extends AppCompatActivity implements EventDetailCallback {
     @BindView(R.id.tvEventDetailTitle)
     TextView tvEventDetailTitle;

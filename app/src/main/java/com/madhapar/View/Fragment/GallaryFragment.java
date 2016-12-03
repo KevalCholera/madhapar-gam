@@ -70,7 +70,7 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
                 bundle.putString("images", albumArray.toString());
                 fragmentAlbum.setArguments(bundle);
             }
-            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, fragmentAlbum).addToBackStack(null).commit();
+            mFragmentManager.beginTransaction().replace(R.id.flGallaryMain, fragmentAlbum).commitAllowingStateLoss();
         }
     }
 
@@ -104,7 +104,6 @@ public class GallaryFragment extends BaseFragment implements EventDetailCallback
         if (isAdded() && getActivity() != null) {
             UtilClass.hideProgress();
             this.albumArray = eventArray;
-
             radioAlbumSelector.performClick();
         }
 //        customGrid = new CustomGrid(getActivity(), eventArray,fragmentManager);

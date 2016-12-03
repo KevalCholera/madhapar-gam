@@ -90,9 +90,14 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
             }
             Bitmap bitmap = loadBitmapFromView(this, this.getWindow().getDecorView().getRootView());
             String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
-            Uri imageUri = Uri.parse(path);
-            shareImage(imageUri);
-
+            try {
+                if (path != null) {
+                    Uri imageUri = Uri.parse(path);
+                    shareImage(imageUri);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             requestPermission();
         }

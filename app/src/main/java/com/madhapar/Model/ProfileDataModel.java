@@ -1,8 +1,5 @@
 package com.madhapar.Model;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,51 +23,51 @@ import java.util.Map;
  * Created by Ronak on 10/7/2016.
  */
 public class ProfileDataModel implements ProfileDataModelInt {
-       @Override
+    @Override
     public EventPhotosModel getProfileDataList(final RequestPresenter callbackdata) {
-           String tag = "userList";
-           StringRequest userListRequest = new StringRequest(Request.Method.GET, UtilClass.getUserListUrl(), new Response.Listener<String>() {
-               @Override
-               public void onResponse(String response) {
-                   if (response != null) {
-                       try {
-                           JSONObject userObject = new JSONObject(response);
+        String tag = "userList";
+        StringRequest userListRequest = new StringRequest(Request.Method.GET, UtilClass.getUserUrl("", true), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    try {
+                        JSONObject userObject = new JSONObject(response);
 
-                           if (userObject != null) {
-                               if (userObject.optInt("status") == Constants.ResponseCode.SuccessCode) {
-                                   JSONArray userList = userObject.optJSONArray("response");
-                                   if (userList != null) {
-                                       callbackdata.onSuccessEventResponse(userList);
-                                   }
-                               } else {
-                                   callbackdata.onFailResponse(userObject.optString("message"));
-                               }
-                           }
-                       } catch (JSONException e) {
-                           e.printStackTrace();
-                       }
-                   }
-               }
-           }, new Response.ErrorListener() {
-               @Override
-               public void onErrorResponse(VolleyError error) {
-                   callbackdata.onFailRequest();
-               }
-           }) {
-               @Override
-               public Map<String, String> getHeaders() throws AuthFailureError {
-                   Map<String, String> header = new HashMap<>();
-                   header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
-                   return header;
-               }
-           };
-           userListRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
-                   DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                   DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-           MadhaparGamApp.getAppInstance().addToRequestQueue(userListRequest, tag);
-           return null;
+                        if (userObject != null) {
+                            if (userObject.optInt("status") == Constants.ResponseCode.SuccessCode) {
+                                JSONArray userList = userObject.optJSONArray("response");
+                                if (userList != null) {
+                                    callbackdata.onSuccessEventResponse(userList);
+                                }
+                            } else {
+                                callbackdata.onFailResponse(userObject.optString("message"));
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callbackdata.onFailRequest();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> header = new HashMap<>();
+                header.put("Authorization", Constants.RequestConstants.HeaderPostfix + SharedPreferenceUtil.getString(Constants.UserData.token, Constants.RequestConstants.DefaultToken));
+                return header;
+            }
+        };
+        userListRequest.setRetryPolicy(new DefaultRetryPolicy(UtilClass.RetryTimeOut,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MadhaparGamApp.getAppInstance().addToRequestQueue(userListRequest, tag);
+        return null;
 
-       }
+    }
 
 
 }

@@ -41,13 +41,13 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, Constants.RequestConstants.UserListUrl));
-        tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, Constants.RequestConstants.UserListUrl));
-        tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, Constants.RequestConstants.UserListUrl));
-        tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, Constants.RequestConstants.UserListUrl));
-        tvProfileMobileNumber.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, Constants.RequestConstants.UserListUrl));
-        tvProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, Constants.RequestConstants.UserListUrl));
-        tvProfileFacebookId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, Constants.RequestConstants.UserListUrl));
+        tvProfileName.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFirstName, Constants.RequestConstants.UserUrl));
+        tvProfileBloodGroup.setText(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, Constants.RequestConstants.UserUrl));
+        tvProfileDOB.setText(SharedPreferenceUtil.getString(Constants.UserData.UserDOB, Constants.RequestConstants.UserUrl));
+        tvProfileLocation.setText(SharedPreferenceUtil.getString(Constants.UserData.UserLocationName, Constants.RequestConstants.UserUrl));
+        tvProfileMobileNumber.setText(SharedPreferenceUtil.getString(Constants.UserData.UserMobileNo, Constants.RequestConstants.UserUrl));
+        tvProfileEmail.setText(SharedPreferenceUtil.getString(Constants.UserData.UserEmail, Constants.RequestConstants.UserUrl));
+        tvProfileFacebookId.setText(SharedPreferenceUtil.getString(Constants.UserData.UserFBProfileName, Constants.RequestConstants.UserUrl));
 
     }
 

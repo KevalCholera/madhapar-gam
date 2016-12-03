@@ -237,4 +237,9 @@
     <string name="DoneFilter">Done</string>
 
 
+    <!--Splash Screen-->
+    <string name="updateNowButtonMSG">Update</string>
+    <string name="updateNextTimeButtonMSG">Next time</string>
+
+
 </resources>

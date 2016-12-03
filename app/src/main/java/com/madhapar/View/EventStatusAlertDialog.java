@@ -3,6 +3,7 @@ package com.madhapar.View;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -87,6 +88,7 @@ public class EventStatusAlertDialog extends AlertDialog.Builder {
             if (canCreateNewStatus(eventObj).equalsIgnoreCase("not")) {
                 mPresenter.createEventStatus(eventObj.optString("eventId"), evetnStatusType, "10", createCallback);
             } else {
+
                 mPresenter.updateEventStatus(canCreateNewStatus(eventObj), evetnStatusType, "5", updateCallback);
             }
             alertDialog.dismiss();

@@ -2,18 +2,17 @@ package com.madhapar.Application;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HttpStack;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 import com.crashlytics.android.Crashlytics;
 import com.mpt.storage.SharedPreferenceUtil;
 import com.onesignal.OneSignal;
 
 import io.fabric.sdk.android.Fabric;
-import org.json.JSONObject;
 
 /**
  * Created by smartsense on 22/09/16.
@@ -31,8 +30,10 @@ public class MadhaparGamApp extends Application {
         OneSignal.startInit(this).init();
         OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
         SharedPreferenceUtil.init(this);
+
         appInstnace = this;
     }
+
     public RequestQueue getRequestQueue() {
         if (reuestQueque == null) {
             reuestQueque = Volley.newRequestQueue(getApplicationContext());
@@ -53,5 +54,11 @@ public class MadhaparGamApp extends Application {
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         RequestQueue requestQueue1 = Volley.newRequestQueue(getApplicationContext(), stack);
         requestQueue1.add(req);
+    }
+
+    @Override
+    public void onTerminate() {
+
+        super.onTerminate();
     }
 }

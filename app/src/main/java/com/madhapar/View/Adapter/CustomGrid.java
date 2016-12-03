@@ -29,6 +29,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by Ronak on 10/11/2016.
  */
@@ -100,7 +101,7 @@ public class CustomGrid extends BaseAdapter {
                     photoListFragment = new PhotoListFragment();
                 }
                 photoListFragment.setArguments(bundle);
-                fm.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).commit();
+                fm.beginTransaction().replace(R.id.flGallaryMain, photoListFragment).commitAllowingStateLoss();
 
             }
         });

@@ -1,6 +1,7 @@
 package com.madhapar.Presenter;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.madhapar.Model.EventModel;
 import com.madhapar.Model.EventModelInt;
@@ -126,6 +127,7 @@ public class EventPresenter implements EventPresenterInt, EventModelInt.onEventD
     @Override
     public void updateEventStatus(String eventStatusId, String eventStatus, String count, EventDetailCallback.EventStatusUpdateCallback mEventStatusUpdateCallback) {
         this.mEventStatusUpdateCallback = mEventStatusUpdateCallback;
+
         if (eventModel == null) {
             eventModel = new EventModel();
         }
@@ -134,7 +136,7 @@ public class EventPresenter implements EventPresenterInt, EventModelInt.onEventD
 
     @Override
     public void openEventAlert(AppCompatActivity activity, JSONObject eventObj, String statusType, EventDetailCallback.EventStatusCreateCallback createCallback, EventDetailCallback.EventStatusUpdateCallback updateCallback) {
-        EventStatusAlertDialog alertDialog = new EventStatusAlertDialog(activity,eventObj,statusType,createCallback,updateCallback);
+        EventStatusAlertDialog alertDialog = new EventStatusAlertDialog(activity, eventObj, statusType, createCallback, updateCallback);
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.madhapar.View.Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.madhapar.Model.NewsObject;
 import com.madhapar.Presenter.RequestPresenter;
@@ -28,12 +32,14 @@ import com.madhapar.Util.UtilClass;
 import com.madhapar.View.Adapter.NewsListAdapter;
 import com.madhapar.View.FilterActivity;
 import com.madhapar.View.HomeViewInt;
+import com.madhapar.View.NewsDetailViewInt;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * Created by smartsense on 22/09/16.
  */
@@ -50,6 +56,7 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
     public Context mContext;
     private Activity activity;
     private static final int CATAGORY_REQUEST_CODE = 120;
+    private AlertDialog dialog;
 
     @Nullable
     @Override
@@ -58,11 +65,15 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         ButterKnife.bind(this, view);
         if (UtilClass.isInternetAvailabel(getActivity())) {
             UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
+            if (UtilClass.checkForRatingDialog()) {
+                openAletDialogForRating();
+            }
             requestPresenter = new RequestPresenter();
             requestPresenter.getNewsList(this);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+
 
         this.activity = getActivity();
         SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
@@ -103,6 +114,53 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionNews));
         rvNewsList.setNestedScrollingEnabled(true);
         return view;
+    }
+
+    private void openAletDialogForRating() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflator = LayoutInflater.from(getActivity());
+        View view = inflator.inflate(R.layout.alert_version, null, false);
+        dialogBuilder.setView(view);
+        TextView tvDialogOk = (TextView) view.findViewById(R.id.tvVersionDialogUpdate);
+        TextView tvDialogTitle = (TextView) view.findViewById(R.id.tvVersionDialgTitle);
+        tvDialogTitle.setVisibility(View.GONE);
+        TextView tvDialogMessage = (TextView) view.findViewById(R.id.tvVersionDialogMessage);
+        tvDialogMessage.setText("Would you like to rate us to app on play store ?");
+        TextView tvDialogCancel = (TextView) view.findViewById(R.id.tvVersionDialgCancel);
+        tvDialogOk.setText("Ok");
+        tvDialogCancel.setText("Cancel");
+        tvDialogOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+                }
+                UtilClass.updateRegistrationTime(10);
+            }
+        });
+        tvDialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilClass.updateRegistrationTime(5);
+                dialog.dismiss();
+            }
+        });
+        dialog = dialogBuilder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.alert_dialog_white_border);
+        dialog.setCancelable(false);
+        dialog.show();
+
+
     }
 
     @Override
@@ -155,6 +213,22 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
         if (srlNewsList.isRefreshing()) {
             srlNewsList.setRefreshing(false);
         }
+        requestPresenter.getNewsDetail("1", new NewsDetailViewInt() {
+            @Override
+            public void onSuccessNewsDetail(NewsObject newsObject) {
+
+            }
+
+            @Override
+            public void onFailRequest() {
+
+            }
+
+            @Override
+            public void onFailResponse(String message) {
+
+            }
+        });
         UtilClass.hideProgress();
         if (newsList.size() > 0) {
             if (isAdded() && activity != null) {

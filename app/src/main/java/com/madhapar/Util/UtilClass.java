@@ -13,11 +13,13 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.madhapar.R;
+import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +27,8 @@ import org.json.JSONException;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by smartsense on 21/09/16.
@@ -117,8 +121,13 @@ public class UtilClass {
         return builder.toString();
     }
 
-    public static String getEventListUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventListUrl).buildUpon().build();
+    public static String getEventstUrl(String eventId, boolean isEventList) {
+        Uri builder;
+        if (isEventList) {
+            builder = Uri.parse(Constants.RequestConstants.EventsUrl).buildUpon().build();
+        } else {
+            builder = Uri.parse(Constants.RequestConstants.EventsUrl + eventId + "/").buildUpon().build();
+        }
         return builder.toString();
     }
 
@@ -127,20 +136,11 @@ public class UtilClass {
         return builder.toString();
     }
 
-    public static String getLocationListUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.LocationListUrl).buildUpon().build();
+    public static String getLocationUrl() {
+        Uri builder = Uri.parse(Constants.RequestConstants.LocationUrl).buildUpon().build();
         return builder.toString();
     }
 
-    public static String getCreateLocationUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.CreateLocationListUrl).buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getProfileUpdateUrl(String userId) {
-        Uri builder = Uri.parse(Constants.RequestConstants.ProfileUpdateUrl + userId + "/").buildUpon().build();
-        return builder.toString();
-    }
 
     public static String getFeedbackUrl() {
         Uri builder = Uri.parse(Constants.RequestConstants.FeedbackUrl).buildUpon().build();
@@ -154,50 +154,43 @@ public class UtilClass {
     }
 
 
-    public static String getEventStatusListUrl(String eventId, String eventStatus) {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusListUrl + eventId + "/" + eventStatus).buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getEventStatusCreateUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusCreateUrl).buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getEventStatusUpdateUrl(String eventId) {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventStatusUpdaetUrl + eventId + "/").buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getEventDetailUrl(String eventId) {
-        Uri builder = Uri.parse(Constants.RequestConstants.EventDetailUrl + eventId + "/").buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getCommentUpdateUrl(String newsStatusID) {
-        Uri builder = Uri.parse(Constants.RequestConstants.CommentUpdateUrl + newsStatusID + "/").buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getLikeUpdateUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.LikeUpdateUrl).buildUpon().build();
-        return builder.toString();
-    }
-
-    public static String getCommentListUrk(String newsId, String newsStatusId) {
-        Uri builder = Uri.parse(Constants.RequestConstants.CommentLstUrl + newsId + "/" + newsStatusId + "/").buildUpon().build();
+    public static String getEventStatustUrl(String eventId, String eventStatus, int eventStatusInt) {
+        Uri builder;
+        if (eventStatusInt == 0) {
+            builder = Uri.parse(Constants.RequestConstants.EventStatusUrl + eventId + "/" + eventStatus).buildUpon().build();
+        } else if (eventStatusInt == 1) {
+            builder = Uri.parse(Constants.RequestConstants.EventStatusUrl).buildUpon().build();
+        } else {
+            builder = Uri.parse(Constants.RequestConstants.EventStatusUrl + eventStatus + "/").buildUpon().build();
+        }
         return builder.toString();
     }
 
 
-    public static String getNewsDetailUrl(String newsId) {
-        Uri uriBuilder = Uri.parse(Constants.RequestConstants.NewsDetailUrl + newsId + "/").buildUpon().build();
-        return uriBuilder.toString();
+    public static String getNewsStatusUrl(String newsId, String newsStatusId, int newsType) {
+        Uri builder;
+        if (newsType == 0) {
+            builder = Uri.parse(Constants.RequestConstants.NewsStatusUrl).buildUpon().build();
+        } else if (newsType == 1) {
+            builder = Uri.parse(Constants.RequestConstants.NewsStatusUrl + newsId + "/").buildUpon().build();
+        } else if (newsType == 2) {
+            builder = Uri.parse(Constants.RequestConstants.NewsStatusUrl + newsId + "/" + newsStatusId + "/").buildUpon().build();
+        } else {
+            builder = Uri.parse(Constants.RequestConstants.NewsStatusUrl + newsStatusId + "/").buildUpon().build();
+        }
+
+        return builder.toString();
     }
 
 
-    public static String getNewsFeedUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.NewsFeedUrl).buildUpon().build();
+    public static String getNewsFeedUrl(String newsId, boolean isNewsList) {
+        Uri builder;
+        if (isNewsList) {
+            builder = Uri.parse(Constants.RequestConstants.NewsFeedUrl).buildUpon().build();
+        } else {
+            builder = Uri.parse(Constants.RequestConstants.NewsFeedUrl + newsId + "/").buildUpon().build();
+        }
+
         return builder.toString();
     }
 
@@ -206,8 +199,15 @@ public class UtilClass {
         return builder.toString();
     }
 
-    public static String getUserListUrl() {
-        Uri builder = Uri.parse(Constants.RequestConstants.UserListUrl).buildUpon().build();
+    public static String getUserUrl(String userId, boolean isUserList) {
+        Uri builder;
+        if (isUserList) {
+            builder = Uri.parse(Constants.RequestConstants.UserUrl).buildUpon().build();
+        } else {
+            builder = Uri.parse(Constants.RequestConstants.UserUrl + userId + "/").buildUpon().build();
+        }
+
+
         return builder.toString();
     }
 
@@ -227,10 +227,6 @@ public class UtilClass {
         return builder.toString();
     }
 
-    public static String getRemoveLikeUrl(String newsStatusId) {
-        Uri builder = Uri.parse(Constants.RequestConstants.RemoveLikeUrl + newsStatusId + "/").buildUpon().build();
-        return builder.toString();
-    }
 
     public static boolean isInternetAvailabel(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -324,17 +320,55 @@ public class UtilClass {
 
 
     public static String formatValue(double value) {
-        int power;
-        String suffix = " kmbt";
-        String formattedNumber = "";
+        try {
+            int power;
+            String suffix = " kmbt";
+            String formattedNumber = "";
+            NumberFormat formatter = new DecimalFormat("#,###.#");
+            power = (int) StrictMath.log10(value);
+            value = value / (Math.pow(10, (power / 3) * 3));
+            formattedNumber = formatter.format(value);
+            formattedNumber = formattedNumber + suffix.charAt(power / 3);
+            return formattedNumber.length() > 4 ? formattedNumber.replaceAll("\\.[0-9]+", "") : formattedNumber;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
 
-        NumberFormat formatter = new DecimalFormat("#,###.#");
-        power = (int) StrictMath.log10(value);
-        value = value / (Math.pow(10, (power / 3) * 3));
-        formattedNumber = formatter.format(value);
-        formattedNumber = formattedNumber + suffix.charAt(power / 3);
-        return formattedNumber.length() > 4 ? formattedNumber.replaceAll("\\.[0-9]+", "") : formattedNumber;
+    }
+
+    public static boolean checkForRatingDialog() {
+        if (SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0) == 0) {
+            SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationTime, System.currentTimeMillis());
+            SharedPreferenceUtil.save();
+            return true;
+        } else {
+            Calendar calendar = Calendar.getInstance();
+            long regTime = SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0);
+            calendar.setTimeInMillis(regTime);
+            Log.d("******", "RegistrationDate" + calendar.getTime());
+            Date regDate = calendar.getTime();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            Date currentDate = calendar.getTime();
+            Log.d("******", "CurrentTime" + calendar.getTime());
+            if (currentDate.after(regDate)) {
+                return true;
+            } else {
+                return false;
+
+            }
+        }
     }
 
 
+    public static void updateRegistrationTime(int days) {
+        long regTime = SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(regTime);
+        Log.d("******", "Update" + "regTime" + calendar.getTime());
+        calendar.add(Calendar.DAY_OF_YEAR, days);
+        long updatedTime = calendar.getTimeInMillis();
+        SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationTime, updatedTime);
+        SharedPreferenceUtil.save();
+    }
 }

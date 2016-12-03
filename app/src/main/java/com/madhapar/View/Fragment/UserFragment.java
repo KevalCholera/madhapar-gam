@@ -391,7 +391,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
     private boolean changeFocusIfEmpty(EditText et) {
         if (mDialogAll != null) {
             if (!mDialogAll.isVisible()) {
-
                 etEditProfileDOB.clearFocus();
             }
         }
@@ -623,7 +622,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
         File file = new File(imageData);
         HashMap<String, String> params = new HashMap<>();
         params.put("userProfilePicture", file.getAbsoluteFile().toString());
-        WebServiceUtil webServiceUtil = new WebServiceUtil(getActivity(), UtilClass.getProfileUpdateUrl(SharedPreferenceUtil.getString(Constants.UserData.UserId, "")), params, true, params, this);
+        WebServiceUtil webServiceUtil = new WebServiceUtil(getActivity(), UtilClass.getUserUrl(SharedPreferenceUtil.getString(Constants.UserData.UserId, ""), false), params, true, params, this);
         webServiceUtil.execute();
     }
 

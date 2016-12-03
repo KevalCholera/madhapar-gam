@@ -1,7 +1,5 @@
 package com.madhapar.Model;
 
-import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -29,7 +27,7 @@ public class NetworkModel implements NetworkModelInt {
     @Override
     public void getNetworkList(final NetworkListResponseCallback callback) {
         String tag = "userList";
-        StringRequest userListRequest = new StringRequest(Request.Method.GET, UtilClass.getUserListUrl(), new Response.Listener<String>() {
+        StringRequest userListRequest = new StringRequest(Request.Method.GET, UtilClass.getUserUrl("", true), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {

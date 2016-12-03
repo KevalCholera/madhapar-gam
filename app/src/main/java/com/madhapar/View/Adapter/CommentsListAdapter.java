@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * Created by Ronak on 10/10/2016.
  */
@@ -193,7 +194,6 @@ public class CommentsListAdapter extends RecyclerSwipeAdapter<CommentsListAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     private void removeComment(String newsStatusId) {

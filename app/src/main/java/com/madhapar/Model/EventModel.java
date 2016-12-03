@@ -4,20 +4,22 @@ import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.madhapar.Application.MadhaparGamApp;
 import com.madhapar.Util.Constants;
 import com.madhapar.Util.UtilClass;
-import com.madhapar.View.EventDetailCallback;
 import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,10 +33,11 @@ public class EventModel implements EventModelInt {
     @Override
     public void getEventDetail(String eventId, final onEventDetailListener mEventListener) {
         String tag = "eventDetail";
-        StringRequest eventdetailRequest = new StringRequest(Request.Method.GET, UtilClass.getEventDetailUrl(eventId), new Response.Listener<String>() {
+        StringRequest eventdetailRequest = new StringRequest(Request.Method.GET, UtilClass.getEventstUrl(eventId, false), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
+
                     try {
                         JSONObject eventDetail = new JSONObject(response);
                         if (eventDetail.optInt("status") == Constants.ResponseCode.SuccessCode) {
@@ -70,7 +73,7 @@ public class EventModel implements EventModelInt {
     @Override
     public void getEventList(final EventListListener mEventListener) {
         String tag = "getEventList";
-        StringRequest eventListRequest = new StringRequest(Request.Method.GET, UtilClass.getEventListUrl(), new Response.Listener<String>() {
+        StringRequest eventListRequest = new StringRequest(Request.Method.GET, UtilClass.getEventstUrl("", true), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -117,11 +120,11 @@ public class EventModel implements EventModelInt {
     @Override
     public void createEventStatus(final String eventId, final String eventStatusType, final String count, final EventStatusCreateListener mEventStatusListener) {
         String tag = "eventStatusCreate";
-        StringRequest eventStatusRequest = new StringRequest(Request.Method.POST, UtilClass.getEventStatusCreateUrl(), new Response.Listener<String>() {
+        StringRequest eventStatusRequest = new StringRequest(Request.Method.POST, UtilClass.getEventStatustUrl("", "", 1), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-
+                    Log.d("eventStatus", "create" + response);
                     if (response != null) {
                         JSONObject eventStautsObj = new JSONObject(response);
                         if (eventStautsObj != null) {
@@ -169,11 +172,12 @@ public class EventModel implements EventModelInt {
     @Override
     public void getEventStatusList(String eventId, String eventStatus, final EventStautsListListener mEventStatusListListener) {
         String tag = "eventStatusList";
-        StringRequest eventStatusListRequest = new StringRequest(Request.Method.GET, UtilClass.getEventStatusListUrl(eventId, eventStatus), new Response.Listener<String>() {
+        StringRequest eventStatusListRequest = new StringRequest(Request.Method.GET, UtilClass.getEventStatustUrl(eventId, eventStatus, 0), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
                     try {
+                        Log.d("eventStatus", "list" + response);
                         JSONObject statusObj = new JSONObject(response);
 
                         if (statusObj.optInt("status") == Constants.ResponseCode.SuccessCode) {
@@ -211,12 +215,10 @@ public class EventModel implements EventModelInt {
     @Override
     public void updateEventStatus(String eventStatusId, final String eventStatus, final String count, final EventStatusUpdateListener mEventUpdateListener) {
         String tag = "eventStatusUpdate";
-
-        StringRequest statusUpdateRequest = new StringRequest(Request.Method.PUT, UtilClass.getEventStatusUpdateUrl(eventStatusId), new Response.Listener<String>() {
+        StringRequest statusUpdateRequest = new StringRequest(Request.Method.PUT, UtilClass.getEventStatustUrl("", eventStatusId, 2), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
-
                     try {
                         JSONObject updateObj = new JSONObject(response);
                         if (updateObj != null) {
@@ -234,7 +236,24 @@ public class EventModel implements EventModelInt {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mEventUpdateListener.onFailEventUpdateRequest();
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                        JSONObject obj = new JSONObject(res);
+                        if (obj != null) {
+                            mEventUpdateListener.onFailEventUpdateResponse(obj.optString("message"));
+                        } else {
+                            mEventUpdateListener.onFailEventUpdateRequest();
+                        }
+                    } catch (UnsupportedEncodingException e1) {
+                        e1.printStackTrace();
+                    } catch (JSONException e2) {
+                        e2.printStackTrace();
+                    }
+                }
+
             }
         }) {
             @Override
