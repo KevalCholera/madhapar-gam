@@ -34,10 +34,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name="com.madhapar.View.SubActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.madhapar.View.LoginActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -210,8 +207,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
-
 
         <meta-data
             android:name="io.fabric.ApiKey"

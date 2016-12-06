@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * Created by smartsense on 20/10/16.
  */
@@ -52,8 +53,17 @@ public class FundRaisingListAdapter extends RecyclerView.Adapter<FundRaisingList
             String projectDate = projectObj.optString("projectFromDate") + " - " + projectObj.optString("projectToDate");
             holder.tvFundRaisingProjectDate.setText(projectDate);
             try {
-                holder.tvFundRaisingProjectGoal.setText("Goal : " + "₹ " + UtilClass.formatValue(projectObj.optDouble("projectTotalCost")));
-                holder.tvFundRaisingProjectRaised.setText("Raised : " + "₹ " + UtilClass.formatValue(projectObj.optDouble("projectTotalRaised")));
+                String goalValue = "";
+                String raisedValue = "";
+                if (!(projectObj.optDouble("projectTotalCost") <= 0)) {
+                    goalValue = UtilClass.formatValue(projectObj.optDouble("projectTotalCost"));
+                }
+                if (!(projectObj.optDouble("projectTotalCost") <= 0)) {
+                    raisedValue = UtilClass.formatValue(projectObj.optDouble("projectTotalRaised"));
+                }
+
+                holder.tvFundRaisingProjectGoal.setText("Goal : " + "₹ " + goalValue);
+                holder.tvFundRaisingProjectRaised.setText("Raised : " + "₹ " + raisedValue);
 
             } catch (Exception e) {
                 e.printStackTrace();

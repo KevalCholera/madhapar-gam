@@ -32,6 +32,7 @@ public class LoginActivity extends BaseActivity implements LoginInt {
             etLoginId.setHint("");
         }
     }
+
     @BindView(R.id.etLoginPassword)
     EditText etLoginPassword;
     @BindView(R.id.ivClose)
@@ -44,12 +45,15 @@ public class LoginActivity extends BaseActivity implements LoginInt {
     Button btnLogin;
     private PresneterInt presenter;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
     }
+
     @OnClick(R.id.btnLogin)
     public void submit() {
         UtilClass.closeKeyboard(LoginActivity.this);

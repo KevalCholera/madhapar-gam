@@ -28,10 +28,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/margin_small"
-                android:layout_marginRight="@dimen/cardElevation"
+                android:layout_margin="@dimen/margin_small"
                 android:button="@android:color/transparent"
                 android:checked="false"
+                android:elevation="10dp"
                 android:gravity="center" />
 
 
@@ -39,10 +39,10 @@
                 android:id="@+id/radioImageSelector"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="@dimen/margin_small"
-                android:layout_marginRight="@dimen/margin_small"
+                android:layout_margin="@dimen/margin_small"
                 android:button="@android:color/transparent"
-                android:checked="true" />
+                android:checked="true"
+                android:elevation="10dp" />
         </RadioGroup>
 
         <LinearLayout

@@ -9,6 +9,7 @@ public interface CommentModelInt {
 
         void onCommentLengthError();
     }
-    public void comment(String comment, onCommentRequestFinishListener listener);
+
+    void comment(String comment, onCommentRequestFinishListener listener);
 
 }

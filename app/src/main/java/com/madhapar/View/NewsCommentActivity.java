@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+
 public class NewsCommentActivity extends AppCompatActivity implements CommentListCallback, CommentViewInt, NewsLikeCommentUpdateCallback {
     @BindView(R.id.rvCommentList)
     RecyclerView rvCommentList;
@@ -49,19 +51,25 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     @OnClick(R.id.tvSendComment)
     public void sendComment() {
         if (!etCommentText.getText().toString().equalsIgnoreCase("") && etCommentText.getText().toString().length() < 200) {
-            if (presenterClass == null)
+            if (presenterClass == null) {
                 presenterClass = new RequestPresenter();
+            }
+            if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
+                presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
+                if (presenter == null) {
+                    presenter = new PresenterClass();
+                }
+                presenter.commentCredential(etCommentText.getText().toString(), this);
+            } else {
+                presenterClass.updateComment(getIntent().getStringExtra("newsId"), (String) etCommentText.getTag(), etCommentText.getText().toString(), "1", this);
+            }
         } else {
+            if (TextUtils.isEmpty(etCommentText.getText().toString())) {
+                UtilClass.displyMessage(getString(R.string.commentEmpty), this, 0);
+            }
             if (etCommentText.getText().toString().length() > 200) {
                 UtilClass.displyMessage(getString(R.string.commentValidationlessthan200), this, 0);
             }
-        }
-        if (((String) tvSendComment.getTag()).equalsIgnoreCase("add")) {
-            presenterClass.updateLikeComment(getIntent().getStringExtra("newsId"), "1", etCommentText.getText().toString(), this);
-            presenter = new PresenterClass();
-            presenter.commentCredential(etCommentText.getText().toString(), this);
-        } else {
-            presenterClass.updateComment(getIntent().getStringExtra("newsId"), (String) etCommentText.getTag(), etCommentText.getText().toString(), "1", this);
         }
     }
 
@@ -102,6 +110,7 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
         Intent backIntent = new Intent();
         backIntent.putExtra("newsId", getIntent().getStringExtra("newsId"));
         setResult(RESULT_OK, backIntent);
+        UtilClass.closeKeyboard(this);
         finish();
     }
 
@@ -164,7 +173,6 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
 
     @Override
     public void failUpdateRequest() {
-
         tvSendComment.setTag("add");
         etCommentText.setText("");
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
@@ -174,7 +182,10 @@ public class NewsCommentActivity extends AppCompatActivity implements CommentLis
     public void updateComment(String newsComment, String newsStatus, String newsStatusId) {
         etCommentText.setTag(newsStatusId);
         tvSendComment.setTag("update");
-        etCommentText.setText(newsComment);
+        etCommentText.setText(newsComment + " ");
+
+        etCommentText.setSelection(etCommentText.getText().length());
+
     }
 
 

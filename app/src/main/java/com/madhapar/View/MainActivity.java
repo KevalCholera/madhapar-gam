@@ -18,6 +18,7 @@ import com.madhapar.View.Adapter.MainDrawerListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity implements ViewInt, View.OnClickListener {
     private PresenterClass presenter;
     private ViewInt mainViewInt;

@@ -51,6 +51,7 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
         SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
         SharedPreferenceUtil.save();
         setResult(RESULT_OK);
+        UtilClass.closeKeyboard(this);
         finish();
     }
 
@@ -69,11 +70,13 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
             SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, filterString);
             SharedPreferenceUtil.save();
             setResult(RESULT_OK);
+            UtilClass.closeKeyboard(this);
             finish();
         } else {
             SharedPreferenceUtil.putValue(Constants.DifferentData.SelectedCatagory, "clear");
             SharedPreferenceUtil.save();
             setResult(RESULT_OK);
+            UtilClass.closeKeyboard(this);
             finish();
         }
     }
@@ -89,6 +92,12 @@ public class FilterActivity extends BaseActivity implements CatagoryCallback {
         if (newsCatagoryAdapter != null && newsCatagoryAdapter.getFilter() != null) {
             newsCatagoryAdapter.getFilter().filter(etNewsFilterSearch.getText().toString());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        UtilClass.closeKeyboard(this);
+        super.onDestroy();
     }
 
     @Override

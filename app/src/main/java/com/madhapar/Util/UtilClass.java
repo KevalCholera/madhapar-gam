@@ -340,17 +340,21 @@ public class UtilClass {
     public static boolean checkForRatingDialog() {
         if (SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0) == 0) {
             SharedPreferenceUtil.putValue(Constants.UserData.UserRegistrationTime, System.currentTimeMillis());
+            Calendar regCa = Calendar.getInstance();
+            regCa.setTimeInMillis(System.currentTimeMillis());
+            Date date = regCa.getTime();
+            Log.d("***********", "initial" + date);
             SharedPreferenceUtil.save();
             return true;
         } else {
             Calendar calendar = Calendar.getInstance();
             long regTime = SharedPreferenceUtil.getLong(Constants.UserData.UserRegistrationTime, 0);
             calendar.setTimeInMillis(regTime);
-            Log.d("******", "RegistrationDate" + calendar.getTime());
             Date regDate = calendar.getTime();
+            Log.d("************", "regTime" + regDate);
             calendar.setTimeInMillis(System.currentTimeMillis());
             Date currentDate = calendar.getTime();
-            Log.d("******", "CurrentTime" + calendar.getTime());
+            Log.d("*************", "Current Time" + currentDate);
             if (currentDate.after(regDate)) {
                 return true;
             } else {

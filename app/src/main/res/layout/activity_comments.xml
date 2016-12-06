@@ -37,7 +37,6 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-
         <EditText
             android:id="@+id/etCommentText"
             android:layout_width="0dp"
@@ -55,9 +54,14 @@
         <TextView
             android:id="@+id/tvSendComment"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:padding="@dimen/paddingSmall"
             android:text="@string/SendComment"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />

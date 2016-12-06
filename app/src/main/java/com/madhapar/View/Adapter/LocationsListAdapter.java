@@ -18,6 +18,7 @@ import org.json.JSONArray;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * Created by smartsense on 21/10/16.
  */
@@ -84,8 +85,14 @@ public class LocationsListAdapter extends RecyclerView.Adapter<LocationsListAdap
         }
     }
 
+    public void updateLocationList(JSONArray locationList) {
 
-    private class LocationFilter extends Filter {
+        this.locationList = locationList;
+        notifyDataSetChanged();
+    }
+
+
+    public class LocationFilter extends Filter {
         LocationsListAdapter locationAdapter;
 
         public LocationFilter(LocationsListAdapter locationAdapter) {
@@ -111,12 +118,6 @@ public class LocationsListAdapter extends RecyclerView.Adapter<LocationsListAdap
             locationAdapter.locationList = (JSONArray) filterResults.values;
             notifyDataSetChanged();
         }
-    }
-
-    public void updateLocationList(JSONArray locationList) {
-
-        this.locationList = locationList;
-        notifyDataSetChanged();
     }
 
 

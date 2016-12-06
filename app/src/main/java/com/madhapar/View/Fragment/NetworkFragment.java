@@ -106,5 +106,19 @@ public class NetworkFragment extends BaseFragment implements NetworkViewInt {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        if (getActivity() != null) {
+            UtilClass.closeKeyboard(getActivity());
+        }
+        super.onDestroyView();
+    }
 
+    @Override
+    public void onDetach() {
+        if (getActivity() != null ) {
+            UtilClass.closeKeyboard(getActivity());
+        }
+        super.onDetach();
+    }
 }

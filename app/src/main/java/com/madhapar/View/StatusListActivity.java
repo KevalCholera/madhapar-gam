@@ -1,4 +1,5 @@
 package com.madhapar.View;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -146,6 +147,7 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     @Override
     public void onFailEventStatusListRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
 
     }
@@ -153,11 +155,13 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     @Override
     public void onFailEventStatusResponse(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(message, this, 0);
     }
 
     @Override
     public void onSuccessStautsCreate(JSONObject updateObj) {
+        UtilClass.closeKeyboard(this);
         if (ivEventStautsChangeImage.getVisibility() == View.VISIBLE) {
             ivEventStautsChangeImage.setVisibility(View.GONE);
         } else {
@@ -177,17 +181,20 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     @Override
     public void onFailStautsCreateRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
     }
 
     @Override
     public void onFailStautsCreateRequest(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(message, this, 0);
     }
 
     @Override
     public void onSuccessStautsUpdate(JSONObject updateObj) {
+        UtilClass.closeKeyboard(this);
         if (ivEventStautsChangeImage.getVisibility() == View.VISIBLE) {
             ivEventStautsChangeImage.setVisibility(View.GONE);
         } else {
@@ -208,12 +215,14 @@ public class StatusListActivity extends AppCompatActivity implements EventDetail
     @Override
     public void onFailStautsUpdateRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), this, 0);
     }
 
     @Override
     public void onFailStautsUpdateRequest(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(this);
         UtilClass.displyMessage(message, this, 0);
     }
 

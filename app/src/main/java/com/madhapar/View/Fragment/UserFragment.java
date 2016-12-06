@@ -321,7 +321,6 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
             etProfileLastName.setText(first + lastName.substring(1));
         }
 
-
         etEditProfileBloodGroup.setTag(SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, ""));
 
         if (SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, "").equalsIgnoreCase("") || SharedPreferenceUtil.getString(Constants.UserData.UserBloodGroup, "").equalsIgnoreCase("null")) {

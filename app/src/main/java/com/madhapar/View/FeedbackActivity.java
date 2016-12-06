@@ -15,6 +15,7 @@ import com.madhapar.Util.UtilClass;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 public class FeedbackActivity extends AppCompatActivity implements FeedbackActivityInt {
     @BindView(R.id.etFeedbackSubject)
     EditText etFeedbackSubject;
@@ -98,5 +99,12 @@ public class FeedbackActivity extends AppCompatActivity implements FeedbackActiv
         UtilClass.hideProgress();
         UtilClass.displyMessage(getString(R.string.msgSomethigWentWrong), FeedbackActivity.this, Toast.LENGTH_SHORT);
     }
+
+    @Override
+    protected void onDestroy() {
+        UtilClass.closeKeyboard(this);
+        super.onDestroy();
+    }
+
 
 }

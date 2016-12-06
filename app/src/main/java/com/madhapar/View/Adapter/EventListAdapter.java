@@ -164,7 +164,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     }
 
     private String getDates(String fromDate) {
-        return   fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13);
+        return fromDate.substring(0, 2) + "-" + fromDate.substring(3, 6) + "-" + fromDate.substring(8, 13);
 
 
     }
@@ -196,12 +196,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     @Override
     public void onFailStautsCreateRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
     }
 
     @Override
     public void onFailStautsCreateRequest(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(message, context, 0);
 
     }
@@ -209,6 +211,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     @Override
     public void onSuccessEventList(final JSONArray eventArray) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -221,12 +224,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     @Override
     public void onFailEventListRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
     }
 
     @Override
     public void onFailEventListResponse(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(message, context, 0);
 
     }
@@ -247,12 +252,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.MyVi
     @Override
     public void onFailStautsUpdateRequest() {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(context.getString(R.string.msgSomethigWentWrong), context, 0);
     }
 
     @Override
     public void onFailStautsUpdateRequest(String message) {
         UtilClass.hideProgress();
+        UtilClass.closeKeyboard(activity);
         UtilClass.displyMessage(message, context, 0);
     }
 

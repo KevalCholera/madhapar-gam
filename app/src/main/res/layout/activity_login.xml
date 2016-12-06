@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
@@ -31,7 +32,6 @@
                     android:layout_gravity="end"
                     android:layout_marginRight="@dimen/activity_login_margin"
                     android:layout_marginTop="@dimen/top_margin_medium"
-
                     android:visibility="gone" />
 
                 <ImageView
@@ -69,7 +69,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium">
+                    android:layout_marginTop="@dimen/margin_medium"
+                    app:passwordToggleEnabled="true">
 
                     <EditText
                         android:id="@+id/etLoginPassword"
@@ -79,8 +80,8 @@
                         android:layout_marginRight="@dimen/activity_rightleft_login"
                         android:layout_marginTop="@dimen/activity_top_login_margin"
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-                        android:drawableLeft="@mipmap/icon_key"
                         android:drawablePadding="@dimen/paddingMedium"
+                        android:drawableStart="@mipmap/icon_key"
                         android:gravity="left|center"
                         android:hint="@string/passwordLogin"
                         android:inputType="textPassword"
@@ -94,13 +95,14 @@
                     android:layout_width="@dimen/activity_button_width"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_marginTop="@dimen/activity_top_login_margin"
                     android:background="@drawable/loginbtn"
                     android:shadowDy="0"
-                    android:stateListAnimator="@null"
                     android:text="@string/btnLogin"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text18" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +132,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="@dimen/paddingSmall"
-                    android:text="@string/newUserSignUp" />
+                    android:text="@string/newUserSignUp"
+                    android:textSize="@dimen/text18" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
