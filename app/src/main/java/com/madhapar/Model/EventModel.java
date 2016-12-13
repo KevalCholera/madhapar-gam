@@ -29,7 +29,6 @@ import java.util.Map;
 
 public class EventModel implements EventModelInt {
 
-
     @Override
     public void getEventDetail(String eventId, final onEventDetailListener mEventListener) {
         String tag = "eventDetail";

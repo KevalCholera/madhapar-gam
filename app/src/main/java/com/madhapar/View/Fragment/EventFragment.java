@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
 /**
  * Created by smartsense on 24/09/16.
  */
+
 public class EventFragment extends BaseFragment implements EventDetailCallback.EventListCallback {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -41,7 +42,6 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     LinearLayout llNewsListPlaceholder;
     private EventPresenter presenterClass;
     private EventListAdapter recylerViewAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     public Context mContext;
     private static final int REQUEST_CODE_FOR_EVENT_STATUS = 102;
 
@@ -49,16 +49,19 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
+
         ButterKnife.bind(this, view);
         presenterClass = new EventPresenter();
+
         if (UtilClass.isInternetAvailabel(getActivity())) {
             UtilClass.showProgress(getActivity(), getString(R.string.msgPleaseWait));
             presenterClass.getEventList(EventFragment.this);
         } else {
             UtilClass.displyMessage(getString(R.string.msgCheckInternet), getActivity(), 0);
         }
+
         mContext = this.getActivity();
-        mLayoutManager = new LinearLayoutManager(mContext);
+
         rlEventList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -71,6 +74,7 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
                 }
             }
         });
+
         getActivity().registerReceiver(pushReceiver, new IntentFilter(Constants.PushConstant.PushActionEvent));
         return view;
     }
@@ -109,7 +113,6 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         super.onDestroy();
     }
 
-
     @Override
     public void onSuccessEventList(JSONArray eventArray) {
         UtilClass.hideProgress();
@@ -119,14 +122,15 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         if (eventArray.length() > 0) {
             if (recylerViewAdapter == null) {
                 recylerViewAdapter = new EventListAdapter(getActivity(), eventArray, (AppCompatActivity) getActivity());
-                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
                 recyclerView.setAdapter(recylerViewAdapter);
 
             } else {
                 recylerViewAdapter.updateAdapter(eventArray);
             }
         } else {
-            updateViews(false);
+            llNewsListPlaceholder.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         }
     }
 
@@ -141,7 +145,6 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
         }
     }
 
-
     @Override
     public void onFailEventListResponse(String message) {
         if (isAdded() && getActivity() != null) {
@@ -152,7 +155,6 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
             UtilClass.displyMessage(message, getActivity(), 0);
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -168,15 +170,5 @@ public class EventFragment extends BaseFragment implements EventDetailCallback.E
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void updateViews(final boolean listVisible) {
-        if (listVisible) {
-            llNewsListPlaceholder.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        } else {
-            llNewsListPlaceholder.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
     }
 }

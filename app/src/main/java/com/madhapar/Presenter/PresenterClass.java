@@ -15,7 +15,6 @@ import com.madhapar.Model.ForgetPasswordModelInt;
 import com.madhapar.Model.FundRaisingModel;
 import com.madhapar.Model.FundRaisingModelInt;
 import com.madhapar.Model.LoginModel;
-import com.madhapar.Model.LoginModelInt;
 import com.madhapar.Model.MainModelClass;
 import com.madhapar.Model.SignUpModel;
 import com.madhapar.Util.UtilClass;
@@ -39,7 +38,7 @@ import java.util.List;
  * Created by smartsense on 21/09/16.
  */
 
-public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRequestFinishListener, LoginModelInt.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
+public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRequestFinishListener, LoginModel.onLoginFinishListener, SignUpModel.OnSignUpFinishedListener, ForgetPasswordModel.onSendOtpListener, ChangePasswordModel.onChangePasswordRequestFinishListener, FeedbackModel.OnFeedbackPostListener, ForgetPasswordModelInt.onVerifyOtpListener, FundRaisingModelInt.FundRaisingListResponseCallback {
 
     private MainModelClass modelClass;
     private LoginInt loginInt;
@@ -96,9 +95,7 @@ public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRe
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.
-                replace(containerId, modelClass.getFragment(position));
-
+        fragmentTransaction.replace(containerId, modelClass.getFragment(position));
 
         for (int entry = 0; entry < fragmentManager.getBackStackEntryCount(); entry++) {
             Log.i("@@@@@@@@@@@@@@@@@@@@", "Found fragment: " + fragmentManager.getBackStackEntryAt(entry).getId());

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by smartsense on 06/10/16.
  */
 
-public interface LoginModelInt {
+interface LoginModelInt {
 
 
     public interface onLoginFinishListener {
