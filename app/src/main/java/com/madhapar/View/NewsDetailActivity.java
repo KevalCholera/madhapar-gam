@@ -82,9 +82,8 @@ public class NewsDetailActivity extends BaseActivity implements NewsLikeCommentU
     void screenshotShare() {
         if (checkPermission()) {
             svNewsDetail.smoothScrollTo(0, svNewsDetail.getTop());
-
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

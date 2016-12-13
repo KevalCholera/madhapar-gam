@@ -85,7 +85,7 @@ public class EventDetailActivity extends AppCompatActivity implements EventDetai
         if (checkPermission()) {
             svEventDetail.smoothScrollTo(0, svEventDetail.getTop());
             try {
-                Thread.sleep(2000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

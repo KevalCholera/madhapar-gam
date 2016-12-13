@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.madhapar.View.UploadInterface;
-import com.mpt.storage.SharedPreferenceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +80,7 @@ public class WebServiceUtil extends AsyncTask<String, Integer, String> {
             response = mu.finish();
 
 
+
         } catch (IOException e) {
 
             e.printStackTrace();
@@ -94,7 +94,6 @@ public class WebServiceUtil extends AsyncTask<String, Integer, String> {
     }
 
     protected void onPostExecute(String result) {
-
         if (result != null) {
             try {
                 JSONArray picArray = new JSONArray(result);

@@ -265,7 +265,6 @@ public class HomeFragment extends BaseFragment implements HomeViewInt {
 
     @Override
     public void onFailResponse(String message) {
-        Log.e("onFailResponse", "newsList");
         if (isAdded() && activity != null) {
             if (srlNewsList.isRefreshing()) {
                 srlNewsList.setRefreshing(false);

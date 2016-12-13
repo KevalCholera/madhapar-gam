@@ -113,10 +113,11 @@
                 <ImageView
                     android:id="@+id/ivNewsLike"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/activity_top_login_margin"
+                    android:layout_height="@dimen/commentImageHeight"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_top_login_margin"
-                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_marginRight="@dimen/activity_top_login_margin"
+                    android:padding="@dimen/padding3"
                     android:src="@mipmap/ic_news_like" />
 
                 <TextView
@@ -140,10 +141,11 @@
                 <ImageView
                     android:id="@+id/ivNewsComment"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/activity_top_login_margin"
+                    android:layout_height="@dimen/commentImageHeight"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_top_login_margin"
                     android:layout_marginRight="@dimen/margin_small"
+                    android:padding="@dimen/padding3"
 
                     android:src="@mipmap/ic_news_comment" />
 

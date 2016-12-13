@@ -30,7 +30,6 @@ public class ProfileEditActivity extends AppCompatActivity {
     TextView tvProfileDOB;
     @BindView(R.id.tvProfileBloddGroup)
     TextView tvProfileBloddGroup;
-
     @BindView(R.id.tvProfileEmail)
     TextView tvProfileEmail;
     @BindView(R.id.tvProfileMiddleName)

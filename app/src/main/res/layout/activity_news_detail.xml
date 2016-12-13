@@ -135,11 +135,12 @@
 
             <ImageView
                 android:id="@+id/ivNewsDetailLike"
-                android:layout_width="@dimen/newsDetailWidthImage"
-                android:layout_height="@dimen/newsDetailWidthImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/commentImageHeight"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/magin_large"
                 android:layout_marginRight="@dimen/margin_small"
+                android:padding="@dimen/padding3"
                 android:src="@mipmap/ic_news_like" />
 
             <TextView
@@ -161,11 +162,12 @@
 
             <ImageView
                 android:id="@+id/ivNewsDetailComment"
-                android:layout_width="@dimen/newsDetailWidthImage"
-                android:layout_height="@dimen/newsDetailWidthImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/commentImageHeight"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/margin30"
                 android:layout_marginRight="@dimen/margin_small"
+                android:padding="@dimen/padding3"
                 android:src="@mipmap/ic_news_comment" />
 
             <TextView
@@ -188,9 +190,10 @@
             <ImageView
                 android:id="@+id/ivDetailNewsShare"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/newsDetailWidthImage"
+                android:layout_height="@dimen/commentImageHeight"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/margin20"
+                android:padding="@dimen/padding3"
                 android:src="@mipmap/ic_news_share_filled" />
         </LinearLayout>
     </LinearLayout>

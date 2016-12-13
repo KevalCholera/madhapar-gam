@@ -493,6 +493,7 @@ public class UserFragment extends BaseFragment implements ProfileUpdateCallback,
                 .build();
         mDialogAll.show(getChildFragmentManager(), "month");
         mDialogAll.setCancelable(false);
+
     }
 
 
