@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public interface LoginModelInt {
 
+
     public interface onLoginFinishListener {
         void onLoginRequiredFieldError();
 
@@ -22,6 +23,8 @@ public interface LoginModelInt {
         void onLoginSuccess();
 
         void onLoginFailError(String failMessage);
+
+
 
         void onRequestError();
 

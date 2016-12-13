@@ -84,6 +84,7 @@ public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRe
     public void signUpValidationCredentials(String firstName, String lastName, String contactNumber, String password, String middleName, AppCompatActivity activity) {
 
         signUpModel = new SignUpModel();
+
         signUpModel.signup(firstName, lastName, contactNumber, password, middleName, this, activity);
     }
 
@@ -99,6 +100,9 @@ public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRe
                 replace(containerId, modelClass.getFragment(position));
 
 
+        for (int entry = 0; entry < fragmentManager.getBackStackEntryCount(); entry++) {
+            Log.i("@@@@@@@@@@@@@@@@@@@@", "Found fragment: " + fragmentManager.getBackStackEntryAt(entry).getId());
+        }
         fragmentTransaction.commitAllowingStateLoss();
     }
 
@@ -128,6 +132,7 @@ public class PresenterClass implements PresneterInt, CommentModelInt.onCommentRe
         commentViewInt1 = commentViewInt;
         commentModel = new CommentModel();
         commentModel.comment(comment, this);
+
 
     }
 
